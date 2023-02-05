@@ -1,0 +1,26 @@
+.table {
+    &__header {
+        margin-bottom: 40px;
+    }
+
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+.btn-actions {
+    .three-dots {
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+.group__btns {
+    .cancel {
+        background-color: #73777a;
+        border: none;
+        margin-right: 30px;
+    }
+}

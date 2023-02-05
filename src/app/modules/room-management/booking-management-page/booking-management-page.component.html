@@ -1,0 +1,178 @@
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
+    <div class="title">Tiêu chí tìm kiếm</div>
+    <div class="form__content">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="fullname">Tên đầy đủ</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="fullname" id="fullname" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="roomType">Loại phòng</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="roomType" id="roomType" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="status">Trạng thái</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="status" id="status" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label>Khoảng thời gian</nz-form-label>
+                        <nz-form-control>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <nz-form-control>
+                                    <nz-date-picker
+                                        nzShowTime
+                                        nzFormat="HH:mm:ss dd/MM/yyyy"
+                                        ngModel
+                                        [nzShowTime]="true"
+                                        [nzAllowClear]="true"
+                                        [nzDisabled]="false"
+                                        [nzInputReadOnly]="true"
+                                        name="startTime"
+                                        formControlName="startTime"
+                                    ></nz-date-picker>
+                                </nz-form-control>
+                                <span style="padding: 7px 20px;">-</span>
+                                <nz-form-control>
+                                    <nz-date-picker
+                                        nzShowTime
+                                        nzFormat="HH:mm:ss dd/MM/yyyy"
+                                        ngModel
+                                        [nzShowTime]="true"
+                                        [nzAllowClear]="true"
+                                        [nzDisabled]="false"
+                                        [nzInputReadOnly]="true"
+                                        name="endTime"
+                                        formControlName="endTime"
+                                    ></nz-date-picker>
+                                </nz-form-control>
+                            </div>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="group__btns d-flex justify-content-center">
+        <button nz-button nzType="primary" [nzSize]="size">Tìm kiếm</button>
+    </div>
+</form>
+<div class="table">
+    <div class="d-flex table__header justify-content-between">
+        <div class="title">Danh sách đặt phòng ({{listOfData.length}})</div>
+        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addBooking()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+            Thêm mới đặt phòng
+        </button>
+    </div>
+    <div class="table__content">
+        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+            <thead (nzSortOrderChange)="sortChange($event)">
+                <tr>
+                    <th rowspan="2" [nzSortFn]="true">Name</th>
+                    <th rowspan="2" [nzSortFn]="true">Room Type</th>
+                    <th colspan="2">Total Numbers</th>
+                    <th rowspan="2" [nzSortFn]="true">Date</th>
+                    <th rowspan="2" [nzSortFn]="true">Arrival Date</th>
+                    <th rowspan="2" [nzSortFn]="true">Depature Date</th>
+                    <th rowspan="2" [nzSortFn]="true">Email</th>
+                    <th rowspan="2" [nzSortFn]="true">Phone Number</th>
+                    <th rowspan="2" [nzSortFn]="true">Address</th>
+                    <th rowspan="2" [nzSortFn]="true">Status</th>
+                    <th rowspan="2">Actions</th>
+                </tr>
+                <tr>
+                    <th rowspan="3" [nzSortFn]="true">Adults</th>
+                    <th rowspan="3" [nzSortFn]="true">Children</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.roomType }}</td>
+                    <td>{{ data.numberAdults }}</td>
+                    <td>{{ data.numberChildren }}</td>
+                    <td>{{ data.createdAt | date: 'HH:mm:ss - dd/MM/yyyy' }}</td>
+                    <td>{{ data.startTime | date: 'HH:mm:ss - dd/MM/yyyy' }}</td>
+                    <td>{{ data.endTime | date: 'HH:mm:ss - dd/MM/yyyy' }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.phone }}</td>
+                    <td>{{ data.address }}</td>
+                    <td class="status">
+                        <div *ngIf="data.status == 0" class="pending">Đang xử lý</div>
+                        <div *ngIf="data.status == 1" class="active">Thành công</div>
+                        <div *ngIf="data.status == 2" class="in-active">Thất bại</div>
+                    </td>
+                    <td>
+                        <div class="btn-actions">
+                            <button class="three-dots" nzTrigger="click" nz-button 
+                                nz-dropdown [nzDropdownMenu]="menu">
+                                    <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
+                            </button>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                                <ul nz-menu>
+                                    <li nz-menu-item (click)="updateBooking(data)">
+                                      <a>Chỉnh sửa</a>
+                                    </li>
+                                    <li nz-menu-item>
+                                      <a>Xóa</a>
+                                    </li>
+                                  </ul>
+                            </nz-dropdown-menu>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div class="table__footer">
+
+    </div>
+</div>

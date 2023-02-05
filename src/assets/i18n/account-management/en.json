@@ -1,0 +1,32 @@
+{
+    "listRoom": {
+      "titleSearch": "Tiêu chí tìm kiếm",
+      "titleTable": "Danh sách phòng",
+      "addRoom": "Thêm mới phòng",
+      "roomId": "Mã phòng",
+      "roomName": "Tên phòng",
+      "building": "Tòa nhà",
+      "price": "Giá phòng",
+      "status": "Trạng thái phòng",
+      "roomType": "Loại phòng",
+      "area": "Diện tích",
+      "phone": "Số điện thoại",
+      "view": "View phòng",
+      "description": "Mô tả",
+      "action": "Thao tác",
+      "btnSearch": "Tìm kiếm"
+    },
+    "register": {
+      "title": "Đăng ký",
+      "email": "Email",
+      "fullName": "Tên đầy đủ",
+      "password": "Mật khẩu",
+      "confirmPassword": "Nhập lại mật khẩu",
+      "agree": "Bằng việc đăng ký, tôi đồng ý với Vinpearl về",
+      "and": "và",
+      "service": "Điều kiện điều khoản",
+      "policy": "Chính sách bảo mật",
+      "hasAccount": "Đã có tài khoản?"
+    }
+}
+  

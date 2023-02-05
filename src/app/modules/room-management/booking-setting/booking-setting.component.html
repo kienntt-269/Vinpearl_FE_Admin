@@ -1,0 +1,155 @@
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form [nzLayout]="'vertical'" nz-form>
+    <div class="form__content">
+        <div class="row">
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="fullname">Tên đầy đủ</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="fullname" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="email">Email</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="email" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="phoneNumber">Số điện thoại</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="phoneNumber" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="roomType">Loại phòng</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="roomType" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="totalMembers">Số người</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="totalMembers" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="startTime">Thời gian đến</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="startTime" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="endTime">Thời gian đi</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="endTime" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="uploadImage">Ảnh</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input id="uploadImage" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </div>
+    <div class="group__btns d-flex justify-content-center">
+        <button class="cancel" nz-button nzType="primary" [nzSize]="size">Hủy bỏ</button>
+        <button nz-button nzType="primary" [nzSize]="size">Thêm mới</button>
+    </div>
+</form>

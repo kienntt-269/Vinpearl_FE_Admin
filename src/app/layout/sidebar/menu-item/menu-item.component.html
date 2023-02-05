@@ -1,0 +1,27 @@
+<div>
+    <div
+        class="menu__item"
+        [class.active]="checkActive(item.path)"
+        (click)="onItemSelected(item)"
+    >
+        <div d-flex align-items-center>
+        <img [src]="item.icon" [alt]="item.icon" class="icon" />
+        <span *ngIf="status" class="name">{{item.name}}</span>
+        </div>
+        <span class="children" *ngIf="status && item.children && item.children.length > 0">
+        <img *ngIf="!isToggleMenu" src="../../../assets/icon/chevron-down.svg" alt="chevron-down">
+        <img *ngIf="isToggleMenu" src="../../../assets/icon/chevron-up.svg" alt="chevron-up">
+        </span>
+    </div>
+    <ul *ngIf="isToggleMenu" class="menu__children">
+        <li *ngFor="let child of item.children; let i = index">
+            <div
+                class="menu__item"
+                [class.active]="checkActive(child.path)"
+                (click)="onItemSelected(child)"
+            >
+                <span *ngIf="status" class="name">{{child.name}}</span>
+            </div>
+        </li>
+    </ul>
+</div>

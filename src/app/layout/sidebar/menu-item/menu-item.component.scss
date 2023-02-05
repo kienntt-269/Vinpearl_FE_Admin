@@ -1,0 +1,37 @@
+.menu {
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .8rem;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #343848;
+
+        .name {
+          color: #FFF;
+        }
+      }
+
+      &.active {
+        background-color: #343848;
+      }
+    }
+
+    &__children {
+      display: flex;
+      flex-direction: column;
+      margin-left: 35px;
+    }
+}
+
+.icon {
+    filter: invert(1);
+}
+
+.name {
+    padding-left: 1rem;
+    font-size: 18px;
+    color: #b4b6bd;
+}

@@ -1,0 +1,30 @@
+{
+    "listAccount": {
+      "titleSearch": "Tiêu chí tìm kiếm",
+      "titleTable": "Danh sách tài khoản",
+      "addAccount": "Thêm mới tài khoản",
+      "accountId": "Mã tài khoản",
+      "accountName": "Tên tài khoản",
+      "price": "Giá tài khoản",
+      "status": "Trạng thái tài khoản",
+      "roomType": "Loại tài khoản",
+      "area": "Diện tích",
+      "phone": "Số điện thoại",
+      "view": "View tài khoản",
+      "description": "Mô tả",
+      "action": "Thao tác",
+      "btnSearch": "Tìm kiếm"
+    },
+    "addAccount": {
+      "title": "Thêm mới tài khoản",
+      "email": "Email",
+      "fullName": "Tên đầy đủ",
+      "password": "Mật khẩu",
+      "confirmPassword": "Nhập lại mật khẩu",
+      "phone": "Số điện thoại",
+      "cccd": "Căn cước công dân",
+      "btnCancel": "Hủy bỏ",
+      "btnAdd": "Thêm mới"
+    }
+  }
+  

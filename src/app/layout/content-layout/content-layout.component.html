@@ -1,0 +1,9 @@
+<div id="app">
+  <app-sidebar [status]="status"></app-sidebar>
+  <div [ngClass]="status ? 'content':'toggle'">
+    <app-header (status)="childToParent($event)"></app-header>
+    <div class="content__body">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

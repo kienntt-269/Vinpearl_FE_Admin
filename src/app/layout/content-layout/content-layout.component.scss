@@ -1,0 +1,17 @@
+.toggle {
+  padding-top: 4rem;
+  width: calc(100% - 4rem);
+  margin-left: auto;
+}
+
+.content {
+  padding-top: 4rem;
+  width: calc(100% - 18rem);
+  margin-left: auto;
+
+  &__body {
+    padding: 25px 25px 0 25px;
+    background-color: #f2f5fa;
+  }
+}
+

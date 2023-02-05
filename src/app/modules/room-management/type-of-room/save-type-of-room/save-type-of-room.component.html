@@ -1,0 +1,144 @@
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form>
+    <div class="title-search">Thêm mới phòng</div>
+    <div class="content row">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="roomName">Tên loại phòng</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="roomName" id="roomName" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="area">Diện tích</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="area" id="area" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="numberParent">Số người lớn</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="numberParent" id="numberParent" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="numberChildren">Số trẻ em</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="numberChildren" id="numberChildren" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="price">Giá một đêm</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="price" id="price" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="description">Mô tả</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="description" id="description" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <div class="clearfix">
+                <nz-upload
+                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  nzListType="picture-card"
+                  [nzPreview]="handlePreview"
+                  [nzLimit]="1"
+                >
+                  <div>
+                    <span nz-icon nzType="plus"></span>
+                    <div style="margin-top: 8px">Upload</div>
+                  </div>
+                </nz-upload>
+                <nz-modal
+                  [nzVisible]="previewVisible"
+                  [nzContent]="modalContent"
+                  [nzFooter]="null"
+                  (nzOnCancel)="previewVisible = false"
+                >
+                  <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  </ng-template>
+                </nz-modal>
+              </div>
+        </div>
+    </div>
+    
+</form>

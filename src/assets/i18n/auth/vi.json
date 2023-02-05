@@ -1,0 +1,22 @@
+{
+  "login": {
+    "title": "Đăng nhập",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "forgotPass": "Quên mật khẩu",
+    "notAccount": "Chưa có tài khoản?",
+    "register": "Đăng ký ngay"
+  },
+  "register": {
+    "title": "Đăng ký",
+    "email": "Email",
+    "fullName": "Tên đầy đủ",
+    "password": "Mật khẩu",
+    "confirmPassword": "Nhập lại mật khẩu",
+    "agree": "Bằng việc đăng ký, tôi đồng ý với Vinpearl về",
+    "and": "và",
+    "service": "Điều kiện điều khoản",
+    "policy": "Chính sách bảo mật",
+    "hasAccount": "Đã có tài khoản?"
+  }
+}

@@ -1,0 +1,109 @@
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form class="form-search" [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
+    <div class="title-search">{{'listAccount.titleSearch' | translate}}</div>
+    <div class="content">
+        <div class="row">
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="accountName">{{'listAccount.accountName' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input formControlName="accountName" id="accountName" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="phone">{{'listAccount.phone' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input formControlName="phone" id="phone" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="phone">{{'listAccount.phone' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input formControlName="phone" id="phone" />
+                            <ng-template #inputNameClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </div>
+    <div class="group__btns d-flex justify-content-center">
+        <button nz-button nzType="primary" [nzSize]="size">{{'listAccount.btnSearch' | translate}}</button>
+    </div>
+</form>
+<div class="table">
+    <div class="d-flex table__header justify-content-between">
+        <div class="title-search">{{'listAccount.titleTable' | translate}} ({{listOfData.length}})</div>
+        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
+            <img src="../../../../assets/icon/plus_icon.svg" alt="">
+            {{'listAccount.addAccount' | translate}}
+        </button>
+    </div>
+    <div class="table__content">
+        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+            <thead (nzSortOrderChange)="sortChange($event)">
+                <tr>
+                    <th [nzSortFn]="true">STT</th>
+                    <th [nzSortFn]="true">STT</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                    <td>{{ data?.id }}</td>
+                    <td>{{ data?.name }}</td>
+                    <td>
+                        <div class="btn-actions">
+                            <button class="three-dots" nzTrigger="click" nz-button 
+                                nz-dropdown [nzDropdownMenu]="menu">
+                                    <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
+                            </button>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                                <ul nz-menu>
+                                    <li nz-menu-item>
+                                      <a>Xóa</a>
+                                    </li>
+                                  </ul>
+                            </nz-dropdown-menu>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div class="table__footer">
+
+    </div>
+</div>

@@ -1,0 +1,82 @@
+import { NgModule } from '@angular/core';
+import { LangChangeEvent, TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
+import { HttpClient } from "@angular/common/http";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared.module';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TourManagementComponent } from './tour-management.component';
+import { BillComponent } from './bill/bill.component';
+import { PlaceComponent } from './place/place.component';
+import { TourComponent } from './tour/tour.component';
+import { TypeOfTourComponent } from './type-of-tour/type-of-tour.component';
+import { TourManagementRoutingModule } from './tour-management-routing.module';
+
+@NgModule({
+  declarations: [
+    TourManagementComponent,
+    BillComponent,
+    PlaceComponent,
+    TourComponent,
+    TypeOfTourComponent,
+  ],
+  imports: [
+    TourManagementRoutingModule,
+    CommonModule,
+    SharedModule,
+    NzTableModule,
+    NzSelectModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    NzDropDownModule,
+    NzIconModule,
+    NzMenuModule,
+    NzFormModule,
+    NzDatePickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzTabsModule,
+    NzUploadModule,
+    NzModalModule,
+    NzMessageModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (TourManagementCreateTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+  ]
+})
+export class TourManagementModule {
+  constructor(public translationService: TranslateService) {
+    translationService.addLangs(['en', 'vi']);
+    this.translationService.store.onLangChange
+      .subscribe((lang: LangChangeEvent) => {
+        this.translationService.use(lang.lang).toPromise();
+      },error =>{
+        console.log(error)
+      });
+  }
+}
+
+export function TourManagementCreateTranslateLoader(http: HttpClient) {
+  console.log('AuthModule createTranslateLoader');
+  return new TranslateHttpLoader(
+    http, './assets/i18n/tour-management/', '.json');
+}

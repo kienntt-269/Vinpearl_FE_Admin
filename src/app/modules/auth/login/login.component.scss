@@ -1,0 +1,61 @@
+.login {
+  min-height: 100vh;
+  overflow: hidden;
+  background: #ccc;
+
+  // .logo__login {
+  //   background-image: url("../../../../assets/images/login/vinpearl_login_screen.jpg");
+  //   background-size: cover;
+  //   background-position: center;
+  //   background-repeat: no-repeat;
+  // }
+
+  .col-12.col-sm-4 {
+    margin: 0 auto;
+    background: #FFF;
+  }
+
+  .content__vinfast {
+    .header {
+      height: 65px;
+      margin-top: 4rem;
+    }
+  }
+
+  .form__login {
+    margin: 0 50px;
+  }
+
+  .nav {
+    &__tabs {
+      margin-top: 1rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    &__item {
+      font-size: 20px;
+      color: #979797;
+      padding: 15px 70px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.active {
+        color: #312f49;
+        font-weight: 700;
+        transition: color .3s ease;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .tab__footer__question {
+    margin-top: 10px;
+
+    a {
+      color: #2c72c6;
+    }
+  }
+
+}

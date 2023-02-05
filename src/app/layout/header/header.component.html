@@ -1,0 +1,9 @@
+<div id="header__default" class="header" [ngClass]="isExpand ? 'toggle': ''">
+  <div class="header__left d-flex">
+    <img *ngIf="isExpand" (click)="toggleSidebar()" src="../../../assets/icon/hamberger_menu.svg" alt="">
+    <img *ngIf="!isExpand" (click)="toggleSidebar()" src="../../../assets/icon/hamberger_menu_.svg" alt="">
+  </div>
+  <div class="header__right">
+    <!-- <app-option-info-admin></app-option-info-admin> -->
+  </div>
+</div>

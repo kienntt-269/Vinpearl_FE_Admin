@@ -1,0 +1,122 @@
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form>
+    <div class="title-search">{{'addAccount.title' | translate}}</div>
+    <div class="content row">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="email">{{'addAccount.email' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="email" id="email" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="fullName">{{'addAccount.fullName' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="fullName" id="fullName" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="password">{{'addAccount.password' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="password" id="password" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="confirmPassword">{{'addAccount.confirmPassword' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="confirmPassword" id="confirmPassword" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="phone">{{'addAccount.phone' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="phone" id="phone" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="cccd">{{'addAccount.cccd' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="cccd" id="cccd" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn-groups d-flex justify-content-center align-items-center">
+        <button nz-button type="primary">{{'addAccount.btnCancel' | translate}}</button>
+        <button nz-button type="primary" (click)="addAccount()">{{'addAccount.btnAdd' | translate}}</button>
+    </div>
+</form>

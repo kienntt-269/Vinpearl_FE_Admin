@@ -1,1 +1,109 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	// font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1rem;
+  font-size: 14px;
+  font-weight: 400;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+li{
+  list-style-type: none;
+}
+img, svg {
+  vertical-align: middle;
+}
+
+.table > :not(caption) > * > * {
+	padding: 0;
+}
+
+nz-form-control {
+	width: 100%;
+}
+
+.ant-picker,
+.ant-form-item-control-input .ant-input-affix-wrapper {
+	min-height: 36px;
+    border-radius: 4px;
+}
+
+nz-date-picker {
+	width: 100%;
+}
+
+.btn.ant-btn-primary {
+	min-height: 40px;
+	background-color: #e6a523;
+	text-transform: uppercase;
+	border-radius: 4px;
+	border: none;
+	color: #1f2125;
+	font-weight: 500;
+
+	&:hover, &:focus {
+		border: 1px solid #e6a523;
+		background-color: #FFFFFF;
+		color: #e6a523;
+		cursor: pointer;
+	}
+}
+
+.title-search {
+    font-weight: 700;
+    font-size: 18px;
+    color: #000;
+}
+
+.text-success {
+    color: #2dce89!important;
+}

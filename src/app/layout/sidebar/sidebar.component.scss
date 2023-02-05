@@ -1,0 +1,28 @@
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4rem;
+  background-color: #3a3f51;
+  color: #FFFFFF;
+  z-index: 100;
+
+  &.toggle {
+    width: 18rem;
+
+    // .menu {
+    //   &__item {
+    //     justify-content: flex-start;
+    //   }
+    // }
+  }
+
+  .logo {
+    height: 4rem;
+    background-image: url("../../../assets/images/login/vinpearl_login_logo-01.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
