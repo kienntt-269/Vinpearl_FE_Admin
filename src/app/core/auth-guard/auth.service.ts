@@ -17,7 +17,7 @@ export class AuthService {
 
   login(body: any): Observable<any> {
     return this.httpClient.post(`${APIs.AUTH_LOGIN}`, {
-        username: body.username,
+        email: body.email,
         password: body.password
     });
   };

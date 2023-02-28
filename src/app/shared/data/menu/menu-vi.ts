@@ -61,22 +61,7 @@ export const MENU_VI = [
       icon: "../../../assets/icon/person-check.svg",
       path: "pages/customer-management",
       name: "Quản lý khách hàng",
-      children: [
-        {
-          id: 1,
-          icon: "../../../assets/icon/cash-coin.svg",
-          path: "pages/customer-management/customer",
-          name: "Khách hàng",
-          children: [],
-        },
-        // {
-        //   id: 2,
-        //   icon: "../../../assets/icon/receipt.svg",
-        //   path: "pages/customer-management/bill",
-        //   name: "Hóa đơn",
-        //   children: [],
-        // },
-      ],
+      children: [],
     },
     {
       id: 4,
@@ -91,18 +76,11 @@ export const MENU_VI = [
           name: "Tour",
           children: [],
         },
-        // {
-        //   id: 1,
-        //   icon: "../../../assets/icon/bookmark-check.svg",
-        //   path: "pages/tour-management/bill",
-        //   name: "Hóa đơn",
-        //   children: [],
-        // },
         {
-          id: 2,
-          icon: "../../../assets/icon/geo-alt.svg",
-          path: "pages/tour-management/place",
-          name: "Địa điểm",
+          id: 1,
+          icon: "../../../assets/icon/bar-chart.svg",
+          path: "pages/tour-management/booking-tour",
+          name: "Đặt tour",
           children: [],
         },
         {

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
+// import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-room-booking',

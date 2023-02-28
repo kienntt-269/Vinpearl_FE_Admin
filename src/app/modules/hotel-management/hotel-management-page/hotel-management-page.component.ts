@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
+import constants from 'src/app/core/constants/constants';
 import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
 
 @Component({
@@ -11,13 +12,17 @@ import { HotelService } from 'src/app/core/service/hotel-management/hotel.servic
 })
 export class HotelManagementPageComponent implements OnInit {
 
+  numberRoom: any;
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
+  pageSize: any = 10;
+  pageIndex: any = 0;
+  sort: any = "id,desc";
   formGroup: FormGroup = new FormGroup({
-    roomName: new FormControl(''),
-    roomType: new FormControl(''),
-    status: new FormControl(''),
+    name: new FormControl(''),
+    totalRoom: new FormControl(''),
+    phone: new FormControl(''),
   });
   constructor(
     private router: Router,
@@ -36,54 +41,6 @@ export class HotelManagementPageComponent implements OnInit {
       }
     ]
 
-    this.listOfData = [
-      {
-        id: 1,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "1@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 0,
-      },
-      {
-        id: 2,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "2@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 1,
-      },
-      {
-        id: 3,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "3@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 2,
-      },
-    ];
-
     this.getAllHotel();
   }
 
@@ -91,15 +48,16 @@ export class HotelManagementPageComponent implements OnInit {
     
   }
 
-  addRoom() {
-    this.router.navigate(['pages/room-management/add-room']);
+  addHotel() {
+    this.router.navigate(['pages/hotel-management/save-hotel']);
   }
 
-  updateRoom(data: any) {
+  updateHotel(data: any, check: any) {
     const params = {
       id: data.id,
+      action: check == 1 ? "PROCESS" : "DETAIL",
     }
-    this.router.navigate(['pages/room-management/update-room'], {queryParams: params});
+    this.router.navigate(['pages/hotel-management/save-hotel'], {queryParams: params});
   }
 
   search() {
@@ -107,11 +65,19 @@ export class HotelManagementPageComponent implements OnInit {
   }
 
   getAllHotel() {
+    // const data = {
+    //   numRoom: this.numberRoom,
+    //   name: this.numberRoom,
+    //   phone: this.numberRoom,
+    //   pageIndex: this.numberRoom,
+    //   pageSize: this.numberRoom,
+    // }
+    const formValue = this.formGroup.value;
     
-    this.hotelService.getListHotel(340, '', '', 1 ,10).subscribe(res => {
+    this.hotelService.getListHotel(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
       if (res.code == 200) {
-        this.listOfData = res.data;
-        console.log(res.data);
+        this.listOfData = res.data.content;
+        console.log(res.data.content);
       }
     })
   }

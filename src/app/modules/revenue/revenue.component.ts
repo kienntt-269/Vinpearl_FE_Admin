@@ -14,15 +14,16 @@ export class RevenueComponent implements OnInit {
   listOfData: any = [];
   chartHotel: any;
   chartRoom: any;
+  chartFlight: any;
   statusCards: any[] = [
     {
-      count: 202,
-      title: "Báo giá",
+      count: 33,
+      title: "Booking vé máy bay",
       path: "/admin/customers"
     },
     {
       count: 375,
-      title: "Booking",
+      title: "Booking khách sạn",
       path: "/admin/customers"
     },
     {
@@ -31,8 +32,8 @@ export class RevenueComponent implements OnInit {
       path: "/admin/customers"
     },
     {
-      count: 33,
-      title: "Quyết toán",
+      count: 202,
+      title: "Báo giá",
       path: "/admin/customers"
     },
   ];
@@ -52,6 +53,7 @@ export class RevenueComponent implements OnInit {
 
     this.createChartHotel();
     this.createChartRoom();
+    this.createChartFlight();
   }
 
   createChartHotel(){
@@ -92,9 +94,38 @@ export class RevenueComponent implements OnInit {
 
       data: {// values on X-Axis
         labels: [
-          'Red',
-          'Blue',
-          'Yellow'
+          'Hủy',
+          'Thành công',
+          'Đang xử lý'
+        ],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [300, 50, 100],
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+          ],
+          // hoverOffset: 4
+        }]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
+  }
+
+  createChartFlight(){
+  
+    this.chartFlight = new Chart("MyChartFlight", {
+      type: 'doughnut', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: [
+          'Hủy',
+          'Thành công',
+          'Đang xử lý'
         ],
         datasets: [{
           label: 'My First Dataset',

@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -18,23 +19,15 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TourManagementComponent } from './tour-management.component';
-import { TourComponent } from './tour/tour.component';
-import { SaveTourComponent } from './save-tour/save-tour.component';
-import { TypeOfTourComponent } from './type-of-tour/type-of-tour.component';
-import { TourManagementRoutingModule } from './tour-management-routing.module';
-
+import { CustomerManagementComponent } from './customer-management/customer-management.component';
+import { CustomerManagementRoutingModule } from './customer-management-routing.module';
 @NgModule({
   declarations: [
-    TourManagementComponent,
-    TourComponent,
-    TypeOfTourComponent,
-    SaveTourComponent,
+    CustomerManagementComponent
   ],
   imports: [
-    TourManagementRoutingModule,
     CommonModule,
+    CustomerManagementRoutingModule,
     SharedModule,
     NzTableModule,
     NzSelectModule,
@@ -45,36 +38,43 @@ import { TourManagementRoutingModule } from './tour-management-routing.module';
     NzMenuModule,
     NzFormModule,
     NzDatePickerModule,
-    FormsModule,
-    ReactiveFormsModule,
+    NzUploadModule,
     NzInputModule,
     NzTabsModule,
-    NzUploadModule,
     NzModalModule,
     NzMessageModule,
+    ReactiveFormsModule,
+    FormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
-        useFactory: (TourManagementCreateTranslateLoader),
+        useFactory: (customerManagementCreateTranslateLoader),
         deps: [HttpClient]
       }
     }),
   ]
 })
-export class TourManagementModule {
+
+export class CustomerManagementModule {
   constructor(public translationService: TranslateService) {
     translationService.addLangs(['en', 'vi']);
-    this.translationService.store.onLangChange
-      .subscribe((lang: LangChangeEvent) => {
-        this.translationService.use(lang.lang).toPromise();
-      },error =>{
-        console.log(error)
-      });
+    if (localStorage.getItem('lang')) {
+      translationService.use(localStorage.getItem('lang')!);
+    } else {
+      localStorage.setItem('lang', 'vi');
+      translationService.use('vi');
+    }
+    // this.translationService.store.onLangChange
+    //   .subscribe((lang: LangChangeEvent) => {
+    //     this.translationService.use(lang.lang).toPromise();
+    //   },error =>{
+    //     console.log(error)
+    //   });
   }
 }
 
-export function TourManagementCreateTranslateLoader(http: HttpClient) {
+export function customerManagementCreateTranslateLoader(http: HttpClient) {
   console.log('AuthModule createTranslateLoader');
   return new TranslateHttpLoader(
-    http, './assets/i18n/tour-management/', '.json');
+    http, './assets/i18n/customer-management/', '.json');
 }

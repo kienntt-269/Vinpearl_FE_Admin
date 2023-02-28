@@ -5,24 +5,24 @@ import { NzButtonSize } from 'ng-zorro-antd/button';
 import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
 
 @Component({
-  selector: 'app-service',
-  templateUrl: './service.component.html',
-  styleUrls: ['./service.component.scss']
+  selector: 'app-customer-management',
+  templateUrl: './customer-management.component.html',
+  styleUrls: ['./customer-management.component.scss']
 })
-export class ServiceComponent implements OnInit {
+export class CustomerManagementComponent implements OnInit {
 
   numberRoom: any;
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
-  pageSize: Number = 10;
-  pageIndex: Number = 0;
-  sort: any = "id, desc";
   formGroup: FormGroup = new FormGroup({
     name: new FormControl(''),
     roomTotal: new FormControl(''),
     phone: new FormControl(''),
   });
+  pageSize: Number = 10;
+  pageIndex: Number = 0;
+  sort: any = "id, desc";
   constructor(
     private router: Router,
     private hotelService: HotelService,
@@ -92,18 +92,25 @@ export class ServiceComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+    if (e.value === 'ascend') {
+      e.value = 'asc';
+    } else if (e.value === 'descend') {
+      e.value = 'desc';
+    }
+    this.sort = `${e.key}, ${e.value}`;
+    console.log(e);
+    this.getAllHotel();
   }
 
-  addService() {
-    this.router.navigate(['pages/service/save-service']);
+  addHotel() {
+    this.router.navigate(['pages/hotel-management/save-hotel']);
   }
 
-  updateService(data: any) {
+  updateRoom(data: any) {
     const params = {
       id: data.id,
     }
-    this.router.navigate(['pages/service/save-service'], {queryParams: params});
+    this.router.navigate(['pages/hotel-management/save-hotel'], {queryParams: params});
   }
 
   search() {
@@ -111,20 +118,19 @@ export class ServiceComponent implements OnInit {
   }
 
   getAllHotel() {
-    // const data = {
-    //   numRoom: this.numberRoom,
-    //   name: this.numberRoom,
-    //   phone: this.numberRoom,
-    //   pageIndex: this.numberRoom,
-    //   pageSize: this.numberRoom,
-    // }
+    const data = {
+      numRoom: this.numberRoom,
+      name: this.numberRoom,
+      phone: this.numberRoom,
+      pageIndex: this.numberRoom,
+      pageSize: this.numberRoom,
+    }
     // this.hotelService.getListHotel(this.pageSize, this.pageIndex, this.sort).subscribe(res => {
     //   if (res.code == 200) {
-    //     this.listOfData = res.data.content;
-    //     console.log(res.data.content);
+    //     this.listOfData = res.data;
+    //     console.log(res.data);
     //   }
     // })
   }
+
 }
-
-

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+// import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth-guard/auth.service';
+import constants from 'src/app/core/constants/constants';
+import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +17,13 @@ export class LoginComponent implements OnInit {
   currentTab: number = 1;
 
   formLogin: FormGroup = new FormGroup({
-    email: new FormControl(''),
+    email: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.maxLength(100),
+        Validators.pattern(REGEX_PATTERN.EMAIL),
+      ],
+    }),
     password: new FormControl('')
   })
 
@@ -27,6 +37,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private authService: AuthService,
+    private route: Router,
+    // private toast: ToastrService
   ) { 
     if (localStorage.getItem('lang')) {
       this.translate.use(localStorage.getItem('lang')!);
@@ -75,19 +87,8 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  clickTab(tab: number) {
-    this.currentTab = tab;
-    const listNav = document.querySelectorAll('.nav__item');
-    listNav.forEach((el) => {
-      el.classList.remove('active');
-    })
-    document.getElementById(`nav__item__${tab}`)?.classList.add('active');
-    this.formLogin.reset();
-    this.formLogin.reset();
-  }
-
   handleLogin() {
-    let formValue = this.formRegister.value;
+    let formValue = this.formLogin.value;
     const body = {
       email: formValue.email,
       password: formValue.password,
@@ -96,21 +97,14 @@ export class LoginComponent implements OnInit {
     this.authService.login(body).subscribe(res => {
       console.log(res.data);
       if (res.code == 200) {
-      }
-    })
-  }
+        // this.toast.success("Đăng nhập thành công", "Thành công");
+        this.route.navigate(['/pages/revenue']);
+        localStorage.setItem(constants.TOKEN, res.data.token);
 
-  handleRegister() {
-    let formValue = this.formRegister.value;
-    const body = {
-      email: formValue.email,
-      fullName: formValue.fullname,
-      password: formValue.password,
-    }
-
-    this.authService.register(body).subscribe(res => {
-      console.log(res.data);
-      if (res.code == 200) {
+      } else if (res.code == 400) {
+        // this.toast.error("Mật khẩu không đúng", "Lỗi");
+      } else if (res.code == 401) {
+        // this.toast.error("Tài khoản không tồn tại", "Lỗi");
       }
     })
   }

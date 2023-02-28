@@ -1,5 +1,5 @@
 {
-    "listHotel": {
+    "listCustomer": {
       "titleSearch": "Tiêu chí tìm kiếm",
       "roomTotal": "Tổng số phòng",
       "roomName": "Tên khách sạn",
@@ -11,8 +11,7 @@
       "description": "Mô tả",
       "address": "Địa chỉ",
       "totalPerson": "Sức chứa",
-      "addHotel": "Thêm mới khách sạn",
-      "hotelId": "Mã khách sạn",
+      "CustomerId": "Mã khách sạn",
       "name": "Tên khách sạn",
       "building": "Tòa nhà",
       "price": "Giá khách sạn",
@@ -21,18 +20,19 @@
       "view": "View khách sạn",
       "action": "Thao tác",
       "edit": "Chỉnh sửa",
+      "detail": "Chi tiết",
       "delete": "Xóa",
       "btnSearch": "Tìm kiếm"
     },
-    "saveHotel": {
+    "saveCustomer": {
       "title": "Thông tin chung",
-      "name": "Tên khách sạn",
+      "name": "Tên khách hàng",
       "email": "Email",
       "description": "Mô tả",
       "address": "Địa chỉ",
       "area": "Diện tích (m2)",
       "site": "Tỉnh thành",
-      "image": "Ảnh",
+      "image": "Ảnh đính kèm",
       "btnCancel": "Hủy",
       "btnAdd": "Thêm mới",
       "btnSave": "Lưu"
@@ -71,14 +71,6 @@
       "print": "In phiếu",
       "pay": "Thanh toán",
       "exit": "Thoát"
-    },
-    "service": {
-      "title": "Dịch vụ",
-      "stt": "STT",
-      "described": "Diễn tả",
-      "number": "Số lượng",
-      "price": "Đơn giá",
-      "money": "Thành tiền"
     }
   }
   

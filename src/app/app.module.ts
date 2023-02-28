@@ -20,6 +20,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormatNumber } from './shared/pipe/number.pipe';
 import { MenuItemComponent } from './layout/sidebar/menu-item/menu-item.component';
 import { AppInterceptor } from './core/interceptor/app.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+
 registerLocaleData(vi);
 
 @NgModule({
@@ -37,7 +39,8 @@ registerLocaleData(vi);
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
     NgbModule,
     TranslateModule.forRoot({
       loader: {
@@ -49,10 +52,10 @@ registerLocaleData(vi);
     }),
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     { provide: NZ_I18N, useValue: vi_VN },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
 

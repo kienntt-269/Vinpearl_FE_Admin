@@ -1,0 +1,242 @@
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form>
+    <div class="title-search">{{'saveHotel.title' | translate}}</div>
+    <div class="content row">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="name">{{'saveHotel.name' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="name" id="name" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['name'].invalid && (this.formGroup.controls['name'].dirty || this.formGroup.controls['name'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['name'].hasError('required')">
+                                {{'saveHotel.validate.name.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['name'].hasError('maxLength')">
+                                {{'saveHotel.validate.name.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="area">{{'saveHotel.area' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="area" id="area" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['area'].invalid && (this.formGroup.controls['area'].dirty || this.formGroup.controls['area'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['area'].hasError('required')">
+                                {{'saveHotel.validate.area.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="site">{{'saveHotel.site' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                [nzPlaceHolder]="'saveHotel.placeHolder' | translate"
+                                formControlName="site"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfSite" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['site'].invalid && (this.formGroup.controls['site'].dirty || this.formGroup.controls['site'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['site'].hasError('required')">
+                                {{'saveHotel.validate.site.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="phone">{{'saveHotel.phone' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputNameClear">
+                                    <input nz-input formControlName="phone" id="phone" />
+                                    <ng-template #inputNameClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['phone'].invalid && (this.formGroup.controls['phone'].dirty || this.formGroup.controls['phone'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['phone'].hasError('required')">
+                                {{'saveHotel.validate.phone.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="totalRoom">{{'saveHotel.totalRoom' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputNameClear">
+                                    <input nz-input formControlName="totalRoom" id="totalRoom" />
+                                    <ng-template #inputNameClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['totalRoom'].invalid && (this.formGroup.controls['totalRoom'].dirty || this.formGroup.controls['totalRoom'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['totalRoom'].hasError('required')">
+                                {{'saveHotel.validate.totalRoom.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="email">{{'saveHotel.email' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="email" id="email" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['email'].invalid && (this.formGroup.controls['email'].dirty || this.formGroup.controls['email'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['email'].hasError('required')">
+                                {{'saveHotel.validate.email.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['email'].hasError('maxLength')">
+                                {{'saveHotel.validate.email.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="description">{{'saveHotel.description' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="description" id="description" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['description'].invalid && (this.formGroup.controls['description'].dirty || this.formGroup.controls['description'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['description'].hasError('required')">
+                                {{'saveHotel.validate.description.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="address">{{'saveHotel.address' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameClear">
+                                <input nz-input formControlName="address" id="address" />
+                                <ng-template #inputNameClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['address'].invalid && (this.formGroup.controls['address'].dirty || this.formGroup.controls['address'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['address'].hasError('required')">
+                                {{'saveHotel.validate.address.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-12">
+                    <nz-form-item>
+                        <nz-form-label nzFor="uploadFile">{{'saveHotel.image'| translate}}</nz-form-label>
+                        <nz-form-control>
+                            <div class="file-list" (click)="hiddenFileInput.click()">
+                                <div class="name">{{fileListName.join(", ")}}</div>
+                                <input #hiddenFileInput style="display: none;" type="file" class="custom-file-input" multiple id="uploadFile" (change)="onFileSelect($event)">
+                                <img src="../../../../assets/icon/upload-file.svg" alt="upload-file">
+                            </div>
+                            <!-- <nz-upload
+                                nzAction="http://192.168.1.13:8080/api/v1/room/roomType/create"
+                                [nzHeaders]="{ authorization: 'authorization-text' }"
+                                (nzChange)="handleChange($event)"
+                                nzMultiple="true"
+                            >
+                                <input nz-input formControlName="uploadFile" id="uploadFile" />
+                            </nz-upload> -->
+                        </nz-form-control>
+                        <!-- <div *ngIf="this.formGroup.controls['uploadFile'].invalid && (this.formGroup.controls['uploadFile'].dirty || this.formGroup.controls['uploadFile'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['uploadFile'].hasError('required')">
+                                {{'saveHotel.validate.uploadFile.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['uploadFile'].hasError('maxLength')">
+                                {{'saveHotel.validate.uploadFile.patterned' | translate}}
+                            </div>
+                        </div> -->
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-12">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button style="background-color: #9A9A9A; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
+                            {{'saveHotel.btnCancel'| translate}}
+                        </button>
+                        <button *ngIf="!roomId" nz-button nzType="primary" (click)="handleAddHotel()">
+                            {{'saveHotel.btnAdd'| translate}}
+                        </button>
+                        <button *ngIf="roomId" nz-button nzType="primary" (click)="handleAddHotel()">
+                            {{'saveHotel.btnSave'| translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</form>

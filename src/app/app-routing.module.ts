@@ -33,6 +33,11 @@ const routes: Routes = [
           import('./modules/room-management/room-management.module').then((m) => m.RoomManagementModule),
       },
       {
+        path: 'customer-management',
+        loadChildren: () =>
+          import('./modules/customer-management/customer-management.module').then((m) => m.CustomerManagementModule),
+      },
+      {
         path: 'tour-management',
         loadChildren: () =>
           import('./modules/tour-management/tour-management.module').then((m) => m.TourManagementModule),

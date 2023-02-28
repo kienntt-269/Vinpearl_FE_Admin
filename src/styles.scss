@@ -4,6 +4,9 @@
 @import '~bootstrap/scss/bootstrap';
 @import "~ng-zorro-antd/ng-zorro-antd.min.css";
 
+// regular style toast
+@import '~ngx-toastr/toastr';
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -67,8 +70,26 @@ img, svg {
 	padding: 0;
 }
 
+.mb-8 {
+	margin-bottom: 8px;
+}
+
+.mr-8 {
+	margin-right: 8px;
+}
+
+button {
+	outline: none !important;
+	border: none !important;
+	height: 40px !important;
+}
+
 nz-form-control {
 	width: 100%;
+}
+
+.ant-select-selector {
+	min-height: 36px !important;
 }
 
 .ant-picker,
@@ -92,8 +113,8 @@ nz-date-picker {
 
 	&:hover, &:focus {
 		border: 1px solid #e6a523;
-		background-color: #FFFFFF;
-		color: #e6a523;
+		background-color: #faad14;
+		color: #1f2125;
 		cursor: pointer;
 	}
 }
@@ -106,4 +127,12 @@ nz-date-picker {
 
 .text-success {
     color: #2dce89!important;
+}
+
+.ant-input-affix-wrapper-status-error {
+	border-color: #E03 !important;
+}
+
+.error {
+	color: #E03;
 }

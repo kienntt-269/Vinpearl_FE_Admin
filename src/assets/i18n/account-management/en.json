@@ -9,7 +9,7 @@
       "price": "Giá phòng",
       "status": "Trạng thái phòng",
       "roomType": "Loại phòng",
-      "area": "Diện tích",
+      "area": "Diện tích (m2)",
       "phone": "Số điện thoại",
       "view": "View phòng",
       "description": "Mô tả",

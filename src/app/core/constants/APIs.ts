@@ -2,10 +2,22 @@ import { environment } from "src/environments/environment.prod";
 
 export default {
 
+  //dashboard
+  API_DASHBOARD_GET_BOOKING_TICKET_BY_MONTH: environment.BASE_PATH_DOMAIN + '/booking-ticket',
+  API_DASHBOARD_GET_BOOKING_ROOM_BY_MONTH: environment.BASE_PATH_DOMAIN + '/booking-room',
+  API_DASHBOARD_GET_BOOKING_TOUR_BY_MONTH: environment.BASE_PATH_DOMAIN + '/booking-tour',
+
   //account
   AUTH_LOGIN: environment.BASE_PATH_DOMAIN + '/user/login',
   AUTH_REGISTER: environment.BASE_PATH_DOMAIN + '/user/register',
   API_GET_LIST_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/123',
+
+  // site
+  API_ADD_SITE: environment.BASE_PATH_DOMAIN + '/site/create',
+  API_UPDATE_SITE: environment.BASE_PATH_DOMAIN + '/site/update',
+  API_GET_DETAIL_SITE: environment.BASE_PATH_DOMAIN + '/site/detail',
+  API_GET_LIST_SITE: environment.BASE_PATH_DOMAIN + '/site/findAll',
+  API_DELETE_SITE: environment.BASE_PATH_DOMAIN + '/site/delete',
 
   // hotel
   API_ADD_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/create',

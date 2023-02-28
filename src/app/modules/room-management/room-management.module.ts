@@ -30,6 +30,7 @@ import { FurnitureComponent } from './furniture/furniture.component';
 import { TypeOfRoomComponent } from './type-of-room/type-of-room.component';
 import { SaveTypeOfRoomComponent } from './type-of-room/save-type-of-room/save-type-of-room.component';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { SaveServiceComponent } from './save-service/save-service.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     ServiceComponent,
     FurnitureComponent,
     TypeOfRoomComponent,
-    SaveTypeOfRoomComponent
+    SaveTypeOfRoomComponent,
+    SaveServiceComponent
   ],
   imports: [
     RoomManagementRoutingModule,

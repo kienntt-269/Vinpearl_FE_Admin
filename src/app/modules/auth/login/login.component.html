@@ -7,7 +7,7 @@
       </div>
       <div class="form__login">
         <ul class="nav__tabs d-flex justify-content-center">
-          <li (click)="clickTab(1)" id="nav__item__1" class="nav__item active">
+          <li id="nav__item__1" class="nav__item active">
             <span>{{'login.title' | translate}}</span>
           </li>
         </ul>
@@ -27,7 +27,7 @@
               <div class="tab__footer d-flex justify-content-center flex-column">
                 <button (click)="handleLogin()" class="btn" nz-button nzType="primary">{{'login.title' | translate}}</button>
                 <div class="tab__footer__question d-flex justify-content-center">
-                  <a (click)="clickTab(2)">{{'login.forgotPass' | translate}}</a>
+                  <a>{{'login.forgotPass' | translate}}</a>
                 </div>
               </div>
             </form>

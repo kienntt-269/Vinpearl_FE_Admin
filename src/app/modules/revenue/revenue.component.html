@@ -44,6 +44,14 @@
               </div>
             </div>
         </div>
+        <div class="card">
+            <h2 class="header">Booking vé máy bay</h2>
+            <div class="body">
+                <div class="chart-container">
+                    <canvas  id="MyChartFlight" >{{ chartFlight }}</canvas>
+              </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
@@ -57,7 +65,7 @@
                         <th [nzSortFn]="true">Tên phòng</th>
                         <th [nzSortFn]="true">Toà nhà</th>
                         <th [nzSortFn]="true">Giá phòng</th>
-                        <th [nzSortFn]="true">Diện tích</th>
+                        <th [nzSortFn]="true">Diện tích (m2)</th>
                         <th [nzSortFn]="true">Loại phòng</th>
                         <th [nzSortFn]="true">View phòng</th>
                         <th [nzSortFn]="true">Trạng thái phòng</th>
@@ -113,7 +121,7 @@
                         <th>Người dùng</th>
                         <th>Tên</th>
                         <th>Số điện thoại</th>
-                        <th>Diện tích</th>
+                        <th>Diện tích (m2)</th>
                         <th>Loại phòng</th>
                         <th>View phòng</th>
                         <th>Trạng thái phòng</th>

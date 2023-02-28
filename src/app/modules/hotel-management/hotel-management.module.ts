@@ -19,14 +19,16 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { HotelManagementPageComponent } from './hotel-management-page/hotel-management-page.component';
-import { AddHotelComponent } from './add-hotel/add-hotel.component';
+import { SaveHotelComponent } from './save-hotel/save-hotel.component';
 import { HotelManagementRoutingModule } from './hotel-management-routing.module';
 
 @NgModule({
     declarations: [
         HotelManagementPageComponent,
-        AddHotelComponent
+        SaveHotelComponent
     ],
     imports: [
         CommonModule,
@@ -46,6 +48,7 @@ import { HotelManagementRoutingModule } from './hotel-management-routing.module'
         NzTabsModule,
         NzModalModule,
         NzMessageModule,
+        NzAlertModule,
         ReactiveFormsModule,
         FormsModule,
         TranslateModule.forChild({

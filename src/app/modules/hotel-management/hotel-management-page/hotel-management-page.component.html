@@ -6,16 +6,18 @@
         <div class="row">
             <div class="col col-sm-4">
                 <nz-form-item>
-                <nz-form-label nzFor="roomName">{{'listHotel.roomName'| translate}}</nz-form-label>
+                <nz-form-label nzFor="name">{{'listHotel.name'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="roomName" id="roomName" />
-                            <ng-template #inputNameClear>
+                        <nz-input-group [nzSuffix]="inputNameHotel">
+                            <input nz-input formControlName="name" id="name" />
+                            <ng-template #inputNameHotel>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="this.formGroup.controls['name'].value"
+                                    (click)="this.formGroup.controls['name'].setValue('')"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -24,16 +26,18 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="roomTotal">{{'listHotel.roomTotal'| translate}}</nz-form-label>
+                    <nz-form-label nzFor="totalRoom">{{'listHotel.totalRoom'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="roomTotal" id="roomTotal" />
-                            <ng-template #inputNameClear>
+                        <nz-input-group [nzSuffix]="inputNumberRoom">
+                            <input nz-input formControlName="totalRoom" id="totalRoom" />
+                            <ng-template #inputNumberRoom>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="this.formGroup.controls['totalRoom'].value"
+                                    (click)="this.formGroup.controls['totalRoom'].setValue('')"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -44,14 +48,16 @@
                 <nz-form-item>
                     <nz-form-label nzFor="phone">{{'listHotel.phone'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
+                        <nz-input-group [nzSuffix]="inputPhone">
                             <input nz-input formControlName="phone" id="phone" />
-                            <ng-template #inputNameClear>
+                            <ng-template #inputPhone>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="this.formGroup.controls['phone'].value"
+                                    (click)="this.formGroup.controls['phone'].setValue('')"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -65,10 +71,12 @@
     </div>
 </form>
 <div class="table">
-    <div class="d-flex table__header justify-content-between">
+    <div class="d-flex table__header justify-content-between mb-8">
         <div class="title-search">{{'listHotel.titleTable'| translate}} ({{listOfData.length}})</div>
-        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
-            <img src="../../../../assets/icon/plus_icon.svg" alt="">
+        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addHotel()">
+            <span class="d-flex mr-8">
+                <img src="../../../../assets/icon/plus_icon.svg" alt="">
+            </span>
             {{'listHotel.addHotel'| translate}}
         </button>
     </div>
@@ -76,42 +84,38 @@
         <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
-                    <th [nzSortFn]="true">{{'listHotel.stt'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.hotelName'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.phone'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.email'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.area'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.address'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.roomTotal'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.totalPerson'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listHotel.description'| translate}}</th>
+                    <th>{{'listHotel.stt'| translate}}</th>
+                    <th nzColumnKey="name" [nzSortFn]="true">{{'listHotel.name'| translate}}</th>
+                    <th nzColumnKey="phone" [nzSortFn]="true">{{'listHotel.phone'| translate}}</th>
+                    <th nzColumnKey="email" [nzSortFn]="true">{{'listHotel.email'| translate}}</th>
+                    <th nzColumnKey="address" [nzSortFn]="true">{{'listHotel.address'| translate}}</th>
+                    <th nzColumnKey="totalRoom" [nzSortFn]="true">{{'listHotel.totalRoom'| translate}}</th>
+                    <th nzColumnKey="totalPerson" [nzSortFn]="true">{{'listHotel.totalPerson'| translate}}</th>
                     <th>{{'listHotel.action'| translate}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of basicTable.data">
-                    <td>{{ data?.id }}</td>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                    <td>{{ pageIndex * pageSize + i + 1 }}</td>
                     <td>{{ data?.name }}</td>
                     <td>{{ data?.phone }}</td>
                     <td>{{ data?.email }} m2</td>
-                    <td>{{ data?.area }}</td>
-                    <td>{{ data?.address }}</td>
-                    <td>{{ data?.roomTotal }}</td>
+                    <td>{{ data?.address }}</td>    
+                    <td>{{ data?.totalRoom }}</td>
                     <td>{{ data?.totalPerson }}</td>
-                    <td>{{ data?.description }}</td>
                     <td>
-                        <div class="btn-actions">
+                        <div class="d-flex align-items-center justify-content-center btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateRoom(data)">
+                                    <li nz-menu-item (click)="updateHotel(data, 1)">
                                       <a>{{'listHotel.edit'| translate}}</a>
                                     </li>
-                                    <li nz-menu-item>
-                                      <a>{{'listHotel.delete'| translate}}</a>
+                                    <li nz-menu-item (click)="updateHotel(data, 2)">
+                                      <a>{{'listHotel.detail'| translate}}</a>
                                     </li>
                                   </ul>
                             </nz-dropdown-menu>

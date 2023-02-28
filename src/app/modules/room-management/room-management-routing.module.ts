@@ -9,6 +9,7 @@ import { ServiceComponent } from './service/service.component';
 import { TypeOfRoomComponent } from './type-of-room/type-of-room.component';
 import { FurnitureComponent } from './furniture/furniture.component';
 import { SaveTypeOfRoomComponent } from './type-of-room/save-type-of-room/save-type-of-room.component';
+import { SaveServiceComponent } from './save-service/save-service.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: "service",
     component: ServiceComponent,
+  },
+  {
+    path: "save-service",
+    component: SaveServiceComponent,
   },
   {
     path: "furniture",

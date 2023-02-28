@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { HotelManagementPageComponent } from './hotel-management-page/hotel-management-page.component';
+import { SaveHotelComponent } from './save-hotel/save-hotel.component';
 const routes: Routes = [
   {
     path: "",
     component: HotelManagementPageComponent,
   },
   {
-    path: "add-hotel",
-    component: AddHotelComponent,
+    path: "save-hotel",
+    component: SaveHotelComponent,
   },
 ];
 
