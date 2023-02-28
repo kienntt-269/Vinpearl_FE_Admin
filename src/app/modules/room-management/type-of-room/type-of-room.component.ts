@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { NzDatePickerSizeType } from 'ng-zorro-antd/date-picker';
 import { BookingService } from 'src/app/core/service/booking-management/booking.service';
+import { RoomService } from 'src/app/core/service/room-management/room.service';
 
 
 @Component({
@@ -16,6 +17,9 @@ export class TypeOfRoomComponent implements OnInit {
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
+  pageSize: any = 10;
+  pageIndex: any = 0;
+  sort: any = "id,desc";
   formGroup: FormGroup = new FormGroup({
     roomName: new FormControl(''),
     roomType: new FormControl(''),
@@ -23,7 +27,7 @@ export class TypeOfRoomComponent implements OnInit {
   });
   constructor(
     private router: Router,
-    private roomService: BookingService,
+    private roomService: RoomService,
   ) { }
 
   ngOnInit(): void {
@@ -38,55 +42,7 @@ export class TypeOfRoomComponent implements OnInit {
       }
     ]
 
-    this.listOfData = [
-      {
-        id: 1,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "1@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 0,
-      },
-      {
-        id: 2,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "2@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 1,
-      },
-      {
-        id: 3,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "3@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 2,
-      },
-    ];
-
-    this.getRoom();
+    this.getRoomType();
   }
 
   sortChange(e: any) {
@@ -104,13 +60,11 @@ export class TypeOfRoomComponent implements OnInit {
     this.router.navigate(['pages/room-management/update-type-of-room'], {queryParams: params});
   }
 
-  getRoom() {
-    const body = {
-
-    }
-    this.roomService.getListRoom(body).subscribe(res => {
+  getRoomType() {
+    const formValue = this.formGroup.value;
+    this.roomService.getListRoomType(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
       if (res.code == 200) {
-        this.listOfData = res.data;
+        this.listOfData = res.data.content;
         console.log(res.data);
       }
     })

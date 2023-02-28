@@ -26,6 +26,13 @@ export default {
   API_GET_LIST_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/search',
   API_DELETE_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/delete',
 
+  // room type
+  API_ADD_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/create',
+  API_UPDATE_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/update',
+  API_GET_DETAIL_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/detail',
+  API_GET_LIST_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/search',
+  API_DELETE_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/delete',
+
   // room
   API_ADD_ROOM: environment.BASE_PATH_DOMAIN + '/room/create',
   API_UPDATE_ROOM: environment.BASE_PATH_DOMAIN + '/room/update',

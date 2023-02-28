@@ -24,6 +24,7 @@ import { TourComponent } from './tour/tour.component';
 import { SaveTourComponent } from './save-tour/save-tour.component';
 import { TypeOfTourComponent } from './type-of-tour/type-of-tour.component';
 import { TourManagementRoutingModule } from './tour-management-routing.module';
+// import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { TourManagementRoutingModule } from './tour-management-routing.module';
     NzUploadModule,
     NzModalModule,
     NzMessageModule,
+    // QuillModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

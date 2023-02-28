@@ -77,28 +77,23 @@
                 <tr>
                     <th [nzSortFn]="true">STT</th>
                     <th [nzSortFn]="true">Tên phòng</th>
-                    <th [nzSortFn]="true">Toà nhà</th>
                     <th [nzSortFn]="true">Giá phòng</th>
                     <th [nzSortFn]="true">Diện tích (m2)</th>
-                    <th [nzSortFn]="true">Loại phòng</th>
-                    <th [nzSortFn]="true">View phòng</th>
-                    <th [nzSortFn]="true">Trạng thái phòng</th>
+                    <th [nzSortFn]="true">Số trẻ em</th>
+                    <th [nzSortFn]="true">Số người lớn</th>
+                    <th [nzSortFn]="true">Số lượng phòng</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of basicTable.data">
-                    <td>{{ data?.id }}</td>
-                    <td>
-                        {{ data?.numberRoom?.toString().length == 1 ? "00" + data?.numberRoom : null}}
-                        {{ data?.numberRoom?.toString().length == 2 ? "0" + data?.numberRoom : null}}
-                    </td>
-                    <td>{{ data?.building?.name }}</td>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                    <td>{{ pageSize * pageIndex + i + 1 }}</td>
+                    <td>{{ data?.name }}</td>
                     <td>{{ data?.price }}</td>
                     <td>{{ data?.area }} m2</td>
-                    <td>{{ data?.name }}</td>
-                    <td>{{ data?.name }}</td>
-                    <td>{{ data?.status }}</td>
+                    <td>{{ data?.numberChildren }}</td>
+                    <td>{{ data?.numberParent }}</td>
+                    <td>{{ data?.numberOfRooms }}</td>
                     <td>
                         <div class="btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 

@@ -21,6 +21,7 @@ import { FormatNumber } from './shared/pipe/number.pipe';
 import { MenuItemComponent } from './layout/sidebar/menu-item/menu-item.component';
 import { AppInterceptor } from './core/interceptor/app.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+// import { QuillModule } from 'ngx-quill';
 
 registerLocaleData(vi);
 
@@ -42,6 +43,7 @@ registerLocaleData(vi);
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     NgbModule,
+    // QuillModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
