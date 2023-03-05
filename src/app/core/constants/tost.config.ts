@@ -1,0 +1,1 @@
+export const config = {positionClass: 'toast-top-right', closeButton:true}

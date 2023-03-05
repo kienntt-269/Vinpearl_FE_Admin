@@ -19,16 +19,16 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TourManagementComponent } from './tour-management.component';
 import { TourComponent } from './tour/tour.component';
 import { SaveTourComponent } from './save-tour/save-tour.component';
 import { TypeOfTourComponent } from './type-of-tour/type-of-tour.component';
 import { TourManagementRoutingModule } from './tour-management-routing.module';
-// import { QuillModule } from 'ngx-quill';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule} from '@angular/common/http';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
-    TourManagementComponent,
     TourComponent,
     TypeOfTourComponent,
     SaveTourComponent,
@@ -53,7 +53,7 @@ import { TourManagementRoutingModule } from './tour-management-routing.module';
     NzUploadModule,
     NzModalModule,
     NzMessageModule,
-    // QuillModule,
+    NgxEditorModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -61,17 +61,25 @@ import { TourManagementRoutingModule } from './tour-management-routing.module';
         deps: [HttpClient]
       }
     }),
+    HttpClientModule,
+    AngularEditorModule
   ]
 })
 export class TourManagementModule {
   constructor(public translationService: TranslateService) {
     translationService.addLangs(['en', 'vi']);
-    this.translationService.store.onLangChange
-      .subscribe((lang: LangChangeEvent) => {
-        this.translationService.use(lang.lang).toPromise();
-      },error =>{
-        console.log(error)
-      });
+    // this.translationService.store.onLangChange
+    //   .subscribe((lang: LangChangeEvent) => {
+    //     this.translationService.use(lang.lang).toPromise();
+    //   },error =>{
+    //     console.log(error)
+    //   });
+    if (localStorage.getItem('lang')) {
+      translationService.use(localStorage.getItem('lang')!);
+    } else {
+      localStorage.setItem('lang', 'vi');
+      translationService.use('vi');
+    }
   }
 }
 

@@ -21,6 +21,7 @@
       "fullName": "Tên đầy đủ",
       "password": "Mật khẩu",
       "confirmPassword": "Nhập lại mật khẩu",
+      "permission": "Mức phân quyền",
       "phone": "Số điện thoại",
       "cccd": "Căn cước công dân",
       "btnCancel": "Hủy bỏ",

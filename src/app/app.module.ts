@@ -21,7 +21,10 @@ import { FormatNumber } from './shared/pipe/number.pipe';
 import { MenuItemComponent } from './layout/sidebar/menu-item/menu-item.component';
 import { AppInterceptor } from './core/interceptor/app.interceptor';
 import { ToastrModule } from 'ngx-toastr';
-// import { QuillModule } from 'ngx-quill';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgxEditorModule } from 'ngx-editor';
+import { OptionInfoAdminModule } from './modules/option-info-admin/option-info-admin.component.module';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 registerLocaleData(vi);
 
@@ -40,9 +43,11 @@ registerLocaleData(vi);
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    OptionInfoAdminModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     NgbModule,
+    NzToolTipModule,
     // QuillModule,
     TranslateModule.forRoot({
       loader: {
@@ -52,6 +57,8 @@ registerLocaleData(vi);
       },
       isolate: false
     }),
+    AngularEditorModule,
+    NgxEditorModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },

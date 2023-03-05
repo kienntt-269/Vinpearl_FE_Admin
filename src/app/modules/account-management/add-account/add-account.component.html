@@ -78,28 +78,26 @@
                 </div>
                 <div class="col col-sm-6">
                     <nz-form-item>
-                        <nz-form-label nzFor="phone">{{'addAccount.phone' | translate}}</nz-form-label>
+                        <nz-form-label nzFor="permission">{{'addAccount.permission' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="phone" id="phone" />
-                                <ng-template #inputNameClear>
-                                    <span
-                                        nz-icon
-                                        class="ant-input-clear-icon"
-                                        nzTheme="fill"
-                                        nzType="close-circle"
-                                    ></span>
-                                </ng-template>
+                                <nz-select
+                                    [nzPlaceHolder]="'saveTour.permission' | translate"
+                                    formControlName="site"
+                                    nzAllowClear
+                                >
+                                    <nz-option *ngFor="let item of listOfPermission" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                                </nz-select>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
                     <nz-form-item>
-                        <nz-form-label nzFor="cccd">{{'addAccount.cccd' | translate}}</nz-form-label>
+                        <nz-form-label nzFor="phone">{{'addAccount.phone' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="cccd" id="cccd" />
+                                <input nz-input formControlName="phone" id="phone" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon

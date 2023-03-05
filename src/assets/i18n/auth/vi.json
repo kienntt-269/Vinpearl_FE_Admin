@@ -18,5 +18,8 @@
     "service": "Điều kiện điều khoản",
     "policy": "Chính sách bảo mật",
     "hasAccount": "Đã có tài khoản?"
+  },
+  "header": {
+    "bell": "Đặt phòng"
   }
 }

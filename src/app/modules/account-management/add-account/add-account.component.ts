@@ -11,8 +11,10 @@ import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 export class AddAccountComponent implements OnInit {
 
   breadcrumb: any = [];
+  listOfPermission: any[] = [];
+
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +28,12 @@ export class AddAccountComponent implements OnInit {
         // route: "/pages/room-booking"
       }
     ]
+
+    this.accountService.getListPermission().subscribe(res => {
+      if (res.code === 200) {
+        this.listOfPermission = res.data;
+      }
+    })
   }
 
   formGroup: FormGroup = new FormGroup({
