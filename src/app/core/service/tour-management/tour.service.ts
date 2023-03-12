@@ -36,11 +36,10 @@ export class TourService {
     addTour(formData: any): Observable<any> {
         const headers = handle.requestHeadersFormData();
         let options = {headers: headers};
-        // return this.httpClient.post(`${APIs.API_ADD_TOUR}`, formData, {
-        //     reportProgress: true,
-        //     observe: 'events'
-        //   });
-        return this.httpClient.post(`${APIs.API_ADD_TOUR}`, formData);
+        return this.httpClient.post(`${APIs.API_ADD_TOUR}`, formData, {
+            reportProgress: true,
+            observe: 'events'
+        });
     };
 
     getAllSite(): Observable<any> {

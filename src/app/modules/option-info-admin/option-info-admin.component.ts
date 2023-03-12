@@ -21,6 +21,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 // import {DatePipe, Location} from "@angular/common";
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { config } from 'src/app/core/constants/tost.config';
+import { focusElement } from 'src/app/shared/util/focus-element';
+import handle from 'src/app/core/functions/handle';
 
 @Component({
   selector: 'app-option-info-admin',
@@ -167,11 +169,12 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
     //     focusElement('.btn-cancel-setting');
     //   }, 500)
     // }
-    // if (modalName === 'logout') {
-    //   setTimeout(() => {
-    //     focusElement('.btn-cancel')
-    //   }, 500)
-    // }
+    if (modalName === 'logout') {
+      this.showLogout = true;
+      setTimeout(() => {
+        focusElement('.btn-cancel');
+      }, 500)
+    }
   }
 
   changeLanguage(chooseLanguage: string) {
@@ -623,5 +626,18 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
       this.toast.error(this.translate.instant('forgotPassword.expired'), this.translate.instant('error'), config);
       this.route.navigate(["/auth/forgot-password"]);
     }, 700);
+  }
+
+  showLogout: boolean = false;
+
+  handleCancel() {
+    this.showLogout = false;
+  }
+
+  confirmLogout() {
+    // handle.logout;
+    this.showLogout = false;
+    this.route.navigate(['/auth/login']);
+    localStorage.clear();
   }
 }

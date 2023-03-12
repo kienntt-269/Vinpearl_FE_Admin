@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { BookingService } from 'src/app/core/service/booking-management/booking.service';
+import { AuthService } from 'src/app/core/auth-guard/auth.service';
 
 @Component({
   selector: 'app-account-management-page',
@@ -15,13 +15,40 @@ export class AccountManagementPageComponent implements OnInit {
   breadcrumb: any = [];
   listOfData: any = [];
   formGroup: FormGroup = new FormGroup({
-    roomName: new FormControl(''),
-    roomType: new FormControl(''),
-    status: new FormControl(''),
+    fullName: new FormControl(''),
+    phone: new FormControl(''),
+    hotelId: new FormControl(''),
   });
+  pageSize = 10;
+  pageIndex = 1;
+  sort: any = "id,asc";
+  totalItem: any = 0;
+
+  // @Output() changeItemPerPage: EventEmitter<number> = new EventEmitter<number>();
+  // @Output() changeCurrentPage: EventEmitter<number> = new EventEmitter<number>();      // Gửi currentPage lên cho parent component
+
+  changeCurrentPage(currentPage: number) {
+    this.pageIndex = currentPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getListAccount()
+  }
+
+  changeItemPerPage(itemPerPage: number) {
+    this.pageIndex = 1;
+    this.pageSize = itemPerPage;
+    // call event rule engine
+    // this.createData();
+    
+    // call event service
+    this.getListAccount()
+  }
+  
   constructor(
     private router: Router,
-    private roomService: BookingService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -36,55 +63,7 @@ export class AccountManagementPageComponent implements OnInit {
       }
     ]
 
-    this.listOfData = [
-      {
-        id: 1,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "1@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 0,
-      },
-      {
-        id: 2,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "2@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 1,
-      },
-      {
-        id: 3,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "3@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 2,
-      },
-    ];
-
-    this.getRoom();
+    this.getListAccount();
   }
 
   sortChange(e: any) {
@@ -95,14 +74,17 @@ export class AccountManagementPageComponent implements OnInit {
     this.router.navigate(['pages/account-management/add-room']);
   }
 
-  getRoom() {
+  getListAccount() {
     const body = {
-
+      name: "",
+      phone: "",
+      page: this.pageIndex - 1,
+      size: this.pageSize,
     }
-    this.roomService.getListRoom(body).subscribe(res => {
+    this.authService.getListAccount(body).subscribe(res => {
       if (res.code == 200) {
-        this.listOfData = res.data;
-        console.log(res.data);
+        this.listOfData = res.data.content;
+        this.totalItem = res.data.totalElements;
       }
     })
   }

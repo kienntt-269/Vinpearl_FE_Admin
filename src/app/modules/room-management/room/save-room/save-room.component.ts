@@ -72,7 +72,7 @@ export class SaveRoomComponent implements OnInit {
         Validators.maxLength(12),
       ],
     }),
-    area: new FormControl('', {
+    acreage: new FormControl('', {
       validators: [
         Validators.required,
         Validators.maxLength(100),

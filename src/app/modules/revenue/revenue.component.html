@@ -73,15 +73,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of basicTable.data">
-                        <td>{{ data?.id }}</td>
+                    <tr *ngFor="let data of basicTable.data; let i = index">
+                        <td>{{ pageSize * pageIndex + i + 1 }}</td>
                         <td>
                             {{ data?.numberRoom?.toString().length == 1 ? "00" + data?.numberRoom : null}}
                             {{ data?.numberRoom?.toString().length == 2 ? "0" + data?.numberRoom : null}}
                         </td>
                         <td>{{ data?.building?.name }}</td>
                         <td>{{ data?.price }}</td>
-                        <td>{{ data?.area }} m2</td>
+                        <td>{{ data?.acreage }} m2</td>
                         <td>{{ data?.name }}</td>
                         <td>{{ data?.name }}</td>
                         <td>{{ data?.status }}</td>
@@ -129,15 +129,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of basicTable.data">
-                        <td>{{ data?.id }}</td>
+                    <tr *ngFor="let data of basicTable.data; let i = index">
+                        <td>{{ pageSize * pageIndex + i + 1 }}</td>
                         <td>
                             {{ data?.numberRoom?.toString().length == 1 ? "00" + data?.numberRoom : null}}
                             {{ data?.numberRoom?.toString().length == 2 ? "0" + data?.numberRoom : null}}
                         </td>
                         <td>{{ data?.building?.name }}</td>
                         <td>{{ data?.price }}</td>
-                        <td>{{ data?.area }} m2</td>
+                        <td>{{ data?.acreage }} m2</td>
                         <td>{{ data?.name }}</td>
                         <td>{{ data?.name }}</td>
                         <td>{{ data?.status }}</td>

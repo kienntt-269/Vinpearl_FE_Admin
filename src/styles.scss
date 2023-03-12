@@ -138,3 +138,25 @@ nz-date-picker {
 .error {
 	color: #E03;
 }
+
+.ant-btn.btn-cancel {
+	background: #555555 !important;
+
+	&:hover {
+		background-color: #9A9A9A!important;
+	}
+}
+
+.ant-btn.ant-btn-primary {
+	background-color: #f39f2d!important;
+	border-color: #f39f2d!important;
+	border-radius: 4px;
+
+	&:hover {
+		background-color: #f1b259!important;
+	}
+}
+
+.ant-select-clear {
+	display: flex !important;
+}

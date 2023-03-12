@@ -18,8 +18,9 @@ export class TypeOfRoomComponent implements OnInit {
   breadcrumb: any = [];
   listOfData: any = [];
   pageSize: any = 10;
-  pageIndex: any = 0;
-  sort: any = "id,desc";
+  pageIndex: any = 1;
+  sort: any = "id,asc";
+  totalItem: any = 0;
   formGroup: FormGroup = new FormGroup({
     roomName: new FormControl(''),
     roomType: new FormControl(''),
@@ -62,11 +63,30 @@ export class TypeOfRoomComponent implements OnInit {
 
   getRoomType() {
     const formValue = this.formGroup.value;
-    this.roomService.getListRoomType(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
+    this.roomService.getListRoomType(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.numberOfRooms, formValue.phone).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
-        console.log(res.data);
+        this.totalItem = res.data.totalElements;
       }
     })
+  }
+
+  changeCurrentPage(currentPage: number) {
+    this.pageIndex = currentPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getRoomType()
+  }
+
+  changeItemPerPage(itemPerPage: number) {
+    this.pageIndex = 1;
+    this.pageSize = itemPerPage;
+    // call event rule engine
+    // this.createData();
+    
+    // call event service
+    this.getRoomType()
   }
 }

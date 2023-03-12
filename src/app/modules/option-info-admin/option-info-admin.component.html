@@ -1,38 +1,30 @@
 <div class="info-option" [hidden]="hiddenAll">
     <button #infOption class="btn-custom">
-      <img src="../../../assets/icons/icon/CMS/info.svg" alt=""/>
+      <img src="../../../assets/icon/info.svg" alt=""/>
       <!-- <span class="btn-admin">{{nameUser}}</span> -->
       <span class="btn-admin">Nguyễn Tiến Trung Kiên</span>
-      <img src="./../../../assets/icons/icon/CMS/arrow5.svg" alt=""/>
+      <img src="./../../../assets/icon/arrow-up-short.svg" alt=""/>
     </button>
     <div class="btn-hide"  #toggleButton (click)="toggleMenu()"></div>
   
     <div [hidden]="!isMenuOpen" class="dropdown-option" #menu>
       <div class="item-option" (click)="hideOption('introduce')" data-bs-toggle="modal" data-bs-target="#introduce">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/>
-        </svg>
         {{'optionInfoAdmin.menu.introduce' | translate}}
       </div>
       <div class="item-option" [class.color-red]="languageCurrent === 'vi'" (click)="changeLanguage('vi')">
-        <img class="align-icon" src="./../../../../assets/icons/icon/CMS/vi2.svg" alt=""/>
         {{'optionInfoAdmin.menu.vi' | translate}}
       </div>
       <div class="item-option" [class.color-red]="languageCurrent === 'en'" (click)="changeLanguage('en')">
-        <img class="align-icon" src="./../../../../assets/icons/icon/CMS/en2.svg" alt=""/>
         {{'optionInfoAdmin.menu.en' | translate}}
       </div>
       <div class="item-option change-pass" (click)="hideOption('changePassword')" data-bs-toggle="modal"
            data-bs-target="#changePassword"
            #openChangePass>
-        <img class="align-icon custom change-pass" src="./../../../../assets/images/lock.png" alt=""/>
         {{'optionInfoAdmin.menu.changePassword' | translate}}</div>
       <div class="item-option" (click)="hideOption('accountSettings')" data-bs-toggle="modal"
            data-bs-target="#accountSettings">
-        <img class="align-icon" src="./../../../../assets/icons/icon/CMS/setting2.svg" alt=""/>
         {{'optionInfoAdmin.menu.accountSettings' | translate}}</div>
       <div class="item-option" (click)="hideOption('logout')" data-bs-toggle="modal" data-bs-target="#logout">
-        <img class="align-icon custom" src="./../../../../assets/images/logout.png" alt=""/>
         {{'optionInfoAdmin.menu.logout' | translate}}</div>
     </div>
   </div>
@@ -257,109 +249,34 @@
       </div>
     </div>
   </div>
-  
-  <!-- Modal accountSettings -->
-  <div class="modal fade modal-custom" id="accountSettings" tabindex="-1" aria-labelledby="exampleModalLabel"
-       aria-hidden="true"
-       data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title font-size-18">{{'optionInfoAdmin.labelSetting' | translate}} </h5>
-          <button type="button" class="btn-close-modal" data-bs-dismiss="modal" (click)="btnCancelAccSetting()">
-            <ng-container *ngTemplateOutlet="closeIcon"></ng-container>
-          </button>
-        </div>
-        <div class="modal-body pb-0" style="text-align: center">
-          <form  [nzLayout]="'vertical'" class="align-left" nz-form [formGroup]="formGroupSetting">
-            <nz-form-control>
-              <nz-radio-group name="mode" formControlName="radioMode">
-                <nz-form-label>{{'optionInfoAdmin.settingMode' | translate}}</nz-form-label>
-                <nz-space nzPreset="2" nzDirection="vertical" class="d-flex">
-                  <label nz-radio nzValue="1">{{'optionInfoAdmin.labelRadioMode1' | translate}}</label>
-                  <label nz-radio nzValue="2" class="mt-1">{{'optionInfoAdmin.labelRadioMode' | translate}}</label>
-                </nz-space>
-              </nz-radio-group>
-            </nz-form-control>
-            <hr>
-            <nz-form-item>
-              <nz-form-control class="checkbox-customer">
-                <form [formGroup]="formGroupSetting">
-                  <nz-checkbox-wrapper (nzOnChange)="chooseNotification($event)">
-                    <label name="checkbox2" formControlName="checkboxNotif" nz-checkbox
-                           nzValue="notification">{{'optionInfoAdmin.notifi' | translate}}</label>
-                  </nz-checkbox-wrapper>
-                </form>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item *ngIf="notif!=0">
-              <nz-form-label>{{'optionInfoAdmin.receiveNotifications' | translate}}</nz-form-label>
-              <nz-form-control>
-                <nz-select
-                  formControlName="notif"
-                  name="x"
-                  
-                  nzValue="checkbox"
-                  nzShowCheckbox
-                  nzChecked="true"
-                  [nzAllowClear]="false"
-                  style="text-align: left;"
-                >
-                  <nz-option *ngFor="let item of dataOptions" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-            <hr>
-            <nz-form-item>
-              <nz-form-control class="checkbox-customer">
-                <nz-checkbox-wrapper (nzOnChange)="chooseIS2A($event)">
-                  <label name="checkbox1" formControlName="checkboxOtp" nz-checkbox nzValue="is2a">{{'optionInfoAdmin.authen' | translate}}</label>
-                </nz-checkbox-wrapper>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item *ngIf="otp!=0">
-              <!--            <nz-form-label>{{receiveOtp}} / {{formGroupSetting.get('otp')?.value}}</nz-form-label>-->
-              <nz-form-label>{{'optionInfoAdmin.receiveOtp' | translate}}</nz-form-label>
-              <nz-form-control>
-                <nz-select
-                  formControlName="otp"
-                  name="checkbox2"
-                  [nzAllowClear]="false"
-                  
-                >
-                  <nz-option *ngFor="let item of dataOption2Layers" [nzValue]="item.id"
-                              [nzLabel]="item.name"></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-          </form>
-  
-          <div *ngIf="isGoogleAuth === true">
-            <!--        <div>-->
-            <nz-form-item>
-              <nz-form-label>{{'QR Code'}}</nz-form-label>
-            </nz-form-item>
-            <img [src]="imageSource" alt="Image Source">
-  
-            <!--          <img class="align-icon" style="width: 200px; height: 200px"-->
-            <!--               src="http://192.168.100.46:8088/api/device/vbcs/functions/login/createImageOTP/3ML2KYICSYRPYXSM" alt=""/>-->
-          </div>
-        </div>
-        <div class="modal-footer" style="margin: auto">
-          <button type="button" class="btn-cancel-setting btn-action-delete" nz-button 
-                  nzType="primary"
-                  data-bs-dismiss="modal" (click)="btnCancelAccSetting()">
-            {{'optionInfoAdmin.btnCancel' | translate}}
-          </button>
-          <button nz-button class="" 
-                  nzType="primary" type="button" data-bs-dismiss="modal">
-            {{'optionInfoAdmin.btnSave' | translate}}
-          </button>
-        </div>
+
+  <nz-modal
+    [(nzVisible)]="showLogout"
+    nzTitle="{{'optionInfoAdmin.labelLogout' | translate}}"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="confirmLogout()"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+  >
+    <ng-template #modalContent>
+      {{'optionInfoAdmin.textLogout' | translate}}
+    </ng-template>
+    <ng-template #modalFooter>
+      <div class="d-flex justify-content-center">
+        <button style="color: #FFF;" class="btn-cancel" nz-button nzType="default" (click)="handleCancel()">Hủy</button>
+        <button nz-button nzType="primary" (click)="confirmLogout()">Đăng xuất</button>
       </div>
-    </div>
-  </div>
-  
+    </ng-template>
+  </nz-modal>
+
+  <ng-template #XIcon>
+    <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10.192 0.677002L5.94897 4.95341L1.70697 0.677002L0.292969 2.10247L4.53497 6.37888L0.292969 10.6553L1.70697 12.0808L5.94897 7.80435L10.192 12.0808L11.606 10.6553L7.36397 6.37888L11.606 2.10247L10.192 0.677002Z"
+        fill="black" />
+    </svg>
+  </ng-template>
+
   <!-- Modal logout -->
   <div class="modal fade modal-custom" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
         data-bs-keyboard="true">

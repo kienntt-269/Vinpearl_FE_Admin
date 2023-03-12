@@ -18,6 +18,8 @@ export class SaveTourComponent implements OnInit {
 
   fileToUpload: any;
   fileListName: any[] = [];
+  imageInput: any[] = [];
+  fileList: any[] = [];
   selectedFile: any;
   listOfSite: any[] = [];
   htmlContent = '';
@@ -70,7 +72,7 @@ export class SaveTourComponent implements OnInit {
       name: "Spa",
     },
   ];
-  listOfLengthOfStay: any = [
+  listOfLengthStay: any = [
     {
       id: 1,
       name: "1 ngày",
@@ -218,7 +220,7 @@ export class SaveTourComponent implements OnInit {
         Validators.required,
       ],
     }),
-    lengthOfStay: new FormControl('', {
+    lengthStay: new FormControl('', {
       validators: [
         Validators.required,
       ],
@@ -281,7 +283,7 @@ export class SaveTourComponent implements OnInit {
         const data = res.data;
         this.formGroup.setValue({
           name: data.name,
-          area: data.area,
+          acreage: data.acreage,
           site: data.siteId,
           phone: data.phone,
           totalRoom: data.totalRoom,
@@ -296,73 +298,64 @@ export class SaveTourComponent implements OnInit {
 
   handleAddTour() {
     const formValue = this.formGroup.value;
-    console.log(formValue);
-    const data = {
-      name: formValue.name,
-      numberOfPeople: formValue.numberOfPeople,
-      suitableId: formValue.suitable,
-      // typeOfTourId: formValue.typeOfTour,
-      leavingFromId: formValue.leavingFrom,
-      leavingToId: formValue.leavingTo,
-      lengthOfStayId: formValue.lengthOfStay,
-      price: formValue.price,
-      expirationDateMls: formValue.expirationDate,
-      description: formValue.description,
-      inclusion: formValue.inclusion,
-      termsConditions: formValue.termsConditions,
-      path: formValue.path,
+    // if (this.formGroup.invalid) {
+    //   for (const control of Object.keys(this.formGroup.controls)) {
+    //     this.formGroup.controls[control].markAsTouched();
+    //   }
+    //   return;
+    // }
+    const formData = new FormData();
+    formData.append("name", formValue.name);
+    formData.append("numberOfPeople", formValue.numberOfPeople);
+    formData.append("suitableId", formValue.suitable);
+    formData.append("leavingFromId", formValue.leavingFrom);
+    formData.append("leavingToId", formValue.leavingTo);
+    formData.append("lengthStayId", formValue.lengthStay);
+    formData.append("price", formValue.price);
+    formData.append("typeOfTourId", formValue.typeOfTour);
+    formData.append("description", formValue.description);
+    formData.append("inclusion", formValue.inclusion);
+    formData.append("termsConditions", formValue.termsConditions);
+    if (typeof(formValue.expirationDate) === "object") {
+      formValue.expirationDate = formValue.expirationDate.getTime();
     }
-    this.tourService.addTour(data).subscribe(res => {
-      console.log(res);
-      if (res.code === 200) {
-        console.log(res);
+    formData.append("expirationDateMls", formValue.expirationDate);
+    // formData.append("images", formValue.uploadFile);
+    for (let index = 0; index < this.fileList.length; index++) {
+      formData.append("images", this.fileList[index]);
+    }
+
+    this.tourService.addTour(formData).subscribe(res => {
+      if (res.body?.code == 200) {
+        this.toast.success('Thành công', 'Thông báo');
+        this.router.navigate(['/pages/tour']);
+      }
+      if (res.body?.code == 400) {
+        this.toast.success('Lỗi', 'Thông báo');
+      }
+      if (res.body?.code == 404) {
+        this.toast.success('Lỗi', 'Thông báo');
       }
     })
-    if (this.formGroup.invalid) {
-      for (const control of Object.keys(this.formGroup.controls)) {
-        this.formGroup.controls[control].markAsTouched();
-      }
-      return;
-    }
-    
-    // const formData = new FormData();
-    // formData.append("name", formValue.name);
-    // formData.append("email", formValue.email);
-    // formData.append("description", formValue.description);
-    // formData.append("address", formValue.address);
-    // formData.append("phone", formValue.phone);
-    // formData.append("totalRoom", formValue.totalRoom);
-    // formData.append("area", formValue.area);
-    // formData.append("siteId", formValue.site);
-    // // formData.append("images", formValue.uploadFile);
-    // for (let index = 0; index < this.selectedFile.length; index++) {
-    //   formData.append("images", this.selectedFile[index]);
-    // }
-
-    // this.tourService.addHotel(formData).subscribe(res => {
-    //   console.log(res.body);
-    //   if (res.body?.code == 200) {
-    //     this.toast.success('Thành công', 'Thông báo');
-    //     this.router.navigate(['/pages/hotel-management']);
-    //   }
-    //   if (res.body?.code == 400) {
-    //     this.toast.success('Lỗi', 'Thông báo');
-    //   }
-    //   if (res.body?.code == 404) {
-    //     this.toast.success('Lỗi', 'Thông báo');
-    //   }
-    // })
   }
 
   onCancel() {
-    this.router.navigate(['/pages/hotel-management']);
+    this.router.navigate(['/pages/tour']);
   }
 
   onFileSelect(event: any) {
-    this.selectedFile = event.target.files;
+    this.fileList = event.target.files;
     this.fileListName = [];
-    for (let index = 0; index < this.selectedFile.length; index++) {
-      this.fileListName.push(this.selectedFile[index].name);
+    this.imageInput = [];
+    for (let index = 0; index < this.fileList.length; index++) {
+      var reader = new FileReader();
+      reader.readAsDataURL(this.fileList[index]);
+      
+      reader.onload = (e: any) => {
+        this.imageInput.push(e.target.result);
+      };
+      
+      this.fileListName.push(this.fileList[index].name);
     }
   }
 

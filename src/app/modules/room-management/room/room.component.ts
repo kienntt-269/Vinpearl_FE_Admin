@@ -16,6 +16,9 @@ export class RoomComponent implements OnInit {
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
+  pageSize: any = 10;
+  pageIndex: any = 0;
+  sort: any = "id,asc";
   formGroup: FormGroup = new FormGroup({
     roomName: new FormControl(''),
     roomType: new FormControl(''),

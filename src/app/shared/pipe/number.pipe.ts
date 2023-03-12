@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'format'
 })
-export class FormatNumber implements PipeTransform {
+export class FormatPrice implements PipeTransform {
 
   transform(value: number | string, locale?: string): string {
     return new Intl.NumberFormat(locale, {

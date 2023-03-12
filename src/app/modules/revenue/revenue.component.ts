@@ -38,6 +38,10 @@ export class RevenueComponent implements OnInit {
     },
   ];
 
+  pageSize: any = 10;
+  pageIndex: any = 0;
+  sort: any = "id,asc";
+
   constructor(
     private router: Router,
     private roomService: BookingService,

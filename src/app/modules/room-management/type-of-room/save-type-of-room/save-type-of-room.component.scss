@@ -25,16 +25,34 @@
         }
 
         .name {
-            height: 100%;
-            display: flex;
-            align-items: center;
+            white-space: nowrap;
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
             margin-left: 10px;
+            height: 100%;
+            line-height: 200%;
         }
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .frame-default {
+        margin-top: 35px;
+        height: 350px;
+        background-color: #53575a1a;
     }
 }
 
 ::ng-deep {
     .ant-upload.ant-upload-select {
         width: 100%;
+    }
+
+    .ant-carousel .slick-dots li button {
+        height: 100% !important;
     }
 }

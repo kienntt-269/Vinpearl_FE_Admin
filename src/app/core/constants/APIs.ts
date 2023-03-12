@@ -10,7 +10,8 @@ export default {
   //account
   AUTH_LOGIN: environment.BASE_PATH_DOMAIN + '/user/login',
   AUTH_REGISTER: environment.BASE_PATH_DOMAIN + '/user/register',
-  API_GET_LIST_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/123',
+  API_GET_LIST_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/search',
+  API_GET_DETAIL_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/detail',
   API_GET_LIST_PERMISSION: environment.BASE_PATH_DOMAIN + '/user/permission/findAll',
 
   // site
@@ -26,6 +27,7 @@ export default {
   API_GET_DETAIL_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/detail',
   API_GET_LIST_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/search',
   API_DELETE_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/delete',
+  API_FINDALL_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/findAll',
 
   // hotel
   API_ADD_TOUR: environment.BASE_PATH_DOMAIN + '/tour/create',
@@ -38,8 +40,9 @@ export default {
   API_ADD_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/create',
   API_UPDATE_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/update',
   API_GET_DETAIL_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/detail',
-  API_GET_LIST_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/search',
+  API_SEARCH_LIST_TYPE_OF_ROOM: environment.BASE_PATH_DOMAIN + '/room/room-type/search',
   API_DELETE_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/delete',
+  API_GET_LIST_TYPE_OF_ROOM: environment.BASE_PATH_DOMAIN + '/room/room-type/findAll',
 
   // room
   API_ADD_ROOM: environment.BASE_PATH_DOMAIN + '/room/create',
@@ -47,6 +50,25 @@ export default {
   API_GET_DETAIL_ROOM: environment.BASE_PATH_DOMAIN + '/room/detail',
   API_GET_LIST_ROOM: environment.BASE_PATH_DOMAIN + '/room/search',
   API_DELETE_ROOM: environment.BASE_PATH_DOMAIN + '/room/delete',
+
+  // service
+  API_ADD_SERVICE: environment.BASE_PATH_DOMAIN + '/service/create',
+  API_UPDATE_SERVICE: environment.BASE_PATH_DOMAIN + '/service/update',
+  API_GET_DETAIL_SERVICE: environment.BASE_PATH_DOMAIN + '/service/detail',
+  API_SEARCH_LIST_SERVICE: environment.BASE_PATH_DOMAIN + '/service/search',
+  API_DELETE_SERVICE: environment.BASE_PATH_DOMAIN + '/service/delete',
+  API_GET_LIST_SERVICE: environment.BASE_PATH_DOMAIN + '/service/findAll',
+
+  // description
+  API_ADD_DESCRIPTION: environment.BASE_PATH_DOMAIN + '/service/description/create',
+  API_GET_LIST_DESCRIPTION: environment.BASE_PATH_DOMAIN + '/service/description/findAll',
+
+  // content
+  API_ADD_CONTENT: environment.BASE_PATH_DOMAIN + '/service/content/create',
+  API_GET_LIST_CONTENT: environment.BASE_PATH_DOMAIN + '/service/content/findAll',
+
+  // lưu cả 3 service, description và content
+  API_SAVE_SERVICE: environment.BASE_PATH_DOMAIN + '/service/save',
 
   // booking
   API_ADD_BOOKING: environment.BASE_PATH_DOMAIN + '/booking/create',

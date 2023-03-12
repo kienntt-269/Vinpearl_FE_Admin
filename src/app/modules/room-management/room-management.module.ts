@@ -22,28 +22,28 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { BookingSettingComponent } from './booking-setting/booking-setting.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RoomBookingComponent } from './room-booking/room-booking.component';
 import { RoomComponent } from './room/room.component';
 import { SaveRoomComponent } from './room/save-room/save-room.component';
-import { ServiceComponent } from './service/service.component';
-import { FurnitureComponent } from './furniture/furniture.component';
+import { ServiceComponent } from './service/service/service.component';
 import { TypeOfRoomComponent } from './type-of-room/type-of-room.component';
 import { SaveTypeOfRoomComponent } from './type-of-room/save-type-of-room/save-type-of-room.component';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { SaveServiceComponent } from './save-service/save-service.component';
+import { SaveServiceComponent } from './service/save-service/save-service.component';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { FormatPrice } from 'src/app/shared/pipe/number.pipe'; 
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
   declarations: [
     BookingManagementPageComponent,
     BookingSettingComponent,
-    RoomBookingComponent,
     RoomComponent,
     SaveRoomComponent,
     ServiceComponent,
-    FurnitureComponent,
     TypeOfRoomComponent,
     SaveTypeOfRoomComponent,
-    SaveServiceComponent
+    SaveServiceComponent,
+    FormatPrice,
   ],
   imports: [
     RoomManagementRoutingModule,
@@ -66,6 +66,8 @@ import { SaveServiceComponent } from './save-service/save-service.component';
     NzUploadModule,
     NzModalModule,
     NzMessageModule,
+    NzCarouselModule,
+    NzPaginationModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -78,12 +80,18 @@ import { SaveServiceComponent } from './save-service/save-service.component';
 export class RoomManagementModule {
   constructor(public translationService: TranslateService) {
     translationService.addLangs(['en', 'vi']);
-    this.translationService.store.onLangChange
-      .subscribe((lang: LangChangeEvent) => {
-        this.translationService.use(lang.lang).toPromise();
-      },error =>{
-        console.log(error)
-      });
+    // this.translationService.store.onLangChange
+    //   .subscribe((lang: LangChangeEvent) => {
+    //     this.translationService.use(lang.lang).toPromise();
+    //   },error =>{
+    //     console.log(error)
+    //   });
+    if (localStorage.getItem('lang')) {
+      translationService.use(localStorage.getItem('lang')!);
+    } else {
+      localStorage.setItem('lang', 'vi');
+      translationService.use('vi');
+    }
   }
 }
 

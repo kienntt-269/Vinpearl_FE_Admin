@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
 import * as moment from 'moment';
+import { io } from 'socket.io-client';
+import constants from 'src/app/core/constants/constants';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +17,47 @@ export class HeaderComponent implements OnInit {
   countNotRead: number = 0;
   isRingBell: boolean = false;
   isShowBooking: boolean = false;
+  private socket: any;
+  TOPIC_ORDER = 'order';
+  TOPIC_CONNECT = 'connect';
+  TOPIC_DISCONNECT = 'disconnect';
   constructor(
     private renderer: Renderer2,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.startTime();
+  }
+
+  connectSocket() {
+    // API socket
+    this.socket = io(environment.BASE_PATH_DOMAIN + '/order?token=' + localStorage.getItem(constants.TOKEN), {
+      transports: ['polling', 'websocket'],
+      path: '/socket.io'
+    });
+    this.subscribeTopic(this.TOPIC_CONNECT);
+  }
+
+  subscribeTopic(topic: string) {
+    if (topic == this.TOPIC_CONNECT) {
+      this.socket.on(topic, () => {
+        this.subscribeTopic(this.TOPIC_DISCONNECT);
+        this.subscribeTopic(this.TOPIC_ORDER);
+      });
+      return;
+    }
+    if (topic == this.TOPIC_DISCONNECT) {
+      this.socket.on(topic, () => {
+        console.log('disconnected')
+      });
+      return;
+    }
+
+    if (topic == this.TOPIC_ORDER) {
+      this.socket.on(topic, (data: any) => {
+        console.log('Received new order: ', data);
+      })
+    }
   }
 
   toggleSidebar() {

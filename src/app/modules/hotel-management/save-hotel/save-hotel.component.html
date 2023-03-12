@@ -32,10 +32,10 @@
                 </div>
                 <div class="col col-sm-6">
                     <nz-form-item>
-                        <nz-form-label nzFor="area">{{'saveHotel.area' | translate}}</nz-form-label>
+                        <nz-form-label nzFor="acreage">{{'saveHotel.acreage' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="area" id="area" />
+                                <input nz-input formControlName="acreage" id="acreage" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -46,9 +46,9 @@
                                 </ng-template>
                             </nz-input-group>
                         </nz-form-control>
-                        <div *ngIf="this.formGroup.controls['area'].invalid && (this.formGroup.controls['area'].dirty || this.formGroup.controls['area'].touched)">
-                            <div class="error" *ngIf="this.formGroup.controls['area'].hasError('required')">
-                                {{'saveHotel.validate.area.required' | translate}}
+                        <div *ngIf="this.formGroup.controls['acreage'].invalid && (this.formGroup.controls['acreage'].dirty || this.formGroup.controls['acreage'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['acreage'].hasError('required')">
+                                {{'saveHotel.validate.acreage.required' | translate}}
                             </div>
                         </div>
                     </nz-form-item>
@@ -235,6 +235,32 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <div class="frame-default" *ngIf="fileList.length == 0">
+            </div>
+            <p class="mt-1 text-center" *ngIf="fileList.length == 0">{{"saveHotel.image" | translate}}</p>
+            <div class="d-flex  align-items-center">
+              <svg style="cursor: pointer;" (click)="pre()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+                height="14" viewBox="0 0 12 14" fill="none">
+                <path d="M11.4258 12L4.3271 7L11.4258 2L10.006 0L0.0678864 7L10.006 14L11.4258 12Z" fill="black" />
+              </svg>
+
+              <nz-carousel [nzEnableSwipe]="true" [nzEffect]="'fade'">
+                <div nz-carousel-content *ngFor="let image of imageInput;let indexOfelement=index;">
+                  <div>
+                    <img src={{image}} alt="">
+                    <p style="font-size: 16px;">{{fileList[indexOfelement].name}}</p>
+                  </div>
+                </div>
+              </nz-carousel>
+
+              <svg style="cursor: pointer;" (click)="next()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+                height="14" viewBox="0 0 12 14" fill="none">
+                <path d="M0.148438 12L7.24712 7L0.148438 2L1.56817 0L11.5063 7L1.56817 14L0.148438 12Z"
+                  fill="black" />
+              </svg>
             </div>
         </div>
     </div>

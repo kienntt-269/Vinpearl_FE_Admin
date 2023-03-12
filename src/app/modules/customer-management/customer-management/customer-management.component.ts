@@ -20,9 +20,9 @@ export class CustomerManagementComponent implements OnInit {
     roomTotal: new FormControl(''),
     phone: new FormControl(''),
   });
-  pageSize: Number = 10;
-  pageIndex: Number = 0;
-  sort: any = "id, desc";
+  pageSize: any = 10;
+  pageIndex: any = 0;
+  sort: any = "id,asc";
   constructor(
     private router: Router,
     private hotelService: HotelService,

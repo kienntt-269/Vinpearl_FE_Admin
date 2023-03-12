@@ -1,0 +1,388 @@
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form>
+    <div class="title-search">{{'saveService.title' | translate}}</div>
+    <div class="content row">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="name">{{'saveService.name' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                [nzPlaceHolder]="'saveService.name' | translate"
+                                formControlName="name"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfName" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['name'].invalid && (this.formGroup.controls['name'].dirty || this.formGroup.controls['name'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['name'].hasError('required')">
+                                {{'saveService.validate.name.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['name'].hasError('maxLength')">
+                                {{'saveService.validate.name.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="description">{{'saveService.description' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                nzMode="multiple"
+                                [nzPlaceHolder]="'saveService.description' | translate"
+                                formControlName="description"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfDescription" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['description'].invalid && (this.formGroup.controls['description'].dirty || this.formGroup.controls['description'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['description'].hasError('required')">
+                                {{'saveService.validate.description.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['description'].hasError('maxLength')">
+                                {{'saveService.validate.description.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="content">{{'saveService.content' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                nzMode="multiple"
+                                [nzPlaceHolder]="'saveService.content' | translate"
+                                formControlName="content"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfContent" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['content'].invalid && (this.formGroup.controls['content'].dirty || this.formGroup.controls['content'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['content'].hasError('required')">
+                                {{'saveService.validate.content.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['content'].hasError('maxLength')">
+                                {{'saveService.validate.content.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="typeOfRoom">{{'saveService.typeOfRoom' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                [nzPlaceHolder]="'saveService.typeOfRoom' | translate"
+                                formControlName="typeOfRoom"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfTypeOfRoom" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['typeOfRoom'].invalid && (this.formGroup.controls['typeOfRoom'].dirty || this.formGroup.controls['typeOfRoom'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['typeOfRoom'].hasError('required')">
+                                {{'saveService.validate.typeOfRoom.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn-groups d-flex justify-content-center align-items-center">
+        <button nz-button nzType="primary" (click)="cancel()" style="margin-right: 16px; background-color: #ccc !important;">{{'saveService.btnCancel' | translate}}</button>
+        <button nz-button nzType="primary" (click)="saveService()">{{'saveService.btnAdd' | translate}}</button>
+    </div>
+    <div class="space"></div>
+    <div class="row" style="margin-top: 20px">
+        <div class="col col-md-4">
+            <div class="table">
+                <div class="d-flex table__header justify-content-between mb-8">
+                    <div class="title-search">{{'saveService.nameTable'| translate}}</div>
+                    <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addName()">
+                        <span class="d-flex">
+                            <img src="../../../../assets/icon/plus_icon.svg" alt="">
+                        </span>
+                        
+                    </button>
+                </div>
+                <div class="table__content">
+                    <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #table1 [nzData]="listOfName">
+                        <thead>
+                            <tr>
+                                <th>{{'saveService.stt'| translate}}</th>
+                                <th>{{'saveService.name'| translate}}</th>
+                                <th>{{'saveService.name'| translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of table1.data; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ data?.name }}</td>
+                                <td>{{ data?.price | format }} vnđ</td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                    <div class="d-flex justify-content-center align-items-center" *ngIf="listOfName.length > 5">
+                        <nz-pagination
+                            [nzPageIndex]="0"
+                            [nzTotal]="listOfName.length"
+                            [nzPageSize]="5"
+                        ></nz-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <div class="table">
+                <div class="d-flex table__header justify-content-between mb-8">
+                    <div class="title-search">{{'saveService.descriptionTable'| translate}}</div>
+                    <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addDescription()">
+                        <span class="d-flex">
+                            <img src="../../../../assets/icon/plus_icon.svg" alt="">
+                        </span>
+                        
+                    </button>
+                </div>
+                <div class="table__content">
+                    <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #table2 [nzData]="listOfDescription">
+                        <thead>
+                            <tr>
+                                <th>{{'saveService.stt'| translate}}</th>
+                                <th>{{'saveService.description'| translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of table2.data; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ data?.name }}</td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                    <div class="d-flex justify-content-center align-items-center" *ngIf="listOfDescription.length > 5">
+                        <nz-pagination
+                            [nzPageIndex]="0"
+                            [nzTotal]="listOfDescription.length"
+                            [nzPageSize]="5"
+                        ></nz-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <div class="table">
+                <div class="d-flex table__header justify-content-between mb-8">
+                    <div class="title-search">{{'saveService.contentTable'| translate}}</div>
+                    <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addContent()">
+                        <span class="d-flex">
+                            <img src="../../../../assets/icon/plus_icon.svg" alt="">
+                        </span>
+                    </button>
+                </div>
+                <div class="table__content">
+                    <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #table3 [nzData]="listOfContent">
+                        <thead>
+                            <tr>
+                                <th>{{'saveService.stt'| translate}}</th>
+                                <th>{{'saveService.content'| translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of table3.data; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ data?.name }}</td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                    <div class="d-flex justify-content-center align-items-center" *ngIf="listOfContent.length > 5">
+                        <nz-pagination
+                            [nzPageIndex]="0"
+                            [nzTotal]="listOfContent.length"
+                            [nzPageSize]="5"
+                        ></nz-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<nz-modal
+    [(nzVisible)]="isVisibleName"
+    [nzTitle]="'saveService.modal.add' | translate"
+    (nzOnCancel)="handleCancelName()"
+    (nzOnOk)="callApiAddName()"
+    [nzContent]="modalContent1"
+    [nzFooter]="modalFooter1"
+>
+    <ng-template #modalContent1>
+        <form action="" [nzLayout]="'vertical'" [formGroup]="formAddService" class="form" nz-form>
+            <div class="row">
+                <div class="col col-sm-12">
+                    <nz-form-item>
+                        <nz-form-label nzFor="name">{{'saveService.name' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputNameService">
+                                <input nz-input formControlName="name" id="name" />
+                                <ng-template #inputNameService>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                        *ngIf="this.formAddService.controls['name'].value"
+                                        (click)="this.formAddService.controls['name'].setValue('')"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formAddService.controls['name'].invalid && (this.formAddService.controls['name'].dirty || this.formAddService.controls['name'].touched)">
+                            <div class="error" *ngIf="this.formAddService.controls['name'].hasError('required')">
+                                {{'saveService.validate.name.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formAddService.controls['name'].hasError('maxLength')">
+                                {{'saveService.validate.name.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-12">
+                    <nz-form-item>
+                        <nz-form-label nzFor="price">{{'saveService.price' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputPriceClear">
+                                <input nz-input formControlName="price" id="price" />
+                                <ng-template #inputPriceClear>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                        *ngIf="this.formAddService.controls['price'].value"
+                                        (click)="this.formAddService.controls['price'].setValue('')"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formAddService.controls['price'].invalid && (this.formAddService.controls['price'].dirty || this.formAddService.controls['price'].touched)">
+                            <div class="error" *ngIf="this.formAddService.controls['price'].hasError('required')">
+                                {{'saveService.validate.price.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formAddService.controls['price'].hasError('maxLength')">
+                                {{'saveService.validate.price.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter1>
+    <div class="d-flex justify-content-center">
+        <button style="color: #FFF;" class="btn-cancel" nz-button nzType="default" (click)="handleCancelName()">Hủy</button>
+        <button nz-button nzType="primary" (click)="callApiAddName()">{{'saveService.btnAdd' | translate}}</button>
+    </div>
+    </ng-template>
+</nz-modal>
+<nz-modal
+    [(nzVisible)]="isVisibleDescription"
+    [nzTitle]="'saveService.modal.add' | translate"
+    (nzOnCancel)="handleCancelDescription()"
+    (nzOnOk)="callApiAddDescription()"
+    [nzContent]="modalContent2"
+    [nzFooter]="modalFooter2"
+>
+    <ng-template #modalContent2>
+        <form action="" [nzLayout]="'vertical'" [formGroup]="formAddDescription" class="form" nz-form>
+            <div class="row">
+                <div class="col col-sm-12">
+                    <nz-form-item>
+                        <nz-form-label nzFor="description">{{'saveService.description' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputDescriptionService">
+                                <input nz-input formControlName="description" id="description" />
+                                <ng-template #inputDescriptionService>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                        *ngIf="this.formAddDescription.controls['description'].value"
+                                        (click)="this.formAddDescription.controls['description'].setValue('')"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formAddDescription.controls['description'].invalid && (this.formAddDescription.controls['description'].dirty || this.formAddDescription.controls['description'].touched)">
+                            <div class="error" *ngIf="this.formAddDescription.controls['description'].hasError('required')">
+                                {{'saveService.validate.description.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formAddDescription.controls['description'].hasError('maxLength')">
+                                {{'saveService.validate.description.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter2>
+    <div class="d-flex justify-content-center">
+        <button style="color: #FFF;" class="btn-cancel" nz-button nzType="default" (click)="handleCancelDescription()">Hủy</button>
+        <button nz-button nzType="primary" (click)="callApiAddDescription()">{{'saveService.btnAdd' | translate}}</button>
+    </div>
+    </ng-template>
+</nz-modal>
+<nz-modal
+    [(nzVisible)]="isVisibleContent"
+    [nzTitle]="'saveService.modal.add' | translate"
+    (nzOnCancel)="handleCancelContent()"
+    (nzOnOk)="callApiAddContent()"
+    [nzContent]="modalContent3"
+    [nzFooter]="modalFooter3"
+>
+    <ng-template #modalContent3>
+        <form action="" [nzLayout]="'vertical'" [formGroup]="formAddContent" class="form" nz-form>
+            <div class="row">
+                <div class="col col-sm-12">
+                    <nz-form-item>
+                        <nz-form-label nzFor="content">{{'saveService.content' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-input-group [nzSuffix]="inputContentService">
+                                <input nz-input formControlName="content" id="content" />
+                                <ng-template #inputContentService>
+                                    <span
+                                        nz-icon
+                                        class="ant-input-clear-icon"
+                                        nzTheme="fill"
+                                        nzType="close-circle"
+                                        *ngIf="this.formAddContent.controls['content'].value"
+                                        (click)="this.formAddContent.controls['content'].setValue('')"
+                                    ></span>
+                                </ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                        <div *ngIf="this.formAddContent.controls['content'].invalid && (this.formAddContent.controls['content'].dirty || this.formAddContent.controls['content'].touched)">
+                            <div class="error" *ngIf="this.formAddContent.controls['content'].hasError('required')">
+                                {{'saveService.validate.content.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formAddContent.controls['content'].hasError('maxLength')">
+                                {{'saveService.validate.content.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter3>
+    <div class="d-flex justify-content-center">
+        <button style="color: #FFF;" class="btn-cancel" nz-button nzType="default" (click)="handleCancelContent()">Hủy</button>
+        <button nz-button nzType="primary" (click)="callApiAddContent()">{{'saveService.btnAdd' | translate}}</button>
+    </div>
+    </ng-template>
+</nz-modal>

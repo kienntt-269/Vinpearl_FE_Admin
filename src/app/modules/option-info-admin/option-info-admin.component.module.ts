@@ -11,6 +11,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzFormModule,
     NzSpaceModule,
     NzCheckboxModule,
+    NzButtonModule,
     NzSelectModule,
+    NzModalModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

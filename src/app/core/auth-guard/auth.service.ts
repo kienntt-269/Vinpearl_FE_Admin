@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import APIs from "../constants/APIs";
@@ -6,23 +6,58 @@ import APIs from "../constants/APIs";
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   isAuthenticated() {
     throw new Error("Method not implemented.");
   }
   constructor(
-    public httpClient: HttpClient,
+    private http: HttpClient
   ) {}
 
-  login(body: any): Observable<any> {
-    return this.httpClient.post(`${APIs.AUTH_LOGIN}`, {
-        email: body.email,
-        password: body.password
-    });
+  isLoggedIn = false;
+  redirectUrl!: string;
+
+  // <div *ngIf="authService.isLoggedIn">
+  //   Đây là trang được bảo vệ bởi đăng nhập
+  // </div>
+  // <div *ngIf="!authService.isLoggedIn">
+  //   Bạn cần đăng nhập để truy cập trang này
+  // </div>
+
+  // export class MyProtectedPageComponent {
+  //   constructor(private authService: AuthService, private router: Router) {}
+  
+  //   ngOnInit() {
+  //     if (!this.authService.isLoggedIn) {
+  //       this.authService.redirectUrl = this.router.url;
+  //       this.router.navigate(['/login']);
+  //     }
+  //   }
+  // }
+  
+  login(email: any, password: any): Observable<any> {
+    // return this.http.post(`${APIs.AUTH_LOGIN}`, {
+      this.isLoggedIn = true;
+      return this.http.post(`${APIs.AUTH_LOGIN}`, {
+        email: email,
+        password: password,
+      });
   };
 
+  logout(): void {
+    this.isLoggedIn = false;
+  }
+
   register(body: any): Observable<any> {
-    return this.httpClient.post(`${APIs.AUTH_REGISTER}`, body);
+    return this.http.post(`${APIs.AUTH_REGISTER}`, body);
+  };
+
+  getListAccount(data: any): Observable<any> {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("name",data.name);
+    queryParams = queryParams.append("phone",data.phone);
+    queryParams = queryParams.append("page",data.page);
+    queryParams = queryParams.append("size",data.size);
+    return this.http.get(`${APIs.API_GET_LIST_ACCOUNT}`, {params: queryParams});
   };
 }

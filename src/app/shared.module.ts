@@ -12,6 +12,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './shared/component/loader/loader.component';
+import { PagingComponent } from './shared/component/paging/paging.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 export function sharedCreateTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -22,11 +24,13 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     BreadcrumbComponent,
-    LoaderComponent
+    LoaderComponent,
+    PagingComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    NzPaginationModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -37,7 +41,8 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
   ],
   exports: [
     BreadcrumbComponent,
-    LoaderComponent
+    LoaderComponent,
+    PagingComponent
   ],
   providers: [TranslateStore],
 })

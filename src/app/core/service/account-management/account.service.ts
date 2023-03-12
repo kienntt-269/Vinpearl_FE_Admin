@@ -16,10 +16,16 @@ export class AccountService {
 
     }
 
-    getListAccount(area: Number, name: String, phone: String, pageIndex: Number, pageSize: Number): Observable<any> {
+    getListAccount(acreage: Number, name: String, phone: String, pageIndex: Number, pageSize: Number): Observable<any> {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}?area=${area}&name=${name}&phone=${phone}&pageIndex=${pageIndex}&pageSize=${pageSize}`, options);
+        return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}?acreage=${acreage}&name=${name}&phone=${phone}&pageIndex=${pageIndex}&pageSize=${pageSize}`, options);
+    };
+
+    getDetailUser(id: any): Observable<any> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.get(`${APIs.API_GET_DETAIL_ACCOUNT}/${id}`, options);
     };
 
     getListPermission(): Observable<any> {

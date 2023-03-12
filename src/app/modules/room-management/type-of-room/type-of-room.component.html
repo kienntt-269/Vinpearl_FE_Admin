@@ -1,11 +1,11 @@
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
 <form class="form-search" [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
-    <div class="title-search">Tiêu chí tìm kiếm</div>
+    <div class="title-search">{{'listTypeOfRoom.titleSearch' | translate}}</div>
     <div class="content">
         <div class="row">
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="roomName">Tên phòng</nz-form-label>
+                    <nz-form-label nzFor="roomName">{{'listTypeOfRoom.roomName' | translate}}</nz-form-label>
                     <nz-form-control>
                         <nz-input-group [nzSuffix]="inputNameClear">
                             <input nz-input formControlName="roomName" id="roomName" />
@@ -72,7 +72,7 @@
         </button>
     </div>
     <div class="table__content">
-        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
                     <th [nzSortFn]="true">STT</th>
@@ -90,7 +90,7 @@
                     <td>{{ pageSize * pageIndex + i + 1 }}</td>
                     <td>{{ data?.name }}</td>
                     <td>{{ data?.price }}</td>
-                    <td>{{ data?.area }} m2</td>
+                    <td>{{ data?.acreage }} m2</td>
                     <td>{{ data?.numberChildren }}</td>
                     <td>{{ data?.numberParent }}</td>
                     <td>{{ data?.numberOfRooms }}</td>
@@ -116,7 +116,19 @@
             </tbody>
         </nz-table>
     </div>
-    <div class="table__footer">
-
+    <div class="table-footer d-flex justify-content-between align-items-center">
+        <div *ngIf="totalItem > 0">Hiển thị 1 - {{pageSize}} trong {{totalItem}} bản ghi</div>
+        <div *ngIf="totalItem > 5">
+            <nz-pagination
+                [nzPageIndex]="pageIndex"
+                [nzTotal]="totalItem"
+                nzShowSizeChanger
+                [nzPageSize]="pageSize"
+                [nzPageSizeOptions]="[5, 10, 20, 50, 100]"
+                (nzPageSizeChange)="changeItemPerPage($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+            ></nz-pagination>
+            <div style="width: 300px;"></div>
+        </div>
     </div>
 </div>

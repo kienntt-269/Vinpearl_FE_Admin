@@ -24,6 +24,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { HotelManagementPageComponent } from './hotel-management-page/hotel-management-page.component';
 import { SaveHotelComponent } from './save-hotel/save-hotel.component';
 import { HotelManagementRoutingModule } from './hotel-management-routing.module';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { HotelManagementRoutingModule } from './hotel-management-routing.module'
         NzAlertModule,
         ReactiveFormsModule,
         FormsModule,
+        NzCarouselModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,

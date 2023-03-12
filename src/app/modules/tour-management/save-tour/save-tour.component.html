@@ -32,9 +32,9 @@
             <nz-form-item>
                 <nz-form-label nzFor="numberOfPeople">{{'saveTour.numberOfPeople' | translate}}</nz-form-label>
                 <nz-form-control>
-                    <nz-input-group [nzSuffix]="inputnumberOfPeopleClear">
+                    <nz-input-group [nzSuffix]="inputNumberOfPeopleClear">
                         <input nz-input formControlName="numberOfPeople" id="numberOfPeople" />
-                        <ng-template #inputnumberOfPeopleClear>
+                        <ng-template #inputNumberOfPeopleClear>
                             <span
                                 nz-icon
                                 class="ant-input-clear-icon"
@@ -72,19 +72,19 @@
         </div>
         <div class="col col-sm-4">
             <nz-form-item>
-                <nz-form-label nzFor="lengthOfStay">{{'listTour.lengthOfStay' | translate}}</nz-form-label>
+                <nz-form-label nzFor="lengthStay">{{'listTour.lengthStay' | translate}}</nz-form-label>
                 <nz-form-control>
                     <nz-select
                         [nzPlaceHolder]="'listTour.placeHolder' | translate"
-                        formControlName="lengthOfStay"
+                        formControlName="lengthStay"
                         nzAllowClear
                     >
-                        <nz-option *ngFor="let item of listOfLengthOfStay" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        <nz-option *ngFor="let item of listOfLengthStay" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                     </nz-select>
                 </nz-form-control>
-                <div *ngIf="this.formGroup.controls['lengthOfStay'].invalid && (this.formGroup.controls['lengthOfStay'].dirty || this.formGroup.controls['lengthOfStay'].touched)">
-                    <div class="error" *ngIf="this.formGroup.controls['lengthOfStay'].hasError('required')">
-                        {{'listTour.validate.lengthOfStay.required' | translate}}
+                <div *ngIf="this.formGroup.controls['lengthStay'].invalid && (this.formGroup.controls['lengthStay'].dirty || this.formGroup.controls['lengthStay'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['lengthStay'].hasError('required')">
+                        {{'listTour.validate.lengthStay.required' | translate}}
                     </div>
                 </div>
             </nz-form-item>
@@ -176,17 +176,17 @@
             <nz-form-item>
                 <nz-form-label nzFor="expirationDate">{{'saveTour.expirationDate' | translate}}</nz-form-label>
                 <nz-form-control>
-                    <nz-input-group [nzSuffix]="inputexpirationDateClear">
-                        <input nz-input formControlName="expirationDate" id="expirationDate" />
-                        <ng-template #inputexpirationDateClear>
-                            <span
-                                nz-icon
-                                class="ant-input-clear-icon"
-                                nzTheme="fill"
-                                nzType="close-circle"
-                            ></span>
-                        </ng-template>
-                    </nz-input-group>
+                    <nz-date-picker
+                        nzShowTime
+                        nzFormat="HH:mm:ss dd/MM/yyyy"
+                        ngModel
+                        [nzShowTime]="true"
+                        [nzAllowClear]="true"
+                        [nzDisabled]="false"
+                        [nzInputReadOnly]="true"
+                        name="expirationDate"
+                        formControlName="expirationDate"
+                    ></nz-date-picker>
                 </nz-form-control>
                 <div *ngIf="this.formGroup.controls['expirationDate'].invalid && (this.formGroup.controls['expirationDate'].dirty || this.formGroup.controls['expirationDate'].touched)">
                     <div class="error" *ngIf="this.formGroup.controls['expirationDate'].hasError('required')">

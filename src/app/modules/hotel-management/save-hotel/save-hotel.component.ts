@@ -8,6 +8,7 @@ import { Observable, Observer } from 'rxjs';
 import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
 import { ToastrService } from 'ngx-toastr';
+import {NzCarouselComponent} from 'ng-zorro-antd/carousel';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -23,12 +24,14 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   styleUrls: ['./save-hotel.component.scss']
 })
 export class SaveHotelComponent implements OnInit {
+  @ViewChild(NzCarouselComponent, {static: false})
 
+  myCarousel!: NzCarouselComponent;
   fileToUpload: any;
   fileListName: any[] = [];
-  selectedFile: any;
+  imageInput: any[] = [];
+  fileList: any[] = [];
   listOfSite: any[] = [];
-  
   roomId: any;
   breadcrumb: any = [];
   loading = false;
@@ -84,7 +87,7 @@ export class SaveHotelComponent implements OnInit {
         Validators.maxLength(255),
       ],
     }),
-    area: new FormControl('', {
+    acreage: new FormControl('', {
       validators: [
         Validators.required,
       ],
@@ -128,28 +131,13 @@ export class SaveHotelComponent implements OnInit {
     // })
   });
 
-  previewImage: string | undefined = '';
-  previewVisible = false;
-
-  handleChange(info: NzUploadChangeParam): void {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      this.msg.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      this.msg.error(`${info.file.name} file upload failed.`);
-    }
-  }
-
   getDetailHotel(id: any) {
     this.hotelService.hotelDetail(id).subscribe(res => {
-
       if (res.code == 200) {
         const data = res.data;
         this.formGroup.setValue({
           name: data.name,
-          area: data.area,
+          acreage: data.acreage,
           site: data.siteId,
           phone: data.phone,
           totalRoom: data.totalRoom,
@@ -158,6 +146,11 @@ export class SaveHotelComponent implements OnInit {
           address: data.address,
           // uploadFile: data.uploadFile,
         })
+        this.fileList = data.images;
+        this.fileList.forEach(element => {
+          this.imageInput.push(element.path);
+          this.fileListName.push(element.name);
+        });
       }
     })
   }
@@ -177,11 +170,11 @@ export class SaveHotelComponent implements OnInit {
     formData.append("address", formValue.address);
     formData.append("phone", formValue.phone);
     formData.append("totalRoom", formValue.totalRoom);
-    formData.append("area", formValue.area);
+    formData.append("acreage", formValue.acreage);
     formData.append("siteId", formValue.site);
     // formData.append("images", formValue.uploadFile);
-    for (let index = 0; index < this.selectedFile.length; index++) {
-      formData.append("images", this.selectedFile[index]);
+    for (let index = 0; index < this.fileList.length; index++) {
+      formData.append("images", this.fileList[index]);
     }
 
     this.hotelService.addHotel(formData).subscribe(res => {
@@ -204,11 +197,41 @@ export class SaveHotelComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
-    this.selectedFile = event.target.files;
+    this.fileList = event.target.files;
     this.fileListName = [];
-    for (let index = 0; index < this.selectedFile.length; index++) {
-      this.fileListName.push(this.selectedFile[index].name);
+    this.imageInput = [];
+    for (let index = 0; index < this.fileList.length; index++) {
+      var reader = new FileReader();
+      reader.readAsDataURL(this.fileList[index]);
+      
+      reader.onload = (e: any) => {
+        this.imageInput.push(e.target.result);
+      };
+      
+      this.fileListName.push(this.fileList[index].name);
     }
+  }
+
+  goToImage(slideNumber: any) {
+    this.myCarousel.goTo(slideNumber);
+  }
+
+  pre() {
+    // this.myCarousel.goTo(Number(0));
+    this.myCarousel.pre();
+  }
+
+  next() {
+    this.myCarousel.next();
+  }
+
+  removeImage(index: number) {
+    this.imageInput.splice(index, 1);
+    this.fileList.splice(index, 1);
+    
+    // if (!this.fileList.length) {
+    //   this.msgErrImageNull = false
+    // }
   }
 
 }

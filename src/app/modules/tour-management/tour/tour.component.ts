@@ -122,7 +122,7 @@ export class TourComponent implements OnInit {
   ];
   pageSize: any = 10;
   pageIndex: any = 0;
-  sort: any = "id,desc";
+  sort: any = "id,asc";
   formGroup: FormGroup = new FormGroup({
     name: new FormControl(''),
     status: new FormControl(''),
