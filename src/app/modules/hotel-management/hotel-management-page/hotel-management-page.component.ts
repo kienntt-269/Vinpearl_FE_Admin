@@ -18,7 +18,7 @@ export class HotelManagementPageComponent implements OnInit {
   listOfData: any = [];
   pageSize: any = 10;
   pageIndex: any = 0;
-  sort: any = "id,asc";
+  sort: any = "id,desc";
   formGroup: FormGroup = new FormGroup({
     name: new FormControl(''),
     totalRoom: new FormControl(''),

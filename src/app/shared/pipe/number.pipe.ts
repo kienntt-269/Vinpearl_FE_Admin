@@ -7,7 +7,7 @@ export class FormatPrice implements PipeTransform {
 
   transform(value: number | string, locale?: string): string {
     return new Intl.NumberFormat(locale, {
-      minimumFractionDigits: 2,
+      minimumFractionDigits: 0,
       maximumFractionDigits: 2
     }).format(Number(value));
   }

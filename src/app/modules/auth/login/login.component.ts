@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import constants from 'src/app/core/constants/constants';
 import { AuthService } from 'src/app/core/auth-guard/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { config } from 'src/app/core/constants/tost.config';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
     private translate: TranslateService,
     private authService: AuthService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private toast: ToastrService,
   ) { 
     if (localStorage.getItem('lang')) {
       translate.use(localStorage.getItem('lang')!);
@@ -111,7 +114,19 @@ export class LoginComponent implements OnInit {
         // const redirectUrl = this.authService.redirectUrl || '/';
         localStorage.setItem(constants.FULLNAME, res.data.fullName);
         localStorage.setItem(constants.TOKEN, res.data.token);
+        localStorage.setItem(constants.ROLE_ID, res.data.roleId);
         this.router.navigate(['/pages/revenue']);
+        this.toast.success(
+          this.translate.instant(`toast.login_success`),
+          this.translate.instant('success'),
+          config
+        );
+      } else if (res.code === 404) {
+        this.toast.error(
+          this.translate.instant(`toast.error.404`),
+          this.translate.instant('error'),
+          config
+        );
       }
     })
   }

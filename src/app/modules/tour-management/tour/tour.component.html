@@ -136,7 +136,7 @@
         </button>
     </div>
     <div class="table__content">
-        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
                     <th>{{'listTour.stt'| translate}}</th>
@@ -151,13 +151,37 @@
             </thead>
             <tbody>
                 <tr *ngFor="let data of basicTable.data; let i = index">
-                    <td>{{ pageIndex * pageSize + i + 1 }}</td>
+                    <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
                     <td>{{ data?.name }}</td>
-                    <td>{{ data?.typeOfTour }}</td>
-                    <td>{{ data?.leavingFrom }} m2</td>
-                    <td>{{ data?.leavingTo }}</td>
-                    <td>{{ data?.lengthOfStay }}</td>
-                    <td>{{ data?.suitable }}</td>
+                    <td>
+                        <span *ngIf="data?.typeOfTourId == 1">Gói nghỉ dưỡng</span>
+                        <span *ngIf="data?.typeOfTourId == 2">VinWonders</span>
+                        <span *ngIf="data?.typeOfTourId == 3">Vận chuyển</span>
+                        <span *ngIf="data?.typeOfTourId == 4">Vinpearl Golf</span>
+                        <span *ngIf="data?.typeOfTourId == 5">Ẩm thực</span>
+                        <span *ngIf="data?.typeOfTourId == 6">Tour</span>
+                        <span *ngIf="data?.typeOfTourId == 7">Vé tham quan</span>
+                        <span *ngIf="data?.typeOfTourId == 8">Spa</span>
+                    </td>
+                    <td>{{ data?.leavingFrom?.name }} m2</td>
+                    <td>{{ data?.leavingTo?.name }}</td>
+                    <td>
+                        <span *ngIf="data?.lengthStayId == 1">1 ngày</span>
+                        <span *ngIf="data?.lengthStayId == 2">2 ngày 1 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 3">3 ngày 2 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 4">4 ngày 3 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 5">5 ngày 4 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 6">6 ngày 4 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 7">6 ngày 5 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 8">22 ngày 21 đêm</span>
+                    </td>
+                    <td>
+                        <span *ngIf="data?.suitableId == 1">Tất cả</span>
+                        <span *ngIf="data?.suitableId == 2">Cặp đôi</span>
+                        <span *ngIf="data?.suitableId == 3">Gia đình</span>
+                        <span *ngIf="data?.suitableId == 4">Nhóm bạn</span>
+                        <span *ngIf="data?.suitableId == 5">Doanh nhân</span>
+                    </td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 
@@ -180,7 +204,19 @@
             </tbody>
         </nz-table>
     </div>
-    <div class="table__footer">
-
+    <div class="table-footer d-flex justify-content-between align-items-center">
+        <div *ngIf="totalItem <= 5 && totalItem > 0">Hiển thị 1 - {{totalItem}} trong {{totalItem}} bản ghi</div>
+        <div *ngIf="totalItem > 5">
+            <nz-pagination
+                [nzPageIndex]="pageIndex"
+                [nzTotal]="totalItem"
+                nzShowSizeChanger
+                [nzPageSize]="pageSize"
+                [nzPageSizeOptions]="[5, 10, 20, 50, 100]"
+                (nzPageSizeChange)="changeItemPerPage($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+            ></nz-pagination>
+            <div style="width: 300px;"></div>
+        </div>
     </div>
 </div>

@@ -112,6 +112,11 @@ export class AddAccountComponent implements OnInit {
         Validators.required,
       ],
     }),
+    permission: new FormControl('', {
+      validators: [
+        Validators.required,
+      ],
+    }),
     sex: new FormControl('', {
       validators: [
         Validators.required,
@@ -144,7 +149,7 @@ export class AddAccountComponent implements OnInit {
           birthDate: res.data.birthDate,
           sex: res.data.sex,
           cccd: res.data.cccd,
-          permission: res.data.permission,
+          permission: res.data.role,
           hotelId: res.data.hotelId,
         })
       }
@@ -179,8 +184,8 @@ export class AddAccountComponent implements OnInit {
       birthDateLong: formValue.birthDate,
       sex: formValue.sex,
       cccd: formValue.cccd,
-      permission: formValue.permission,
-      hotelId: formValue.hotelId,
+      roleId: formValue.permission,
+      siteId: formValue.siteId,
     }
 
     this.accountService.addAccount(body).subscribe(res => {

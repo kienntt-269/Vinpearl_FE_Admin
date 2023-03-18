@@ -35,18 +35,4 @@ export class BookingService {
         // return this.httpClient.get(`${APIs.BOOKING_DETAIL}/${id}`, options);
         return this.httpClient.get(`${APIs.API_GET_DETAIL_BOOKING}/${id}`);
     };
-
-    getListRoom(body: any): Observable<any> {
-        const headers = handle.requestHeaders();
-        let options = {headers: headers};
-        // return this.httpClient.get(`${APIs.BOOKING_DETAIL}/${id}`, options);
-        return this.httpClient.post(`${APIs.API_GET_LIST_ROOM}`, body, options);
-    };
-
-    roomDetail(id: number): Observable<any> {
-        const headers = handle.requestHeaders();
-        let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`, options);
-        // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
-    };
 }

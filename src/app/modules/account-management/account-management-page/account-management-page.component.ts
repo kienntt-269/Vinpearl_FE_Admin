@@ -17,11 +17,11 @@ export class AccountManagementPageComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({
     fullName: new FormControl(''),
     phone: new FormControl(''),
-    hotelId: new FormControl(''),
+    hotel: new FormControl(''),
   });
   pageSize = 10;
   pageIndex = 1;
-  sort: any = "id,asc";
+  sort: any = "id,desc";
   totalItem: any = 0;
 
   // @Output() changeItemPerPage: EventEmitter<number> = new EventEmitter<number>();

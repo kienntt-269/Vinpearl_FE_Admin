@@ -155,7 +155,7 @@ export class SaveHotelComponent implements OnInit {
     })
   }
 
-  handleAddHotel() {
+  handleAddHotel = async() => {
     const formValue = this.formGroup.value;
     if (this.formGroup.invalid) {
       for (const control of Object.keys(this.formGroup.controls)) {
@@ -177,19 +177,35 @@ export class SaveHotelComponent implements OnInit {
       formData.append("images", this.fileList[index]);
     }
 
-    this.hotelService.addHotel(formData).subscribe(res => {
-      console.log(res.body);
-      if (res.body?.code == 200) {
+    // this.hotelService.addHotel(formData).subscribe(res => {
+    //   console.log(res.body);
+    //   if (res.body?.code == 200) {
+    //     this.toast.success('Thành công', 'Thông báo');
+    //     this.router.navigate(['/pages/hotel-management']);
+    //   }
+    //   if (res.body?.code == 400) {
+    //     this.toast.success('Lỗi', 'Thông báo');
+    //   }
+    //   if (res.body?.code == 404) {
+    //     this.toast.success('Lỗi', 'Thông báo');
+    //   }
+    // })
+
+    try {
+      const res = await this.hotelService.addHotel(formData);
+      if (res.status == 200) {
         this.toast.success('Thành công', 'Thông báo');
-        this.router.navigate(['/pages/hotel-management']);
+        this.router.navigate(['/pages/room-management/type-of-room']);
       }
-      if (res.body?.code == 400) {
+      if (res.status == 400) {
         this.toast.success('Lỗi', 'Thông báo');
       }
-      if (res.body?.code == 404) {
+      if (res.status == 404) {
         this.toast.success('Lỗi', 'Thông báo');
       }
-    })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onCancel() {

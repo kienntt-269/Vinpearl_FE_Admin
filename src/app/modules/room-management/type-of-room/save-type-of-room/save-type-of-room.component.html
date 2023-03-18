@@ -1,5 +1,5 @@
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
-<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form>
+<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form enctype="multipart/form-data">
     <div class="title-search">{{'saveTypeOfRoom.title' | translate}}</div>
     <div class="content">
         <div class="row align-items-center">
@@ -60,28 +60,28 @@
                     </div>
                     <div class="col col-sm-6">
                         <nz-form-item>
-                            <nz-form-label nzFor="numberParent">{{'saveTypeOfRoom.numberParent' | translate}}</nz-form-label>
+                            <nz-form-label nzFor="numberAdult">{{'saveTypeOfRoom.numberAdult' | translate}}</nz-form-label>
                             <nz-form-control>
-                                <nz-input-group [nzSuffix]="inputNumberParentClear">
-                                    <input nz-input formControlName="numberParent" id="numberParent" />
-                                    <ng-template #inputNumberParentClear>
+                                <nz-input-group [nzSuffix]="inputnumberAdultClear">
+                                    <input nz-input formControlName="numberAdult" id="numberAdult" />
+                                    <ng-template #inputnumberAdultClear>
                                         <span
                                             nz-icon
                                             class="ant-input-clear-icon"
                                             nzTheme="fill"
                                             nzType="close-circle"
-                                            *ngIf="formGroup.controls['numberParent'].value"
-                                            (click)="formGroup.controls['numberParent'].setValue(null)"
+                                            *ngIf="formGroup.controls['numberAdult'].value"
+                                            (click)="formGroup.controls['numberAdult'].setValue(null)"
                                         ></span>
                                     </ng-template>
                                 </nz-input-group>
                             </nz-form-control>
-                            <div *ngIf="this.formGroup.controls['numberParent'].invalid && (this.formGroup.controls['numberParent'].dirty || this.formGroup.controls['numberParent'].touched)">
-                                <div class="error" *ngIf="this.formGroup.controls['numberParent'].hasError('required')">
-                                    {{'saveTypeOfRoom.validate.numberParent.required' | translate}}
+                            <div *ngIf="this.formGroup.controls['numberAdult'].invalid && (this.formGroup.controls['numberAdult'].dirty || this.formGroup.controls['numberAdult'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['numberAdult'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.numberAdult.required' | translate}}
                                 </div>
-                                <div class="error" *ngIf="this.formGroup.controls['numberParent'].hasError('maxLength')">
-                                    {{'saveTypeOfRoom.validate.numberParent.maxLength' | translate}}
+                                <div class="error" *ngIf="this.formGroup.controls['numberAdult'].hasError('maxLength')">
+                                    {{'saveTypeOfRoom.validate.numberAdult.maxLength' | translate}}
                                 </div>
                             </div>
                         </nz-form-item>

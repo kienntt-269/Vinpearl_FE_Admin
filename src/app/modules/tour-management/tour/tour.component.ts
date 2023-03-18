@@ -47,7 +47,7 @@ export class TourComponent implements OnInit {
       name: "Vé tham quan",
     },
     {
-      id: 7,
+      id: 8,
       name: "Spa",
     },
   ];
@@ -81,7 +81,7 @@ export class TourComponent implements OnInit {
       name: "6 ngày 5 đêm",
     },
     {
-      id: 7,
+      id: 8,
       name: "22 ngày 21 đêm",
     },
   ];
@@ -120,9 +120,11 @@ export class TourComponent implements OnInit {
       name: "Hết chỗ",
     },
   ];
+
   pageSize: any = 10;
-  pageIndex: any = 0;
-  sort: any = "id,asc";
+  pageIndex: any = 1;
+  sort: any = "id,desc";
+  totalItem: any = 0;
   formGroup: FormGroup = new FormGroup({
     name: new FormControl(''),
     status: new FormControl(''),
@@ -174,24 +176,39 @@ export class TourComponent implements OnInit {
   }
 
   search() {
+    this.pageIndex = 0;
+    this.pageSize = 10,
+    this.sort = "id,desc";
     this.getAllTour();
   }
 
   getAllTour() {
-    // const data = {
-    //   numRoom: this.numberRoom,
-    //   name: this.numberRoom,
-    //   phone: this.numberRoom,
-    //   pageIndex: this.numberRoom,
-    //   pageSize: this.numberRoom,
-    // }
     const formValue = this.formGroup.value;
     
-    this.tourService.getListTour(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
+    this.tourService.getListTour(this.pageSize, this.pageIndex - 1, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
-        console.log(res.data.content);
+        this.totalItem = res.data.totalElements;
       }
     })
+  }
+
+  changeCurrentPage(currentPage: number) {
+    this.pageIndex = currentPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getAllTour()
+  }
+
+  changeItemPerPage(itemPerPage: number) {
+    this.pageIndex = 1;
+    this.pageSize = itemPerPage;
+    // call event rule engine
+    // this.createData();
+    
+    // call event service
+    this.getAllTour()
   }
 }

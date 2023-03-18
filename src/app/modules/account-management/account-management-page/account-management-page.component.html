@@ -18,7 +18,7 @@
                                     *ngIf="formGroup.controls['fullName'].value"
                                     (click)="formGroup.controls['fullName'].setValue(null)"
                                 ></span>
-                            </ng-template>
+                            </ng-template>      
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
@@ -93,7 +93,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let data of basicTable.data; let i = index">
-                    <td>{{ pageSize * pageIndex + i + 1 }}</td>
+                    <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
                     <td>{{ data?.fullName }}</td>
                     <td>{{ data?.birthDate }}</td>
                     <td>
@@ -102,8 +102,12 @@
                         <p *ngIf="data?.sex === 0">Không xác định</p>
                     </td>
                     <td>{{ data?.phone }}</td>
-                    <td>{{ data?.permission }}</td>
-                    <td>{{ data?.status }}</td>
+                    <td>
+                        <span *ngIf="data?.roleId == 1">Full quyền</span>
+                        <span *ngIf="data?.roleId == 2">Nhân viên quản lý khách sạn</span>
+                        <span *ngIf="data?.roleId == 3">Nhân viên quản lý tour</span>
+                    </td>
+                    <td>Đang hoạt động</td>
                     <td>
                         <div class="btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 

@@ -43,5 +43,13 @@
       "cancel": "Hủy",
       "confirm": "Xác nhận"
     }
+  },
+  "error": "Lỗi",
+  "toast": {
+    "login_success": "Đăng nhập thành công",
+    "login_fail": "Đăng nhập thất bại",
+    "error": {
+      "404": "Tên đăng nhập/ Mật khẩu không đúng"
+    }
   }
 }

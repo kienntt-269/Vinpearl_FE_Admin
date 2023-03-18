@@ -5,6 +5,7 @@ export const MENU_VI = [
       path: "pages/revenue",
       name: "Dashboard",
       children: [],
+      code: 'WEB_DASHBOARD',
     },
     {
       id: 1,
@@ -12,12 +13,14 @@ export const MENU_VI = [
       path: "pages/hotel-management",
       name: "Quản lý khách sạn",
       children: [],
+      code: 'WEB_HOTEL_MANAGEMENT',
     },
     {
       id: 2,
       icon: "../../../assets/icon/cash-coin.svg",
       path: "",
       name: "Quản lý phòng",
+      code: 'WEB_ROOM',
       children: [
         {
           id: 0,
@@ -25,6 +28,7 @@ export const MENU_VI = [
           path: "pages/room-management/room",
           name: "Phòng",
           children: [],
+          code: 'WEB_ROOM_MANAGEMENT',
         },
         {
           id: 1,
@@ -32,6 +36,7 @@ export const MENU_VI = [
           path: "pages/room-management/type-of-room",
           name: "Loại phòng",
           children: [],
+          code: 'WEB_TYPE_OF_ROOM_MANAGEMENT',
         },
         {
           id: 2,
@@ -39,6 +44,7 @@ export const MENU_VI = [
           path: "pages/room-management/service",
           name: "Bảng giá dịch vụ",
           children: [],
+          code: 'WEB_SERVICE',
         },
       ],
     },
@@ -48,12 +54,14 @@ export const MENU_VI = [
       path: "pages/customer-management",
       name: "Quản lý khách hàng",
       children: [],
+      code: 'WEB_CUSTOMER_MANAGEMENT',
     },
     {
       id: 4,
       icon: "../../../assets/icon/bookmark-check.svg",
       path: "pages/tour-management/tour",
       name: "Quản lý tour",
+      code: 'WEB_TOUR',
       children: [
         {
           id: 0,
@@ -61,6 +69,7 @@ export const MENU_VI = [
           path: "pages/tour-management/tour",
           name: "Tour",
           children: [],
+          code: 'WEB_TOUR_MANAGEMENT',
         },
         {
           id: 1,
@@ -68,6 +77,7 @@ export const MENU_VI = [
           path: "pages/tour-management/bill",
           name: "Loại tour",
           children: [],
+          code: 'WEB_TYPE_OF_TOUR_MANAGEMENT',
         },
       ],
     },
@@ -77,5 +87,6 @@ export const MENU_VI = [
       path: "pages/account-management",
       name: "Quản lý tài khoản",
       children: [],
+      code: 'WEB_ACCOUNT_MANAGEMENT',
     },
 ]

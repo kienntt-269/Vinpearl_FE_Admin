@@ -82,19 +82,17 @@
                     <nz-form-item>
                         <nz-form-label nzFor="birthDate">{{'addAccount.birthDate' | translate}}</nz-form-label>
                         <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <nz-date-picker
-                                    nzShowTime
-                                    nzFormat="dd/MM/yyyy"
-                                    ngModel
-                                    [nzShowTime]="true"
-                                    [nzAllowClear]="true"
-                                    [nzDisabled]="false"
-                                    [nzInputReadOnly]="true"
-                                    name="birthDate"
-                                    formControlName="birthDate"
-                                ></nz-date-picker>
-                            </nz-input-group>
+                            <nz-date-picker
+                                nzShowTime
+                                nzFormat="dd/MM/yyyy"
+                                ngModel
+                                [nzShowTime]="false"
+                                [nzAllowClear]="true"
+                                [nzDisabled]="false"
+                                [nzInputReadOnly]="true"
+                                name="birthDate"
+                                formControlName="birthDate"
+                            ></nz-date-picker>
                         </nz-form-control>
                     </nz-form-item>
                 </div>
@@ -102,17 +100,13 @@
                     <nz-form-item>
                         <nz-form-label nzFor="sex">{{'addAccount.sex' | translate}}</nz-form-label>
                         <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <nz-input-group>
-                                    <nz-select
-                                        [nzPlaceHolder]="'addAccount.sex' | translate"
-                                        formControlName="sex"
-                                        nzAllowClear
-                                    >
-                                        <nz-option *ngFor="let item of listOfSex" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-                                    </nz-select>
-                                </nz-input-group>
-                            </nz-input-group>
+                            <nz-select
+                                [nzPlaceHolder]="'addAccount.sex' | translate"
+                                formControlName="sex"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfSex" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
                         </nz-form-control>
                     </nz-form-item>
                 </div>
@@ -140,15 +134,13 @@
                     <nz-form-item>
                         <nz-form-label nzFor="permission">{{'addAccount.permission' | translate}}</nz-form-label>
                         <nz-form-control>
-                            <nz-input-group>
-                                <nz-select
-                                    [nzPlaceHolder]="'addAccount.permission' | translate"
-                                    formControlName="permission"
-                                    nzAllowClear
-                                >
-                                    <nz-option *ngFor="let item of listOfPermission" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-                                </nz-select>
-                            </nz-input-group>
+                            <nz-select
+                                [nzPlaceHolder]="'addAccount.permission' | translate"
+                                formControlName="permission"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfPermission" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
                         </nz-form-control>
                     </nz-form-item>
                 </div>

@@ -1,36 +1,33 @@
-<div class="login d-flex">
-  <div class="col-12 col-sm-4">
-    <div class="content__vinfast">
-      <div class="header d-flex justify-content-center">
-        <img src="../../../../assets/images/login/vinpearl_login_logo-01.png" alt="vinpearl login logo-01">
-        <img src="../../../../assets/images/login/vinpearl_login_logo-02.png" alt="vinpearl login logo-02">
-      </div>
-      <div class="form__login">
-        <ul class="nav__tabs d-flex justify-content-center">
-          <li id="nav__item__1" class="nav__item active">
-            <span>{{'login.title' | translate}}</span>
-          </li>
-        </ul>
-        <div class="tab__content">
-          <div *ngIf="currentTab == 1" class="tab__login">
-            <form [formGroup]="formLogin" nz-form>
-              <nz-form-item>
-                <nz-form-control>
-                  <input formControlName="email" nz-input placeholder="{{'login.email' | translate}}" />
-                </nz-form-control>
-              </nz-form-item>
-              <nz-form-item>
-                <nz-form-control>
-                  <input formControlName="password" nz-input placeholder="{{'login.password' | translate}}" />
-                </nz-form-control>
-              </nz-form-item>
-              <div class="tab__footer d-flex justify-content-center flex-column">
-                <button (click)="login()" class="btn" nz-button nzType="primary">{{'login.title' | translate}}</button>
-                <div class="tab__footer__question d-flex justify-content-center">
-                  <a>{{'login.forgotPass' | translate}}</a>
+<div class="form-item">
+  <div class="login d-flex">
+    <div class="col-12">
+      <div class="content-vinpearl">
+        <div class="header d-flex justify-content-center">
+          <img src="../../../../assets/images/login/vinpearl_login_logo-01.png" alt="vinpearl login logo-01">
+          <img src="../../../../assets/images/login/vinpearl_login_logo-02.png" alt="vinpearl login logo-02">
+        </div>
+        <div class="form-login">
+          <div class="tab-content">
+            <div *ngIf="currentTab == 1" class="tab-login">
+              <form [formGroup]="formLogin" nz-form>
+                <nz-form-item>
+                  <nz-form-control>
+                    <input formControlName="email" nz-input placeholder="{{'login.email' | translate}}" />
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-control>
+                    <input formControlName="password" type="password" nz-input placeholder="{{'login.password' | translate}}" />
+                  </nz-form-control>
+                </nz-form-item>
+                <div class="tab-footer d-flex justify-content-center flex-column">
+                  <button (click)="login()" class="btn" nz-button nzType="primary">{{'login.title' | translate}}</button>
+                  <div class="tab-footer-question d-flex justify-content-center">
+                    <a>{{'login.forgotPass' | translate}}</a>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

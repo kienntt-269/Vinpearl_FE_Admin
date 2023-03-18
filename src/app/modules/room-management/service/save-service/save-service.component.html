@@ -72,25 +72,6 @@
                         </div>
                     </nz-form-item>
                 </div>
-                <div class="col col-sm-6">
-                    <nz-form-item>
-                        <nz-form-label nzFor="typeOfRoom">{{'saveService.typeOfRoom' | translate}}</nz-form-label>
-                        <nz-form-control>
-                            <nz-select
-                                [nzPlaceHolder]="'saveService.typeOfRoom' | translate"
-                                formControlName="typeOfRoom"
-                                nzAllowClear
-                            >
-                                <nz-option *ngFor="let item of listOfTypeOfRoom" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-                            </nz-select>
-                        </nz-form-control>
-                        <div *ngIf="this.formGroup.controls['typeOfRoom'].invalid && (this.formGroup.controls['typeOfRoom'].dirty || this.formGroup.controls['typeOfRoom'].touched)">
-                            <div class="error" *ngIf="this.formGroup.controls['typeOfRoom'].hasError('required')">
-                                {{'saveService.validate.typeOfRoom.required' | translate}}
-                            </div>
-                        </div>
-                    </nz-form-item>
-                </div>
             </div>
         </div>
     </div>
@@ -117,7 +98,8 @@
                             <tr>
                                 <th>{{'saveService.stt'| translate}}</th>
                                 <th>{{'saveService.name'| translate}}</th>
-                                <th>{{'saveService.name'| translate}}</th>
+                                <th>{{'saveService.price'| translate}}</th>
+                                <th>{{'saveService.typeOfRoom'| translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,6 +107,7 @@
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ data?.name }}</td>
                                 <td>{{ data?.price | format }} vnđ</td>
+                                <td>{{ data?.name }}</td>
                             </tr>
                         </tbody>
                     </nz-table>
@@ -274,6 +257,25 @@
                             </div>
                             <div class="error" *ngIf="this.formAddService.controls['price'].hasError('maxLength')">
                                 {{'saveService.validate.price.maxLength' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-12">
+                    <nz-form-item>
+                        <nz-form-label nzFor="typeOfRoom">{{'saveService.typeOfRoom' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                [nzPlaceHolder]="'saveService.typeOfRoom' | translate"
+                                formControlName="typeOfRoom"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfTypeOfRoom" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formAddService.controls['typeOfRoom'].invalid && (this.formAddService.controls['typeOfRoom'].dirty || this.formAddService.controls['typeOfRoom'].touched)">
+                            <div class="error" *ngIf="this.formAddService.controls['typeOfRoom'].hasError('required')">
+                                {{'saveService.validate.typeOfRoom.required' | translate}}
                             </div>
                         </div>
                     </nz-form-item>

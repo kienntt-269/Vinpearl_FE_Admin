@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import axios from "axios";
 import { Observable } from "rxjs";
 import APIs from "../../constants/APIs";
 import constants from "../../constants/constants";
@@ -23,10 +24,34 @@ export class RoomService {
         return this.httpClient.get(`${APIs.API_FINDALL_HOTEL}`, options);
     };
 
-    getListRoomType(size: Number, pageIndex: Number, sort: any, name: String, totalRoom: any, phone: any): Observable<any> {
+    //room
+
+    getListRoom(size: Number, pageIndex: Number, sort: any, name: String, totalRoom: any, phone: any): Observable<any> {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM}?&page=${pageIndex}&size=${size}&sort=${sort}`, options);
+        return this.httpClient.get(`${APIs.API_GET_LIST_ROOM}?&page=${pageIndex}&size=${size}&sort=${sort}`, options);
+    };
+
+    roomDetail(id: number): Observable<any> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`, options);
+        // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
+    };
+
+    addRoom(formData: any): Observable<any> {
+        const headers = handle.requestHeadersFormData();
+        let options = {headers: headers};
+        return this.httpClient.post(`${APIs.API_ADD_ROOM}`, formData, options);
+        // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
+    };
+
+    //room type
+
+    getListRoomType(size: Number, pageIndex: Number, sort: any, hotelId: any, acreage: any, phone: any): Observable<any> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM}?hotelId=${hotelId}&acreage=${acreage}&phone=${phone}&page=${pageIndex}&size=${size}&sort=${sort}`, options);
     };
 
     roomTypeDetail(id: number): Observable<any> {
@@ -36,13 +61,20 @@ export class RoomService {
         // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
     };
 
-    addRoomType(formData: any): Observable<any> {
+    // addRoomType(formData: any): Observable<any> {
+    //     const headers = handle.requestHeadersFormData();
+    //     let options = {headers: headers};
+    //     return this.httpClient.post(`${APIs.API_ADD_ROOM_TYPE}`, formData, {
+    //         reportProgress: true,
+    //         observe: 'events'
+    //       });
+    //     // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
+    // };
+
+    addRoomType(formData: any) {
         const headers = handle.requestHeadersFormData();
         let options = {headers: headers};
-        return this.httpClient.post(`${APIs.API_ADD_ROOM_TYPE}`, formData, {
-            reportProgress: true,
-            observe: 'events'
-          });
+        return axios.post(`${APIs.API_ADD_ROOM_TYPE}`, formData);
         // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
     };
 

@@ -18,8 +18,8 @@ export class TypeOfRoomComponent implements OnInit {
   breadcrumb: any = [];
   listOfData: any = [];
   pageSize: any = 10;
-  pageIndex: any = 1;
-  sort: any = "id,asc";
+  pageIndex: any = 0;
+  sort: any = "id,desc";
   totalItem: any = 0;
   formGroup: FormGroup = new FormGroup({
     roomName: new FormControl(''),
@@ -63,7 +63,12 @@ export class TypeOfRoomComponent implements OnInit {
 
   getRoomType() {
     const formValue = this.formGroup.value;
-    this.roomService.getListRoomType(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.numberOfRooms, formValue.phone).subscribe(res => {
+    const data = {
+      name: formValue.name ? formValue.name : "",
+      numberOfRooms: formValue.numberOfRooms ? formValue.numberOfRooms : "",
+      phone: formValue.phone ? formValue.phone : "",
+    }
+    this.roomService.getListRoomType(this.pageSize, this.pageIndex, this.sort, data.name, data.numberOfRooms, data.phone).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
         this.totalItem = res.data.totalElements;

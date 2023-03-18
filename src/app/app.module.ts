@@ -24,7 +24,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxEditorModule } from 'ngx-editor';
 import { OptionInfoAdminModule } from './modules/option-info-admin/option-info-admin.component.module';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { FormatPrice } from './shared/pipe/number.pipe';
 
 registerLocaleData(vi);
 
@@ -36,7 +35,6 @@ registerLocaleData(vi);
     FooterComponent,
     SidebarComponent,
     MenuItemComponent,
-    FormatPrice,
   ],
   imports: [
     BrowserModule,
@@ -59,9 +57,6 @@ registerLocaleData(vi);
     }),
     AngularEditorModule,
     NgxEditorModule,
-  ],
-  exports: [
-    FormatPrice
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },

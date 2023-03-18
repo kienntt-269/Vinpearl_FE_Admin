@@ -93,11 +93,6 @@ export class SaveServiceComponent implements OnInit {
         Validators.required,
       ],
     }),
-    typeOfRoom: new FormControl('', {
-      validators: [
-        Validators.required,
-      ],
-    }),
   });
 
   formAddService: FormGroup = new FormGroup({
@@ -107,6 +102,11 @@ export class SaveServiceComponent implements OnInit {
       ],
     }),
     price: new FormControl('', {
+      validators: [
+        Validators.required,
+      ],
+    }),
+    typeOfRoom: new FormControl('', {
       validators: [
         Validators.required,
       ],
@@ -135,7 +135,6 @@ export class SaveServiceComponent implements OnInit {
       id: formValue.name,
       descriptionIds: formValue.description,
       contentIds: formValue.content,
-      typeofRoomId: formValue.typeOfRoom,
     }
 
     this.roomService.saveService(body).subscribe(res => {
@@ -161,6 +160,7 @@ export class SaveServiceComponent implements OnInit {
     const data = {
       name: this.formAddService.value.name,
       price: this.formAddService.value.price,
+      roomTypeId: this.formAddService.value.typeOfRoom,
     };
     if (this.formAddService.invalid) {
       for (const control of Object.keys(this.formAddService.controls)) {

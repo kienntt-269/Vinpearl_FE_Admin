@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { Router } from '@angular/router';
 import { BookingService } from 'src/app/core/service/booking-management/booking.service';
+import { RoomService } from 'src/app/core/service/room-management/room.service';
 
 @Component({
   selector: 'app-revenue',
@@ -40,11 +41,11 @@ export class RevenueComponent implements OnInit {
 
   pageSize: any = 10;
   pageIndex: any = 0;
-  sort: any = "id,asc";
+  sort: any = "id,desc";
 
   constructor(
     private router: Router,
-    private roomService: BookingService,
+    private roomService: RoomService,
   ) { }
 
   ngOnInit(): void {
@@ -150,15 +151,7 @@ export class RevenueComponent implements OnInit {
   }
 
   getRoom() {
-    const body = {
 
-    }
-    this.roomService.getListRoom(body).subscribe(res => {
-      if (res.code == 200) {
-        this.listOfData = res.data;
-        console.log(res.data);
-      }
-    })
   }
 
   sortChange(e: any) {

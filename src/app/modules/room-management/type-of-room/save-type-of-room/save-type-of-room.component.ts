@@ -90,7 +90,7 @@ export class SaveTypeOfRoomComponent implements OnInit {
         Validators.required,
       ],
     }),
-    numberParent: new FormControl('', {
+    numberAdult: new FormControl('', {
       validators: [
         Validators.required,
       ],
@@ -125,7 +125,7 @@ export class SaveTypeOfRoomComponent implements OnInit {
         this.formGroup.setValue({
           name: data.name,
           acreage: data.acreage,
-          numberParent: data.numberParent,
+          numberAdult: data.numberAdult,
           numberChildren: data.numberChildren,
           numberOfRooms: data.numberOfRooms,
           description: data.description,
@@ -141,7 +141,7 @@ export class SaveTypeOfRoomComponent implements OnInit {
     })
   }
 
-  handleAddTypeOfRoom() {
+  handleAddTypeOfRoom = async() => {
     const formValue = this.formGroup.value;
     if (this.formGroup.invalid) {
       for (const control of Object.keys(this.formGroup.controls)) {
@@ -152,7 +152,7 @@ export class SaveTypeOfRoomComponent implements OnInit {
     const formData = new FormData();
     formData.append("name", formValue.name);
     formData.append("acreage", formValue.acreage);
-    formData.append("numberParent", formValue.numberParent);
+    formData.append("numberAdult", formValue.numberAdult);
     formData.append("numberChildren", formValue.numberChildren);
     formData.append("numberOfRooms", formValue.numberOfRooms);
     formData.append("acreage", formValue.acreage);
@@ -162,19 +162,34 @@ export class SaveTypeOfRoomComponent implements OnInit {
       formData.append("images", this.fileList[index]);
     }
 
-    this.roomService.addRoomType(formData).subscribe(res => {
-      console.log(res.body);
-      if (res.body?.code == 200) {
+    try {
+      const res = await this.roomService.addRoomType(formData);
+      if (res.status == 200) {
         this.toast.success('Thành công', 'Thông báo');
         this.router.navigate(['/pages/room-management/type-of-room']);
       }
-      if (res.body?.code == 400) {
+      if (res.status == 400) {
         this.toast.success('Lỗi', 'Thông báo');
       }
-      if (res.body?.code == 404) {
+      if (res.status == 404) {
         this.toast.success('Lỗi', 'Thông báo');
       }
-    })
+    } catch (error) {
+      console.log(error);
+    }
+    // this.roomService.addRoomType(formData).subscribe(res => {
+    //   console.log(res.body);
+    //   if (res.body?.code == 200) {
+    //     this.toast.success('Thành công', 'Thông báo');
+    //     this.router.navigate(['/pages/room-management/type-of-room']);
+    //   }
+    //   if (res.body?.code == 400) {
+    //     this.toast.success('Lỗi', 'Thông báo');
+    //   }
+    //   if (res.body?.code == 404) {
+    //     this.toast.success('Lỗi', 'Thông báo');
+    //   }
+    // })
   }
 
   onCancel() {

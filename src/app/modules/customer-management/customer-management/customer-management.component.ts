@@ -22,7 +22,7 @@ export class CustomerManagementComponent implements OnInit {
   });
   pageSize: any = 10;
   pageIndex: any = 0;
-  sort: any = "id,asc";
+  sort: any = "id,desc";
   constructor(
     private router: Router,
     private hotelService: HotelService,

@@ -1,9 +1,19 @@
-.login {
-  min-height: 100vh;
-  overflow: hidden;
-  background: #ccc;
+.form-item {
+  padding: 160px;
+  background: #F1f1f1;
+  height: 100vh;
+}
 
-  // .logo__login {
+.login {
+  background-color: #FFFFFF;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	padding: 24px;
+	width: 450px;
+  min-height: 500px;
+	position: relative;
+  margin: 50px auto 0;
+
+  // .logo-login {
   //   background-image: url("../../../../assets/images/login/vinpearl_login_screen.jpg");
   //   background-size: cover;
   //   background-position: center;
@@ -11,28 +21,28 @@
   // }
 
   .col-12.col-sm-4 {
-    margin: 0 auto;
     background: #FFF;
   }
 
-  .content__vinfast {
+  .content-vinpearl {
     .header {
       height: 65px;
       margin-top: 4rem;
     }
   }
 
-  .form__login {
-    margin: 0 50px;
+  .form-login {
+    margin-top: 40px;
+    position: relative;
   }
 
   .nav {
-    &__tabs {
+    &-tabs {
       margin-top: 1rem;
       border-bottom: 1px solid #dee2e6;
     }
 
-    &__item {
+    &-item {
       font-size: 20px;
       color: #979797;
       padding: 15px 70px;
@@ -50,7 +60,7 @@
     }
   }
 
-  .tab__footer__question {
+  .tab-footer-question {
     margin-top: 10px;
 
     a {

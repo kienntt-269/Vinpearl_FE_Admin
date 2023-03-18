@@ -72,7 +72,7 @@ export class SaveTourComponent implements OnInit {
       name: "Spa",
     },
   ];
-  listOfLengthStay: any = [
+  listOfLengthOfStay: any = [
     {
       id: 1,
       name: "1 ngày",
@@ -220,7 +220,7 @@ export class SaveTourComponent implements OnInit {
         Validators.required,
       ],
     }),
-    lengthStay: new FormControl('', {
+    lengthOfStay: new FormControl('', {
       validators: [
         Validators.required,
       ],
@@ -231,7 +231,12 @@ export class SaveTourComponent implements OnInit {
         Validators.maxLength(255),
       ],
     }),
-    price: new FormControl('', {
+    priceAdult: new FormControl('', {
+      validators: [
+        Validators.required,
+      ],
+    }),
+    priceChildren: new FormControl('', {
       validators: [
         Validators.required,
       ],
@@ -296,7 +301,7 @@ export class SaveTourComponent implements OnInit {
     })
   }
 
-  handleAddTour() {
+  handleAddTour = async() =>  {
     const formValue = this.formGroup.value;
     // if (this.formGroup.invalid) {
     //   for (const control of Object.keys(this.formGroup.controls)) {
@@ -310,8 +315,9 @@ export class SaveTourComponent implements OnInit {
     formData.append("suitableId", formValue.suitable);
     formData.append("leavingFromId", formValue.leavingFrom);
     formData.append("leavingToId", formValue.leavingTo);
-    formData.append("lengthStayId", formValue.lengthStay);
-    formData.append("price", formValue.price);
+    formData.append("lengthStayId", formValue.lengthOfStay);
+    formData.append("priceAdult", formValue.priceAdult);
+    formData.append("priceChildren", formValue.priceChildren);
     formData.append("typeOfTourId", formValue.typeOfTour);
     formData.append("description", formValue.description);
     formData.append("inclusion", formValue.inclusion);
@@ -325,18 +331,34 @@ export class SaveTourComponent implements OnInit {
       formData.append("images", this.fileList[index]);
     }
 
-    this.tourService.addTour(formData).subscribe(res => {
-      if (res.body?.code == 200) {
+    try {
+      const res = await this.tourService.addTour(formData);
+      if (res.status == 200) {
         this.toast.success('Thành công', 'Thông báo');
-        this.router.navigate(['/pages/tour']);
+        this.router.navigate(['/pages/tour-management/tour']);
       }
-      if (res.body?.code == 400) {
+      if (res.status == 400) {
         this.toast.success('Lỗi', 'Thông báo');
       }
-      if (res.body?.code == 404) {
+      if (res.status == 404) {
         this.toast.success('Lỗi', 'Thông báo');
       }
-    })
+    } catch (error) {
+      console.log(error);
+    }
+
+    // this.tourService.addTour(formData).subscribe(res => {
+    //   if (res.body?.code == 200) {
+    //     this.toast.success('Thành công', 'Thông báo');
+    //     this.router.navigate(['/pages/tour']);
+    //   }
+    //   if (res.body?.code == 400) {
+    //     this.toast.success('Lỗi', 'Thông báo');
+    //   }
+    //   if (res.body?.code == 404) {
+    //     this.toast.success('Lỗi', 'Thông báo');
+    //   }
+    // })
   }
 
   onCancel() {
