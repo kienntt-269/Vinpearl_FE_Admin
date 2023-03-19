@@ -71,9 +71,9 @@ export default {
   API_SAVE_SERVICE: environment.BASE_PATH_DOMAIN + '/service/save',
 
   // booking
-  API_ADD_BOOKING: environment.BASE_PATH_DOMAIN + '/booking/create',
   API_UPDATE_BOOKING: environment.BASE_PATH_DOMAIN + '/booking/update',
   API_GET_DETAIL_BOOKING: environment.BASE_PATH_DOMAIN + '/booking/detail',
-  API_GET_LIST_BOOKING: environment.BASE_PATH_DOMAIN + '/booking/search',
+  API_GET_LIST_BOOKING_ROOM: environment.BASE_PATH_DOMAIN + '/booking-room/search',
+  API_GET_LIST_BOOKING_TOUR: environment.BASE_PATH_DOMAIN + '/booking-tour/search',
   API_DELETE_BOOKING: environment.BASE_PATH_DOMAIN + '/booking/delete',
 }

@@ -7,14 +7,6 @@ import { RoomService } from 'src/app/core/service/room-management/room.service';
 import { ToastrService } from 'ngx-toastr';
 import { NzCarouselComponent } from 'ng-zorro-antd/carousel';
 
-const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-
 @Component({
   selector: 'app-save-type-of-room',
   templateUrl: './save-type-of-room.component.html',
@@ -156,8 +148,12 @@ export class SaveTypeOfRoomComponent implements OnInit {
     formData.append("numberChildren", formValue.numberChildren);
     formData.append("numberOfRooms", formValue.numberOfRooms);
     formData.append("acreage", formValue.acreage);
-    formData.append("description", formValue.site);
+    formData.append("description", formValue.description);
     formData.append("hotelId", formValue.hotel);
+    
+    if (this.typeOfRoomId) {
+      formData.append("id", this.typeOfRoomId); 
+    }
     for (let index = 0; index < this.fileList.length; index++) {
       formData.append("images", this.fileList[index]);
     }

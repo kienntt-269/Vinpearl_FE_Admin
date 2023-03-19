@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
+import { BookingService } from 'src/app/core/service/booking-management/booking.service';
 
 @Component({
   selector: 'app-customer-management',
@@ -16,79 +16,32 @@ export class CustomerManagementComponent implements OnInit {
   breadcrumb: any = [];
   listOfData: any = [];
   formGroup: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    roomTotal: new FormControl(''),
-    phone: new FormControl(''),
+    code: new FormControl(''),
+    fullName: new FormControl(''),
+    roomType: new FormControl(''),
   });
-  pageSize: any = 10;
-  pageIndex: any = 0;
+  pageSize = 10;
+  pageIndex = 1;
   sort: any = "id,desc";
+  totalItem: any = 0;
   constructor(
     private router: Router,
-    private hotelService: HotelService,
+    private bookingService: BookingService,
   ) { }
 
   ngOnInit(): void {
     this.breadcrumb = [
       {
-        name: "Quản lý đặt phòng",
+        name: "Quản lý khách hàng",
         // route: "/pages/room-booking"
       },
       {
-        name: "Danh sách phòng",
+        name: "Danh sách khách hàng",
         // route: "/pages/room-booking"
       }
     ]
 
-    this.listOfData = [
-      {
-        id: 1,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "1@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 0,
-      },
-      {
-        id: 2,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "2@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 1,
-      },
-      {
-        id: 3,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "3@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 2,
-      },
-    ];
-
-    this.getAllHotel();
+    this.getAllBookingRoom();
   }
 
   sortChange(e: any) {
@@ -99,7 +52,7 @@ export class CustomerManagementComponent implements OnInit {
     }
     this.sort = `${e.key}, ${e.value}`;
     console.log(e);
-    this.getAllHotel();
+    this.getAllBookingRoom();
   }
 
   addHotel() {
@@ -114,23 +67,47 @@ export class CustomerManagementComponent implements OnInit {
   }
 
   search() {
-    this.getAllHotel();
+    this.getAllBookingRoom();
   }
 
-  getAllHotel() {
+  getAllBookingRoom() {
+    const formValue = this.formGroup.value;
     const data = {
-      numRoom: this.numberRoom,
-      name: this.numberRoom,
-      phone: this.numberRoom,
-      pageIndex: this.numberRoom,
-      pageSize: this.numberRoom,
+      page: this.pageIndex,
+      size: this.pageSize,
+      sort: this.sort,
+      customerId: formValue.customerId ? formValue.customerId : "",
+      code: formValue.code ? formValue.code : "",
+      status: formValue.status ? formValue.status : "",
+      startTime: formValue.startTime ? formValue.startTime : "",
+      endTime: formValue.endTime ? formValue.endTime : "",
     }
-    // this.hotelService.getListHotel(this.pageSize, this.pageIndex, this.sort).subscribe(res => {
-    //   if (res.code == 200) {
-    //     this.listOfData = res.data;
-    //     console.log(res.data);
-    //   }
-    // })
+    
+    this.bookingService.getListBookingRoom(data).subscribe(res => {
+      if (res.code == 200) {
+        this.listOfData = res.data.content;
+        this.totalItem = res.data.totalElements;
+      }
+    })
+  }
+
+  changeCurrentPage(currentPage: number) {
+    this.pageIndex = currentPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getAllBookingRoom()
+  }
+
+  changeItemPerPage(itemPerPage: number) {
+    this.pageIndex = 1;
+    this.pageSize = itemPerPage;
+    // call event rule engine
+    // this.createData();
+    
+    // call event service
+    this.getAllBookingRoom()
   }
 
 }

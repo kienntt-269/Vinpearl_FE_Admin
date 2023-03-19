@@ -303,12 +303,12 @@ export class SaveTourComponent implements OnInit {
 
   handleAddTour = async() =>  {
     const formValue = this.formGroup.value;
-    // if (this.formGroup.invalid) {
-    //   for (const control of Object.keys(this.formGroup.controls)) {
-    //     this.formGroup.controls[control].markAsTouched();
-    //   }
-    //   return;
-    // }
+    if (this.formGroup.invalid) {
+      for (const control of Object.keys(this.formGroup.controls)) {
+        this.formGroup.controls[control].markAsTouched();
+      }
+      return;
+    }
     const formData = new FormData();
     formData.append("name", formValue.name);
     formData.append("numberOfPeople", formValue.numberOfPeople);

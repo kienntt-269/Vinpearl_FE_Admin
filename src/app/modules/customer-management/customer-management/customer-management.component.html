@@ -6,16 +6,18 @@
         <div class="row">
             <div class="col col-sm-4">
                 <nz-form-item>
-                <nz-form-label nzFor="name">{{'listCustomer.name'| translate}}</nz-form-label>
+                <nz-form-label nzFor="code">{{'listCustomer.code'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="name" id="name" />
-                            <ng-template #inputNameClear>
+                        <nz-input-group [nzSuffix]="inputcodeClear">
+                            <input nz-input formControlcode="code" id="code" />
+                            <ng-template #inputcodeClear>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="formGroup.controls['code'].value"
+                                    (click)="formGroup.controls['code'].setValue(null)"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -24,16 +26,38 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="phone">{{'listCustomer.phone'| translate}}</nz-form-label>
+                    <nz-form-label nzFor="fullName">{{'listCustomer.fullName'| translate}}</nz-form-label>
                     <nz-form-control>
                         <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="phone" id="phone" />
+                            <input nz-input formControlName="fullName" id="fullName" />
                             <ng-template #inputNameClear>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="formGroup.controls['fullName'].value"
+                                    (click)="formGroup.controls['fullName'].setValue(null)"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="roomType">{{'listCustomer.roomType'| translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputroomTypeClear">
+                            <input nz-input formControlroomType="roomType" id="roomType" />
+                            <ng-template #inputroomTypeClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                    *ngIf="formGroup.controls['roomType'].value"
+                                    (click)="formGroup.controls['roomType'].setValue(null)"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -48,31 +72,43 @@
 </form>
 <div class="table">
     <div class="d-flex table__header justify-content-between mb-8">
-        <div class="title-search">{{'listCustomer.titleTable'| translate}} ({{listOfData.length}})</div>
+        <div class="title-search">{{'listCustomer.titleTable'| translate}} ({{totalItem}})</div>
     </div>
     <div class="table__content">
-        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
                     <th [nzSortFn]="true">{{'listCustomer.stt'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.name'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.phone'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.code'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.fullName'| translate}}</th>
                     <th [nzSortFn]="true">{{'listCustomer.email'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.address'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.roomTotal'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.totalPerson'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.phone'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.room'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.roomType'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.service'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.price'| translate}}</th>
+                    <th [nzSortFn]="true">{{'listCustomer.status'| translate}}</th>
                     <th>{{'listCustomer.action'| translate}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let data of basicTable.data; let i = index">
-                    <td>{{ pageSize * pageIndex + i + 1 }}</td>
-                    <td>{{ data?.name }}</td>
-                    <td>{{ data?.phone }}</td>
-                    <td>{{ data?.email }} m2</td>
-                    <td>{{ data?.address }}</td>
-                    <td>{{ data?.roomTotal }}</td>
-                    <td>{{ data?.totalPerson }}</td>
+                    <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
+                    <td>{{ data?.code }}</td>
+                    <td>{{ data?.customer?.fullName }}</td>
+                    <td>{{ data?.customer?.email }}</td>
+                    <td>{{ data?.customer?.phone }}</td>
+                    <td>{{ data?.room?.name }}</td>
+                    <td>{{ data?.room?.roomTypes?.name }}</td>
+                    <td>{{ data?.service?.name }}</td>
+                    <td>{{ data?.paymentAmount }}</td>
+                    <td>
+                        <span *ngIf="data?.paymentStatus == 0">Không thành công</span>
+                        <span *ngIf="data?.paymentStatus == 1">Thành công</span>
+                        <span *ngIf="data?.paymentStatus == 2">Đã hủy</span>
+                        <span *ngIf="data?.paymentStatus == 3">Đã hoàn</span>
+                        <span *ngIf="data?.paymentStatus == 4">Chờ xử lý</span>
+                    </td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 
@@ -95,7 +131,19 @@
             </tbody>
         </nz-table>
     </div>
-    <div class="table__footer">
-
+    <div class="table-footer d-flex justify-content-between align-items-center">
+        <div *ngIf="totalItem <= 5 && totalItem > 0">Hiển thị 1 - {{totalItem}} trong {{totalItem}} bản ghi</div>
+        <div *ngIf="totalItem > 5">
+            <nz-pagination
+                [nzPageIndex]="pageIndex"
+                [nzTotal]="totalItem"
+                nzShowSizeChanger
+                [nzPageSize]="pageSize"
+                [nzPageSizeOptions]="[5, 10, 20, 50, 100]"
+                (nzPageSizeChange)="changeItemPerPage($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+            ></nz-pagination>
+            <div style="width: 300px;"></div>
+        </div>
     </div>
 </div>

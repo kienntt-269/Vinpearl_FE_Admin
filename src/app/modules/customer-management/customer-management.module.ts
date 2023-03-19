@@ -21,6 +21,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
 import { CustomerManagementRoutingModule } from './customer-management-routing.module';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+
 @NgModule({
   declarations: [
     CustomerManagementComponent
@@ -42,6 +44,7 @@ import { CustomerManagementRoutingModule } from './customer-management-routing.m
     NzInputModule,
     NzTabsModule,
     NzModalModule,
+    NzPaginationModule,
     NzMessageModule,
     ReactiveFormsModule,
     FormsModule,

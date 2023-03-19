@@ -14,6 +14,8 @@
                                 class="ant-input-clear-icon"
                                 nzTheme="fill"
                                 nzType="close-circle"
+                                *ngIf="formGroup.controls['name'].value"
+                                (click)="formGroup.controls['name'].setValue(null)"
                             ></span>
                         </ng-template>
                     </nz-input-group>
@@ -40,6 +42,8 @@
                                 class="ant-input-clear-icon"
                                 nzTheme="fill"
                                 nzType="close-circle"
+                                *ngIf="formGroup.controls['numberOfPeople'].value"
+                                (click)="formGroup.controls['numberOfPeople'].setValue(null)"
                             ></span>
                         </ng-template>
                     </nz-input-group>
@@ -158,6 +162,8 @@
                                 class="ant-input-clear-icon"
                                 nzTheme="fill"
                                 nzType="close-circle"
+                                *ngIf="formGroup.controls['priceAdult'].value"
+                                (click)="formGroup.controls['priceAdult'].setValue(null)"
                             ></span>
                         </ng-template>
                     </nz-input-group>
@@ -184,6 +190,8 @@
                                 class="ant-input-clear-icon"
                                 nzTheme="fill"
                                 nzType="close-circle"
+                                *ngIf="formGroup.controls['priceChildren'].value"
+                                (click)="formGroup.controls['priceChildren'].setValue(null)"
                             ></span>
                         </ng-template>
                     </nz-input-group>

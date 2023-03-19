@@ -57,7 +57,7 @@ export class RoomService {
     roomTypeDetail(id: number): Observable<any> {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM}/${id}`, options);
+        return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM_TYPE}/${id}`, options);
         // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
     };
 
