@@ -46,6 +46,7 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
   @Input() isValidate: any = false;
   timeInterval: any;
   objectId: any = '';
+  fullName: any = localStorage.getItem(constants.FULLNAME);
 
   @HostListener('window:resize', [])
   onResize() {

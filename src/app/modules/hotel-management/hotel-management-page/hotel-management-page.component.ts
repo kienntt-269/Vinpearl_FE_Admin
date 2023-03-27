@@ -73,8 +73,9 @@ export class HotelManagementPageComponent implements OnInit {
     //   pageSize: this.numberRoom,
     // }
     const formValue = this.formGroup.value;
+    const siteId = localStorage.getItem(constants.SITE_ID) || "";
     
-    this.hotelService.getListHotel(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
+    this.hotelService.getListHotel(this.pageSize, this.pageIndex, this.sort, siteId, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
         console.log(res.data.content);

@@ -28,14 +28,14 @@ export class SidebarComponent implements OnInit {
   getChild(child: any) {
     let arrayRole: any[] = []
     let codes: string | any[];
-    if (localStorage.getItem(constants.ROLE_ID) == '2') {
+    if (localStorage.getItem(constants.ROLE_ID) == '1') {
       codes = PERMISSION.ROLE_TOUR_HOTEL;
-    } else if (localStorage.getItem(constants.ROLE_ID) == '3') {
+    } else if (localStorage.getItem(constants.ROLE_ID) == '2') {
       codes = PERMISSION.ROLE_CUSTOMER_CARE;
-    } else {
+    } else if (localStorage.getItem(constants.ROLE_ID) == '3') {
       codes = PERMISSION.ROLE_ADMIN;
     }
-    // let codes = ['WEB_LIVE_VIEW', 'WEB_PLAYBACK', 'WEB_CAMERA_MAP', 'WEB_SEARCH_ALL', 'WEB_DETECT_FACE', 'WEB_MANAGE_DETECT_FACE', 'WEB_TRACE_FACE', 'WEB_ALARM_EVENT' , 'WEB_EVENT' , 'WEB_ALARM', 'WEB_MANAGE_ACCOUNT']
+    
     child.forEach((item: any) => {
       if (codes.indexOf(item.code) > -1 || item.code == "ALL") {
         if (item.children.length) {

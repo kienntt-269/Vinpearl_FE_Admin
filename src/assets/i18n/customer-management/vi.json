@@ -1,6 +1,7 @@
 {
   "listCustomer": {
     "titleSearch": "Tiêu chí tìm kiếm",
+    "titleReport": "Tham số báo cáo",
     "stt": "STT",
     "code": "Mã đơn hàng",
     "fullName": "Tên khách hàng",
@@ -18,6 +19,22 @@
     "edit": "Chỉnh sửa",
     "detail": "Chi tiết",
     "titleTable": "Danh sách khách hàng",
+    "btnSearch": "Tìm kiếm",
+    "startDate": "Từ Ngày Tháng Năm",
+    "endDate": "Đến Ngày Tháng Năm"
+  },
+  "customer": {
+    "titleSearch": "Tiêu chí tìm kiếm",
+    "titleTable": "Danh sách tài khoản",
+    "addAccount": "Thêm mới tài khoản",
+    "accountId": "Mã tài khoản",
+    "fullName": "Tên đầy đủ",
+    "status": "Trạng thái tài khoản",
+    "phone": "Số điện thoại",
+    "cccd": "Căn cước công dân",
+    "birthDate": "Ngày sinh",
+    "sex": "Giới tính",
+    "site": "Khu vực",
     "btnSearch": "Tìm kiếm"
   }
 }

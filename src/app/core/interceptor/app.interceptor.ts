@@ -49,30 +49,32 @@ export class AppInterceptor implements HttpInterceptor{
                 finalize(() => {
                     // this.loader.hide();
                 }),
-                // catchError((err, caught) => {
-                //     // let checkErr = false;
-                //     // if (checkErr) {
+                catchError((err, caught) => {
+                    // let checkErr = false;
+                    // if (checkErr) {
     
-                //     // }
-                //     console.log(caught)
-                //     switch (err.status) {
-                //         case 401: //unauthorized
-                //             this.router.navigate(['pages/401']);
-                //             break;
-                //         case 403: //forbidden
-                //             this.router.navigate(['pages/403']);
-                //             break;
-                //         case 404:
-                //             // this.router.navigate(['pages/404']);
-                //             break;
-                //         case 502:
-                //         case 503:
-                //         case 500:
-                //         case 504:
-                //         case 0:
-                //             this.router.navigate(['pages/500']);
-                //     }
-                // })
+                    // }
+                    console.log(caught)
+                    switch (err.status) {
+                        case 401: //unauthorized
+                            this.router.navigate(['pages/401']);
+                            break;
+                        case 403: //forbidden
+                            this.router.navigate(['pages/403']);
+                            break;
+                        case 404:
+                            // this.router.navigate(['pages/404']);
+                            break;
+                        case 502:
+                        case 503:
+                        case 500:
+                        case 504:
+                        case 0:
+                            this.router.navigate(['pages/500']);
+                    }
+                    this.navigateLogin();
+                    throw err;
+                })
             );
         } else {
             request = request.clone({

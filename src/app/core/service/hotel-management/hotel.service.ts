@@ -18,12 +18,12 @@ export class HotelService {
 
     }
 
-    getListHotel(pageSize: Number, pageIndex: Number, sort: any, name: String, totalRoom: any, phone: any): Observable<any> {
+    getListHotel(pageSize: Number, pageIndex: Number, sort: any, siteId: any, name: String, totalRoom: any, phone: any): Observable<any> {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
         // return this.httpClient.get(`${APIs.BOOKING_DETAIL}/${id}`, options);
         // return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}?siteId=${siteId}&page=${pageIndex}&size=${pageSize}&sort=${sort}&name=${name}&totalRoom=${totalRoom}&phone=${phone}`, options);
-        return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}?page=${pageIndex}&size=${pageSize}&sort=${sort}`, options);
+        return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}?page=${pageIndex}&size=${pageSize}&sort=${sort}&siteId=${siteId}`, options);
     };
 
     hotelDetail(id: number): Observable<any> {

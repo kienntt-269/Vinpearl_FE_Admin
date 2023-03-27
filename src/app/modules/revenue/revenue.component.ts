@@ -12,40 +12,21 @@ import { RoomService } from 'src/app/core/service/room-management/room.service';
 export class RevenueComponent implements OnInit {
 
   breadcrumb: any = [];
-  listOfData: any = [];
+  listOfDataTotal: any = [];
+  listOfDataTour: any = [];
+  listOfDataCustomer: any = [];
   chartHotel: any;
   chartRoom: any;
   chartFlight: any;
-  statusCards: any[] = [
-    {
-      count: 33,
-      title: "Booking vé máy bay",
-      path: "/admin/customers"
-    },
-    {
-      count: 375,
-      title: "Booking khách sạn",
-      path: "/admin/customers"
-    },
-    {
-      count: 150,
-      title: "Tour điều hành",
-      path: "/admin/customers"
-    },
-    {
-      count: 202,
-      title: "Báo giá",
-      path: "/admin/customers"
-    },
-  ];
 
-  pageSize: any = 10;
+  pageSize: any = 5;
   pageIndex: any = 0;
   sort: any = "id,desc";
 
   constructor(
     private router: Router,
     private roomService: RoomService,
+    private bookingService: BookingService,
   ) { }
 
   ngOnInit(): void {
@@ -59,6 +40,30 @@ export class RevenueComponent implements OnInit {
     this.createChartHotel();
     this.createChartRoom();
     this.createChartFlight();
+
+    const data = {
+      page: this.pageIndex,
+      size: this.pageSize,
+      sort: this.sort,
+    }
+
+    this.bookingService.getListTotal().subscribe(res => {
+      if (res.code == 200) {
+        this.listOfDataTotal = res.data;
+      }
+    })
+
+    this.bookingService.getListBookingTour(data).subscribe(res => {
+      if (res.code == 200) {
+        this.listOfDataTour = res.data.content;
+      }
+    })
+
+    this.bookingService.getTop5Customer().subscribe(res => {
+      if (res.code == 200) {
+        this.listOfDataCustomer = res.data;
+      }
+    })
   }
 
   createChartHotel(){
@@ -156,13 +161,6 @@ export class RevenueComponent implements OnInit {
 
   sortChange(e: any) {
     
-  }
-
-  updateBooking(data: any) {
-    const params = {
-      id: data.id,
-    }
-    this.router.navigate(['pages/room-management/update-type-of-room'], {queryParams: params});
   }
 
 }

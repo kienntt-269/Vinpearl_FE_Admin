@@ -22,6 +22,17 @@
                                 </ng-template>
                             </nz-input-group>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['email'].invalid && (this.formGroup.controls['email'].dirty || this.formGroup.controls['email'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['email'].hasError('required')">
+                                {{'addAccount.validate.email.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['email'].hasError('maxLength')">
+                                {{'addAccount.validate.email.maxLength' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['email'].hasError('pattern')">
+                                {{'addAccount.validate.email.pattern' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -42,6 +53,14 @@
                                 </ng-template>
                             </nz-input-group>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['fullName'].invalid && (this.formGroup.controls['fullName'].dirty || this.formGroup.controls['fullName'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['fullName'].hasError('required')">
+                                {{'addAccount.validate.fullName.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['fullName'].hasError('maxLength')">
+                                {{'addAccount.validate.fullName.maxLength' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -59,6 +78,14 @@
                                   </ng-template>
                             </nz-input-group>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['password'].invalid && (this.formGroup.controls['password'].dirty || this.formGroup.controls['password'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['password'].hasError('required')">
+                                {{'addAccount.validate.password.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['password'].hasError('pattern')">
+                                {{'addAccount.validate.password.pattern' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -76,6 +103,14 @@
                                   </ng-template>
                             </nz-input-group>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['confirmPassword'].invalid && (this.formGroup.controls['confirmPassword'].dirty || this.formGroup.controls['confirmPassword'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['confirmPassword'].hasError('required')">
+                                {{'addAccount.validate.confirmPassword.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['confirmPassword'].hasError('pattern')">
+                                {{'addAccount.validate.confirmPassword.pattern' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -94,6 +129,11 @@
                                 formControlName="birthDate"
                             ></nz-date-picker>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['birthDate'].invalid && (this.formGroup.controls['birthDate'].dirty || this.formGroup.controls['birthDate'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['birthDate'].hasError('required')">
+                                {{'addAccount.validate.birthDate.required' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -108,6 +148,11 @@
                                 <nz-option *ngFor="let item of listOfSex" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                             </nz-select>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['sex'].invalid && (this.formGroup.controls['sex'].dirty || this.formGroup.controls['sex'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['sex'].hasError('required')">
+                                {{'addAccount.validate.sex.required' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -128,6 +173,56 @@
                                 </ng-template>
                             </nz-input-group>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['phone'].invalid && (this.formGroup.controls['phone'].dirty || this.formGroup.controls['phone'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['phone'].hasError('required')">
+                                {{'addAccount.validate.phone.required' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['phone'].hasError('maxLength')">
+                                {{'addAccount.validate.phone.maxLength' | translate}}
+                            </div>
+                            <div class="error" *ngIf="this.formGroup.controls['phone'].hasError('pattern')">
+                                {{'addAccount.validate.phone.pattern' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="site">{{'addAccount.site' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                [nzPlaceHolder]="'addAccount.site' | translate"
+                                formControlName="site"
+                                nzAllowClear
+                                (ngModelChange)="getHotel($event)"
+                            >
+                                <nz-option *ngFor="let item of listOfSite" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['site'].invalid && (this.formGroup.controls['site'].dirty || this.formGroup.controls['site'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['site'].hasError('required')">
+                                {{'addAccount.validate.site.required' | translate}}
+                            </div>
+                        </div>
+                    </nz-form-item>
+                </div>
+                <div class="col col-sm-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="hotel">{{'addAccount.hotel' | translate}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-select
+                                [nzPlaceHolder]="'addAccount.hotel' | translate"
+                                formControlName="hotel"
+                                nzAllowClear
+                            >
+                                <nz-option *ngFor="let item of listOfHotel" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['hotel'].invalid && (this.formGroup.controls['hotel'].dirty || this.formGroup.controls['hotel'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['hotel'].hasError('required')">
+                                {{'addAccount.validate.hotel.required' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -142,6 +237,11 @@
                                 <nz-option *ngFor="let item of listOfPermission" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                             </nz-select>
                         </nz-form-control>
+                        <div *ngIf="this.formGroup.controls['permission'].invalid && (this.formGroup.controls['permission'].dirty || this.formGroup.controls['permission'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['permission'].hasError('required')">
+                                {{'addAccount.validate.permission.required' | translate}}
+                            </div>
+                        </div>
                     </nz-form-item>
                 </div>
             </div>

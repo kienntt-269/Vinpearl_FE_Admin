@@ -30,8 +30,8 @@ import { SaveTypeOfRoomComponent } from './type-of-room/save-type-of-room/save-t
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { SaveServiceComponent } from './service/save-service/save-service.component';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
-import { FormatPrice } from 'src/app/shared/pipe/number.pipe'; 
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +43,6 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     TypeOfRoomComponent,
     SaveTypeOfRoomComponent,
     SaveServiceComponent,
-    FormatPrice,
   ],
   imports: [
     RoomManagementRoutingModule,

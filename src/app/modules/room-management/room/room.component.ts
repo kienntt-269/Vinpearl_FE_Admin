@@ -56,16 +56,25 @@ export class RoomComponent implements OnInit {
     this.router.navigate(['pages/room-management/add-room']);
   }
 
-  updateRoom(data: any) {
+  updateRoom(data: any, check: any) {
     const params = {
       id: data.id,
+      action: check == 1 ? "PROCESS" : "DETAIL",
     }
     this.router.navigate(['pages/room-management/update-room'], {queryParams: params});
   }
 
   getRoom() {
     const formValue = this.formGroup.value;
-    this.roomService.getListRoom(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.numberOfRooms, formValue.phone).subscribe(res => {
+    const data = {
+      name: formValue.roomName ? formValue.roomName : "",
+      roomType: formValue.roomType ? formValue.roomType : "",
+      status: formValue.status ? formValue.status : "",
+      page: this.pageIndex,
+      size: this.pageSize,
+      sort: this.sort,
+    }
+    this.roomService.getListRoom(data).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
         this.totalItem = res.data.totalElements;
@@ -74,7 +83,7 @@ export class RoomComponent implements OnInit {
   }
 
   changeCurrentPage(currentPage: number) {
-    this.pageIndex = currentPage;
+    this.pageIndex = currentPage - 1;
     // call event rule engine
     // this.createData();
 
@@ -90,5 +99,11 @@ export class RoomComponent implements OnInit {
     
     // call event service
     this.getRoom()
+  }
+
+  search() {
+    this.pageSize = 10;
+    this.pageIndex = 0;
+    this.getRoom();
   }
 }

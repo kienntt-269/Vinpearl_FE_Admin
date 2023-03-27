@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './shared/component/loader/loader.component';
 import { PagingComponent } from './shared/component/paging/paging.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { FormatPrice } from './shared/pipe/number.pipe';
 
 export function sharedCreateTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -25,7 +26,8 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
   declarations: [
     BreadcrumbComponent,
     LoaderComponent,
-    PagingComponent
+    PagingComponent,
+    FormatPrice,
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
   exports: [
     BreadcrumbComponent,
     LoaderComponent,
-    PagingComponent
+    PagingComponent,
+    FormatPrice,
   ],
   providers: [TranslateStore],
 })

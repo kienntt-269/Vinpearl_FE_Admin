@@ -115,6 +115,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem(constants.FULLNAME, res.data.fullName);
         localStorage.setItem(constants.TOKEN, res.data.token);
         localStorage.setItem(constants.ROLE_ID, res.data.roleId);
+        localStorage.setItem(constants.SITE_ID, res.data.siteId);
+        localStorage.setItem(constants.HOTEL_ID, res.data.hotelId);
         this.router.navigate(['/pages/revenue']);
         this.toast.success(
           this.translate.instant(`toast.login_success`),

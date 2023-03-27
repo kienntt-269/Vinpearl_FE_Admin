@@ -19,6 +19,14 @@ function requestHeadersFormData() {
   };
 }
 
+function requestHeadersExcel() {
+  return new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'Authorization': localStorage.getItem(constants.TOKEN) as string || "",
+  });
+}
+
 function logout() {
   const route = CoreModule.injector.get<Router>(Router)
   let login = {
@@ -44,5 +52,6 @@ function logout() {
 export default {
     requestHeaders: requestHeaders,
     requestHeadersFormData: requestHeadersFormData,
+    requestHeadersExcel: requestHeadersExcel,
     logout: logout,
 }

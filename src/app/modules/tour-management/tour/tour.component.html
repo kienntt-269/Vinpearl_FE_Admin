@@ -146,6 +146,8 @@
                     <th nzColumnKey="leavingTo" [nzSortFn]="true">{{'listTour.leavingTo'| translate}}</th>
                     <th nzColumnKey="lengthOfStay" [nzSortFn]="true">{{'listTour.lengthOfStay'| translate}}</th>
                     <th nzColumnKey="suitable" [nzSortFn]="true">{{'listTour.suitable'| translate}}</th>
+                    <th nzColumnKey="suitable" [nzSortFn]="true">{{'listTour.numberOfPeople'| translate}}</th>
+                    <th nzColumnKey="suitable" [nzSortFn]="true">{{'listTour.remainingOfPeople'| translate}}</th>
                     <th>{{'listTour.action'| translate}}</th>
                 </tr>
             </thead>
@@ -163,8 +165,8 @@
                         <span *ngIf="data?.typeOfTourId == 7">Vé tham quan</span>
                         <span *ngIf="data?.typeOfTourId == 8">Spa</span>
                     </td>
-                    <td>{{ data?.leavingFrom?.name }} m2</td>
-                    <td>{{ data?.leavingTo?.name }}</td>
+                    <td>{{ data?.leavingFrom }}</td>
+                    <td>{{ data?.leavingTo }}</td>
                     <td>
                         <span *ngIf="data?.lengthStayId == 1">1 ngày</span>
                         <span *ngIf="data?.lengthStayId == 2">2 ngày 1 đêm</span>
@@ -182,6 +184,8 @@
                         <span *ngIf="data?.suitableId == 4">Nhóm bạn</span>
                         <span *ngIf="data?.suitableId == 5">Doanh nhân</span>
                     </td>
+                    <td>{{ data?.numberOfPeople }}</td>
+                    <td>{{ data?.numberOfPeople - data?.remainingOfPeople }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 
@@ -190,10 +194,10 @@
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateHotel(data, 1)">
+                                    <li nz-menu-item (click)="updateTour(data, 1)">
                                       <a>{{'listTour.edit'| translate}}</a>
                                     </li>
-                                    <li nz-menu-item (click)="updateHotel(data, 2)">
+                                    <li nz-menu-item (click)="updateTour(data, 2)">
                                       <a>{{'listTour.detail'| translate}}</a>
                                     </li>
                                   </ul>

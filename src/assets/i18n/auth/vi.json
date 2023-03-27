@@ -45,6 +45,7 @@
     }
   },
   "error": "Lỗi",
+  "success": "Thành công",
   "toast": {
     "login_success": "Đăng nhập thành công",
     "login_fail": "Đăng nhập thất bại",

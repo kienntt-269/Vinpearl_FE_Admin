@@ -74,28 +74,16 @@
     text-align: center;
 }
 
-.empty {
-    background-color: #3C8DBC;
-}
-
-.live {
-    background-color: #00A65A;
-}
-
-.deposit {
-    background-color: #605CA8;
-}
-
 .item-room.checkin {
-    background-color: #F39C12;
+    color: #F39C12;
 }
 
 .item-room.checkout {
-    background-color: #DD4B39;
+    color: #DD4B39;
 }
 
 .item-room.unknown {
-    background-color: #DDDDDD;
+    color: #DDDDDD;
 }
 
 .room {

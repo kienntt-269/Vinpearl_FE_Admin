@@ -29,6 +29,7 @@ export class SaveRoomComponent implements OnInit {
   avatarUrl?: string;
   listOfHotel: any[] = [];
   listOfRoomType: any[] = [];
+  listOfRoomGroupType: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -50,6 +51,17 @@ export class SaveRoomComponent implements OnInit {
             // route: "/pages/room-booking"
           }
         ]
+        this.getDetailRoom(this.roomId);
+        this.listOfRoomGroupType = [
+          {
+            id: 0,
+            name: "Phòng dịch vụ",
+          },
+          {
+            id: 1,
+            name: "Phòng đặt tour",
+          },
+        ]
       } else {
         this.breadcrumb = [
           {
@@ -61,9 +73,8 @@ export class SaveRoomComponent implements OnInit {
             // route: "/pages/room-booking"
           }
         ]
-
-        this.getListHotel();
       }
+      this.getListHotel();
     });
   }
 
@@ -96,6 +107,21 @@ export class SaveRoomComponent implements OnInit {
     this.getListRoomType(id);
   }
 
+  getDetailRoom(id: any) {
+    this.roomService.roomDetail(id).subscribe(res => {
+      if (res.code == 200) {
+        const data = res.data;
+        this.formGroup.setValue({
+          name: data.name,
+          roomGroupType: data.roomGroupTypeId,
+          hotel: data.hotel,
+          roomType: data.roomTypeId,
+          description: data.description
+        })
+      }
+    })
+  }
+
   getListHotel() {
     this.roomService.getListHotel().subscribe(res => {
       if (res.code === 200) {
@@ -105,9 +131,9 @@ export class SaveRoomComponent implements OnInit {
   }
 
   getListRoomType(hotelId: any) {
-    this.roomService.getListRoomType(1000, 0, "id,desc", hotelId, "", "").subscribe(res => {
+    this.roomService.getListRoomTypeByHotelId(hotelId).subscribe(res => {
       if (res.code === 200) {
-        this.listOfRoomType = res.data.content;
+        this.listOfRoomType = res.data;
       }
     })
   }
@@ -133,17 +159,17 @@ export class SaveRoomComponent implements OnInit {
       status: 0,
     }
 
-    this.roomService.addRoom(data).subscribe(res => {
-      if (res.code == 200) {
+    this.roomService.addRoom(data).subscribe({
+      next: res => {
         this.toast.success('Thành công', 'Thông báo');
         this.router.navigate(['/pages/room-management/room']);
-      }
-      if (res.body?.code == 400) {
-        this.toast.success('Lỗi', 'Thông báo');
-      }
-      if (res.body?.code == 404) {
-        this.toast.success('Lỗi', 'Thông báo');
+      },
+      error: error => {
+        if (error.error.detailError.includes("Đã đạt tối đa số lượng phòng cho phép")) {
+          this.toast.error('Đã đạt tối đa số lượng phòng cho phép', 'Lỗi');
+        }
       }
     })
+
   }
 }

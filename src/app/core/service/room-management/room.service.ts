@@ -26,10 +26,10 @@ export class RoomService {
 
     //room
 
-    getListRoom(size: Number, pageIndex: Number, sort: any, name: String, totalRoom: any, phone: any): Observable<any> {
+    getListRoom(data: any): Observable<any> {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_GET_LIST_ROOM}?&page=${pageIndex}&size=${size}&sort=${sort}`, options);
+        return this.httpClient.get(`${APIs.API_GET_LIST_ROOM}?name=${data.name}&roomType=${data.roomType}&status=${data.status}&page=${data.page}&size=${data.size}&sort=${data.sort}`, options);
     };
 
     roomDetail(id: number): Observable<any> {
@@ -40,7 +40,7 @@ export class RoomService {
     };
 
     addRoom(formData: any): Observable<any> {
-        const headers = handle.requestHeadersFormData();
+        const headers = handle.requestHeaders();
         let options = {headers: headers};
         return this.httpClient.post(`${APIs.API_ADD_ROOM}`, formData, options);
         // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
@@ -48,10 +48,16 @@ export class RoomService {
 
     //room type
 
-    getListRoomType(size: Number, pageIndex: Number, sort: any, hotelId: any, acreage: any, phone: any): Observable<any> {
+    getListRoomType(data: any): Observable<any> {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM}?hotelId=${hotelId}&acreage=${acreage}&phone=${phone}&page=${pageIndex}&size=${size}&sort=${sort}`, options);
+        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM}?hotelName=${data.hotelName}&numberPerson=${data.numberPerson}&name=${data.name}&page=${data.page}&size=${data.size}&sort=${data.sort}`, options);
+    };
+
+    getListRoomTypeByHotelId(hotelId: any): Observable<any> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM_BY_HOTEL_ID}/${hotelId}`, options);
     };
 
     roomTypeDetail(id: number): Observable<any> {

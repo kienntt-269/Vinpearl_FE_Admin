@@ -19,46 +19,56 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { ReportCustomerHotelComponent } from './report-customer-hotel/report-customer-hotel.component';
+import { ReportCustomerTourComponent } from './report-customer-tour/report-customer-tour.component';
+import { ReportRoutingModule } from './report-routing.module';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { CustomerManagementRoutingModule } from './customer-management-routing.module';
-import { CustomerManagementComponent } from './customer-management/customer-management.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    CustomerManagementComponent,
-  ],
-  imports: [
-    CommonModule,
-    CustomerManagementRoutingModule,
-    SharedModule,
-    NzTableModule,
-    NzSelectModule,
-    NzButtonModule,
-    NzCheckboxModule,
-    NzDropDownModule,
-    NzIconModule,
-    NzMenuModule,
-    NzFormModule,
-    NzDatePickerModule,
-    NzUploadModule,
-    NzInputModule,
-    NzTabsModule,
-    NzModalModule,
-    NzPaginationModule,
-    NzMessageModule,
-    ReactiveFormsModule,
-    FormsModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (customerManagementCreateTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
-  ]
+    declarations: [
+        ReportCustomerHotelComponent,
+        ReportCustomerTourComponent,
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        NzTableModule,
+        NzSelectModule,
+        NzButtonModule,
+        NzCheckboxModule,
+        NzDropDownModule,
+        ReportRoutingModule,
+        NzIconModule,
+        NzMenuModule,
+        NzFormModule,
+        NzDatePickerModule,
+        NzUploadModule,
+        NzInputModule,
+        NzTabsModule,
+        NzModalModule,
+        NzMessageModule,
+        NzPaginationModule,
+        NzAlertModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NzCarouselModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (ReportCreateTranslateLoader),
+                deps: [HttpClient]
+            },
+            isolate: true
+        }),
+    ],
+    providers: [DatePipe],
 })
 
-export class CustomerManagementModule {
+export class ReportModule {
   constructor(public translationService: TranslateService) {
     translationService.addLangs(['en', 'vi']);
     if (localStorage.getItem('lang')) {
@@ -69,15 +79,15 @@ export class CustomerManagementModule {
     }
     // this.translationService.store.onLangChange
     //   .subscribe((lang: LangChangeEvent) => {
-    //     this.translationService.use(lang.lang).toPromise();
+    //     this.translationService.use(lang.lang);
     //   },error =>{
     //     console.log(error)
     //   });
   }
 }
 
-export function customerManagementCreateTranslateLoader(http: HttpClient) {
-  console.log('AuthModule createTranslateLoader');
+export function ReportCreateTranslateLoader(http: HttpClient) {
+  console.log('ReportModule createTranslateLoader');
   return new TranslateHttpLoader(
     http, './assets/i18n/customer-management/', '.json');
 }

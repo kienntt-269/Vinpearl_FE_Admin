@@ -93,31 +93,24 @@
                     </button>
                 </div>
                 <div class="table__content">
-                    <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #table1 [nzData]="listOfName">
+                    <nz-table nzBordered nzSize="middle" #table1 [nzData]="listOfName">
                         <thead>
                             <tr>
                                 <th>{{'saveService.stt'| translate}}</th>
                                 <th>{{'saveService.name'| translate}}</th>
                                 <th>{{'saveService.price'| translate}}</th>
-                                <th>{{'saveService.typeOfRoom'| translate}}</th>
+                                <!-- <th>{{'saveService.typeOfRoom'| translate}}</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let data of table1.data; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ data?.name }}</td>
-                                <td>{{ data?.price | format }} vnđ</td>
-                                <td>{{ data?.name }}</td>
+                                <td>{{ data?.price | format }} VNĐ</td>
+                                <!-- <td>{{ data?.name }}</td> -->
                             </tr>
                         </tbody>
                     </nz-table>
-                    <div class="d-flex justify-content-center align-items-center" *ngIf="listOfName.length > 5">
-                        <nz-pagination
-                            [nzPageIndex]="0"
-                            [nzTotal]="listOfName.length"
-                            [nzPageSize]="5"
-                        ></nz-pagination>
-                    </div>
                 </div>
             </div>
         </div>
@@ -133,7 +126,7 @@
                     </button>
                 </div>
                 <div class="table__content">
-                    <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #table2 [nzData]="listOfDescription">
+                    <nz-table nzBordered nzSize="middle" #table2 [nzData]="listOfDescription">
                         <thead>
                             <tr>
                                 <th>{{'saveService.stt'| translate}}</th>
@@ -147,13 +140,6 @@
                             </tr>
                         </tbody>
                     </nz-table>
-                    <div class="d-flex justify-content-center align-items-center" *ngIf="listOfDescription.length > 5">
-                        <nz-pagination
-                            [nzPageIndex]="0"
-                            [nzTotal]="listOfDescription.length"
-                            [nzPageSize]="5"
-                        ></nz-pagination>
-                    </div>
                 </div>
             </div>
         </div>
@@ -168,7 +154,7 @@
                     </button>
                 </div>
                 <div class="table__content">
-                    <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #table3 [nzData]="listOfContent">
+                    <nz-table nzBordered nzSize="middle" #table3 [nzData]="listOfContent">
                         <thead>
                             <tr>
                                 <th>{{'saveService.stt'| translate}}</th>
@@ -182,13 +168,6 @@
                             </tr>
                         </tbody>
                     </nz-table>
-                    <div class="d-flex justify-content-center align-items-center" *ngIf="listOfContent.length > 5">
-                        <nz-pagination
-                            [nzPageIndex]="0"
-                            [nzTotal]="listOfContent.length"
-                            [nzPageSize]="5"
-                        ></nz-pagination>
-                    </div>
                 </div>
             </div>
         </div>

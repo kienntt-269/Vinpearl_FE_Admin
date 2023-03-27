@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import APIs from "../../constants/APIs";
@@ -18,12 +18,32 @@ export class TourService {
 
     }
 
-    getListTour(pageSize: Number, pageIndex: Number, sort: any, name: String, totalRoom: any, phone: any): Observable<any> {
+    getListTour(data: any): Observable<any> {
         const headers = handle.requestHeaders();
-        let options = {headers: headers};
-        // return this.httpClient.get(`${APIs.BOOKING_DETAIL}/${id}`, options);
-        // return this.httpClient.get(`${APIs.API_GET_LIST_Tour}?siteId=${siteId}&page=${pageIndex}&size=${pageSize}&sort=${sort}&name=${name}&totalRoom=${totalRoom}&phone=${phone}`, options);
-        return this.httpClient.get(`${APIs.API_GET_LIST_TOUR}?page=${pageIndex}&size=${pageSize}&sort=${sort}`, options);
+        let queryParams = new HttpParams();
+        queryParams = queryParams.append("page",data.page);
+        queryParams = queryParams.append("size",data.size);
+        queryParams = queryParams.append("sort",data.sort);
+        if (data.searchName) {
+            queryParams = queryParams.append("searchName",data.searchName);
+        }
+        if (data.siteId) {
+            queryParams = queryParams.append("siteId",data.siteId);
+        }
+        if (data.lengthStayIds) {
+            queryParams = queryParams.append("lengthStayIds",data.lengthStayIds);
+        }
+        if (data.suitableIds) {
+            queryParams = queryParams.append("suitableIds",data.suitableIds);
+        }
+        if (data.typeOfTours) {
+            queryParams = queryParams.append("typeOfTours",data.typeOfTours);
+        }
+        let options = {
+            headers: headers,
+            params: queryParams
+        };
+        return this.httpClient.get(`${APIs.API_GET_LIST_TOUR}`, options);
     };
 
     TourDetail(id: number): Observable<any> {

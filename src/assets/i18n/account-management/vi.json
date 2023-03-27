@@ -10,6 +10,7 @@
       "phone": "Số điện thoại",
       "birthDate": "Ngày sinh",
       "sex": "Giới tính",
+      "site": "Khu vực",
       "permission": "Mức phân quyền",
       "btnSearch": "Tìm kiếm"
     },
@@ -22,10 +23,30 @@
       "permission": "Mức phân quyền",
       "birthDate": "Ngày sinh",
       "sex": "Giới tính",
+      "site": "Khu vực",
+      "hotel": "Tên khách sạn",
       "phone": "Số điện thoại",
       "cccd": "Căn cước công dân",
       "btnCancel": "Hủy bỏ",
-      "btnAdd": "Thêm mới"
+      "btnAdd": "Thêm mới",
+      "validate": {
+        "email.required": "Vui lòng nhập Email",
+        "email.pattern": "Email đã nhập chưa đúng định dạng",
+        "email.maxLength": "Email tối đa 100 ký tự",
+        "fullName.required": "Vui lòng nhập Tên đầy đủ",
+        "fullName.maxLength": "Tên khách sạn tối đa 255 ký tự",
+        "password.required": "Vui lòng nhập Mật khẩu",
+        "password.pattern": "Mật khẩu đã nhập chưa đúng định dạng",
+        "confirmPassword.required": "Vui lòng nhập Nhập lại mật khẩu",
+        "confirmPassword.pattern": "Nhập lại mật khẩu đã nhập chưa đúng định dạng",
+        "phone.required": "Vui lòng nhập Số điện thoại",
+        "phone.pattern": "Số điện thoại đã nhập chưa đúng định dạng",
+        "birthDate.required": "Vui lòng nhập Ngày sinh",
+        "site.required": "Vui lòng chọn Khu vực",
+        "hotel.required": "Vui lòng chọn Tên khách sạn",
+        "sex.required": "Vui lòng nhập Giới tính",
+        "permission.required": "Vui lòng chọn Mức phân quyền"
+      }
     }
   }
   

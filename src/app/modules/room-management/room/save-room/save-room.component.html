@@ -68,11 +68,11 @@
                         <nz-form-label nzFor="roomGroupType">{{'saveRoom.roomGroupType' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-select
-                                [nzPlaceHolder]="'Loại phòng'"
+                                [nzPlaceHolder]="'Loại nhóm phòng'"
                                 formControlName="roomGroupType"
                                 nzAllowClear
                             >
-                                <nz-option *ngFor="let item of listOfRoomType" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                                <nz-option *ngFor="let item of listOfRoomGroupType" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                             </nz-select>
                         </nz-form-control>
                         <div *ngIf="this.formGroup.controls['roomGroupType'].invalid && (this.formGroup.controls['roomGroupType'].dirty || this.formGroup.controls['roomGroupType'].touched)">

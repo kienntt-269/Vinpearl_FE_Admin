@@ -72,7 +72,7 @@
 <div class="table">
     <div class="table-title d-flex table-header justify-content-between">
         <div class="title-search">{{'listAccount.titleTable' | translate}} ({{listOfData.length}})</div>
-        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
+        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addAccount()">
             <img src="../../../../assets/icon/plus_icon.svg" alt="">
             {{'listAccount.addAccount' | translate}}
         </button>
@@ -85,9 +85,10 @@
                     <th [nzSortFn]="true">{{'listAccount.fullName' | translate}}</th>
                     <th [nzSortFn]="true">{{'listAccount.birthDate' | translate}}</th>
                     <th [nzSortFn]="true">{{'listAccount.sex' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.site' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.hotel' | translate}}</th>
                     <th [nzSortFn]="true">{{'listAccount.phone' | translate}}</th>
                     <th [nzSortFn]="true">{{'listAccount.permission' | translate}}</th>
-                    <th [nzSortFn]="true">{{'listAccount.status' | translate}}</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -95,19 +96,20 @@
                 <tr *ngFor="let data of basicTable.data; let i = index">
                     <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
                     <td>{{ data?.fullName }}</td>
-                    <td>{{ data?.birthDate }}</td>
+                    <td>{{ data?.birthDate | date: "HH:mm:ss - dd/MM/yyyy" }}</td>
                     <td>
                         <p *ngIf="data?.sex === 1">Nam</p>
                         <p *ngIf="data?.sex === 2">Nữ</p>
                         <p *ngIf="data?.sex === 0">Không xác định</p>
                     </td>
+                    <td>{{ data?.site?.name || " - " }}</td>
+                    <td>{{ data?.hotel?.name || " - " }}</td>
                     <td>{{ data?.phone }}</td>
                     <td>
-                        <span *ngIf="data?.roleId == 1">Full quyền</span>
-                        <span *ngIf="data?.roleId == 2">Nhân viên quản lý khách sạn</span>
-                        <span *ngIf="data?.roleId == 3">Nhân viên quản lý tour</span>
+                        <span *ngIf="data?.roleId == 1">Bộ phận quản lý tour và khách sạn</span>
+                        <span *ngIf="data?.roleId == 2">Bộ phận quản lý khách hàng</span>
+                        <span *ngIf="data?.roleId == 3">Quản trị viên</span>
                     </td>
-                    <td>Đang hoạt động</td>
                     <td>
                         <div class="btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 
@@ -116,8 +118,11 @@
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item>
-                                      <a>Xóa</a>
+                                    <li nz-menu-item (click)="updateAccount(data, 1)">
+                                        <a>Chỉnh sửa</a>
+                                      </li>
+                                    <li nz-menu-item (click)="updateAccount(data, 2)">
+                                      <a>Xem chi tiết</a>
                                     </li>
                                   </ul>
                             </nz-dropdown-menu>

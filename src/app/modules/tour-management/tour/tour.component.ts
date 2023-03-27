@@ -167,7 +167,7 @@ export class TourComponent implements OnInit {
     this.router.navigate(['pages/tour-management/save-tour']);
   }
 
-  updateHotel(data: any, check: any) {
+  updateTour(data: any, check: any) {
     const params = {
       id: data.id,
       action: check == 1 ? "PROCESS" : "DETAIL",
@@ -184,8 +184,17 @@ export class TourComponent implements OnInit {
 
   getAllTour() {
     const formValue = this.formGroup.value;
-    
-    this.tourService.getListTour(this.pageSize, this.pageIndex - 1, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
+    const data = {
+      page: this.pageIndex -1,
+      size: this.pageSize,
+      sort: this.sort,
+      searchName: formValue.name,
+      siteId: formValue.siteId,
+      lengthStayIds: formValue.lengthStayIds,
+      suitableIds: formValue.suitableIds,
+      typeOfTours: formValue.typeOfTours,
+    }
+    this.tourService.getListTour(data).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
         this.totalItem = res.data.totalElements;

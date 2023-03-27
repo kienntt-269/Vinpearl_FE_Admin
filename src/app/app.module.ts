@@ -24,6 +24,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxEditorModule } from 'ngx-editor';
 import { OptionInfoAdminModule } from './modules/option-info-admin/option-info-admin.component.module';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { SharedModule } from './shared.module';
 
 registerLocaleData(vi);
 
@@ -45,6 +46,7 @@ registerLocaleData(vi);
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     NgbModule,
+    SharedModule,
     NzToolTipModule,
     // QuillModule,
     TranslateModule.forRoot({

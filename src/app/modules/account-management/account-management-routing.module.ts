@@ -8,7 +8,7 @@ const routes: Routes = [
     component: AccountManagementPageComponent,
   },
   {
-    path: "add-room",
+    path: "add-account",
     component: AddAccountComponent,
   },
 ];

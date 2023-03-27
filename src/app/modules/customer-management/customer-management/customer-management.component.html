@@ -1,32 +1,11 @@
-<app-loader></app-loader>
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
 <form class="form-search" [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
-    <div class="title-search">{{'listCustomer.titleSearch'| translate}}</div>
+    <div class="title-search">{{'customer.titleSearch' | translate}}</div>
     <div class="content">
         <div class="row">
             <div class="col col-sm-4">
                 <nz-form-item>
-                <nz-form-label nzFor="code">{{'listCustomer.code'| translate}}</nz-form-label>
-                    <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputcodeClear">
-                            <input nz-input formControlcode="code" id="code" />
-                            <ng-template #inputcodeClear>
-                                <span
-                                    nz-icon
-                                    class="ant-input-clear-icon"
-                                    nzTheme="fill"
-                                    nzType="close-circle"
-                                    *ngIf="formGroup.controls['code'].value"
-                                    (click)="formGroup.controls['code'].setValue(null)"
-                                ></span>
-                            </ng-template>
-                        </nz-input-group>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <div class="col col-sm-4">
-                <nz-form-item>
-                    <nz-form-label nzFor="fullName">{{'listCustomer.fullName'| translate}}</nz-form-label>
+                    <nz-form-label nzFor="fullName">{{'customer.fullName' | translate}}</nz-form-label>
                     <nz-form-control>
                         <nz-input-group [nzSuffix]="inputNameClear">
                             <input nz-input formControlName="fullName" id="fullName" />
@@ -39,6 +18,26 @@
                                     *ngIf="formGroup.controls['fullName'].value"
                                     (click)="formGroup.controls['fullName'].setValue(null)"
                                 ></span>
+                            </ng-template>      
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="phone">{{'customer.phone' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputPhoneClear">
+                            <input nz-input formControlName="phone" id="phone" />
+                            <ng-template #inputPhoneClear>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                    *ngIf="formGroup.controls['phone'].value"
+                                    (click)="formGroup.controls['phone'].setValue(null)"
+                                ></span>
                             </ng-template>
                         </nz-input-group>
                     </nz-form-control>
@@ -46,18 +45,18 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="roomType">{{'listCustomer.roomType'| translate}}</nz-form-label>
+                    <nz-form-label nzFor="hotel">{{'customer.hotel' | translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputroomTypeClear">
-                            <input nz-input formControlroomType="roomType" id="roomType" />
-                            <ng-template #inputroomTypeClear>
+                        <nz-input-group [nzSuffix]="inputNameClear">
+                            <input nz-input formControlName="hotel" id="hotel" />
+                            <ng-template #inputNameClear>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
-                                    *ngIf="formGroup.controls['roomType'].value"
-                                    (click)="formGroup.controls['roomType'].setValue(null)"
+                                    *ngIf="formGroup.controls['hotel'].value"
+                                    (click)="formGroup.controls['hotel'].setValue(null)"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -66,62 +65,53 @@
             </div>
         </div>
     </div>
-    <div class="group__btns d-flex justify-content-center">
-        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">{{'listCustomer.btnSearch'| translate}}</button>
+    <div class="group-btns d-flex justify-content-center">
+        <button nz-button nzType="primary" [nzSize]="size">{{'customer.btnSearch' | translate}}</button>
     </div>
 </form>
 <div class="table">
-    <div class="d-flex table__header justify-content-between mb-8">
-        <div class="title-search">{{'listCustomer.titleTable'| translate}} ({{totalItem}})</div>
+    <div class="table-title d-flex table-header justify-content-between">
+        <div class="title-search">{{'customer.titleTable' | translate}} ({{listOfData.length}})</div>
+        <div></div>
     </div>
-    <div class="table__content">
+    <div class="table-content">
         <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
-                    <th [nzSortFn]="true">{{'listCustomer.stt'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.code'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.fullName'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.email'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.phone'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.room'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.roomType'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.service'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.price'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.status'| translate}}</th>
-                    <th>{{'listCustomer.action'| translate}}</th>
+                    <th [nzSortFn]="true">STT</th>
+                    <th [nzSortFn]="true">{{'customer.fullName' | translate}}</th>
+                    <th [nzSortFn]="true">{{'customer.birthDate' | translate}}</th>
+                    <th [nzSortFn]="true">{{'customer.sex' | translate}}</th>
+                    <th [nzSortFn]="true">{{'customer.phone' | translate}}</th>
+                    <th [nzSortFn]="true">{{'customer.cccd' | translate}}</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let data of basicTable.data; let i = index">
                     <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
-                    <td>{{ data?.code }}</td>
-                    <td>{{ data?.customer?.fullName }}</td>
-                    <td>{{ data?.customer?.email }}</td>
-                    <td>{{ data?.customer?.phone }}</td>
-                    <td>{{ data?.room?.name }}</td>
-                    <td>{{ data?.room?.roomTypes?.name }}</td>
-                    <td>{{ data?.service?.name }}</td>
-                    <td>{{ data?.paymentAmount }}</td>
+                    <td>{{ data?.fullName }}</td>
+                    <td>{{ data?.birthDate | date: "HH:mm:ss - dd/MM/yyyy" }}</td>
                     <td>
-                        <span *ngIf="data?.paymentStatus == 0">Không thành công</span>
-                        <span *ngIf="data?.paymentStatus == 1">Thành công</span>
-                        <span *ngIf="data?.paymentStatus == 2">Đã hủy</span>
-                        <span *ngIf="data?.paymentStatus == 3">Đã hoàn</span>
-                        <span *ngIf="data?.paymentStatus == 4">Chờ xử lý</span>
+                        <p *ngIf="data?.sex === 1">Nam</p>
+                        <p *ngIf="data?.sex === 2">Nữ</p>
+                        <p *ngIf="data?.sex === 0">Không xác định</p>
                     </td>
+                    <td>{{ data?.phone }}</td>
+                    <td>{{ data?.cccd }}</td>
                     <td>
-                        <div class="d-flex align-items-center justify-content-center btn-actions">
+                        <div class="btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateRoom(data)">
-                                      <a>{{'listCustomer.edit'| translate}}</a>
-                                    </li>
+                                    <li nz-menu-item (click)="updateAccount(data)">
+                                        <a >Xem chi tiết</a>
+                                      </li>
                                     <li nz-menu-item>
-                                      <a>{{'listCustomer.detail'| translate}}</a>
+                                      <a>Xóa</a>
                                     </li>
                                   </ul>
                             </nz-dropdown-menu>

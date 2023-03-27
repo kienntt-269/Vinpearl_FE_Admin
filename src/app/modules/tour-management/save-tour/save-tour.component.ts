@@ -225,12 +225,12 @@ export class SaveTourComponent implements OnInit {
         Validators.required,
       ],
     }),
-    path: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.maxLength(255),
-      ],
-    }),
+    // path: new FormControl('', {
+    //   validators: [
+    //     Validators.required,
+    //     Validators.maxLength(255),
+    //   ],
+    // }),
     priceAdult: new FormControl('', {
       validators: [
         Validators.required,
@@ -242,6 +242,16 @@ export class SaveTourComponent implements OnInit {
       ],
     }),
     expirationDate: new FormControl('', {
+      validators: [
+        Validators.required,
+      ],
+    }),
+    startDate: new FormControl('', {
+      validators: [
+        Validators.required,
+      ],
+    }),
+    endDate: new FormControl('', {
       validators: [
         Validators.required,
       ],
@@ -301,7 +311,7 @@ export class SaveTourComponent implements OnInit {
     })
   }
 
-  handleAddTour = async() =>  {
+  handleAddTour = async () =>  {
     const formValue = this.formGroup.value;
     if (this.formGroup.invalid) {
       for (const control of Object.keys(this.formGroup.controls)) {
@@ -326,6 +336,14 @@ export class SaveTourComponent implements OnInit {
       formValue.expirationDate = formValue.expirationDate.getTime();
     }
     formData.append("expirationDateMls", formValue.expirationDate);
+    if (typeof(formValue.startDate) === "object") {
+      formValue.startDate = formValue.startDate.getTime();
+    }
+    formData.append("startDateMls", formValue.startDate);
+    if (typeof(formValue.endDate) === "object") {
+      formValue.endDate = formValue.endDate.getTime();
+    }
+    formData.append("endDateMls", formValue.endDate);
     // formData.append("images", formValue.uploadFile);
     for (let index = 0; index < this.fileList.length; index++) {
       formData.append("images", this.fileList[index]);
@@ -338,10 +356,10 @@ export class SaveTourComponent implements OnInit {
         this.router.navigate(['/pages/tour-management/tour']);
       }
       if (res.status == 400) {
-        this.toast.success('Lỗi', 'Thông báo');
+        this.toast.error('Lỗi', 'Thông báo');
       }
       if (res.status == 404) {
-        this.toast.success('Lỗi', 'Thông báo');
+        this.toast.error('Lỗi', 'Thông báo');
       }
     } catch (error) {
       console.log(error);

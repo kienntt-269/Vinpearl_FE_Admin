@@ -70,8 +70,8 @@ export class AccountManagementPageComponent implements OnInit {
     
   }
 
-  addRoom() {
-    this.router.navigate(['pages/account-management/add-room']);
+  addAccount() {
+    this.router.navigate(['pages/account-management/add-account']);
   }
 
   getListAccount() {
@@ -87,6 +87,14 @@ export class AccountManagementPageComponent implements OnInit {
         this.totalItem = res.data.totalElements;
       }
     })
+  }
+
+  updateAccount(data: any, check: any) {
+    const params = {
+      id: data.id,
+      action: check == 1 ? "PROCESS" : "DETAIL",
+    }
+    this.router.navigate(['pages/account-management/add-account'], {queryParams: params});
   }
 }
 

@@ -38,31 +38,75 @@ export class BookingService {
 
     getListBookingRoom(data: any): Observable<any> {
         const headers = handle.requestHeaders();
-        let options = {headers: headers};
+        
         let queryParams = new HttpParams();
         queryParams = queryParams.append("page",data.page);
         queryParams = queryParams.append("size",data.size);
         queryParams = queryParams.append("sort",data.sort);
-        queryParams = queryParams.append("customerId",data.customerId);
-        queryParams = queryParams.append("code",data.code);
-        queryParams = queryParams.append("status",data.status);
-        queryParams = queryParams.append("startTime",data.startTime);
-        queryParams = queryParams.append("endTime",data.endTime);
-        return this.httpClient.get(`${APIs.API_GET_LIST_BOOKING_ROOM}`, {params: queryParams});
+        if (data.status) {
+            queryParams = queryParams.append("status",data.status);
+        }
+        if (data.startDate) {
+            queryParams = queryParams.append("startDate",data.startDate);  
+        }
+        if (data.endDate) {
+            queryParams = queryParams.append("endDate",data.endDate);
+        }
+        let options = {
+            headers: headers,
+            params: queryParams,
+        };
+        return this.httpClient.get(`${APIs.API_GET_LIST_BOOKING_ROOM}`, options);
     };
 
     getListBookingTour(data: any): Observable<any> {
         const headers = handle.requestHeaders();
-        let options = {headers: headers};
+        
         let queryParams = new HttpParams();
         queryParams = queryParams.append("page",data.page);
         queryParams = queryParams.append("size",data.size);
         queryParams = queryParams.append("sort",data.sort);
-        queryParams = queryParams.append("customerId",data.customerId);
-        queryParams = queryParams.append("code",data.code);
-        queryParams = queryParams.append("status",data.status);
-        queryParams = queryParams.append("startTime",data.startTime);
-        queryParams = queryParams.append("endTime",data.endTime);
-        return this.httpClient.get(`${APIs.API_GET_LIST_TOUR}`, {params: queryParams});
+        if (data.status) {
+            queryParams = queryParams.append("status",data.status);
+        }
+        if (data.startDate) {
+            queryParams = queryParams.append("startDate",data.startDate);  
+        }
+        if (data.endDate) {
+            queryParams = queryParams.append("endDate",data.endDate);
+        }
+        let options = {
+            headers: headers,
+            params: queryParams,
+        };
+        return this.httpClient.get(`${APIs.API_GET_LIST_BOOKING_TOUR}`, options);
     };
+
+    getTop5Customer() : Observable<any> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.get(`${APIs.API_TOP_5_CUSTOMER_MONEY}`, options);
+    };
+
+    exportFile(data: any) : Observable<Blob> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.post(`${APIs.API_EXPORT_BOOKING_ROOM}`, data, {
+            responseType: 'blob'
+          });
+    }
+
+    exportFileTour(data: any) : Observable<Blob> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.post(`${APIs.API_EXPORT_BOOKING_TOUR}`, data, {
+            responseType: 'blob'
+          });
+    }
+
+    getListTotal() : Observable<any> {
+        const headers = handle.requestHeaders();
+        let options = {headers: headers};
+        return this.httpClient.get(`${APIs.API_DASHBOARD_GET_BOOKING_TOTAL}`, options);
+    }
 }

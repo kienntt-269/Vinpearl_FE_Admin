@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import constants from 'src/app/core/constants/constants';
 import { AccountService } from 'src/app/core/service/account-management/account.service';
+import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
 import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 
 @Component({
@@ -15,6 +16,8 @@ export class AddAccountComponent implements OnInit {
 
   breadcrumb: any = [];
   listOfPermission: any[] = [];
+  listOfHotel: any[] = [];
+  listOfSite: any[] = [];
   listOfSex: any[] = [
     {
       id: 1,
@@ -33,8 +36,13 @@ export class AddAccountComponent implements OnInit {
   passwordVisible = false;
   passwordConfirmVisible = false;
   userDetail: any;
+  pageSize = 10;
+  pageIndex = 1;
+  sort: any = "id,desc";
+  totalItem: any = 0;
   constructor(
     private accountService: AccountService,
+    private hotelService: HotelService,
     private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
@@ -79,6 +87,25 @@ export class AddAccountComponent implements OnInit {
         })
       }
     })
+    this.hotelService.getAllSite().subscribe(res => {
+      if (res.code === 200) {
+        this.listOfSite = res.data;
+      }
+    })
+  }
+
+  getAllHotel(siteId: Number) {
+    this.listOfHotel = [];
+    this.hotelService.getListHotel(100, 0, this.sort, siteId, "", "", "").subscribe(res => {
+      if (res.code === 200) {
+        // console.log(res.data.content);
+        this.listOfHotel = res.data.content;
+      }
+    });
+  }
+
+  getHotel(event: any) {
+    this.getAllHotel(event);
   }
 
   formGroup: FormGroup = new FormGroup({
@@ -126,12 +153,17 @@ export class AddAccountComponent implements OnInit {
       validators: [
         Validators.required,
         Validators.maxLength(12),
+        Validators.pattern(REGEX_PATTERN.PHONE)
       ],
     }),
-    cccd: new FormControl('', {
+    site: new FormControl('', {
       validators: [
         Validators.required,
-        Validators.maxLength(12),
+      ],
+    }),
+    hotel: new FormControl('', {
+      validators: [
+        Validators.required,
       ],
     }),
   });
@@ -140,6 +172,7 @@ export class AddAccountComponent implements OnInit {
     this.accountService.getDetailUser(id).subscribe(res => {
       if (res.code === 200) {
         this.userDetail = res.data;
+        // this.getAllHotel(res.data.site.id);
         
         this.formGroup.patchValue({
           email: res.data.email,
@@ -149,8 +182,9 @@ export class AddAccountComponent implements OnInit {
           birthDate: res.data.birthDate,
           sex: res.data.sex,
           cccd: res.data.cccd,
-          permission: res.data.role,
-          hotelId: res.data.hotelId,
+          permission: res.data.role.id,
+          hotel: res.data.hotel.id,
+          site: res.data.site.id,
         })
       }
     })
@@ -185,7 +219,8 @@ export class AddAccountComponent implements OnInit {
       sex: formValue.sex,
       cccd: formValue.cccd,
       roleId: formValue.permission,
-      siteId: formValue.siteId,
+      siteId: formValue.site,
+      hotelId: formValue.hotel,
     }
 
     this.accountService.addAccount(body).subscribe(res => {

@@ -47,10 +47,10 @@
                 <nz-form-item>
                     <nz-form-label nzFor="status">Trạng thái</nz-form-label>
                     <nz-form-control>
-                        <nz-select formControlName="status">
+                        <nz-select formControlName="status" nzAllowClear="true">
                             <nz-option nzValue="0" nzLabel="Trống">Trống</nz-option>
-                            <nz-option nzValue="1" nzLabel="Đang ở">Đang ở</nz-option>
-                            <nz-option nzValue="2" nzLabel="Đặt cọc">Đặt cọc</nz-option>
+                            <nz-option nzValue="1" nzLabel="Đặt cọc">Đặt cọc</nz-option>
+                            <nz-option nzValue="2" nzLabel="Đang ở">Đang ở</nz-option>
                         </nz-select>
                     </nz-form-control>
                 </nz-form-item>
@@ -58,25 +58,25 @@
         </div>
     </div>
     <div class="group__btns d-flex justify-content-center">
-        <button nz-button nzType="primary" [nzSize]="size">Tìm kiếm</button>
+        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">Tìm kiếm</button>
     </div>
 </form>
 <div class="table">
     <div class="d-flex table__header justify-content-between">
-        <div class="title-search">Danh sách phòng ({{listOfData.length}})</div>
+        <div class="title-search">Danh sách phòng ({{totalItem}})</div>
         <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
             <img src="../../../../assets/icon/plus_icon.svg" alt="">
             Thêm mới phòng
         </button>
     </div>
     <div class="table__content">
-        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
                     <th [nzSortFn]="true">STT</th>
                     <th [nzSortFn]="true">Tên phòng</th>
+                    <th [nzSortFn]="true">Số phòng</th>
                     <th [nzSortFn]="true">Loại phòng</th>
-                    <th [nzSortFn]="true">View phòng</th>
                     <th [nzSortFn]="true">Trạng thái phòng</th>
                     <th>Thao tác</th>
                 </tr>
@@ -84,18 +84,16 @@
             <tbody>
                 <tr *ngFor="let data of basicTable.data; let i = index">
                     <td>{{ pageSize * pageIndex + i + 1 }}</td>
-                    <td>
-                        {{ data?.numberRoom}}
-                    </td>
                     <td>{{ data?.name }}</td>
-                    <td>{{ data?.name }}</td>
+                    <td>{{ data?.numberRoom}}</td>
+                    <td>{{ data?.roomTypes?.name }}</td>
                     <td>
                         <!-- status = 0 : Trống -->
                         <!-- status = 1 : Đang ở -->
                         <!-- status = 2 : Đặt cọc -->
                         <span class="empty" *ngIf="data?.status == 0">Trống</span>
-                        <span class="live" *ngIf="data?.status == 1">Đang ở</span>
-                        <span class="deposit" *ngIf="data?.status == 2">Đặt cọc</span>
+                        <span class="live" *ngIf="data?.status == 1">Đặt cọc</span>
+                        <span class="deposit" *ngIf="data?.status == 2">Đang ở</span>
                     </td>
                     <td>
                         <div class="btn-actions">
@@ -105,10 +103,10 @@
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateRoom(data)">
+                                    <li nz-menu-item (click)="updateRoom(data, 1)">
                                       <a>Chỉnh sửa</a>
                                     </li>
-                                    <li nz-menu-item>
+                                    <li nz-menu-item (click)="updateRoom(data, 2)">
                                       <a>Xóa</a>
                                     </li>
                                   </ul>

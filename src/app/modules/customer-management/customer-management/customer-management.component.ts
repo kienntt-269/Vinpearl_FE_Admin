@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { BookingService } from 'src/app/core/service/booking-management/booking.service';
+import { AuthService } from 'src/app/core/auth-guard/auth.service';
 
 @Component({
   selector: 'app-customer-management',
@@ -11,85 +11,21 @@ import { BookingService } from 'src/app/core/service/booking-management/booking.
 })
 export class CustomerManagementComponent implements OnInit {
 
-  numberRoom: any;
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
   formGroup: FormGroup = new FormGroup({
-    code: new FormControl(''),
     fullName: new FormControl(''),
-    roomType: new FormControl(''),
+    phone: new FormControl(''),
+    hotel: new FormControl(''),
   });
   pageSize = 10;
   pageIndex = 1;
   sort: any = "id,desc";
   totalItem: any = 0;
-  constructor(
-    private router: Router,
-    private bookingService: BookingService,
-  ) { }
 
-  ngOnInit(): void {
-    this.breadcrumb = [
-      {
-        name: "Quản lý khách hàng",
-        // route: "/pages/room-booking"
-      },
-      {
-        name: "Danh sách khách hàng",
-        // route: "/pages/room-booking"
-      }
-    ]
-
-    this.getAllBookingRoom();
-  }
-
-  sortChange(e: any) {
-    if (e.value === 'ascend') {
-      e.value = 'asc';
-    } else if (e.value === 'descend') {
-      e.value = 'desc';
-    }
-    this.sort = `${e.key}, ${e.value}`;
-    console.log(e);
-    this.getAllBookingRoom();
-  }
-
-  addHotel() {
-    this.router.navigate(['pages/hotel-management/save-hotel']);
-  }
-
-  updateRoom(data: any) {
-    const params = {
-      id: data.id,
-    }
-    this.router.navigate(['pages/hotel-management/save-hotel'], {queryParams: params});
-  }
-
-  search() {
-    this.getAllBookingRoom();
-  }
-
-  getAllBookingRoom() {
-    const formValue = this.formGroup.value;
-    const data = {
-      page: this.pageIndex,
-      size: this.pageSize,
-      sort: this.sort,
-      customerId: formValue.customerId ? formValue.customerId : "",
-      code: formValue.code ? formValue.code : "",
-      status: formValue.status ? formValue.status : "",
-      startTime: formValue.startTime ? formValue.startTime : "",
-      endTime: formValue.endTime ? formValue.endTime : "",
-    }
-    
-    this.bookingService.getListBookingRoom(data).subscribe(res => {
-      if (res.code == 200) {
-        this.listOfData = res.data.content;
-        this.totalItem = res.data.totalElements;
-      }
-    })
-  }
+  // @Output() changeItemPerPage: EventEmitter<number> = new EventEmitter<number>();
+  // @Output() changeCurrentPage: EventEmitter<number> = new EventEmitter<number>();      // Gửi currentPage lên cho parent component
 
   changeCurrentPage(currentPage: number) {
     this.pageIndex = currentPage;
@@ -97,7 +33,7 @@ export class CustomerManagementComponent implements OnInit {
     // this.createData();
 
     // call event service
-    this.getAllBookingRoom()
+    this.getListAccount()
   }
 
   changeItemPerPage(itemPerPage: number) {
@@ -107,7 +43,53 @@ export class CustomerManagementComponent implements OnInit {
     // this.createData();
     
     // call event service
-    this.getAllBookingRoom()
+    this.getListAccount()
+  }
+  
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) { }
+
+  ngOnInit(): void {
+    this.breadcrumb = [
+      {
+        name: "Quản lý đặt phòng",
+        // route: "/pages/room-booking"
+      },
+      {
+        name: "Danh sách phòng",
+        // route: "/pages/room-booking"
+      }
+    ]
+
+    this.getListAccount();
   }
 
+  sortChange(e: any) {
+    
+  }
+
+  getListAccount() {
+    const body = {
+      name: "",
+      phone: "",
+      page: this.pageIndex - 1,
+      size: this.pageSize,
+    }
+    this.authService.getListAccount(body).subscribe(res => {
+      if (res.code == 200) {
+        this.listOfData = res.data.content;
+        this.totalItem = res.data.totalElements;
+      }
+    })
+  }
+
+  updateAccount(data: any) {
+    const params = {
+      id: data.id,
+    }
+    this.router.navigate(['pages/customer-management/save-customer'], {queryParams: params});
+  }
 }
+
