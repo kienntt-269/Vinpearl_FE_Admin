@@ -4,18 +4,19 @@ import constants from "../constants/constants";
 import { CoreModule } from "../core.module";
 
 function requestHeaders() {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': localStorage.getItem(constants.TOKEN) as string || "",
-    });
+    // return new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Accept': 'application/json',
+    //   'Authorization': `Bearer ${localStorage.getItem(constants.TOKEN)}` as string || "",
+    // });
+    return new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json').set('Authorization', `Bearer ${localStorage.getItem(constants.TOKEN)}`);
 }
 
 function requestHeadersFormData() {
   return {
     "Content-Type": "multipart/form-data",
     'Accept': 'application/json',
-    'Authorization': localStorage.getItem(constants.TOKEN) as string || "",
+    'Authorization': `Bearer ${localStorage.getItem(constants.TOKEN)}` as string || "",
   };
 }
 
@@ -23,7 +24,7 @@ function requestHeadersExcel() {
   return new HttpHeaders({
     'Content-Type': 'application/json',
     'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    'Authorization': localStorage.getItem(constants.TOKEN) as string || "",
+    'Authorization': `Bearer ${localStorage.getItem(constants.TOKEN)}` as string || "",
   });
 }
 

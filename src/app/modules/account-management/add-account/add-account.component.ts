@@ -96,7 +96,13 @@ export class AddAccountComponent implements OnInit {
 
   getAllHotel(siteId: Number) {
     this.listOfHotel = [];
-    this.hotelService.getListHotel(100, 0, this.sort, siteId, "", "", "").subscribe(res => {
+    const data = {
+      siteId: siteId,
+      page: 0,
+      size: 100,
+      sort: this.sort,
+    }
+    this.hotelService.getListHotel(data).subscribe(res => {
       if (res.code === 200) {
         // console.log(res.data.content);
         this.listOfHotel = res.data.content;
@@ -173,7 +179,7 @@ export class AddAccountComponent implements OnInit {
       if (res.code === 200) {
         this.userDetail = res.data;
         // this.getAllHotel(res.data.site.id);
-        
+
         this.formGroup.patchValue({
           email: res.data.email,
           fullName: res.data.fullName,
@@ -196,7 +202,7 @@ export class AddAccountComponent implements OnInit {
 
   addAccount() {
     const formValue = this.formGroup.value;
-    
+
     // if (this.formGroup.invalid) {
     //   for (const control of Object.keys(this.formGroup.controls)) {
     //     this.formGroup.controls[control].markAsTouched();
@@ -209,7 +215,7 @@ export class AddAccountComponent implements OnInit {
     }
 
     formValue.hotelId = localStorage.getItem(constants.HOTEL_ID);
-    
+
     const body = {
       email: formValue.email,
       fullName: formValue.fullName,

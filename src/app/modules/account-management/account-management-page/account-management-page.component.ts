@@ -41,11 +41,11 @@ export class AccountManagementPageComponent implements OnInit {
     this.pageSize = itemPerPage;
     // call event rule engine
     // this.createData();
-    
+
     // call event service
     this.getListAccount()
   }
-  
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -67,7 +67,11 @@ export class AccountManagementPageComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+
+  }
+
+  search() {
+    this.getListAccount();
   }
 
   addAccount() {
@@ -76,8 +80,6 @@ export class AccountManagementPageComponent implements OnInit {
 
   getListAccount() {
     const body = {
-      name: "",
-      phone: "",
       page: this.pageIndex - 1,
       size: this.pageSize,
     }

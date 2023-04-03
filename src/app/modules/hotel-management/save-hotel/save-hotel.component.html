@@ -227,10 +227,10 @@
                         <button style="background-color: #9A9A9A; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
                             {{'saveHotel.btnCancel'| translate}}
                         </button>
-                        <button *ngIf="!roomId" nz-button nzType="primary" (click)="handleAddHotel()">
+                        <button *ngIf="!hotelId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddHotel()">
                             {{'saveHotel.btnAdd'| translate}}
                         </button>
-                        <button *ngIf="roomId" nz-button nzType="primary" (click)="handleAddHotel()">
+                        <button  *ngIf="hotelId  && action != 'PROCESS'" nz-button nzType="primary" (click)="handleAddHotel()">
                             {{'saveHotel.btnSave'| translate}}
                         </button>
                     </div>
@@ -264,5 +264,5 @@
             </div>
         </div>
     </div>
-    
+
 </form>

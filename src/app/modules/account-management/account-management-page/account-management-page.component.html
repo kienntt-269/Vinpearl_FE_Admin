@@ -18,7 +18,7 @@
                                     *ngIf="formGroup.controls['fullName'].value"
                                     (click)="formGroup.controls['fullName'].setValue(null)"
                                 ></span>
-                            </ng-template>      
+                            </ng-template>
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
@@ -66,13 +66,13 @@
         </div>
     </div>
     <div class="group-btns d-flex justify-content-center">
-        <button nz-button nzType="primary" [nzSize]="size">{{'listAccount.btnSearch' | translate}}</button>
+        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">{{'listAccount.btnSearch' | translate}}</button>
     </div>
 </form>
 <div class="table">
     <div class="table-title d-flex table-header justify-content-between">
         <div class="title-search">{{'listAccount.titleTable' | translate}} ({{listOfData.length}})</div>
-        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addAccount()">
+        <button *hasPermission="'WEB_ADD_ACCOUNT'" nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addAccount()">
             <img src="../../../../assets/icon/plus_icon.svg" alt="">
             {{'listAccount.addAccount' | translate}}
         </button>
@@ -112,7 +112,7 @@
                     </td>
                     <td>
                         <div class="btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>

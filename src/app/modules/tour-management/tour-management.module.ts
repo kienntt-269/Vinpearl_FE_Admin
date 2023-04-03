@@ -26,6 +26,7 @@ import { TourManagementRoutingModule } from './tour-management-routing.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import { NgxEditorModule } from 'ngx-editor';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
@@ -54,6 +55,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzUploadModule,
     NzModalModule,
     NzMessageModule,
+    NzCarouselModule,
     NzPaginationModule,
     NgxEditorModule,
     TranslateModule.forChild({

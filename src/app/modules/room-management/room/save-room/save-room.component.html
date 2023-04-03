@@ -82,7 +82,7 @@
                         </div>
                     </nz-form-item>
                 </div>
-                <div class="col col-sm-6">
+                <!-- <div class="col col-sm-6">
                     <nz-form-item>
                         <nz-form-label nzFor="description">{{'saveRoom.description' | translate}}</nz-form-label>
                         <nz-form-control>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     </nz-form-item>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="btn-group">
@@ -115,15 +115,15 @@
                     <button style="background-color: #9A9A9A; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
                         {{'saveRoom.btnCancel'| translate}}
                     </button>
-                    <button *ngIf="!roomId" nz-button nzType="primary" (click)="handleAddRoom()">
+                    <button *ngIf="!roomId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddRoom()">
                         {{'saveRoom.btnAdd'| translate}}
                     </button>
-                    <button *ngIf="roomId" nz-button nzType="primary" (click)="handleAddRoom()">
+                    <button *ngIf="roomId && action != 'PROCESS'" nz-button nzType="primary" (click)="handleAddRoom()">
                         {{'saveRoom.btnSave'| translate}}
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </form>

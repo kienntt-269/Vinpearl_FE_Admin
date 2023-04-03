@@ -41,6 +41,8 @@
       "priceAdult": "Giá người lớn (chưa bao gồm giá khách sạn)",
       "priceChildren": "Giá trẻ em (chưa bao gồm giá khách sạn)",
       "expirationDate": "Ngày hết hạn",
+      "startDate": "Ngày bắt đầu",
+      "endDate": "Ngày kết thúc",
       "description": "Mô tả",
       "inclusion": "Bao gồm",
       "termsConditions": "Điều khoản",
@@ -79,5 +81,4 @@
       }
     }
   }
-    
-    
+

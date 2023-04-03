@@ -32,7 +32,8 @@ export class SaveHotelComponent implements OnInit {
   imageInput: any[] = [];
   fileList: any[] = [];
   listOfSite: any[] = [];
-  roomId: any;
+  hotelId: any;
+  action: any;
   breadcrumb: any = [];
   loading = false;
   avatarUrl?: string;
@@ -46,8 +47,9 @@ export class SaveHotelComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.roomId = params['id'];
-      if (this.roomId) {
+      this.hotelId = params['id'];
+      this.action = params['action'];
+      if (this.hotelId) {
         this.breadcrumb = [
           {
             name: "Quản lý đặt phòng",
@@ -58,7 +60,7 @@ export class SaveHotelComponent implements OnInit {
             // route: "/pages/room-booking"
           }
         ]
-        this.getDetailHotel(this.roomId);
+        this.getDetailHotel(this.hotelId);
       } else {
         this.breadcrumb = [
           {
@@ -151,6 +153,7 @@ export class SaveHotelComponent implements OnInit {
           this.imageInput.push(element.path);
           this.fileListName.push(element.name);
         });
+        console.log(this.fileList);
       }
     })
   }
@@ -195,7 +198,7 @@ export class SaveHotelComponent implements OnInit {
       const res = await this.hotelService.addHotel(formData);
       if (res.status == 200) {
         this.toast.success('Thành công', 'Thông báo');
-        this.router.navigate(['/pages/room-management/type-of-room']);
+        this.router.navigate(['/pages/hotel-management']);
       }
       if (res.status == 400) {
         this.toast.success('Lỗi', 'Thông báo');
@@ -219,11 +222,11 @@ export class SaveHotelComponent implements OnInit {
     for (let index = 0; index < this.fileList.length; index++) {
       var reader = new FileReader();
       reader.readAsDataURL(this.fileList[index]);
-      
+
       reader.onload = (e: any) => {
         this.imageInput.push(e.target.result);
       };
-      
+
       this.fileListName.push(this.fileList[index].name);
     }
   }
@@ -244,7 +247,7 @@ export class SaveHotelComponent implements OnInit {
   removeImage(index: number) {
     this.imageInput.splice(index, 1);
     this.fileList.splice(index, 1);
-    
+
     // if (!this.fileList.length) {
     //   this.msgErrImageNull = false
     // }

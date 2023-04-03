@@ -52,6 +52,10 @@
         width: 100%;
     }
 
+    .ant-carousel .slick-dots li {
+      background-color: #CCC;
+    }
+
     .ant-carousel .slick-dots li button {
         height: 100% !important;
     }

@@ -8,6 +8,7 @@ import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 import { ToastrService } from 'ngx-toastr';
 import { Editor, Toolbar } from 'ngx-editor';
 import { TourService } from 'src/app/core/service/tour-management/tour.service';
+import { NzCarouselComponent } from 'ng-zorro-antd/carousel';
 
 @Component({
   selector: 'app-save-tour',
@@ -15,7 +16,9 @@ import { TourService } from 'src/app/core/service/tour-management/tour.service';
   styleUrls: ['./save-tour.component.scss']
 })
 export class SaveTourComponent implements OnInit {
+  @ViewChild(NzCarouselComponent, { static: false })
 
+  myCarousel!: NzCarouselComponent;
   fileToUpload: any;
   fileListName: any[] = [];
   imageInput: any[] = [];
@@ -110,27 +113,24 @@ export class SaveTourComponent implements OnInit {
   listOfSuitable: any = [
     {
       id: 1,
-      name: "Tất cả",
-    },
-    {
-      id: 2,
       name: "Cặp đôi",
     },
     {
-      id: 3,
+      id: 2,
       name: "Gia đình",
     },
     {
-      id: 4,
+      id: 3,
       name: "Nhóm bạn",
     },
     {
-      id: 5,
+      id: 4,
       name: "Doanh nhân",
     },
   ];
-  
+
   tourId: any;
+  action: any;
   breadcrumb: any = [];
   loading = false;
   avatarUrl?: string;
@@ -148,6 +148,7 @@ export class SaveTourComponent implements OnInit {
     this.termsConditionsEditor = new Editor();
     this.route.queryParams.subscribe(params => {
       this.tourId = params['id'];
+      this.action = params['action'];
       if (this.tourId) {
         this.breadcrumb = [
           {
@@ -202,7 +203,7 @@ export class SaveTourComponent implements OnInit {
     }),
     suitable: new FormControl('', {
       validators: [
-        Validators.required,
+        // Validators.required,
       ],
     }),
     typeOfTour: new FormControl('', {
@@ -295,18 +296,29 @@ export class SaveTourComponent implements OnInit {
   getDetailTour(id: any) {
     this.tourService.TourDetail(id).subscribe(res => {
       if (res.code == 200) {
-        const data = res.data;
+        const data = res.data[0]?.tour;
         this.formGroup.setValue({
           name: data.name,
-          acreage: data.acreage,
-          site: data.siteId,
-          phone: data.phone,
-          totalRoom: data.totalRoom,
-          email: data.email,
+          numberOfPeople: data.numberOfPeople,
+          suitable: data.suitableId,
+          leavingFrom: data.leavingFromId,
+          leavingTo: data.leavingToId,
+          lengthOfStay: data.lengthStayId,
+          priceAdult: data.priceAdult,
+          priceChildren: data.priceChildren,
+          typeOfTour: data.typeOfTourId,
           description: data.description,
-          address: data.address,
-          // uploadFile: data.uploadFile,
+          inclusion: data.inclusion,
+          termsConditions: data.termsConditions,
+          expirationDate: data.expirationDate,
+          startDate: data.startDate,
+          endDate: data.endDate,
         })
+        this.fileList = data.images;
+        this.fileList.forEach(element => {
+          this.imageInput.push(element.path);
+          this.fileListName.push(element.name);
+        });
       }
     })
   }
@@ -319,10 +331,13 @@ export class SaveTourComponent implements OnInit {
       }
       return;
     }
+
+    const suitableId = formValue.suitable ? formValue.suitable : 0;
+
     const formData = new FormData();
     formData.append("name", formValue.name);
     formData.append("numberOfPeople", formValue.numberOfPeople);
-    formData.append("suitableId", formValue.suitable);
+    formData.append("suitableId", suitableId);
     formData.append("leavingFromId", formValue.leavingFrom);
     formData.append("leavingToId", formValue.leavingTo);
     formData.append("lengthStayId", formValue.lengthOfStay);
@@ -390,14 +405,26 @@ export class SaveTourComponent implements OnInit {
     for (let index = 0; index < this.fileList.length; index++) {
       var reader = new FileReader();
       reader.readAsDataURL(this.fileList[index]);
-      
+
       reader.onload = (e: any) => {
         this.imageInput.push(e.target.result);
       };
-      
+
       this.fileListName.push(this.fileList[index].name);
     }
   }
 
+  goToImage(slideNumber: any) {
+    this.myCarousel.goTo(slideNumber);
+  }
+
+  pre() {
+    // this.myCarousel.goTo(Number(0));
+    this.myCarousel.pre();
+  }
+
+  next() {
+    this.myCarousel.next();
+  }
 
 }

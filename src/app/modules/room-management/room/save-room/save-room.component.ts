@@ -24,6 +24,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
 export class SaveRoomComponent implements OnInit {
 
   roomId: any;
+  action: any;
   breadcrumb: any = [];
   loading = false;
   avatarUrl?: string;
@@ -40,6 +41,7 @@ export class SaveRoomComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.roomId = params['id'];
+      this.action = params['id'];
       if (this.roomId) {
         this.breadcrumb = [
           {
@@ -96,11 +98,11 @@ export class SaveRoomComponent implements OnInit {
         Validators.required,
       ],
     }),
-    description: new FormControl('', {
-      validators: [
-        Validators.required,
-      ],
-    }),
+    // description: new FormControl('', {
+    //   validators: [
+    //     Validators.required,
+    //   ],
+    // }),
   });
 
   changeHotel(id: any) {
@@ -113,10 +115,10 @@ export class SaveRoomComponent implements OnInit {
         const data = res.data;
         this.formGroup.setValue({
           name: data.name,
-          roomGroupType: data.roomGroupTypeId,
-          hotel: data.hotel,
+          roomGroupType: data.roomGroupType,
+          hotel: data.roomTypes?.hotelId,
           roomType: data.roomTypeId,
-          description: data.description
+          // description: data.description
         })
       }
     })
@@ -155,21 +157,30 @@ export class SaveRoomComponent implements OnInit {
       name: formValue.name,
       roomGroupType: formValue.roomGroupType,
       roomTypeId: formValue.roomType,
-      description: formValue.description,
+      // description: formValue.description,
       status: 0,
     }
 
-    this.roomService.addRoom(data).subscribe({
-      next: res => {
-        this.toast.success('Thành công', 'Thông báo');
-        this.router.navigate(['/pages/room-management/room']);
-      },
-      error: error => {
-        if (error.error.detailError.includes("Đã đạt tối đa số lượng phòng cho phép")) {
-          this.toast.error('Đã đạt tối đa số lượng phòng cho phép', 'Lỗi');
+    if (this.roomId) {
+      this.roomService.updateRoom(this.roomId, data).subscribe(res => {
+        if (res.code == 200) {
+          this.toast.success('Cập nhật phòng thành công');
+          this.router.navigate(['/pages/room-management/room']);
         }
-      }
-    })
+      })
+    } else {
+      this.roomService.addRoom(data).subscribe({
+        next: res => {
+          this.toast.success('Thành công', 'Thông báo');
+          this.router.navigate(['/pages/room-management/room']);
+        },
+        error: error => {
+          if (error.error.detailError.includes("Đã đạt tối đa số lượng phòng cho phép")) {
+            this.toast.error('Đã đạt tối đa số lượng phòng cho phép', 'Lỗi');
+          }
+        }
+      })
+    }
 
   }
 }

@@ -33,7 +33,7 @@ export class CustomerManagementComponent implements OnInit {
     // this.createData();
 
     // call event service
-    this.getListAccount()
+    this.getListCustomer()
   }
 
   changeItemPerPage(itemPerPage: number) {
@@ -41,11 +41,11 @@ export class CustomerManagementComponent implements OnInit {
     this.pageSize = itemPerPage;
     // call event rule engine
     // this.createData();
-    
+
     // call event service
-    this.getListAccount()
+    this.getListCustomer()
   }
-  
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -63,21 +63,21 @@ export class CustomerManagementComponent implements OnInit {
       }
     ]
 
-    this.getListAccount();
+    this.getListCustomer();
   }
 
   sortChange(e: any) {
-    
+
   }
 
-  getListAccount() {
+  getListCustomer() {
     const body = {
       name: "",
       phone: "",
       page: this.pageIndex - 1,
       size: this.pageSize,
     }
-    this.authService.getListAccount(body).subscribe(res => {
+    this.authService.getListCustomer(body).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
         this.totalItem = res.data.totalElements;
@@ -85,7 +85,7 @@ export class CustomerManagementComponent implements OnInit {
     })
   }
 
-  updateAccount(data: any) {
+  updateCustomer(data: any) {
     const params = {
       id: data.id,
     }

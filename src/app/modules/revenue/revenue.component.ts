@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { Router } from '@angular/router';
 import { BookingService } from 'src/app/core/service/booking-management/booking.service';
 import { RoomService } from 'src/app/core/service/room-management/room.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-revenue',
@@ -60,10 +61,16 @@ export class RevenueComponent implements OnInit {
     })
 
     this.bookingService.getTop5Customer().subscribe(res => {
+      console.log(res);
       if (res.code == 200) {
         this.listOfDataCustomer = res.data;
       }
-    })
+    }, (error: HttpErrorResponse) => {
+      console.log(error.error);
+      console.log(error.status);
+      console.log(error.statusText);
+    }
+  )
   }
 
   createChartHotel(){
@@ -98,7 +105,7 @@ export class RevenueComponent implements OnInit {
   }
 
   createChartRoom(){
-  
+
     this.chartRoom = new Chart("MyChartRoom", {
       type: 'doughnut', //this denotes tha type of chart
 
@@ -122,12 +129,12 @@ export class RevenueComponent implements OnInit {
       options: {
         aspectRatio:2.5
       }
-      
+
     });
   }
 
   createChartFlight(){
-  
+
     this.chartFlight = new Chart("MyChartFlight", {
       type: 'doughnut', //this denotes tha type of chart
 
@@ -151,7 +158,7 @@ export class RevenueComponent implements OnInit {
       options: {
         aspectRatio:2.5
       }
-      
+
     });
   }
 
@@ -160,7 +167,7 @@ export class RevenueComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+
   }
 
 }

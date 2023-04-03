@@ -23,6 +23,8 @@ export class TypeOfRoomComponent implements OnInit {
     name: new FormControl(''),
     numberPerson: new FormControl(''),
     hotelName: new FormControl(''),
+    startTime: new FormControl(''),
+    endTime: new FormControl(''),
   });
   constructor(
     private router: Router,
@@ -45,7 +47,7 @@ export class TypeOfRoomComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+
   }
 
   addRoom() {
@@ -64,10 +66,19 @@ export class TypeOfRoomComponent implements OnInit {
 
   getRoomType() {
     const formValue = this.formGroup.value;
+    if (typeof(formValue.startTime) === "object" && formValue.startTime != null) {
+      formValue.startTime = formValue.startTime.getTime();
+    }
+    if (typeof(formValue.endTime) === "object" && formValue.endTime != null) {
+      formValue.endTime = formValue.endTime.getTime();
+    }
+
     const data = {
-      name: formValue.name ? formValue.name : "",
-      numberPerson: formValue.numberPerson ? formValue.numberPerson : "",
-      hotelName: formValue.hotelName ? formValue.hotelName : "",
+      name: formValue.name,
+      numberPerson: formValue.numberPerson,
+      hotelName: formValue.hotelName,
+      startTime: formValue.startTime,
+      endTime: formValue.endTime,
       page: this.pageIndex,
       size: this.pageSize,
       sort: this.sort,
@@ -98,7 +109,7 @@ export class TypeOfRoomComponent implements OnInit {
     this.pageSize = itemPerPage;
     // call event rule engine
     // this.createData();
-    
+
     // call event service
     this.getRoomType()
   }

@@ -38,16 +38,16 @@ export class BookingService {
 
     getListBookingRoom(data: any): Observable<any> {
         const headers = handle.requestHeaders();
-        
+
         let queryParams = new HttpParams();
         queryParams = queryParams.append("page",data.page);
         queryParams = queryParams.append("size",data.size);
         queryParams = queryParams.append("sort",data.sort);
         if (data.status) {
-            queryParams = queryParams.append("status",data.status);
+            queryParams = queryParams.append("status",parseInt(data.status));
         }
         if (data.startDate) {
-            queryParams = queryParams.append("startDate",data.startDate);  
+            queryParams = queryParams.append("startDate",data.startDate);
         }
         if (data.endDate) {
             queryParams = queryParams.append("endDate",data.endDate);
@@ -61,16 +61,16 @@ export class BookingService {
 
     getListBookingTour(data: any): Observable<any> {
         const headers = handle.requestHeaders();
-        
+
         let queryParams = new HttpParams();
         queryParams = queryParams.append("page",data.page);
         queryParams = queryParams.append("size",data.size);
         queryParams = queryParams.append("sort",data.sort);
         if (data.status) {
-            queryParams = queryParams.append("status",data.status);
+            queryParams = queryParams.append("status",parseInt(data.status));
         }
         if (data.startDate) {
-            queryParams = queryParams.append("startDate",data.startDate);  
+            queryParams = queryParams.append("startDate",data.startDate);
         }
         if (data.endDate) {
             queryParams = queryParams.append("endDate",data.endDate);
@@ -78,6 +78,7 @@ export class BookingService {
         let options = {
             headers: headers,
             params: queryParams,
+            withCredentials: true,
         };
         return this.httpClient.get(`${APIs.API_GET_LIST_BOOKING_TOUR}`, options);
     };

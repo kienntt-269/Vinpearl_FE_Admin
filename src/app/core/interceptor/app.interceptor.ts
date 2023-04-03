@@ -6,6 +6,7 @@ import { AuthService } from '../auth-guard/auth.service';
 import { Router } from '@angular/router';
 import constants from '../constants/constants';
 import handle from '../functions/handle';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ providedIn: 'root' })
 export class AppInterceptor implements HttpInterceptor{
@@ -14,6 +15,7 @@ export class AppInterceptor implements HttpInterceptor{
         // public jwtHelper: JwtHelperService,
         public authService: AuthService,
         public router: Router,
+        private toast: ToastrService,
     ) { }
 
     // public isAuthenticated(): boolean {
@@ -38,8 +40,7 @@ export class AppInterceptor implements HttpInterceptor{
                             // this.authService.checkReFreshToken();
                         }
                         if (body.code == 400 || body.code == 404 ) {
-                            if ((body.detailError && body.detailError.includes('Session token is expired')) || (body.detailError && body.detailError.includes('Invalid session token'))) {
-                                console.log("Có lỗi: Navigate to Login");
+                            if (body.detailError && body.detailError.includes('Token has expired')) {
                                 // this.toast.error(storage.get('lang') == 'vi' ? 'Đã có lỗi trong quá trình xử lý, vui lòng thực hiện vào lúc khác!' : 'An error occurred during handling data, please try again!', storage.get('lang') == 'vi' ? 'Lỗi' : 'Error', config)
                                 this.navigateLogin();
                             }
@@ -50,12 +51,16 @@ export class AppInterceptor implements HttpInterceptor{
                     // this.loader.hide();
                 }),
                 catchError((err, caught) => {
-                    // let checkErr = false;
-                    // if (checkErr) {
-    
-                    // }
-                    console.log(caught)
+                    console.log(caught);
                     switch (err.status) {
+                      case 400:
+                            console.log(err.error);
+                            if (err.error.detailError && err.error.detailError.includes('Token has expired')) {
+                              this.toast.error(localStorage.getItem('lang') == 'vi' ? 'Phiên làm việc của bạn đã hết hạn!' : 'Your token has timed-out!', localStorage.getItem('lang') == 'vi' ? 'Lỗi' : 'Error')
+                              this.navigateLogin();
+                              this.router.navigate(['auth/login']);
+                          }
+                            break;
                         case 401: //unauthorized
                             this.router.navigate(['pages/401']);
                             break;

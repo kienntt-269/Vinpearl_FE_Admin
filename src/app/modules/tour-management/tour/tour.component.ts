@@ -90,26 +90,22 @@ export class TourComponent implements OnInit {
   listOfSuitable: any = [
     {
       id: 1,
-      name: "Tất cả",
-    },
-    {
-      id: 2,
       name: "Cặp đôi",
     },
     {
-      id: 3,
+      id: 2,
       name: "Gia đình",
     },
     {
-      id: 4,
+      id: 3,
       name: "Nhóm bạn",
     },
     {
-      id: 5,
+      id: 4,
       name: "Doanh nhân",
     },
   ];
-  
+
   listOfStatus: any = [
     {
       id: 1,
@@ -128,10 +124,10 @@ export class TourComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({
     name: new FormControl(''),
     status: new FormControl(''),
-    typeOfTour: new FormControl(''),
+    typeOfTour: new FormControl([]),
     leavingFrom: new FormControl(''),
-    lengthOfStay: new FormControl(''),
-    suitable: new FormControl(''),
+    lengthOfStay: new FormControl([]),
+    suitable: new FormControl([]),
   });
   constructor(
     private router: Router,
@@ -160,7 +156,7 @@ export class TourComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+
   }
 
   addTour() {
@@ -176,7 +172,7 @@ export class TourComponent implements OnInit {
   }
 
   search() {
-    this.pageIndex = 0;
+    this.pageIndex = 1;
     this.pageSize = 10,
     this.sort = "id,desc";
     this.getAllTour();
@@ -190,9 +186,9 @@ export class TourComponent implements OnInit {
       sort: this.sort,
       searchName: formValue.name,
       siteId: formValue.siteId,
-      lengthStayIds: formValue.lengthStayIds,
-      suitableIds: formValue.suitableIds,
-      typeOfTours: formValue.typeOfTours,
+      lengthStayIds: formValue.lengthOfStay,
+      suitableIds: formValue.suitable,
+      typeOfTours: formValue.typeOfTour,
     }
     this.tourService.getListTour(data).subscribe(res => {
       if (res.code == 200) {
@@ -216,7 +212,7 @@ export class TourComponent implements OnInit {
     this.pageSize = itemPerPage;
     // call event rule engine
     // this.createData();
-    
+
     // call event service
     this.getAllTour()
   }

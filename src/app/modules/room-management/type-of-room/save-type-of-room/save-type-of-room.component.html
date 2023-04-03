@@ -203,16 +203,16 @@
                     height="14" viewBox="0 0 12 14" fill="none">
                     <path d="M11.4258 12L4.3271 7L11.4258 2L10.006 0L0.0678864 7L10.006 14L11.4258 12Z" fill="black" />
                   </svg>
-    
+
                   <nz-carousel [nzEnableSwipe]="true" [nzEffect]="'fade'">
                     <div nz-carousel-content *ngFor="let image of imageInput;let indexOfelement=index;">
                       <div>
                         <img src={{image}} alt="">
-                        <p style="font-size: 16px;">{{fileList[indexOfelement].name}}</p>
+                        <p style="font-size: 16px;">{{fileList[indexOfelement].name.split("images\\")[1]}}</p>
                       </div>
                     </div>
                   </nz-carousel>
-    
+
                   <svg style="cursor: pointer;" (click)="next()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
                     height="14" viewBox="0 0 12 14" fill="none">
                     <path d="M0.148438 12L7.24712 7L0.148438 2L1.56817 0L11.5063 7L1.56817 14L0.148438 12Z"
@@ -226,10 +226,10 @@
                         <button style="background-color: #9A9A9A; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
                             {{'saveTypeOfRoom.btnCancel'| translate}}
                         </button>
-                        <button *ngIf="!typeOfRoomId" nz-button nzType="primary" (click)="handleAddTypeOfRoom()">
+                        <button *ngIf="!typeOfRoomId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddTypeOfRoom()">
                             {{'saveTypeOfRoom.btnAdd'| translate}}
                         </button>
-                        <button *ngIf="typeOfRoomId" nz-button nzType="primary" (click)="handleAddTypeOfRoom()">
+                        <button *ngIf="typeOfRoomId && action != 'PROCESS'" nz-button nzType="primary" (click)="handleAddTypeOfRoom()">
                             {{'saveTypeOfRoom.btnSave'| translate}}
                         </button>
                     </div>
@@ -237,5 +237,5 @@
             </div>
         </div>
     </div>
-    
+
 </form>

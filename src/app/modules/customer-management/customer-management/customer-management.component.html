@@ -18,7 +18,7 @@
                                     *ngIf="formGroup.controls['fullName'].value"
                                     (click)="formGroup.controls['fullName'].setValue(null)"
                                 ></span>
-                            </ng-template>      
+                            </ng-template>
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
@@ -101,13 +101,13 @@
                     <td>{{ data?.cccd }}</td>
                     <td>
                         <div class="btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateAccount(data)">
+                                    <li nz-menu-item (click)="updateCustomer(data)">
                                         <a >Xem chi tiết</a>
                                       </li>
                                     <li nz-menu-item>

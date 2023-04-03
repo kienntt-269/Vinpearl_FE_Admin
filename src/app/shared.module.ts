@@ -15,6 +15,7 @@ import { LoaderComponent } from './shared/component/loader/loader.component';
 import { PagingComponent } from './shared/component/paging/paging.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { FormatPrice } from './shared/pipe/number.pipe';
+import { HasPermissionDirective } from './core/directive/has-permission.directive';
 
 export function sharedCreateTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -28,6 +29,7 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
     LoaderComponent,
     PagingComponent,
     FormatPrice,
+    HasPermissionDirective,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
     LoaderComponent,
     PagingComponent,
     FormatPrice,
+    HasPermissionDirective,
   ],
   providers: [TranslateStore],
 })

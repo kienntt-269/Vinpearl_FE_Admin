@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,9 +13,11 @@ import { NzCarouselComponent } from 'ng-zorro-antd/carousel';
   styleUrls: ['./save-type-of-room.component.scss']
 })
 export class SaveTypeOfRoomComponent implements OnInit {
+  @ViewChild(NzCarouselComponent, { static: false })
 
   myCarousel!: NzCarouselComponent;
   typeOfRoomId: any;
+  action: any;
   breadcrumb: any = [];
   fileListName: any[] = [];
   imageInput: any[] = [];
@@ -32,6 +34,7 @@ export class SaveTypeOfRoomComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.typeOfRoomId = params['id'];
+      this.action = params['action'];
       if (this.typeOfRoomId) {
         this.breadcrumb = [
           {
@@ -127,7 +130,7 @@ export class SaveTypeOfRoomComponent implements OnInit {
         this.fileList = data.images;
         this.fileList.forEach(element => {
           this.imageInput.push(element.path);
-          this.fileListName.push(element.name);
+          this.fileListName.push(element.name.split("images\\")[1]);
         });
       }
     })
@@ -150,9 +153,9 @@ export class SaveTypeOfRoomComponent implements OnInit {
     formData.append("acreage", formValue.acreage);
     formData.append("description", formValue.description);
     formData.append("hotelId", formValue.hotel);
-    
+
     if (this.typeOfRoomId) {
-      formData.append("id", this.typeOfRoomId); 
+      formData.append("id", this.typeOfRoomId);
     }
     for (let index = 0; index < this.fileList.length; index++) {
       formData.append("images", this.fileList[index]);
@@ -199,11 +202,11 @@ export class SaveTypeOfRoomComponent implements OnInit {
     for (let index = 0; index < this.fileList.length; index++) {
       var reader = new FileReader();
       reader.readAsDataURL(this.fileList[index]);
-      
+
       reader.onload = (e: any) => {
         this.imageInput.push(e.target.result);
       };
-      
+
       this.fileListName.push(this.fileList[index].name);
     }
   }
@@ -224,7 +227,7 @@ export class SaveTypeOfRoomComponent implements OnInit {
   removeImage(index: number) {
     this.imageInput.splice(index, 1);
     this.fileList.splice(index, 1);
-    
+
     // if (!this.fileList.length) {
     //   this.msgErrImageNull = false
     // }

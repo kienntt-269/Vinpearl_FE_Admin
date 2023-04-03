@@ -47,7 +47,7 @@ export class ServiceComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+
   }
 
   addService() {
@@ -66,14 +66,16 @@ export class ServiceComponent implements OnInit {
   }
 
   getAllService() {
+    const formValue = this.formGroup.value;
     const data = {
-      numRoom: this.numberRoom,
-      name: this.numberRoom,
-      phone: this.numberRoom,
-      pageIndex: this.numberRoom,
-      pageSize: this.numberRoom,
+      name: formValue.name,
+      description: formValue.description,
+      price: formValue.price,
+      page: this.pageIndex,
+      size: this.pageSize,
+      sort: 'id, desc',
     }
-    this.roomService.search(this.pageSize, this.pageIndex, this.sort).subscribe(res => {
+    this.roomService.search(data).subscribe(res => {
       if (res.code == 200) {
         res.data.content.forEach((item: any) => {
           item.descriptions = item.descriptions.map((item: any) => item.name);

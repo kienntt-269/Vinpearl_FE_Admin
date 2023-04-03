@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import APIs from "../../constants/APIs";
@@ -18,12 +18,32 @@ export class HotelService {
 
     }
 
-    getListHotel(pageSize: Number, pageIndex: Number, sort: any, siteId: any, name: String, totalRoom: any, phone: any): Observable<any> {
-        const headers = handle.requestHeaders();
-        let options = {headers: headers};
-        // return this.httpClient.get(`${APIs.BOOKING_DETAIL}/${id}`, options);
-        // return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}?siteId=${siteId}&page=${pageIndex}&size=${pageSize}&sort=${sort}&name=${name}&totalRoom=${totalRoom}&phone=${phone}`, options);
-        return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}?page=${pageIndex}&size=${pageSize}&sort=${sort}&siteId=${siteId}`, options);
+    getListHotel(data: any): Observable<any> {
+      const headers = handle.requestHeaders();
+      let queryParams = new HttpParams();
+      if (data.name) {
+        queryParams = queryParams.append("name",data.name);
+      }
+      if (data.description) {
+        queryParams = queryParams.append("description",data.description);
+      }
+      if (data.price) {
+        queryParams = queryParams.append("price",data.price);
+      }
+      if (data.page || data.page == 0) {
+        queryParams = queryParams.append("page",data.page);
+      }
+      if (data.size) {
+        queryParams = queryParams.append("size",data.size);
+      }
+      if (data.sort) {
+        queryParams = queryParams.append("sort",data.sort);
+      }
+      let options = {
+        headers: headers,
+        params: queryParams,
+      };
+        return this.httpClient.get(`${APIs.API_GET_LIST_HOTEL}`, options);
     };
 
     hotelDetail(id: number): Observable<any> {
@@ -40,7 +60,7 @@ export class HotelService {
         //     reportProgress: true,
         //     observe: 'events'
         //   });
-        return axios.post(`${APIs.API_ADD_TOUR}`, formData);
+        return axios.post(`${APIs.API_ADD_HOTEL}`, formData);
     };
 
     getAllSite(): Observable<any> {

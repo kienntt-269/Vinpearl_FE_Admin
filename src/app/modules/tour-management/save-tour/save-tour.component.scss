@@ -9,34 +9,63 @@
   background: #FFF;
   border-radius: 4px;
 
-  &:hover, &:focus {
-      border-color: #40a9ff;
+  &:hover,
+  &:focus {
+    border-color: #40a9ff;
   }
 
   img {
-      position: absolute;
-      right: 10px;
-      width: 24px;
-      height: 24px;
-      top: 5px;
+    position: absolute;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    top: 5px;
   }
 
   .name {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      margin-left: 10px;
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 10px;
+    height: 100%;
+    line-height: 200%;
   }
 }
 
-::ng-deep { /* to penetrate <ngx-editor> CSS styling */
+img {
+  width: 100%;
+  height: auto;
+}
 
-    .NgxEditor {
-      height: 400px;
-      overflow-y: scroll;
-    }
-  
-    .NgxEditor__Content {
-      min-height: 400px; /* make all of the editor acreage clickable */
-    }
+.frame-default {
+  margin-top: 35px;
+  height: 350px;
+  background-color: #53575a1a;
+}
+
+::ng-deep {
+  /* to penetrate <ngx-editor> CSS styling */
+
+  .NgxEditor {
+    height: 400px;
+    overflow-y: scroll;
   }
+
+  .NgxEditor__Content {
+    min-height: 400px;
+    /* make all of the editor acreage clickable */
+  }
+
+  .ant-upload.ant-upload-select {
+    width: 100%;
+  }
+
+  .ant-carousel .slick-dots li {
+    background-color: #CCC;
+  }
+
+  .ant-carousel .slick-dots li button {
+    height: 100% !important;
+  }
+}

@@ -1,6 +1,6 @@
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
 <div class="header">
-    
+
 </div>
 <div class="row">
     <div class="col-xl-3 col-md-6 custom-card">
@@ -47,7 +47,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <div class="card">
-            
+
             <div class="body">
                 <div class="chart-container">
                     <canvas  id="MyChartHotel" >{{ chartHotel }}</canvas>
@@ -138,7 +138,7 @@
                         <td>{{ data?.fullName }}</td>
                         <td>{{ data?.email }}</td>
                         <td>{{ data?.phone }}</td>
-                        <td>{{ data?.price }}</td>
+                        <td>{{ data?.total | format }} VNĐ</td>
                     </tr>
                 </tbody>
             </nz-table>

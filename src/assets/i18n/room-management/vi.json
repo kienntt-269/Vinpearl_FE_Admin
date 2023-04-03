@@ -1,6 +1,7 @@
 {
   "listRoom": {
     "titleSearch": "Tiêu chí tìm kiếm",
+    "rangeTime": "Khoảng thời gian",
     "titleTable": "Danh sách phòng",
     "addRoom": "Thêm mới phòng",
     "roomId": "Mã phòng",
@@ -76,6 +77,7 @@
   },
   "listTypeOfRoom": {
     "titleSearch": "Tiêu chí tìm kiếm",
+    "rangeTime": "Khoảng thời gian",
     "titleTable": "Danh sách loại phòng",
     "addRoomType": "Thêm mới loại phòng",
     "roomId": "Mã loại phòng",
@@ -131,5 +133,4 @@
     }
   }
 }
-  
-  
+

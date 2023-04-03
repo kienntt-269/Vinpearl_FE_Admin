@@ -12,6 +12,7 @@ export default {
   AUTH_LOGIN: environment.BASE_PATH_DOMAIN + '/user/login',
   AUTH_REGISTER: environment.BASE_PATH_DOMAIN + '/user/register',
   API_GET_LIST_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/search',
+  API_GET_LIST_CUSTOMER: environment.BASE_PATH_DOMAIN + '/customer/search',
   API_GET_DETAIL_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/detail',
   API_GET_LIST_PERMISSION: environment.BASE_PATH_DOMAIN + '/user/permission/findAll',
 
@@ -30,12 +31,12 @@ export default {
   API_DELETE_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/delete',
   API_FINDALL_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/findAll',
 
-  // hotel
-  API_ADD_TOUR: environment.BASE_PATH_DOMAIN + '/tour/create',
+  // tour
+  API_ADD_TOUR: environment.BASE_PATH_DOMAIN + '/tour/save',
   API_UPDATE_TOUR: environment.BASE_PATH_DOMAIN + '/tour/update',
   API_GET_DETAIL_TOUR: environment.BASE_PATH_DOMAIN + '/tour/detail',
   API_GET_LIST_TOUR: environment.BASE_PATH_DOMAIN + '/tour/search',
-  API_TOP_5_CUSTOMER_MONEY: environment.BASE_PATH_DOMAIN + '/booking-tour/top-customers',
+  API_TOP_5_CUSTOMER_MONEY: environment.BASE_PATH_DOMAIN + '/dashboard/getTop5Customer',
 
   // room type
   API_ADD_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/create',

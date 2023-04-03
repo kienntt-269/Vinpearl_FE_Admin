@@ -57,6 +57,26 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
+            <div class="col col-sm-8">
+              <nz-form-item>
+                <nz-form-label nzFor="">{{'listTypeOfRoom.rangeTime'| translate}}</nz-form-label>
+                <nz-form-control>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <nz-date-picker
+                      nzAllowClear="false"
+                      formControlName="startTime"
+                      [nzFormat]="'HH:mm:ss - dd/MM/yyyy'"
+                    ></nz-date-picker>
+                    <div> ~ </div>
+                    <nz-date-picker
+                      nzAllowClear="false"
+                      formControlName="endTime"
+                      [nzFormat]="'HH:mm:ss - dd/MM/yyyy'"
+                    ></nz-date-picker>
+                  </div>
+                </nz-form-control>
+                </nz-form-item>
+            </div>
         </div>
     </div>
     <div class="group__btns d-flex justify-content-center">
@@ -81,7 +101,7 @@
                     <th [nzSortFn]="true">{{'listTypeOfRoom.numberChildren' | translate}}</th>
                     <th [nzSortFn]="true">{{'listTypeOfRoom.numberAdult' | translate}}</th>
                     <th [nzSortFn]="true">{{'listTypeOfRoom.numberOfRooms' | translate}}</th>
-                    <th [nzSortFn]="true">{{'listTypeOfRoom.service' | translate}}</th>
+                    <th [width]="400" [nzSortFn]="true">{{'listTypeOfRoom.service' | translate}}</th>
                     <th [nzSortFn]="true">{{'listTypeOfRoom.description' | translate}}</th>
                     <th>{{'listTypeOfRoom.action' | translate}}</th>
                 </tr>
@@ -94,14 +114,20 @@
                     <td>{{ data?.numberChildren }}</td>
                     <td>{{ data?.numberAdult }}</td>
                     <td>{{ data?.numberOfRooms }}</td>
-                    <td>{{ data?.serviceName }}</td>
                     <td>
-                        <!-- {{ serviceNameList[i]?.join(", ") }} -->
+                      <div *ngFor="let service of data.service; let idx = index">
+                        <div>
+                          {{ service.name }}
+                        </div>
+                        <div>
+                          {{ service.price }}
+                        </div>
+                      </div>
                     </td>
                     <td [width]="350">{{ data?.description }}</td>
                     <td>
                         <div class="btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>

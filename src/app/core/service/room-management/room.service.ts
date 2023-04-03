@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import axios from "axios";
 import { Observable } from "rxjs";
@@ -28,8 +28,36 @@ export class RoomService {
 
     getListRoom(data: any): Observable<any> {
         const headers = handle.requestHeaders();
-        let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_GET_LIST_ROOM}?name=${data.name}&roomType=${data.roomType}&status=${data.status}&page=${data.page}&size=${data.size}&sort=${data.sort}`, options);
+        let queryParams = new HttpParams();
+        if (data.name) {
+          queryParams = queryParams.append("name",data.name);
+        }
+        if (data.roomType) {
+          queryParams = queryParams.append("roomType",data.roomType);
+        }
+        if (data.status) {
+          queryParams = queryParams.append("status",data.status);
+        }
+        if (data.startTime) {
+          queryParams = queryParams.append("startTime",data.startTime);
+        }
+        if (data.endTime) {
+          queryParams = queryParams.append("endTime",data.endTime);
+        }
+        if (data.page || data.page == 0) {
+          queryParams = queryParams.append("page",data.page);
+        }
+        if (data.size) {
+          queryParams = queryParams.append("size",data.size);
+        }
+        if (data.sort) {
+          queryParams = queryParams.append("sort",data.sort);
+        }
+        let options = {
+          headers: headers,
+          params: queryParams,
+        };
+        return this.httpClient.get(`${APIs.API_GET_LIST_ROOM}`, options);
     };
 
     roomDetail(id: number): Observable<any> {
@@ -46,12 +74,40 @@ export class RoomService {
         // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
     };
 
+    updateRoom(id: any, formData: any): Observable<any> {
+      const headers = handle.requestHeaders();
+      let options = {headers: headers};
+      return this.httpClient.put(`${APIs.API_UPDATE_ROOM}/${id}`, formData, options);
+    };
+
     //room type
 
     getListRoomType(data: any): Observable<any> {
-        const headers = handle.requestHeaders();
-        let options = {headers: headers};
-        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM}?hotelName=${data.hotelName}&numberPerson=${data.numberPerson}&name=${data.name}&page=${data.page}&size=${data.size}&sort=${data.sort}`, options);
+      const headers = handle.requestHeaders();
+      let queryParams = new HttpParams();
+      if (data.hotelName) {
+        queryParams = queryParams.append("hotelName",data.hotelName);
+      }
+      if (data.numberPerson) {
+        queryParams = queryParams.append("numberPerson",data.numberPerson);
+      }
+      if (data.name) {
+        queryParams = queryParams.append("name",data.name);
+      }
+      if (data.page || data.page == 0) {
+        queryParams = queryParams.append("page",data.page);
+      }
+      if (data.size) {
+        queryParams = queryParams.append("size",data.size);
+      }
+      if (data.sort) {
+        queryParams = queryParams.append("sort",data.sort);
+      }
+      let options = {
+        headers: headers,
+        params: queryParams,
+      };
+        return this.httpClient.get(`${APIs.API_SEARCH_LIST_TYPE_OF_ROOM}`, options);
     };
 
     getListRoomTypeByHotelId(hotelId: any): Observable<any> {
@@ -84,19 +140,39 @@ export class RoomService {
         // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
     };
 
-    search(size: Number, page: Number, sort: any): Observable<any> {
+    search(data: any): Observable<any> {
         const headers = handle.requestHeaders();
-        let options = {headers: headers};
-        const hotelId = localStorage.getItem(constants.HOTEL_ID) || 1;
-        // return this.httpClient.get(`${APIs.BOOKING_DETAIL}/${id}`, options);
-        return this.httpClient.get(`${APIs.API_SEARCH_LIST_SERVICE}?page=${page}&size=${size}&sort=${sort}`, options);
+        let queryParams = new HttpParams();
+        if (data.name) {
+          queryParams = queryParams.append("name",data.name);
+        }
+        if (data.totalRoom) {
+          queryParams = queryParams.append("totalRoom",data.totalRoom);
+        }
+        if (data.phone) {
+          queryParams = queryParams.append("phone",data.phone);
+        }
+        if (data.page || data.page == 0) {
+          queryParams = queryParams.append("page",data.page);
+        }
+        if (data.size) {
+          queryParams = queryParams.append("size",data.size);
+        }
+        if (data.sort) {
+          queryParams = queryParams.append("sort",data.sort);
+        }
+        let options = {
+          headers: headers,
+          params: queryParams,
+        };
+        return this.httpClient.get(`${APIs.API_SEARCH_LIST_SERVICE}`, options);
     };
 
     serviceDetail(id: number): Observable<any> {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
         return this.httpClient.get(`${APIs.API_GET_DETAIL_SERVICE}/${id}`, options);
-        
+
     };
 
     saveService(data: any): Observable<any> {

@@ -8,7 +8,12 @@
                 <nz-form-item>
                 <nz-form-label nzFor="startDate">{{'listCustomer.startDate'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-date-picker nzAllowClear="false" formControlName="startDate" [nzFormat]="'dd/MM/yyyy'"></nz-date-picker>
+                        <nz-date-picker
+                          nzAllowClear="false"
+                          formControlName="startDate"
+                          [nzFormat]="'dd/MM/yyyy'"
+                        >
+                        </nz-date-picker>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -16,7 +21,11 @@
                 <nz-form-item>
                     <nz-form-label nzFor="endDate">{{'listCustomer.endDate'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-date-picker nzAllowClear="false" formControlName="endDate" [nzFormat]="'dd/MM/yyyy'"></nz-date-picker>
+                        <nz-date-picker
+                          nzAllowClear="false"
+                          formControlName="endDate"
+                          [nzFormat]="'dd/MM/yyyy'"
+                        ></nz-date-picker>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -58,7 +67,7 @@
                     <th [nzSortFn]="true">{{'listCustomer.phone'| translate}}</th>
                     <th [nzSortFn]="true">{{'listCustomer.room'| translate}}</th>
                     <th [nzSortFn]="true">{{'listCustomer.roomType'| translate}}</th>
-                    <th [nzSortFn]="true">{{'listCustomer.service'| translate}}</th>
+                    <!-- <th [nzSortFn]="true">{{'listCustomer.service'| translate}}</th> -->
                     <th [nzSortFn]="true">{{'listCustomer.price'| translate}}</th>
                     <th [nzSortFn]="true">{{'listCustomer.status'| translate}}</th>
                     <th>{{'listCustomer.action'| translate}}</th>
@@ -73,7 +82,7 @@
                     <td>{{ data?.customer?.phone }}</td>
                     <td>{{ data?.room?.name }}</td>
                     <td>{{ data?.room?.roomTypes?.name }}</td>
-                    <td>{{ data?.service?.name }}</td>
+                    <!-- <td>{{ data?.service?.name }}</td> -->
                     <td>{{ data?.paymentAmount | format }} VNĐ</td>
                     <td>
                         <span *ngIf="data?.paymentStatus == 0">Không thành công</span>
@@ -84,7 +93,7 @@
                     </td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>

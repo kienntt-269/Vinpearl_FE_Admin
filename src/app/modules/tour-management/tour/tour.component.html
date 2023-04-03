@@ -51,6 +51,8 @@
                             [nzPlaceHolder]="'listTour.placeHolder' | translate"
                             formControlName="typeOfTour"
                             nzAllowClear
+                            nzMode="multiple"
+                            [nzMaxTagCount]="3"
                         >
                             <nz-option *ngFor="let item of listOfTypeOfTour" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                         </nz-select>
@@ -70,6 +72,8 @@
                             [nzPlaceHolder]="'listTour.placeHolder' | translate"
                             formControlName="lengthOfStay"
                             nzAllowClear
+                            nzMode="multiple"
+                            [nzMaxTagCount]="3"
                         >
                             <nz-option *ngFor="let item of listOfLengthOfStay" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                         </nz-select>
@@ -108,6 +112,8 @@
                             [nzPlaceHolder]="'listTour.placeHolder' | translate"
                             formControlName="suitable"
                             nzAllowClear
+                            nzMode="multiple"
+                            [nzMaxTagCount]="3"
                         >
                             <nz-option *ngFor="let item of listOfSuitable" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                         </nz-select>
@@ -178,17 +184,16 @@
                         <span *ngIf="data?.lengthStayId == 8">22 ngày 21 đêm</span>
                     </td>
                     <td>
-                        <span *ngIf="data?.suitableId == 1">Tất cả</span>
-                        <span *ngIf="data?.suitableId == 2">Cặp đôi</span>
-                        <span *ngIf="data?.suitableId == 3">Gia đình</span>
-                        <span *ngIf="data?.suitableId == 4">Nhóm bạn</span>
-                        <span *ngIf="data?.suitableId == 5">Doanh nhân</span>
+                        <span *ngIf="data?.suitableId == 1">Cặp đôi</span>
+                        <span *ngIf="data?.suitableId == 2">Gia đình</span>
+                        <span *ngIf="data?.suitableId == 3">Nhóm bạn</span>
+                        <span *ngIf="data?.suitableId == 4">Doanh nhân</span>
                     </td>
                     <td>{{ data?.numberOfPeople }}</td>
                     <td>{{ data?.numberOfPeople - data?.remainingOfPeople }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>

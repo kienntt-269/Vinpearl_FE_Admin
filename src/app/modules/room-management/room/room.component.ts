@@ -25,6 +25,8 @@ export class RoomComponent implements OnInit {
     roomName: new FormControl(''),
     roomType: new FormControl(''),
     status: new FormControl(''),
+    startTime: new FormControl(''),
+    endTime: new FormControl(''),
   });
   constructor(
     private router: Router,
@@ -49,7 +51,7 @@ export class RoomComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+
   }
 
   addRoom() {
@@ -66,10 +68,19 @@ export class RoomComponent implements OnInit {
 
   getRoom() {
     const formValue = this.formGroup.value;
+    if (typeof(formValue.startTime) === "object" && formValue.startTime != null) {
+      formValue.startTime = formValue.startTime.getTime();
+    }
+    if (typeof(formValue.endTime) === "object" && formValue.endTime != null) {
+      formValue.endTime = formValue.endTime.getTime();
+    }
+
     const data = {
-      name: formValue.roomName ? formValue.roomName : "",
-      roomType: formValue.roomType ? formValue.roomType : "",
-      status: formValue.status ? formValue.status : "",
+      name: formValue.roomName,
+      roomType: formValue.roomType,
+      status: formValue.status,
+      startTime: formValue.startTime,
+      endTime: formValue.endTime,
       page: this.pageIndex,
       size: this.pageSize,
       sort: this.sort,
@@ -96,7 +107,7 @@ export class RoomComponent implements OnInit {
     this.pageSize = itemPerPage;
     // call event rule engine
     // this.createData();
-    
+
     // call event service
     this.getRoom()
   }

@@ -19,7 +19,7 @@ export class ReportCustomerHotelComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({
     startDate: new FormControl(new Date().getTime() - 86400000 * 30),
     endDate: new FormControl(new Date().getTime()),
-    status: new FormControl('0'),
+    status: new FormControl('1'),
   });
   pageSize = 10;
   pageIndex = 1;
@@ -77,12 +77,12 @@ export class ReportCustomerHotelComponent implements OnInit {
       page: this.pageIndex - 1,
       size: this.pageSize,
       sort: this.sort,
-      status: formValue.status ? parseInt(formValue.status) : "",
+      status: formValue.status,
       startDate: formValue.startDate ? this.datepipe.transform(formValue.startDate, 'yyyy-MM-dd') : "",
       endDate: formValue.endDate ? this.datepipe.transform(formValue.endDate, 'yyyy-MM-dd') : "",
     }
-    
-    this.bookingService.getListBookingTour(data).subscribe(res => {
+
+    this.bookingService.getListBookingRoom(data).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
         this.totalItem = res.data.totalElements;
@@ -104,7 +104,7 @@ export class ReportCustomerHotelComponent implements OnInit {
     this.pageSize = itemPerPage;
     // call event rule engine
     // this.createData();
-    
+
     // call event service
     this.getAllBookingRoom()
   }
@@ -116,7 +116,7 @@ export class ReportCustomerHotelComponent implements OnInit {
       startDate: formValue.startDate ? this.datepipe.transform(formValue.startDate, 'yyyy-MM-dd') : null,
       endDate: formValue.endDate ? this.datepipe.transform(formValue.endDate, 'yyyy-MM-dd') : null,
     }
-    
+
     this.bookingService.exportFile(data).subscribe(res => {
       const url = window.URL.createObjectURL(res);
       const a = document.createElement('a');
