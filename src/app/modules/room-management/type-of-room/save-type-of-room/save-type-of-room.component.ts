@@ -35,6 +35,12 @@ export class SaveTypeOfRoomComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.typeOfRoomId = params['id'];
       this.action = params['action'];
+      if (this.action == "DETAIL") {
+        //disable all input
+        Object.keys(this.formGroup.controls).forEach((key) => {
+          this.formGroup.get(key)?.disable();
+        });
+      }
       if (this.typeOfRoomId) {
         this.breadcrumb = [
           {

@@ -54,13 +54,13 @@ export class TourService {
     };
 
     addTour(formData: any) {
-        // const headers = handle.requestHeadersFormData();
-        // let options = {headers: headers};
+        const headers = handle.requestHeadersAxios();
+        let options = {headers: headers};
         // return this.httpClient.post(`${APIs.API_ADD_TOUR}`, formData, {
         //     reportProgress: true,
         //     observe: 'events'
         // });
-        return axios.post(`${APIs.API_ADD_TOUR}`, formData);
+        return axios.post(`${APIs.API_ADD_TOUR}`, formData, options);
     };
 
     getAllSite(): Observable<any> {

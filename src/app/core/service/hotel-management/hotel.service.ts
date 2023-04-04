@@ -54,13 +54,13 @@ export class HotelService {
     };
 
     addHotel(formData: any) {
-        // const headers = handle.requestHeadersFormData();
-        // let options = {headers: headers};
+        const headers = handle.requestHeadersFormData();
+        let options = {headers: headers};
         // return this.httpClient.post(`${APIs.API_ADD_HOTEL}`, formData, {
         //     reportProgress: true,
         //     observe: 'events'
         //   });
-        return axios.post(`${APIs.API_ADD_HOTEL}`, formData);
+        return axios.post(`${APIs.API_ADD_HOTEL}`, formData, options);
     };
 
     getAllSite(): Observable<any> {

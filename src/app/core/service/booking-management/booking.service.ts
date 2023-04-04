@@ -55,6 +55,7 @@ export class BookingService {
         let options = {
             headers: headers,
             params: queryParams,
+
         };
         return this.httpClient.get(`${APIs.API_GET_LIST_BOOKING_ROOM}`, options);
     };
@@ -78,7 +79,6 @@ export class BookingService {
         let options = {
             headers: headers,
             params: queryParams,
-            withCredentials: true,
         };
         return this.httpClient.get(`${APIs.API_GET_LIST_BOOKING_TOUR}`, options);
     };
@@ -93,7 +93,8 @@ export class BookingService {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
         return this.httpClient.post(`${APIs.API_EXPORT_BOOKING_ROOM}`, data, {
-            responseType: 'blob'
+            responseType: 'blob',
+            headers: headers,
           });
     }
 
@@ -101,7 +102,8 @@ export class BookingService {
         const headers = handle.requestHeaders();
         let options = {headers: headers};
         return this.httpClient.post(`${APIs.API_EXPORT_BOOKING_TOUR}`, data, {
-            responseType: 'blob'
+            responseType: 'blob',
+            headers: headers,
           });
     }
 
@@ -110,4 +112,10 @@ export class BookingService {
         let options = {headers: headers};
         return this.httpClient.get(`${APIs.API_DASHBOARD_GET_BOOKING_TOTAL}`, options);
     }
+
+    getListStatistics() : Observable<any> {
+      const headers = handle.requestHeaders();
+      let options = {headers: headers};
+      return this.httpClient.get(`${APIs.API_DASHBOARD_GET_BOOKING_STATISTICS}`, options);
+  }
 }

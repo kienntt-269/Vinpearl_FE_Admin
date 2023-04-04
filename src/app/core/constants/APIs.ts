@@ -7,6 +7,7 @@ export default {
   API_DASHBOARD_GET_BOOKING_ROOM_BY_MONTH: environment.BASE_PATH_DOMAIN + '/booking-room',
   API_DASHBOARD_GET_BOOKING_TOUR_BY_MONTH: environment.BASE_PATH_DOMAIN + '/booking-tour',
   API_DASHBOARD_GET_BOOKING_TOTAL: environment.BASE_PATH_DOMAIN + '/dashboard/total',
+  API_DASHBOARD_GET_BOOKING_STATISTICS: environment.BASE_PATH_DOMAIN + '/dashboard/statistics',
 
   //account
   AUTH_LOGIN: environment.BASE_PATH_DOMAIN + '/user/login',
@@ -24,7 +25,7 @@ export default {
   API_DELETE_SITE: environment.BASE_PATH_DOMAIN + '/site/delete',
 
   // hotel
-  API_ADD_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/create',
+  API_ADD_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/save',
   API_UPDATE_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/update',
   API_GET_DETAIL_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/detail',
   API_GET_LIST_HOTEL: environment.BASE_PATH_DOMAIN + '/hotel/search',
@@ -39,7 +40,7 @@ export default {
   API_TOP_5_CUSTOMER_MONEY: environment.BASE_PATH_DOMAIN + '/dashboard/getTop5Customer',
 
   // room type
-  API_ADD_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/create',
+  API_ADD_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/save',
   API_UPDATE_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/update',
   API_GET_DETAIL_ROOM_TYPE: environment.BASE_PATH_DOMAIN + '/room/room-type/detail',
   API_SEARCH_LIST_TYPE_OF_ROOM: environment.BASE_PATH_DOMAIN + '/room/room-type/search',

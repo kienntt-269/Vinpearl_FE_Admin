@@ -85,11 +85,11 @@
                     <!-- <td>{{ data?.service?.name }}</td> -->
                     <td>{{ data?.paymentAmount | format }} VNĐ</td>
                     <td>
-                        <span *ngIf="data?.paymentStatus == 0">Không thành công</span>
-                        <span *ngIf="data?.paymentStatus == 1">Thành công</span>
-                        <span *ngIf="data?.paymentStatus == 2">Đã hủy</span>
-                        <span *ngIf="data?.paymentStatus == 3">Đã hoàn</span>
-                        <span *ngIf="data?.paymentStatus == 4">Chờ xử lý</span>
+                      <span class="empty" *ngIf="data?.paymentStatus == 0">Đã hủy</span>
+                      <span class="live" *ngIf="data?.paymentStatus == 1">Thành công</span>
+                      <span class="deposit" *ngIf="data?.paymentStatus == 2">Không thành công</span>
+                      <span class="deposit" *ngIf="data?.paymentStatus == 3">Đã hoàn</span>
+                      <span class="deposit" *ngIf="data?.paymentStatus == 4">Chờ xử lý</span>
                     </td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center btn-actions">

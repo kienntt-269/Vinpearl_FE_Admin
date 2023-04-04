@@ -41,7 +41,13 @@ export class SaveRoomComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.roomId = params['id'];
-      this.action = params['id'];
+      this.action = params['action'];
+      if (this.action == "DETAIL") {
+        //disable all input
+        Object.keys(this.formGroup.controls).forEach((key) => {
+          this.formGroup.get(key)?.disable();
+        });
+      }
       if (this.roomId) {
         this.breadcrumb = [
           {

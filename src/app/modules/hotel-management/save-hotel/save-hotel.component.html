@@ -9,7 +9,7 @@
                         <nz-form-label nzFor="name">{{'saveHotel.name' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="name" id="name" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="name" id="name" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -35,7 +35,7 @@
                         <nz-form-label nzFor="acreage">{{'saveHotel.acreage' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="acreage" id="acreage" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="acreage" id="acreage" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -78,7 +78,7 @@
                         <nz-form-control>
                             <nz-form-control>
                                 <nz-input-group [nzSuffix]="inputNameClear">
-                                    <input nz-input formControlName="phone" id="phone" />
+                                    <input [disabled]="action == 'DETAIL'" nz-input formControlName="phone" id="phone" />
                                     <ng-template #inputNameClear>
                                         <span
                                             nz-icon
@@ -103,7 +103,7 @@
                         <nz-form-control>
                             <nz-form-control>
                                 <nz-input-group [nzSuffix]="inputNameClear">
-                                    <input nz-input formControlName="totalRoom" id="totalRoom" />
+                                    <input [disabled]="action == 'DETAIL'" nz-input formControlName="totalRoom" id="totalRoom" />
                                     <ng-template #inputNameClear>
                                         <span
                                             nz-icon
@@ -127,7 +127,7 @@
                         <nz-form-label nzFor="email">{{'saveHotel.email' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="email" id="email" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="email" id="email" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -153,7 +153,7 @@
                         <nz-form-label nzFor="description">{{'saveHotel.description' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="description" id="description" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="description" id="description" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -176,7 +176,7 @@
                         <nz-form-label nzFor="address">{{'saveHotel.address' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="address" id="address" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="address" id="address" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -200,7 +200,7 @@
                         <nz-form-control>
                             <div class="file-list" (click)="hiddenFileInput.click()">
                                 <div class="name">{{fileListName.join(", ")}}</div>
-                                <input #hiddenFileInput style="display: none;" type="file" class="custom-file-input" multiple id="uploadFile" (change)="onFileSelect($event)">
+                                <input [disabled]="action == 'DETAIL'" #hiddenFileInput style="display: none;" type="file" class="custom-file-input" multiple id="uploadFile" (change)="onFileSelect($event)">
                                 <img src="../../../../assets/icon/upload-file.svg" alt="upload-file">
                             </div>
                             <!-- <nz-upload
@@ -209,7 +209,7 @@
                                 (nzChange)="handleChange($event)"
                                 nzMultiple="true"
                             >
-                                <input nz-input formControlName="uploadFile" id="uploadFile" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="uploadFile" id="uploadFile" />
                             </nz-upload> -->
                         </nz-form-control>
                         <!-- <div *ngIf="this.formGroup.controls['uploadFile'].invalid && (this.formGroup.controls['uploadFile'].dirty || this.formGroup.controls['uploadFile'].touched)">
@@ -224,13 +224,13 @@
                 </div>
                 <div class="col col-sm-12">
                     <div class="d-flex justify-content-center align-items-center">
-                        <button style="background-color: #9A9A9A; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
+                        <button style="background-color: #9A9A9A !important; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
                             {{'saveHotel.btnCancel'| translate}}
                         </button>
                         <button *ngIf="!hotelId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddHotel()">
                             {{'saveHotel.btnAdd'| translate}}
                         </button>
-                        <button  *ngIf="hotelId  && action != 'PROCESS'" nz-button nzType="primary" (click)="handleAddHotel()">
+                        <button  *ngIf="hotelId  && action == 'PROCESS'" nz-button nzType="primary" (click)="handleAddHotel()">
                             {{'saveHotel.btnSave'| translate}}
                         </button>
                     </div>

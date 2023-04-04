@@ -14,6 +14,7 @@ export class RevenueComponent implements OnInit {
 
   breadcrumb: any = [];
   listOfDataTotal: any = [];
+  listOfStatistics: any = [];
   listOfDataTour: any = [];
   listOfDataCustomer: any = [];
   chartHotel: any;
@@ -38,10 +39,6 @@ export class RevenueComponent implements OnInit {
       }
     ];
 
-    this.createChartHotel();
-    this.createChartRoom();
-    this.createChartFlight();
-
     const data = {
       page: this.pageIndex,
       size: this.pageSize,
@@ -51,6 +48,13 @@ export class RevenueComponent implements OnInit {
     this.bookingService.getListTotal().subscribe(res => {
       if (res.code == 200) {
         this.listOfDataTotal = res.data;
+      }
+    })
+
+    this.bookingService.getListStatistics().subscribe(res => {
+      if (res.code == 200) {
+        this.listOfStatistics = res.data;
+        this.createChartHotel(this.listOfStatistics);
       }
     })
 
@@ -70,28 +74,32 @@ export class RevenueComponent implements OnInit {
       console.log(error.status);
       console.log(error.statusText);
     }
-  )
+    )
+    this.createChartRoom();
+    this.createChartFlight();
   }
 
-  createChartHotel(){
-    let months = ["January", "February", "March", "April", "June",  "July",  "August",  "September",  "October",  "November",  "December"];
-    let currentMonth = new Date().getMonth();
+  createChartHotel(listOfStatistics: any){
+    console.log(listOfStatistics.map((item: any) => item.data))
+    let months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",  "Tháng 6",  "Tháng 7",  "Tháng 8",  "Tháng 9",  "Tháng 10",  "Tháng 11", "Tháng 12"];
+    // let currentMonth = new Date().getMonth();
     this.chartHotel = new Chart("MyChartHotel", {
       type: 'line', //this denotes tha type of chart
 
       data: {
-        labels: months.slice(currentMonth - 6).concat(months.slice(0, currentMonth)),
+        // labels: months.slice(currentMonth - 6).concat(months.slice(0, currentMonth)),
+        labels: months,
         datasets: [
           {
-            label: 'Khách hàng mới',
-            data: [65, 100, 80, 181, 256, 55, 40],
+            label: 'Khách hàng đặt tour',
+            data:  listOfStatistics.length > 0 ? listOfStatistics.map((item: any) => item.data) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             fill: false,
             borderColor: 'rgb(159,141,241)',
             tension: 0.1
           },
           {
-            label: 'Khách hàng cũ',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            label: 'Khách hàng đặt phòng',
+            data: listOfStatistics.length > 0 ? listOfStatistics.map((item: any) => item.data) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             fill: false,
             borderColor: 'rgb(231,154,59)',
             tension: 0.1

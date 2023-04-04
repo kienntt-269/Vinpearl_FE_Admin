@@ -134,9 +134,9 @@ export class RoomService {
     // };
 
     addRoomType(formData: any) {
-        const headers = handle.requestHeadersFormData();
-        let options = {headers: headers};
-        return axios.post(`${APIs.API_ADD_ROOM_TYPE}`, formData);
+      const headers = handle.requestHeadersAxios();
+      let options = {headers: headers};
+        return axios.post(`${APIs.API_ADD_ROOM_TYPE}`, formData, options);
         // return this.httpClient.get(`${APIs.API_GET_DETAIL_ROOM}/${id}`);
     };
 

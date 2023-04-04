@@ -49,6 +49,12 @@ export class SaveHotelComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.hotelId = params['id'];
       this.action = params['action'];
+      if (this.action == "DETAIL") {
+        //disable all input
+        Object.keys(this.formGroup.controls).forEach((key) => {
+          this.formGroup.get(key)?.disable();
+        });
+      }
       if (this.hotelId) {
         this.breadcrumb = [
           {
@@ -176,6 +182,11 @@ export class SaveHotelComponent implements OnInit {
     formData.append("acreage", formValue.acreage);
     formData.append("siteId", formValue.site);
     // formData.append("images", formValue.uploadFile);
+
+    if (this.hotelId) {
+      formData.append("id", this.hotelId);
+    }
+
     for (let index = 0; index < this.fileList.length; index++) {
       formData.append("images", this.fileList[index]);
     }

@@ -71,7 +71,7 @@ export class SaveTourComponent implements OnInit {
       name: "Vé tham quan",
     },
     {
-      id: 7,
+      id: 8,
       name: "Spa",
     },
   ];
@@ -149,6 +149,12 @@ export class SaveTourComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.tourId = params['id'];
       this.action = params['action'];
+      if (this.action == "DETAIL") {
+        //disable all input
+        Object.keys(this.formGroup.controls).forEach((key) => {
+          this.formGroup.get(key)?.disable();
+        });
+      }
       if (this.tourId) {
         this.breadcrumb = [
           {
@@ -347,21 +353,25 @@ export class SaveTourComponent implements OnInit {
     formData.append("description", formValue.description);
     formData.append("inclusion", formValue.inclusion);
     formData.append("termsConditions", formValue.termsConditions);
-    if (typeof(formValue.expirationDate) === "object") {
-      formValue.expirationDate = formValue.expirationDate.getTime();
-    }
+    // if (typeof(formValue.expirationDate) === "object") {
+      formValue.expirationDate = new Date(formValue.expirationDate).getTime();
+    // }
     formData.append("expirationDateMls", formValue.expirationDate);
-    if (typeof(formValue.startDate) === "object") {
-      formValue.startDate = formValue.startDate.getTime();
-    }
+    // if (typeof(formValue.startDate) === "object") {
+      formValue.startDate = new Date(formValue.startDate).getTime();
+    // }
     formData.append("startDateMls", formValue.startDate);
-    if (typeof(formValue.endDate) === "object") {
-      formValue.endDate = formValue.endDate.getTime();
-    }
+    // if (typeof(formValue.endDate) === "object") {
+      formValue.endDate = new Date(formValue.endDate).getTime();
+    // }
     formData.append("endDateMls", formValue.endDate);
     // formData.append("images", formValue.uploadFile);
     for (let index = 0; index < this.fileList.length; index++) {
       formData.append("images", this.fileList[index]);
+    }
+
+    if (this.tourId) {
+      formData.append("id", this.tourId);
     }
 
     try {
@@ -395,7 +405,7 @@ export class SaveTourComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/pages/tour']);
+    this.router.navigate(['/pages/tour-management/tour']);
   }
 
   onFileSelect(event: any) {

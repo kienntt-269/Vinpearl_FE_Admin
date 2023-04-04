@@ -112,13 +112,13 @@
         <div class="btn-group">
             <div class="col col-sm-12">
                 <div class="d-flex justify-content-center align-items-center">
-                    <button style="background-color: #9A9A9A; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
+                    <button style="background-color: #9A9A9A !important; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
                         {{'saveRoom.btnCancel'| translate}}
                     </button>
                     <button *ngIf="!roomId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddRoom()">
                         {{'saveRoom.btnAdd'| translate}}
                     </button>
-                    <button *ngIf="roomId && action != 'PROCESS'" nz-button nzType="primary" (click)="handleAddRoom()">
+                    <button *ngIf="roomId && action == 'PROCESS'" nz-button nzType="primary" (click)="handleAddRoom()">
                         {{'saveRoom.btnSave'| translate}}
                     </button>
                 </div>

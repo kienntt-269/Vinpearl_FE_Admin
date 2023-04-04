@@ -4,12 +4,12 @@ import constants from "../constants/constants";
 import { CoreModule } from "../core.module";
 
 function requestHeaders() {
-    // return new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   'Accept': 'application/json',
-    //   'Authorization': `Bearer ${localStorage.getItem(constants.TOKEN)}` as string || "",
-    // });
-    return new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json').set('Authorization', `Bearer ${localStorage.getItem(constants.TOKEN)}`);
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem(constants.TOKEN)}` as string || "",
+    });
+    // return new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json').set('Authorization', `Bearer ${localStorage.getItem(constants.TOKEN)}`);
 }
 
 function requestHeadersFormData() {
@@ -26,6 +26,12 @@ function requestHeadersExcel() {
     'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     'Authorization': `Bearer ${localStorage.getItem(constants.TOKEN)}` as string || "",
   });
+}
+
+function requestHeadersAxios() {
+  return {
+    'Authorization': `Bearer ${localStorage.getItem(constants.TOKEN)}` as string || "",
+  }
 }
 
 function logout() {
@@ -52,6 +58,7 @@ function logout() {
 
 export default {
     requestHeaders: requestHeaders,
+    requestHeadersAxios: requestHeadersAxios,
     requestHeadersFormData: requestHeadersFormData,
     requestHeadersExcel: requestHeadersExcel,
     logout: logout,
