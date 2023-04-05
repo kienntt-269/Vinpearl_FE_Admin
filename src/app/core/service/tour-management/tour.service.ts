@@ -30,14 +30,20 @@ export class TourService {
         if (data.siteId) {
             queryParams = queryParams.append("siteId",data.siteId);
         }
-        if (data.lengthStayIds) {
-            queryParams = queryParams.append("lengthStayIds",data.lengthStayIds);
+        if (data.typeOfTours) {
+          for (let index = 0; index < data.typeOfTours.length; index++) {
+            queryParams = queryParams.append("typeOfTours",data.typeOfTours[index]);
+          }
         }
         if (data.suitableIds) {
-            queryParams = queryParams.append("suitableIds",data.suitableIds);
+          for (let index = 0; index < data.suitableIds.length; index++) {
+            queryParams = queryParams.append("suitableIds",data.suitableIds[index]);
+          }
         }
-        if (data.typeOfTours) {
-            queryParams = queryParams.append("typeOfTours",data.typeOfTours);
+        if (data.lengthStayIds) {
+          for (let index = 0; index < data.lengthStayIds.length; index++) {
+            queryParams = queryParams.append("lengthStayIds",data.lengthStayIds[index]);
+          }
         }
         let options = {
             headers: headers,

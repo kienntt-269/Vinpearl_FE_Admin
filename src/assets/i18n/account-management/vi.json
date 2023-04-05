@@ -6,6 +6,7 @@
       "accountId": "Mã tài khoản",
       "fullName": "Tên đầy đủ",
       "hotel": "Tên khách sạn",
+      "siteId": "Khu vực",
       "status": "Trạng thái tài khoản",
       "phone": "Số điện thoại",
       "birthDate": "Ngày sinh",
@@ -49,4 +50,3 @@
       }
     }
   }
-  

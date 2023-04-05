@@ -71,11 +71,13 @@ export class CustomerManagementComponent implements OnInit {
   }
 
   getListCustomer() {
+    const formValue = this.formGroup.value;
     const body = {
-      name: "",
-      phone: "",
+      name: formValue.fullName,
+      phone: formValue.phone,
       page: this.pageIndex - 1,
       size: this.pageSize,
+      sort: this.sort,
     }
     this.authService.getListCustomer(body).subscribe(res => {
       if (res.code == 200) {
@@ -90,6 +92,10 @@ export class CustomerManagementComponent implements OnInit {
       id: data.id,
     }
     this.router.navigate(['pages/customer-management/save-customer'], {queryParams: params});
+  }
+
+  search() {
+    this.getListCustomer();
   }
 }
 

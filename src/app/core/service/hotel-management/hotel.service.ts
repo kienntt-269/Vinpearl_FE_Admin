@@ -24,11 +24,11 @@ export class HotelService {
       if (data.name) {
         queryParams = queryParams.append("name",data.name);
       }
-      if (data.description) {
-        queryParams = queryParams.append("description",data.description);
+      if (data.totalRoom) {
+        queryParams = queryParams.append("totalRoom",data.totalRoom);
       }
-      if (data.price) {
-        queryParams = queryParams.append("price",data.price);
+      if (data.phone) {
+        queryParams = queryParams.append("phone",data.phone);
       }
       if (data.page || data.page == 0) {
         queryParams = queryParams.append("page",data.page);

@@ -61,6 +61,9 @@ export class AuthService {
     if (data.name) {
       queryParams = queryParams.append("name",data.name);
     }
+    if (data.siteId) {
+      queryParams = queryParams.append("siteId",data.siteId);
+    }
     if (data.phone) {
       queryParams = queryParams.append("phone",data.phone);
     }
@@ -70,10 +73,13 @@ export class AuthService {
     if (data.size) {
       queryParams = queryParams.append("size",data.size);
     }
+    if (data.sort) {
+      queryParams = queryParams.append("sort",data.sort);
+    }
     const headers = handle.requestHeaders();
     let options = {
       headers: headers,
-      queryParams: queryParams,
+      params: queryParams,
     };
     return this.http.get(`${APIs.API_GET_LIST_ACCOUNT}`, options);
   };
@@ -92,10 +98,13 @@ export class AuthService {
     if (data.size) {
       queryParams = queryParams.append("size",data.size);
     }
+    if (data.sort) {
+      queryParams = queryParams.append("sort",data.sort);
+    }
     const headers = handle.requestHeaders();
     let options = {
       headers: headers,
-      queryParams: queryParams,
+      params: queryParams,
     };
     return this.http.get(`${APIs.API_GET_LIST_CUSTOMER}`, options);
   };

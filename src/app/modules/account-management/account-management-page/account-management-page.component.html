@@ -45,21 +45,17 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="hotel">{{'listAccount.hotel' | translate}}</nz-form-label>
+                    <nz-form-label nzFor="siteId">{{'listAccount.siteId' | translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="hotel" id="hotel" />
-                            <ng-template #inputNameClear>
-                                <span
-                                    nz-icon
-                                    class="ant-input-clear-icon"
-                                    nzTheme="fill"
-                                    nzType="close-circle"
-                                    *ngIf="formGroup.controls['hotel'].value"
-                                    (click)="formGroup.controls['hotel'].setValue(null)"
-                                ></span>
-                            </ng-template>
-                        </nz-input-group>
+                      <nz-form-control>
+                        <nz-select
+                            [nzPlaceHolder]="'addAccount.site' | translate"
+                            formControlName="siteId"
+                            nzAllowClear
+                        >
+                            <nz-option *ngFor="let item of listOfSite" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
                     </nz-form-control>
                 </nz-form-item>
             </div>

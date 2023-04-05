@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { AuthService } from 'src/app/core/auth-guard/auth.service';
+import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
 
 @Component({
   selector: 'app-account-management-page',
@@ -14,10 +15,11 @@ export class AccountManagementPageComponent implements OnInit {
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
+  listOfSite: any[] = [];
   formGroup: FormGroup = new FormGroup({
     fullName: new FormControl(''),
     phone: new FormControl(''),
-    hotel: new FormControl(''),
+    siteId: new FormControl(''),
   });
   pageSize = 10;
   pageIndex = 1;
@@ -49,6 +51,7 @@ export class AccountManagementPageComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private hotelService: HotelService,
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +67,11 @@ export class AccountManagementPageComponent implements OnInit {
     ]
 
     this.getListAccount();
+    this.hotelService.getAllSite().subscribe(res => {
+      if (res.code === 200) {
+        this.listOfSite = res.data;
+      }
+    })
   }
 
   sortChange(e: any) {
@@ -79,9 +87,14 @@ export class AccountManagementPageComponent implements OnInit {
   }
 
   getListAccount() {
+    const formValue = this.formGroup.value;
     const body = {
+      name: formValue.fullName,
+      phone: formValue.phone,
+      siteId: formValue.siteId,
       page: this.pageIndex - 1,
       size: this.pageSize,
+      sort: this.sort,
     }
     this.authService.getListAccount(body).subscribe(res => {
       if (res.code == 200) {

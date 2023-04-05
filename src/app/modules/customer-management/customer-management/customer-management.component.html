@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="group-btns d-flex justify-content-center">
-        <button nz-button nzType="primary" [nzSize]="size">{{'customer.btnSearch' | translate}}</button>
+        <button (click)="search()"  nz-button nzType="primary" [nzSize]="size">{{'customer.btnSearch' | translate}}</button>
     </div>
 </form>
 <div class="table">
@@ -83,7 +83,8 @@
                     <th [nzSortFn]="true">{{'customer.birthDate' | translate}}</th>
                     <th [nzSortFn]="true">{{'customer.sex' | translate}}</th>
                     <th [nzSortFn]="true">{{'customer.phone' | translate}}</th>
-                    <th [nzSortFn]="true">{{'customer.cccd' | translate}}</th>
+                    <!-- <th [nzSortFn]="true">{{'customer.cccd' | translate}}</th> -->
+                    <th [nzSortFn]="true">{{'customer.email' | translate}}</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -98,7 +99,8 @@
                         <p *ngIf="data?.sex === 0">Không xác định</p>
                     </td>
                     <td>{{ data?.phone }}</td>
-                    <td>{{ data?.cccd }}</td>
+                    <!-- <td>{{ data?.cccd }}</td> -->
+                    <td>{{ data?.email }}</td>
                     <td>
                         <div class="btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button

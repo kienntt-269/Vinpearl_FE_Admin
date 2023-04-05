@@ -73,7 +73,7 @@ export class ServiceComponent implements OnInit {
       price: formValue.price,
       page: this.pageIndex,
       size: this.pageSize,
-      sort: 'id, desc',
+      sort: this.sort,
     }
     this.roomService.search(data).subscribe(res => {
       if (res.code == 200) {

@@ -91,6 +91,12 @@ export class RoomService {
       if (data.numberPerson) {
         queryParams = queryParams.append("numberPerson",data.numberPerson);
       }
+      if (data.startTime) {
+        queryParams = queryParams.append("startTime",data.startTime);
+      }
+      if (data.endTime) {
+        queryParams = queryParams.append("endTime",data.endTime);
+      }
       if (data.name) {
         queryParams = queryParams.append("name",data.name);
       }
@@ -146,11 +152,11 @@ export class RoomService {
         if (data.name) {
           queryParams = queryParams.append("name",data.name);
         }
-        if (data.totalRoom) {
-          queryParams = queryParams.append("totalRoom",data.totalRoom);
+        if (data.description) {
+          queryParams = queryParams.append("description",data.description);
         }
-        if (data.phone) {
-          queryParams = queryParams.append("phone",data.phone);
+        if (data.price) {
+          queryParams = queryParams.append("price",data.price);
         }
         if (data.page || data.page == 0) {
           queryParams = queryParams.append("page",data.page);
