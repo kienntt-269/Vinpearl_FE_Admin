@@ -52,14 +52,14 @@ export class AppInterceptor implements HttpInterceptor{
                 }),
                 catchError((err, caught) => {
                     console.log(caught);
+                    console.log(err.error);
                     switch (err.status) {
                       case 400:
-                            console.log(err.error);
                             if (err.error.detailError && err.error.detailError.includes('Token has expired')) {
                               this.toast.error(localStorage.getItem('lang') == 'vi' ? 'Phiên làm việc của bạn đã hết hạn!' : 'Your token has timed-out!', localStorage.getItem('lang') == 'vi' ? 'Lỗi' : 'Error')
                               this.navigateLogin();
                               this.router.navigate(['auth/login']);
-                          }
+                            }
                             break;
                         case 401: //unauthorized
                             this.router.navigate(['pages/401']);
@@ -68,7 +68,11 @@ export class AppInterceptor implements HttpInterceptor{
                             this.router.navigate(['pages/403']);
                             break;
                         case 404:
-                            // this.router.navigate(['pages/404']);
+                            if (err.error.detailError && err.error.detailError.includes('Access Denied')) {
+                              this.toast.error(localStorage.getItem('lang') == 'vi' ? 'Phiên làm việc của bạn đã hết hạn!' : 'Your token has timed-out!', localStorage.getItem('lang') == 'vi' ? 'Lỗi' : 'Error')
+                              this.navigateLogin();
+                              this.router.navigate(['auth/login']);
+                            }
                             break;
                         case 502:
                         case 503:
