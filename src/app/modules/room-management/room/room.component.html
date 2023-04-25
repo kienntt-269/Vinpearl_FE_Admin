@@ -15,6 +15,8 @@
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="formGroup.controls['roomName'].value"
+                                    (click)="formGroup.controls['roomName'].setValue(null)"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -33,6 +35,8 @@
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="formGroup.controls['roomType'].value"
+                                    (click)="formGroup.controls['roomType'].setValue(null)"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -43,74 +47,87 @@
                 <nz-form-item>
                     <nz-form-label nzFor="status">Trạng thái</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="status" id="status" />
-                            <ng-template #inputNameClear>
-                                <span
-                                    nz-icon
-                                    class="ant-input-clear-icon"
-                                    nzTheme="fill"
-                                    nzType="close-circle"
-                                ></span>
-                            </ng-template>
-                        </nz-input-group>
+                        <nz-select formControlName="status" nzAllowClear="true">
+                            <nz-option nzValue="0" nzLabel="Trống">Trống</nz-option>
+                            <nz-option nzValue="1" nzLabel="Đặt cọc">Đặt cọc</nz-option>
+                            <nz-option nzValue="2" nzLabel="Đang ở">Đang ở</nz-option>
+                        </nz-select>
                     </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-8">
+              <nz-form-item>
+                <nz-form-label nzFor="">{{'listRoom.rangeTime'| translate}}</nz-form-label>
+                <nz-form-control>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <nz-date-picker
+                      nzAllowClear="true"
+                      formControlName="startTime"
+                      [nzFormat]="'HH:mm:ss - dd/MM/yyyy'"
+                    ></nz-date-picker>
+                    <div> ~ </div>
+                    <nz-date-picker
+                      nzAllowClear="true"
+                      formControlName="endTime"
+                      [nzFormat]="'HH:mm:ss - dd/MM/yyyy'"
+                    ></nz-date-picker>
+                  </div>
+                </nz-form-control>
                 </nz-form-item>
             </div>
         </div>
     </div>
     <div class="group__btns d-flex justify-content-center">
-        <button nz-button nzType="primary" [nzSize]="size">Tìm kiếm</button>
+        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">Tìm kiếm</button>
     </div>
 </form>
 <div class="table">
     <div class="d-flex table__header justify-content-between">
-        <div class="title-search">Danh sách phòng ({{listOfData.length}})</div>
+        <div class="title-search">Danh sách phòng ({{totalItem}})</div>
         <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
             <img src="../../../../assets/icon/plus_icon.svg" alt="">
             Thêm mới phòng
         </button>
     </div>
     <div class="table__content">
-        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
                     <th [nzSortFn]="true">STT</th>
                     <th [nzSortFn]="true">Tên phòng</th>
-                    <th [nzSortFn]="true">Toà nhà</th>
-                    <th [nzSortFn]="true">Giá phòng</th>
-                    <th [nzSortFn]="true">Diện tích (m2)</th>
+                    <th [nzSortFn]="true">Số phòng</th>
                     <th [nzSortFn]="true">Loại phòng</th>
-                    <th [nzSortFn]="true">View phòng</th>
                     <th [nzSortFn]="true">Trạng thái phòng</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of basicTable.data">
-                    <td>{{ data?.id }}</td>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                    <td>{{ pageSize * pageIndex + i + 1 }}</td>
+                    <td>{{ data?.name }}</td>
+                    <td>{{ data?.numberRoom}}</td>
+                    <!-- <td>{{ data?.roomTypes?.name }}</td> -->
+                    <td>{{ data?.roomTypeName }}</td>
                     <td>
-                        {{ data?.numberRoom?.toString().length == 1 ? "00" + data?.numberRoom : null}}
-                        {{ data?.numberRoom?.toString().length == 2 ? "0" + data?.numberRoom : null}}
+                        <!-- status = 0 : Trống -->
+                        <!-- status = 1 : Đang ở -->
+                        <!-- status = 2 : Đặt cọc -->
+                        <span class="empty" *ngIf="data?.status == 0">Trống</span>
+                        <span class="live" *ngIf="data?.status == 1">Đặt cọc</span>
+                        <span class="deposit" *ngIf="data?.status == 2">Đang ở</span>
                     </td>
-                    <td>{{ data?.building?.name }}</td>
-                    <td>{{ data?.price }}</td>
-                    <td>{{ data?.area }} m2</td>
-                    <td>{{ data?.name }}</td>
-                    <td>{{ data?.name }}</td>
-                    <td>{{ data?.status }}</td>
                     <td>
                         <div class="btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateRoom(data)">
+                                    <li nz-menu-item (click)="updateRoom(data, 1)">
                                       <a>Chỉnh sửa</a>
                                     </li>
-                                    <li nz-menu-item>
+                                    <li nz-menu-item (click)="updateRoom(data, 2)">
                                       <a>Xóa</a>
                                     </li>
                                   </ul>
@@ -121,7 +138,19 @@
             </tbody>
         </nz-table>
     </div>
-    <div class="table__footer">
-
+    <div class="table-footer d-flex justify-content-between align-items-center">
+        <div *ngIf="totalItem > 0">Hiển thị 1 - {{pageSize}} trong {{totalItem}} bản ghi</div>
+        <div *ngIf="totalItem > 5">
+            <nz-pagination
+                [nzPageIndex]="pageIndex"
+                [nzTotal]="totalItem"
+                nzShowSizeChanger
+                [nzPageSize]="pageSize"
+                [nzPageSizeOptions]="[5, 10, 20, 50, 100]"
+                (nzPageSizeChange)="changeItemPerPage($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+            ></nz-pagination>
+            <div style="width: 300px;"></div>
+        </div>
     </div>
 </div>

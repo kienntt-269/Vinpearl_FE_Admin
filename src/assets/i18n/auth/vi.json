@@ -18,5 +18,39 @@
     "service": "Điều kiện điều khoản",
     "policy": "Chính sách bảo mật",
     "hasAccount": "Đã có tài khoản?"
+  },
+  "header": {
+    "bell": "Đặt phòng"
+  },
+  "optionInfoAdmin": {
+    "menu": {
+      "introduce": "Giới thiệu",
+      "changePassword": "Đổi mật khẩu",
+      "accountSettings": "Cài đặt",
+      "vi": "Tiếng Việt",
+      "en": "Tiếng Anh",
+      "logout": "Đăng xuất"
+    },
+    "btnConfirm": "Xác nhận",
+    "textLogout": "Bạn có chắc chắn muốn Đăng xuất khỏi hệ thống?",
+    "labelLogout": "Đăng xuất",
+    "labelNewPassword": "Mật khẩu mới",
+    "labelOldPassword": "Mật khẩu hiện tại",
+    "labelPasswordRenew": "Nhập lại mật khẩu mới",
+    "btnExit": "Thoát",
+    "error": "Lỗi",
+    "btn": {
+      "cancel": "Hủy",
+      "confirm": "Xác nhận"
+    }
+  },
+  "error": "Lỗi",
+  "success": "Thành công",
+  "toast": {
+    "login_success": "Đăng nhập thành công",
+    "login_fail": "Đăng nhập thất bại",
+    "error": {
+      "404": "Tên đăng nhập/ Mật khẩu không đúng"
+    }
   }
 }

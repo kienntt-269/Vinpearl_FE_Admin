@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
+import { AuthService } from 'src/app/core/auth-guard/auth.service';
 
 @Component({
   selector: 'app-customer-management',
@@ -11,21 +11,44 @@ import { HotelService } from 'src/app/core/service/hotel-management/hotel.servic
 })
 export class CustomerManagementComponent implements OnInit {
 
-  numberRoom: any;
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
   formGroup: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    roomTotal: new FormControl(''),
+    fullName: new FormControl(''),
     phone: new FormControl(''),
+    hotel: new FormControl(''),
   });
-  pageSize: Number = 10;
-  pageIndex: Number = 0;
-  sort: any = "id, desc";
+  pageSize = 10;
+  pageIndex = 1;
+  sort: any = "id,desc";
+  totalItem: any = 0;
+
+  // @Output() changeItemPerPage: EventEmitter<number> = new EventEmitter<number>();
+  // @Output() changeCurrentPage: EventEmitter<number> = new EventEmitter<number>();      // Gửi currentPage lên cho parent component
+
+  changeCurrentPage(currentPage: number) {
+    this.pageIndex = currentPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getListCustomer()
+  }
+
+  changeItemPerPage(itemPerPage: number) {
+    this.pageIndex = 1;
+    this.pageSize = itemPerPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getListCustomer()
+  }
+
   constructor(
     private router: Router,
-    private hotelService: HotelService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -40,97 +63,39 @@ export class CustomerManagementComponent implements OnInit {
       }
     ]
 
-    this.listOfData = [
-      {
-        id: 1,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "1@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 0,
-      },
-      {
-        id: 2,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "2@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 1,
-      },
-      {
-        id: 3,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "3@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 2,
-      },
-    ];
-
-    this.getAllHotel();
+    this.getListCustomer();
   }
 
   sortChange(e: any) {
-    if (e.value === 'ascend') {
-      e.value = 'asc';
-    } else if (e.value === 'descend') {
-      e.value = 'desc';
+
+  }
+
+  getListCustomer() {
+    const formValue = this.formGroup.value;
+    const body = {
+      name: formValue.fullName,
+      phone: formValue.phone,
+      page: this.pageIndex - 1,
+      size: this.pageSize,
+      sort: this.sort,
     }
-    this.sort = `${e.key}, ${e.value}`;
-    console.log(e);
-    this.getAllHotel();
+    this.authService.getListCustomer(body).subscribe(res => {
+      if (res.code == 200) {
+        this.listOfData = res.data.content;
+        this.totalItem = res.data.totalElements;
+      }
+    })
   }
 
-  addHotel() {
-    this.router.navigate(['pages/hotel-management/save-hotel']);
-  }
-
-  updateRoom(data: any) {
+  updateCustomer(data: any) {
     const params = {
       id: data.id,
     }
-    this.router.navigate(['pages/hotel-management/save-hotel'], {queryParams: params});
+    this.router.navigate(['pages/customer-management/save-customer'], {queryParams: params});
   }
 
   search() {
-    this.getAllHotel();
+    this.getListCustomer();
   }
-
-  getAllHotel() {
-    const data = {
-      numRoom: this.numberRoom,
-      name: this.numberRoom,
-      phone: this.numberRoom,
-      pageIndex: this.numberRoom,
-      pageSize: this.numberRoom,
-    }
-    // this.hotelService.getListHotel(this.pageSize, this.pageIndex, this.sort).subscribe(res => {
-    //   if (res.code == 200) {
-    //     this.listOfData = res.data;
-    //     console.log(res.data);
-    //   }
-    // })
-  }
-
 }
+

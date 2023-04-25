@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-// import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/core/auth-guard/auth.service';
+import { Location } from '@angular/common';
 import constants from 'src/app/core/constants/constants';
+import { AuthService } from 'src/app/core/auth-guard/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { config } from 'src/app/core/constants/tost.config';
 import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 
 @Component({
@@ -15,36 +17,32 @@ import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 export class LoginComponent implements OnInit {
 
   currentTab: number = 1;
+  passwordVisible = false;
+  confirmPasswordVisible = false;
+  passwordVisibleLogin = false;
 
   formLogin: FormGroup = new FormGroup({
-    email: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.maxLength(100),
-        Validators.pattern(REGEX_PATTERN.EMAIL),
-      ],
-    }),
+    email: new FormControl(''),
     password: new FormControl('')
   })
 
   formRegister: FormGroup = new FormGroup({
     email: new FormControl(''),
-    fullname: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
+    password: new FormControl('')
   })
 
   constructor(
     private translate: TranslateService,
     private authService: AuthService,
-    private route: Router,
-    // private toast: ToastrService
-  ) { 
+    private router: Router,
+    private location: Location,
+    private toast: ToastrService,
+  ) {
     if (localStorage.getItem('lang')) {
-      this.translate.use(localStorage.getItem('lang')!);
+      translate.use(localStorage.getItem('lang')!);
     } else {
       localStorage.setItem('lang', 'vi');
-      this.translate.use('vi');
+      translate.use('vi');
     }
   }
 
@@ -55,56 +53,82 @@ export class LoginComponent implements OnInit {
   buildForm() {
     this.formLogin = new FormGroup({
       email: new FormControl('', {
-        validators: [Validators.required]
+        validators: [
+          Validators.required,
+          Validators.maxLength(100),
+          Validators.pattern(REGEX_PATTERN.EMAIL),
+        ]
       }),
       password: new FormControl('', {
         validators: [
           Validators.required,
-          Validators.pattern(''),
         ],
       }),
     });
+  }
 
-    this.formRegister = new FormGroup({
-      email: new FormControl('', {
-        validators: [Validators.required]
-      }),
-      fullname: new FormControl('', {
-        validators: [Validators.required]
-      }),
-      password: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.pattern(''),
-        ],
-      }),
-      confirmPassword: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.pattern(''),
-        ],
-      }),
+  clickTab(tab: number) {
+    this.currentTab = tab;
+    const listNav = document.querySelectorAll('.nav__item');
+    listNav.forEach((el) => {
+      el.classList.remove('active');
+    })
+    document.getElementById(`nav__item__${tab}`)?.classList.add('active');
+    this.formLogin.reset();
+    this.formLogin.reset();
+  }
+
+  login() {
+    const body = this.formLogin.value;
+    var email = body.email;
+    var password = body.password;
+    var remember = body.remember;
+
+    if (remember) {
+      localStorage.setItem(constants.REMEMBER_ME, 'true');
+      localStorage.setItem(constants.EMAIL_REMEMBER, email);
+      localStorage.setItem(constants.PASSWORD_REMEMBER, btoa(password));
+    } else {
+      if (localStorage.getItem(constants.EMAIL_REMEMBER) && email != localStorage.getItem(constants.EMAIL_REMEMBER)) {
+        localStorage.setItem(constants.REMEMBER_ME, 'true');
+      } else {
+        localStorage.setItem(constants.REMEMBER_ME, 'false');
+      }
+    }
+    this.authService.login(email, password).subscribe(res => {
+      if (res.code === 200) {
+        // const redirectUrl = this.authService.redirectUrl || '/';
+        localStorage.setItem(constants.FULLNAME, res.data.fullName);
+        localStorage.setItem(constants.TOKEN, res.data.token);
+        localStorage.setItem(constants.ROLE_ID, res.data.roleId);
+        localStorage.setItem(constants.SITE_ID, res.data.siteId);
+        localStorage.setItem(constants.HOTEL_ID, res.data.hotelId);
+        this.router.navigate(['/pages/revenue']);
+        this.toast.success(
+          this.translate.instant(`toast.login_success`),
+          this.translate.instant('success'),
+          config
+        );
+      } else if (res.code === 404) {
+        this.toast.error(
+          this.translate.instant(`toast.error.404`),
+          this.translate.instant('error'),
+          config
+        );
+      }
     })
   }
 
-  handleLogin() {
-    let formValue = this.formLogin.value;
+  register() {
+    const formValue = this.formRegister.value;
     const body = {
+      fullName: formValue.fullName,
       email: formValue.email,
       password: formValue.password,
     }
-
-    this.authService.login(body).subscribe(res => {
-      console.log(res.data);
-      if (res.code == 200) {
-        // this.toast.success("Đăng nhập thành công", "Thành công");
-        this.route.navigate(['/pages/revenue']);
-        localStorage.setItem(constants.TOKEN, res.data.token);
-
-      } else if (res.code == 400) {
-        // this.toast.error("Mật khẩu không đúng", "Lỗi");
-      } else if (res.code == 401) {
-        // this.toast.error("Tài khoản không tồn tại", "Lỗi");
+    this.authService.register(body).subscribe(res => {
+      if (res.code === 200) {
+        this.clickTab(1);
       }
     })
   }

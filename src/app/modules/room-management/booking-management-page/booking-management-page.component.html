@@ -134,7 +134,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of basicTable.data">
+                <tr *ngFor="let data of basicTable.data; let i = index">
                     <td>{{ data.name }}</td>
                     <td>{{ data.roomType }}</td>
                     <td>{{ data.numberAdults }}</td>
@@ -152,7 +152,7 @@
                     </td>
                     <td>
                         <div class="btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>

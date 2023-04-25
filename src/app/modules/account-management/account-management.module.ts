@@ -22,6 +22,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { AccountManagementPageComponent } from './account-management-page/account-management-page.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import { AccountManagementRoutingModule } from './account-management-routing.module';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+
 @NgModule({
   declarations: [
     AccountManagementPageComponent,
@@ -47,6 +49,7 @@ import { AccountManagementRoutingModule } from './account-management-routing.mod
     NzMessageModule,
     ReactiveFormsModule,
     FormsModule,
+    NzPaginationModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

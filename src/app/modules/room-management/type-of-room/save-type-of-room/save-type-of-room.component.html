@@ -1,144 +1,241 @@
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
-<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form>
-    <div class="title-search">Thêm mới phòng</div>
-    <div class="content row">
-        <div class="col col-md-8">
-            <div class="row">
-                <div class="col col-sm-6">
-                    <nz-form-item>
-                        <nz-form-label nzFor="roomName">Tên loại phòng</nz-form-label>
-                        <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="roomName" id="roomName" />
-                                <ng-template #inputNameClear>
-                                    <span
-                                        nz-icon
-                                        class="ant-input-clear-icon"
-                                        nzTheme="fill"
-                                        nzType="close-circle"
-                                    ></span>
-                                </ng-template>
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
+<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form enctype="multipart/form-data">
+    <div class="title-search">{{'saveTypeOfRoom.title' | translate}}</div>
+    <div class="content">
+        <div class="row align-items-center">
+            <div class="col col-md-8">
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="name">{{'saveTypeOfRoom.name' | translate}}</nz-form-label>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputNameClear">
+                                    <input nz-input formControlName="name" id="name" />
+                                    <ng-template #inputNameClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                            *ngIf="formGroup.controls['name'].value"
+                                            (click)="formGroup.controls['name'].setValue(null)"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                            <div *ngIf="this.formGroup.controls['name'].invalid && (this.formGroup.controls['name'].dirty || this.formGroup.controls['name'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['name'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.name.required' | translate}}
+                                </div>
+                                <div class="error" *ngIf="this.formGroup.controls['name'].hasError('maxLength')">
+                                    {{'saveTypeOfRoom.validate.name.maxLength' | translate}}
+                                </div>
+                            </div>
+                        </nz-form-item>
+                    </div>
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="acreage">{{'saveTypeOfRoom.acreage' | translate}}</nz-form-label>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputAcreageClear">
+                                    <input nz-input formControlName="acreage" id="acreage" />
+                                    <ng-template #inputAcreageClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                            *ngIf="formGroup.controls['acreage'].value"
+                                            (click)="formGroup.controls['acreage'].setValue(null)"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                            <div *ngIf="this.formGroup.controls['acreage'].invalid && (this.formGroup.controls['acreage'].dirty || this.formGroup.controls['acreage'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['acreage'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.acreage.required' | translate}}
+                                </div>
+                            </div>
+                        </nz-form-item>
+                    </div>
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="numberAdult">{{'saveTypeOfRoom.numberAdult' | translate}}</nz-form-label>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputnumberAdultClear">
+                                    <input nz-input formControlName="numberAdult" id="numberAdult" />
+                                    <ng-template #inputnumberAdultClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                            *ngIf="formGroup.controls['numberAdult'].value"
+                                            (click)="formGroup.controls['numberAdult'].setValue(null)"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                            <div *ngIf="this.formGroup.controls['numberAdult'].invalid && (this.formGroup.controls['numberAdult'].dirty || this.formGroup.controls['numberAdult'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['numberAdult'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.numberAdult.required' | translate}}
+                                </div>
+                                <div class="error" *ngIf="this.formGroup.controls['numberAdult'].hasError('maxLength')">
+                                    {{'saveTypeOfRoom.validate.numberAdult.maxLength' | translate}}
+                                </div>
+                            </div>
+                        </nz-form-item>
+                    </div>
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="numberChildren">{{'saveTypeOfRoom.numberChildren' | translate}}</nz-form-label>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputNumberChildrenClear">
+                                    <input nz-input formControlName="numberChildren" id="numberChildren" />
+                                    <ng-template #inputNumberChildrenClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                            *ngIf="formGroup.controls['numberChildren'].value"
+                                            (click)="formGroup.controls['numberChildren'].setValue(null)"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                            <div *ngIf="this.formGroup.controls['numberChildren'].invalid && (this.formGroup.controls['numberChildren'].dirty || this.formGroup.controls['numberChildren'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['numberChildren'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.numberChildren.required' | translate}}
+                                </div>
+                            </div>
+                        </nz-form-item>
+                    </div>
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="numberOfRooms">{{'saveTypeOfRoom.numberOfRooms' | translate}}</nz-form-label>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputnumberOfRoomsClear">
+                                    <input nz-input formControlName="numberOfRooms" id="numberOfRooms" />
+                                    <ng-template #inputnumberOfRoomsClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                            *ngIf="formGroup.controls['numberOfRooms'].value"
+                                            (click)="formGroup.controls['numberOfRooms'].setValue(null)"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                            <div *ngIf="this.formGroup.controls['numberOfRooms'].invalid && (this.formGroup.controls['numberOfRooms'].dirty || this.formGroup.controls['numberOfRooms'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['numberOfRooms'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.numberOfRooms.required' | translate}}
+                                </div>
+                            </div>
+                        </nz-form-item>
+                    </div>
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="description">{{'saveTypeOfRoom.description' | translate}}</nz-form-label>
+                            <nz-form-control>
+                                <nz-input-group [nzSuffix]="inputDescriptionClear">
+                                    <input nz-input formControlName="description" id="description" />
+                                    <ng-template #inputDescriptionClear>
+                                        <span
+                                            nz-icon
+                                            class="ant-input-clear-icon"
+                                            nzTheme="fill"
+                                            nzType="close-circle"
+                                            *ngIf="formGroup.controls['description'].value"
+                                            (click)="formGroup.controls['description'].setValue(null)"
+                                        ></span>
+                                    </ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                            <div *ngIf="this.formGroup.controls['description'].invalid && (this.formGroup.controls['description'].dirty || this.formGroup.controls['description'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['description'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.description.required' | translate}}
+                                </div>
+                            </div>
+                        </nz-form-item>
+                    </div>
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="hotel">{{'saveTypeOfRoom.hotel' | translate}}</nz-form-label>
+                            <nz-form-control>
+                                <nz-select
+                                    [nzPlaceHolder]="'saveTypeOfRoom.hotel' | translate"
+                                    formControlName="hotel"
+                                    nzAllowClear
+                                >
+                                    <nz-option *ngFor="let item of listOfHotel" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                            <div *ngIf="this.formGroup.controls['hotel'].invalid && (this.formGroup.controls['hotel'].dirty || this.formGroup.controls['hotel'].touched)">
+                                <div class="error" *ngIf="this.formGroup.controls['hotel'].hasError('required')">
+                                    {{'saveTypeOfRoom.validate.hotel.required' | translate}}
+                                </div>
+                            </div>
+                        </nz-form-item>
+                    </div>
+                    <div class="col col-sm-6">
+                        <nz-form-item>
+                            <nz-form-label nzFor="uploadFile">{{'saveTypeOfRoom.image'| translate}}</nz-form-label>
+                            <nz-form-control>
+                                <div class="file-list" (click)="hiddenFileInput.click()">
+                                    <div class="name">{{fileListName.join(", ")}}</div>
+                                    <input #hiddenFileInput style="display: none;" type="file" class="custom-file-input" multiple id="uploadFile" (change)="onFileSelect($event)">
+                                    <img src="../../../../assets/icon/upload-file.svg" alt="upload-file">
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
                 </div>
-                <div class="col col-sm-6">
-                    <nz-form-item>
-                        <nz-form-label nzFor="area">Diện tích (m2)</nz-form-label>
-                        <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="area" id="area" />
-                                <ng-template #inputNameClear>
-                                    <span
-                                        nz-icon
-                                        class="ant-input-clear-icon"
-                                        nzTheme="fill"
-                                        nzType="close-circle"
-                                    ></span>
-                                </ng-template>
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
+            </div>
+            <div class="col col-md-4">
+                <div class="frame-default" *ngIf="fileList.length == 0">
                 </div>
-                <div class="col col-sm-6">
-                    <nz-form-item>
-                        <nz-form-label nzFor="numberParent">Số người lớn</nz-form-label>
-                        <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="numberParent" id="numberParent" />
-                                <ng-template #inputNameClear>
-                                    <span
-                                        nz-icon
-                                        class="ant-input-clear-icon"
-                                        nzTheme="fill"
-                                        nzType="close-circle"
-                                    ></span>
-                                </ng-template>
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
+                <p class="mt-1 text-center" *ngIf="fileList.length == 0">{{"saveTypeOfRoom.image" | translate}}</p>
+                <div class="d-flex  align-items-center">
+                  <svg style="cursor: pointer;" (click)="pre()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+                    height="14" viewBox="0 0 12 14" fill="none">
+                    <path d="M11.4258 12L4.3271 7L11.4258 2L10.006 0L0.0678864 7L10.006 14L11.4258 12Z" fill="black" />
+                  </svg>
+
+                  <nz-carousel [nzEnableSwipe]="true" [nzEffect]="'fade'">
+                    <div nz-carousel-content *ngFor="let image of imageInput;let indexOfelement=index;">
+                      <div>
+                        <img src={{image}} alt="">
+                        <p style="font-size: 16px;">{{fileList[indexOfelement].name.split("images\\")[1]}}</p>
+                      </div>
+                    </div>
+                  </nz-carousel>
+
+                  <svg style="cursor: pointer;" (click)="next()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+                    height="14" viewBox="0 0 12 14" fill="none">
+                    <path d="M0.148438 12L7.24712 7L0.148438 2L1.56817 0L11.5063 7L1.56817 14L0.148438 12Z"
+                      fill="black" />
+                  </svg>
                 </div>
-                <div class="col col-sm-6">
-                    <nz-form-item>
-                        <nz-form-label nzFor="numberChildren">Số trẻ em</nz-form-label>
-                        <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="numberChildren" id="numberChildren" />
-                                <ng-template #inputNameClear>
-                                    <span
-                                        nz-icon
-                                        class="ant-input-clear-icon"
-                                        nzTheme="fill"
-                                        nzType="close-circle"
-                                    ></span>
-                                </ng-template>
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                </div>
-                <div class="col col-sm-6">
-                    <nz-form-item>
-                        <nz-form-label nzFor="price">Giá một đêm</nz-form-label>
-                        <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="price" id="price" />
-                                <ng-template #inputNameClear>
-                                    <span
-                                        nz-icon
-                                        class="ant-input-clear-icon"
-                                        nzTheme="fill"
-                                        nzType="close-circle"
-                                    ></span>
-                                </ng-template>
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                </div>
-                <div class="col col-sm-6">
-                    <nz-form-item>
-                        <nz-form-label nzFor="description">Mô tả</nz-form-label>
-                        <nz-form-control>
-                            <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="description" id="description" />
-                                <ng-template #inputNameClear>
-                                    <span
-                                        nz-icon
-                                        class="ant-input-clear-icon"
-                                        nzTheme="fill"
-                                        nzType="close-circle"
-                                    ></span>
-                                </ng-template>
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
+            </div>
+            <div class="btn-group">
+                <div class="col col-sm-12">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button style="background-color: #9A9A9A !important; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
+                            {{'saveTypeOfRoom.btnCancel'| translate}}
+                        </button>
+                        <button *ngIf="!typeOfRoomId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddTypeOfRoom()">
+                            {{'saveTypeOfRoom.btnAdd'| translate}}
+                        </button>
+                        <button *ngIf="typeOfRoomId && action == 'PROCESS'" nz-button nzType="primary" (click)="handleAddTypeOfRoom()">
+                            {{'saveTypeOfRoom.btnSave'| translate}}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col col-md-4">
-            <div class="clearfix">
-                <nz-upload
-                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  nzListType="picture-card"
-                  [nzPreview]="handlePreview"
-                  [nzLimit]="1"
-                >
-                  <div>
-                    <span nz-icon nzType="plus"></span>
-                    <div style="margin-top: 8px">Upload</div>
-                  </div>
-                </nz-upload>
-                <nz-modal
-                  [nzVisible]="previewVisible"
-                  [nzContent]="modalContent"
-                  [nzFooter]="null"
-                  (nzOnCancel)="previewVisible = false"
-                >
-                  <ng-template #modalContent>
-                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                  </ng-template>
-                </nz-modal>
-              </div>
-        </div>
     </div>
-    
+
 </form>

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { BookingService } from 'src/app/core/service/booking-management/booking.service';
+import { AuthService } from 'src/app/core/auth-guard/auth.service';
+import { HotelService } from 'src/app/core/service/hotel-management/hotel.service';
 
 @Component({
   selector: 'app-account-management-page',
@@ -14,14 +15,43 @@ export class AccountManagementPageComponent implements OnInit {
   size: NzButtonSize = 'large';
   breadcrumb: any = [];
   listOfData: any = [];
+  listOfSite: any[] = [];
   formGroup: FormGroup = new FormGroup({
-    roomName: new FormControl(''),
-    roomType: new FormControl(''),
-    status: new FormControl(''),
+    fullName: new FormControl(''),
+    phone: new FormControl(''),
+    siteId: new FormControl(''),
   });
+  pageSize = 10;
+  pageIndex = 1;
+  sort: any = "id,desc";
+  totalItem: any = 0;
+
+  // @Output() changeItemPerPage: EventEmitter<number> = new EventEmitter<number>();
+  // @Output() changeCurrentPage: EventEmitter<number> = new EventEmitter<number>();      // Gửi currentPage lên cho parent component
+
+  changeCurrentPage(currentPage: number) {
+    this.pageIndex = currentPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getListAccount()
+  }
+
+  changeItemPerPage(itemPerPage: number) {
+    this.pageIndex = 1;
+    this.pageSize = itemPerPage;
+    // call event rule engine
+    // this.createData();
+
+    // call event service
+    this.getListAccount()
+  }
+
   constructor(
     private router: Router,
-    private roomService: BookingService,
+    private authService: AuthService,
+    private hotelService: HotelService,
   ) { }
 
   ngOnInit(): void {
@@ -36,75 +66,50 @@ export class AccountManagementPageComponent implements OnInit {
       }
     ]
 
-    this.listOfData = [
-      {
-        id: 1,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "1@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 0,
-      },
-      {
-        id: 2,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "2@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 1,
-      },
-      {
-        id: 3,
-        name: "Nguyễn Kiên",
-        age: 32,
-        roomType: "Double",
-        numberAdults: 5, 
-        numberChildren: 0,
-        createdAt: 1670484236420,
-        startTime: 1670494336420,
-        endTime: 1670584336420,
-        email: "3@gmail.com",
-        phone: "0862269856",
-        address: "Bắc Ninh",
-        status: 2,
-      },
-    ];
-
-    this.getRoom();
+    this.getListAccount();
+    this.hotelService.getAllSite().subscribe(res => {
+      if (res.code === 200) {
+        this.listOfSite = res.data;
+      }
+    })
   }
 
   sortChange(e: any) {
-    
+
   }
 
-  addRoom() {
-    this.router.navigate(['pages/account-management/add-room']);
+  search() {
+    this.getListAccount();
   }
 
-  getRoom() {
+  addAccount() {
+    this.router.navigate(['pages/account-management/add-account']);
+  }
+
+  getListAccount() {
+    const formValue = this.formGroup.value;
     const body = {
-
+      name: formValue.fullName,
+      phone: formValue.phone,
+      siteId: formValue.siteId,
+      page: this.pageIndex - 1,
+      size: this.pageSize,
+      sort: this.sort,
     }
-    this.roomService.getListRoom(body).subscribe(res => {
+    this.authService.getListAccount(body).subscribe(res => {
       if (res.code == 200) {
-        this.listOfData = res.data;
-        console.log(res.data);
+        this.listOfData = res.data.content;
+        this.totalItem = res.data.totalElements;
       }
     })
+  }
+
+  updateAccount(data: any, check: any) {
+    const params = {
+      id: data.id,
+      action: check == 1 ? "PROCESS" : "DETAIL",
+    }
+    this.router.navigate(['pages/account-management/add-account'], {queryParams: params});
   }
 }
 

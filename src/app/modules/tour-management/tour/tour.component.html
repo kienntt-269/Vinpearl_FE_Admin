@@ -1,1 +1,231 @@
-<p>tour works!</p>
+<app-loader></app-loader>
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form class="form-search" [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
+    <div class="title-search">{{'listTour.titleSearch'| translate}}</div>
+    <div class="content">
+        <div class="row">
+            <div class="col col-sm-4">
+                <nz-form-item>
+                <nz-form-label nzFor="name">{{'listTour.name'| translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group [nzSuffix]="inputNameHotel">
+                            <input nz-input formControlName="name" id="name" />
+                            <ng-template #inputNameHotel>
+                                <span
+                                    nz-icon
+                                    class="ant-input-clear-icon"
+                                    nzTheme="fill"
+                                    nzType="close-circle"
+                                    *ngIf="this.formGroup.controls['name'].value"
+                                    (click)="this.formGroup.controls['name'].setValue('')"
+                                ></span>
+                            </ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="status">{{'listTour.status' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-select
+                            [nzPlaceHolder]="'listTour.placeHolder' | translate"
+                            formControlName="status"
+                            nzAllowClear
+                        >
+                            <nz-option *ngFor="let item of listOfStatus" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                    <div *ngIf="this.formGroup.controls['status'].invalid && (this.formGroup.controls['status'].dirty || this.formGroup.controls['status'].touched)">
+                        <div class="error" *ngIf="this.formGroup.controls['status'].hasError('required')">
+                            {{'listTour.validate.status.required' | translate}}
+                        </div>
+                    </div>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="typeOfTour">{{'listTour.typeOfTour' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-select
+                            [nzPlaceHolder]="'listTour.placeHolder' | translate"
+                            formControlName="typeOfTour"
+                            nzAllowClear
+                            nzMode="multiple"
+                            [nzMaxTagCount]="3"
+                        >
+                            <nz-option *ngFor="let item of listOfTypeOfTour" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                    <div *ngIf="this.formGroup.controls['typeOfTour'].invalid && (this.formGroup.controls['typeOfTour'].dirty || this.formGroup.controls['typeOfTour'].touched)">
+                        <div class="error" *ngIf="this.formGroup.controls['typeOfTour'].hasError('required')">
+                            {{'listTour.validate.typeOfTour.required' | translate}}
+                        </div>
+                    </div>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="lengthOfStay">{{'listTour.lengthOfStay' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-select
+                            [nzPlaceHolder]="'listTour.placeHolder' | translate"
+                            formControlName="lengthOfStay"
+                            nzAllowClear
+                            nzMode="multiple"
+                            [nzMaxTagCount]="3"
+                        >
+                            <nz-option *ngFor="let item of listOfLengthOfStay" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                    <div *ngIf="this.formGroup.controls['lengthOfStay'].invalid && (this.formGroup.controls['lengthOfStay'].dirty || this.formGroup.controls['lengthOfStay'].touched)">
+                        <div class="error" *ngIf="this.formGroup.controls['lengthOfStay'].hasError('required')">
+                            {{'listTour.validate.lengthOfStay.required' | translate}}
+                        </div>
+                    </div>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="leavingFrom">{{'listTour.leavingFrom' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-select
+                            [nzPlaceHolder]="'listTour.placeHolder' | translate"
+                            formControlName="leavingFrom"
+                            nzAllowClear
+                        >
+                            <nz-option *ngFor="let item of listOfSite" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                    <div *ngIf="this.formGroup.controls['leavingFrom'].invalid && (this.formGroup.controls['leavingFrom'].dirty || this.formGroup.controls['leavingFrom'].touched)">
+                        <div class="error" *ngIf="this.formGroup.controls['leavingFrom'].hasError('required')">
+                            {{'listTour.validate.leavingFrom.required' | translate}}
+                        </div>
+                    </div>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-4">
+                <nz-form-item>
+                    <nz-form-label nzFor="suitable">{{'listTour.suitable' | translate}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-select
+                            [nzPlaceHolder]="'listTour.placeHolder' | translate"
+                            formControlName="suitable"
+                            nzAllowClear
+                            nzMode="multiple"
+                            [nzMaxTagCount]="3"
+                        >
+                            <nz-option *ngFor="let item of listOfSuitable" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                    <div *ngIf="this.formGroup.controls['suitable'].invalid && (this.formGroup.controls['suitable'].dirty || this.formGroup.controls['suitable'].touched)">
+                        <div class="error" *ngIf="this.formGroup.controls['suitable'].hasError('required')">
+                            {{'listTour.validate.suitable.required' | translate}}
+                        </div>
+                    </div>
+                </nz-form-item>
+            </div>
+        </div>
+    </div>
+    <div class="group__btns d-flex justify-content-center">
+        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">{{'listTour.btnSearch'| translate}}</button>
+    </div>
+</form>
+<div class="table">
+    <div class="d-flex table__header justify-content-between mb-8">
+        <div class="title-search">{{'listTour.titleTable'| translate}} ({{listOfData.length}})</div>
+        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addTour()">
+            <span class="d-flex">
+                <img src="../../../../assets/icon/plus_icon.svg" alt="">
+            </span>
+            {{'listTour.addTour'| translate}}
+        </button>
+    </div>
+    <div class="table__content">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+            <thead (nzSortOrderChange)="sortChange($event)">
+                <tr>
+                    <th>{{'listTour.stt'| translate}}</th>
+                    <th nzColumnKey="name" [nzSortFn]="true">{{'listTour.name'| translate}}</th>
+                    <th nzColumnKey="typeOfTour" [nzSortFn]="true">{{'listTour.typeOfTour'| translate}}</th>
+                    <th nzColumnKey="leavingFrom" [nzSortFn]="true">{{'listTour.leavingFrom'| translate}}</th>
+                    <th nzColumnKey="leavingTo" [nzSortFn]="true">{{'listTour.leavingTo'| translate}}</th>
+                    <th nzColumnKey="lengthOfStay" [nzSortFn]="true">{{'listTour.lengthOfStay'| translate}}</th>
+                    <th nzColumnKey="suitable" [nzSortFn]="true">{{'listTour.suitable'| translate}}</th>
+                    <th nzColumnKey="suitable" [nzSortFn]="true">{{'listTour.numberOfPeople'| translate}}</th>
+                    <th nzColumnKey="suitable" [nzSortFn]="true">{{'listTour.remainingOfPeople'| translate}}</th>
+                    <th>{{'listTour.action'| translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                    <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
+                    <td>{{ data?.name }}</td>
+                    <td>
+                        <span *ngIf="data?.typeOfTourId == 1">Gói nghỉ dưỡng</span>
+                        <span *ngIf="data?.typeOfTourId == 2">VinWonders</span>
+                        <span *ngIf="data?.typeOfTourId == 3">Vận chuyển</span>
+                        <span *ngIf="data?.typeOfTourId == 4">Vinpearl Golf</span>
+                        <span *ngIf="data?.typeOfTourId == 5">Ẩm thực</span>
+                        <span *ngIf="data?.typeOfTourId == 6">Tour</span>
+                        <span *ngIf="data?.typeOfTourId == 7">Vé tham quan</span>
+                        <span *ngIf="data?.typeOfTourId == 8">Spa</span>
+                    </td>
+                    <td>{{ data?.leavingFrom }}</td>
+                    <td>{{ data?.leavingTo }}</td>
+                    <td>
+                        <span *ngIf="data?.lengthStayId == 1">1 ngày</span>
+                        <span *ngIf="data?.lengthStayId == 2">2 ngày 1 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 3">3 ngày 2 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 4">4 ngày 3 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 5">5 ngày 4 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 6">6 ngày 4 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 7">6 ngày 5 đêm</span>
+                        <span *ngIf="data?.lengthStayId == 8">22 ngày 21 đêm</span>
+                    </td>
+                    <td>
+                        <span *ngIf="data?.suitableId == 1">Cặp đôi</span>
+                        <span *ngIf="data?.suitableId == 2">Gia đình</span>
+                        <span *ngIf="data?.suitableId == 3">Nhóm bạn</span>
+                        <span *ngIf="data?.suitableId == 4">Doanh nhân</span>
+                    </td>
+                    <td>{{ data?.numberOfPeople }}</td>
+                    <td>{{ data?.numberOfPeople - data?.remainingOfPeople }}</td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-center btn-actions">
+                            <button class="three-dots" nzTrigger="click" nz-button
+                                nz-dropdown [nzDropdownMenu]="menu">
+                                    <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
+                            </button>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                                <ul nz-menu>
+                                    <li nz-menu-item (click)="updateTour(data, 1)">
+                                      <a>{{'listTour.edit'| translate}}</a>
+                                    </li>
+                                    <li nz-menu-item (click)="updateTour(data, 2)">
+                                      <a>{{'listTour.detail'| translate}}</a>
+                                    </li>
+                                  </ul>
+                            </nz-dropdown-menu>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div class="table-footer d-flex justify-content-between align-items-center">
+        <div *ngIf="totalItem <= 5 && totalItem > 0">Hiển thị 1 - {{totalItem}} trong {{totalItem}} bản ghi</div>
+        <div *ngIf="totalItem > 5">
+            <nz-pagination
+                [nzPageIndex]="pageIndex"
+                [nzTotal]="totalItem"
+                nzShowSizeChanger
+                [nzPageSize]="pageSize"
+                [nzPageSizeOptions]="[5, 10, 20, 50, 100]"
+                (nzPageSizeChange)="changeItemPerPage($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+            ></nz-pagination>
+            <div style="width: 300px;"></div>
+        </div>
+    </div>
+</div>

@@ -17,11 +17,14 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { FormatNumber } from './shared/pipe/number.pipe';
 import { MenuItemComponent } from './layout/sidebar/menu-item/menu-item.component';
 import { AppInterceptor } from './core/interceptor/app.interceptor';
 import { ToastrModule } from 'ngx-toastr';
-// import { QuillModule } from 'ngx-quill';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgxEditorModule } from 'ngx-editor';
+import { OptionInfoAdminModule } from './modules/option-info-admin/option-info-admin.component.module';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { SharedModule } from './shared.module';
 
 registerLocaleData(vi);
 
@@ -32,7 +35,6 @@ registerLocaleData(vi);
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    FormatNumber,
     MenuItemComponent,
   ],
   imports: [
@@ -40,9 +42,12 @@ registerLocaleData(vi);
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    OptionInfoAdminModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     NgbModule,
+    SharedModule,
+    NzToolTipModule,
     // QuillModule,
     TranslateModule.forRoot({
       loader: {
@@ -52,6 +57,8 @@ registerLocaleData(vi);
       },
       isolate: false
     }),
+    AngularEditorModule,
+    NgxEditorModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },

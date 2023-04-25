@@ -5,16 +5,18 @@
         <div class="row">
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="accountName">{{'listAccount.accountName' | translate}}</nz-form-label>
+                    <nz-form-label nzFor="fullName">{{'listAccount.fullName' | translate}}</nz-form-label>
                     <nz-form-control>
                         <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="accountName" id="accountName" />
+                            <input nz-input formControlName="fullName" id="fullName" />
                             <ng-template #inputNameClear>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="formGroup.controls['fullName'].value"
+                                    (click)="formGroup.controls['fullName'].setValue(null)"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -25,14 +27,16 @@
                 <nz-form-item>
                     <nz-form-label nzFor="phone">{{'listAccount.phone' | translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
+                        <nz-input-group [nzSuffix]="inputPhoneClear">
                             <input nz-input formControlName="phone" id="phone" />
-                            <ng-template #inputNameClear>
+                            <ng-template #inputPhoneClear>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="formGroup.controls['phone'].value"
+                                    (click)="formGroup.controls['phone'].setValue(null)"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -41,59 +45,80 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="phone">{{'listAccount.phone' | translate}}</nz-form-label>
+                    <nz-form-label nzFor="siteId">{{'listAccount.siteId' | translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="phone" id="phone" />
-                            <ng-template #inputNameClear>
-                                <span
-                                    nz-icon
-                                    class="ant-input-clear-icon"
-                                    nzTheme="fill"
-                                    nzType="close-circle"
-                                ></span>
-                            </ng-template>
-                        </nz-input-group>
+                      <nz-form-control>
+                        <nz-select
+                            [nzPlaceHolder]="'addAccount.site' | translate"
+                            formControlName="siteId"
+                            nzAllowClear
+                        >
+                            <nz-option *ngFor="let item of listOfSite" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
                     </nz-form-control>
                 </nz-form-item>
             </div>
         </div>
     </div>
-    <div class="group__btns d-flex justify-content-center">
-        <button nz-button nzType="primary" [nzSize]="size">{{'listAccount.btnSearch' | translate}}</button>
+    <div class="group-btns d-flex justify-content-center">
+        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">{{'listAccount.btnSearch' | translate}}</button>
     </div>
 </form>
 <div class="table">
-    <div class="d-flex table__header justify-content-between">
+    <div class="table-title d-flex table-header justify-content-between">
         <div class="title-search">{{'listAccount.titleTable' | translate}} ({{listOfData.length}})</div>
-        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
+        <button *hasPermission="'WEB_ADD_ACCOUNT'" nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addAccount()">
             <img src="../../../../assets/icon/plus_icon.svg" alt="">
             {{'listAccount.addAccount' | translate}}
         </button>
     </div>
-    <div class="table__content">
-        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+    <div class="table-content">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
                     <th [nzSortFn]="true">STT</th>
-                    <th [nzSortFn]="true">STT</th>
+                    <th [nzSortFn]="true">{{'listAccount.fullName' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.birthDate' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.sex' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.site' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.hotel' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.phone' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listAccount.permission' | translate}}</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of basicTable.data">
-                    <td>{{ data?.id }}</td>
-                    <td>{{ data?.name }}</td>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                    <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
+                    <td>{{ data?.fullName }}</td>
+                    <td>{{ data?.birthDate | date: "HH:mm:ss - dd/MM/yyyy" }}</td>
+                    <td>
+                        <p *ngIf="data?.sex === 1">Nam</p>
+                        <p *ngIf="data?.sex === 2">Nữ</p>
+                        <p *ngIf="data?.sex === 0">Không xác định</p>
+                    </td>
+                    <td>{{ data?.site?.name || " - " }}</td>
+                    <td>{{ data?.hotel?.name || " - " }}</td>
+                    <td>{{ data?.phone }}</td>
+                    <td>
+                        <span *ngIf="data?.roleId == 1">Bộ phận quản lý tour và khách sạn</span>
+                        <span *ngIf="data?.roleId == 2">Bộ phận quản lý khách hàng</span>
+                        <span *ngIf="data?.roleId == 3">Quản trị viên</span>
+                    </td>
                     <td>
                         <div class="btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item>
-                                      <a>Xóa</a>
+                                    <li nz-menu-item (click)="updateAccount(data, 1)">
+                                        <a>Chỉnh sửa</a>
+                                      </li>
+                                    <li nz-menu-item (click)="updateAccount(data, 2)">
+                                      <a>Xem chi tiết</a>
                                     </li>
                                   </ul>
                             </nz-dropdown-menu>
@@ -103,7 +128,19 @@
             </tbody>
         </nz-table>
     </div>
-    <div class="table__footer">
-
+    <div class="table-footer d-flex justify-content-between align-items-center">
+        <div *ngIf="totalItem <= 5 && totalItem > 0">Hiển thị 1 - {{totalItem}} trong {{totalItem}} bản ghi</div>
+        <div *ngIf="totalItem > 5">
+            <nz-pagination
+                [nzPageIndex]="pageIndex"
+                [nzTotal]="totalItem"
+                nzShowSizeChanger
+                [nzPageSize]="pageSize"
+                [nzPageSizeOptions]="[5, 10, 20, 50, 100]"
+                (nzPageSizeChange)="changeItemPerPage($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+            ></nz-pagination>
+            <div style="width: 300px;"></div>
+        </div>
     </div>
 </div>

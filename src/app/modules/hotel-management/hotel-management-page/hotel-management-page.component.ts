@@ -45,7 +45,7 @@ export class HotelManagementPageComponent implements OnInit {
   }
 
   sortChange(e: any) {
-    
+
   }
 
   addHotel() {
@@ -65,16 +65,18 @@ export class HotelManagementPageComponent implements OnInit {
   }
 
   getAllHotel() {
-    // const data = {
-    //   numRoom: this.numberRoom,
-    //   name: this.numberRoom,
-    //   phone: this.numberRoom,
-    //   pageIndex: this.numberRoom,
-    //   pageSize: this.numberRoom,
-    // }
     const formValue = this.formGroup.value;
-    
-    this.hotelService.getListHotel(this.pageSize, this.pageIndex, this.sort, formValue.name, formValue.totalRoom, formValue.phone).subscribe(res => {
+    const data = {
+      siteId: localStorage.getItem(constants.SITE_ID) || "",
+      page: this.pageIndex,
+      name: formValue.name,
+      totalRoom: formValue.totalRoom,
+      phone: formValue.phone,
+      size: this.pageSize,
+      sort: 'id,desc',
+    }
+
+    this.hotelService.getListHotel(data).subscribe(res => {
       if (res.code == 200) {
         this.listOfData = res.data.content;
         console.log(res.data.content);

@@ -1,25 +1,45 @@
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
 <div class="header">
-    
+
 </div>
 <div class="row">
-    <div class="col-xl-3 col-md-6 custom-card" *ngFor="let item of statusCards; let i = index">
+    <div class="col-xl-3 col-md-6 custom-card">
         <div class='card card-stats'>
             <div class="card-body">
                 <div class="card-body--top">
-                    <h4>{{item.title}}</h4>
-                    <span>{{item.count}}</span>
+                    <h4>Booking tour</h4>
+                    <span>{{listOfDataTotal[0]?.total}}</span>
                 </div>
-                <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success">
-                        <!-- <img src="../../../assets/icon/arrow-up-short.svg" alt=""> -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2dce89" class="bi bi-arrow-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-                        </svg>
-                        3.48%
-                    </span>
-                    <span class="text-nowrap">Since last month</span>
-                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 custom-card">
+        <div class='card card-stats'>
+            <div class="card-body">
+                <div class="card-body--top">
+                    <h4>Booking khách sạn</h4>
+                    <span>{{listOfDataTotal[1]?.total}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 custom-card">
+        <div class='card card-stats'>
+            <div class="card-body">
+                <div class="card-body--top">
+                    <h4>Tour điều hành</h4>
+                    <span>{{listOfDataTotal[2]?.total}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 custom-card">
+        <div class='card card-stats'>
+            <div class="card-body">
+                <div class="card-body--top">
+                    <h4>Booking vé máy bay</h4>
+                    <span>33</span>
+                </div>
             </div>
         </div>
     </div>
@@ -27,7 +47,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <div class="card">
-            <h2 class="header">Khảo sát khách sạn</h2>
+
             <div class="body">
                 <div class="chart-container">
                     <canvas  id="MyChartHotel" >{{ chartHotel }}</canvas>
@@ -37,71 +57,61 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="card">
-            <h2 class="header">Booking phòng</h2>
+            <h2 class="header">Booking khách sạn</h2>
             <div class="body">
                 <div class="chart-container">
                     <canvas  id="MyChartRoom" >{{ chartRoom }}</canvas>
               </div>
             </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
             <h2 class="header">Booking vé máy bay</h2>
             <div class="body">
                 <div class="chart-container">
                     <canvas  id="MyChartFlight" >{{ chartFlight }}</canvas>
               </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <div class="row">
     <div class="card">
         <h2 class="header">Booking gần nhất</h2>
         <div class="table body">
-            <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+            <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfDataTour">
                 <thead (nzSortOrderChange)="sortChange($event)">
                     <tr>
                         <th>STT</th>
-                        <th [nzSortFn]="true">Tên phòng</th>
-                        <th [nzSortFn]="true">Toà nhà</th>
-                        <th [nzSortFn]="true">Giá phòng</th>
-                        <th [nzSortFn]="true">Diện tích (m2)</th>
+                        <th [nzSortFn]="true">Mã Code</th>
+                        <th [nzSortFn]="true">Thời gian chuyển khoản</th>
+                        <th [nzSortFn]="true">Tên khách hàng</th>
+                        <th [nzSortFn]="true">Email</th>
+                        <th [nzSortFn]="true">Số điện thoại</th>
+                        <th [nzSortFn]="true">Số tiền đã thanh toán</th>
+                        <th [nzSortFn]="true">Phòng</th>
                         <th [nzSortFn]="true">Loại phòng</th>
-                        <th [nzSortFn]="true">View phòng</th>
-                        <th [nzSortFn]="true">Trạng thái phòng</th>
-                        <th>Thao tác</th>
+                        <th [nzSortFn]="true">Tên tour</th>
+                        <th [nzSortFn]="true">Trạng thái</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of basicTable.data">
-                        <td>{{ data?.id }}</td>
+                    <tr *ngFor="let data of basicTable.data; let i = index">
+                        <td>{{ pageSize * pageIndex + i + 1 }}</td>
+                        <td>{{ data?.code }}</td>
+                        <td>{{ data?.paymentDate | date: "HH:mm:ss - dd/MM/yyyy" }}</td>
+                        <td>{{ data?.customer?.fullName }}</td>
+                        <td>{{ data?.customer?.email }}</td>
+                        <td>{{ data?.customer?.phone }}</td>
+                        <td>{{ data?.paymentAmount | format }} VNĐ</td>
+                        <td>{{ data?.room?.name }}</td>
+                        <td>{{ data?.room?.roomTypes.name }}</td>
+                        <td>{{ data?.tour?.name }}</td>
                         <td>
-                            {{ data?.numberRoom?.toString().length == 1 ? "00" + data?.numberRoom : null}}
-                            {{ data?.numberRoom?.toString().length == 2 ? "0" + data?.numberRoom : null}}
-                        </td>
-                        <td>{{ data?.building?.name }}</td>
-                        <td>{{ data?.price }}</td>
-                        <td>{{ data?.area }} m2</td>
-                        <td>{{ data?.name }}</td>
-                        <td>{{ data?.name }}</td>
-                        <td>{{ data?.status }}</td>
-                        <td>
-                            <div class="btn-actions">
-                                <button class="three-dots" nzTrigger="click" nz-button 
-                                    nz-dropdown [nzDropdownMenu]="menu">
-                                        <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
-                                </button>
-                                <nz-dropdown-menu #menu="nzDropdownMenu">
-                                    <ul nz-menu>
-                                        <li nz-menu-item (click)="updateBooking(data)">
-                                          <a>Chỉnh sửa</a>
-                                        </li>
-                                        <li nz-menu-item>
-                                          <a>Xóa</a>
-                                        </li>
-                                      </ul>
-                                </nz-dropdown-menu>
-                            </div>
+                            <span class="deposit" *ngIf="data?.paymentStatus == 0">Đã hủy</span>
+                            <span class="live" *ngIf="data?.paymentStatus == 1">Thành công</span>
+                            <span class="empty" *ngIf="data?.paymentStatus == 2">Không thành công</span>
+                            <span class="empty" *ngIf="data?.paymentStatus == 3">Đã hoàn</span>
+                            <span class="empty" *ngIf="data?.paymentStatus == 4">Chờ xử lý</span>
                         </td>
                     </tr>
                 </tbody>
@@ -112,53 +122,25 @@
 
 <div class="row">
     <div class="card">
-        <h2 class="header">Khách hàng</h2>
+        <h2 class="header">Top 5 Khách hàng chi tiền nhiều nhất</h2>
         <div class="table body">
-            <nz-table nzSize="middle" #basicTable [nzData]="listOfData">
+            <nz-table nzHideOnSinglePage="true" nzBordered nzSize="middle" #basicTable1 [nzData]="listOfDataCustomer">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Người dùng</th>
-                        <th>Tên</th>
-                        <th>Số điện thoại</th>
-                        <th>Diện tích (m2)</th>
-                        <th>Loại phòng</th>
-                        <th>View phòng</th>
-                        <th>Trạng thái phòng</th>
-                        <th>Thao tác</th>
+                        <th [nzSortFn]="true">Tên khách hàng</th>
+                        <th [nzSortFn]="true">Email</th>
+                        <th [nzSortFn]="true">Số điện thoại</th>
+                        <th [nzSortFn]="true">Số tiền đã thanh toán</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of basicTable.data">
-                        <td>{{ data?.id }}</td>
-                        <td>
-                            {{ data?.numberRoom?.toString().length == 1 ? "00" + data?.numberRoom : null}}
-                            {{ data?.numberRoom?.toString().length == 2 ? "0" + data?.numberRoom : null}}
-                        </td>
-                        <td>{{ data?.building?.name }}</td>
-                        <td>{{ data?.price }}</td>
-                        <td>{{ data?.area }} m2</td>
-                        <td>{{ data?.name }}</td>
-                        <td>{{ data?.name }}</td>
-                        <td>{{ data?.status }}</td>
-                        <td>
-                            <div class="btn-actions">
-                                <button class="three-dots" nzTrigger="click" nz-button 
-                                    nz-dropdown [nzDropdownMenu]="menu">
-                                        <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
-                                </button>
-                                <nz-dropdown-menu #menu="nzDropdownMenu">
-                                    <ul nz-menu>
-                                        <li nz-menu-item (click)="updateBooking(data)">
-                                          <a>Chỉnh sửa</a>
-                                        </li>
-                                        <li nz-menu-item>
-                                          <a>Xóa</a>
-                                        </li>
-                                      </ul>
-                                </nz-dropdown-menu>
-                            </div>
-                        </td>
+                    <tr *ngFor="let data of basicTable1.data; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ data?.fullName }}</td>
+                        <td>{{ data?.email }}</td>
+                        <td>{{ data?.phone }}</td>
+                        <td>{{ data?.total | format }} VNĐ</td>
                     </tr>
                 </tbody>
             </nz-table>

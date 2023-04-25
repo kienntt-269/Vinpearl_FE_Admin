@@ -9,7 +9,7 @@
                         <nz-form-label nzFor="name">{{'saveHotel.name' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="name" id="name" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="name" id="name" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -32,10 +32,10 @@
                 </div>
                 <div class="col col-sm-6">
                     <nz-form-item>
-                        <nz-form-label nzFor="area">{{'saveHotel.area' | translate}}</nz-form-label>
+                        <nz-form-label nzFor="acreage">{{'saveHotel.acreage' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="area" id="area" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="acreage" id="acreage" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -46,9 +46,9 @@
                                 </ng-template>
                             </nz-input-group>
                         </nz-form-control>
-                        <div *ngIf="this.formGroup.controls['area'].invalid && (this.formGroup.controls['area'].dirty || this.formGroup.controls['area'].touched)">
-                            <div class="error" *ngIf="this.formGroup.controls['area'].hasError('required')">
-                                {{'saveHotel.validate.area.required' | translate}}
+                        <div *ngIf="this.formGroup.controls['acreage'].invalid && (this.formGroup.controls['acreage'].dirty || this.formGroup.controls['acreage'].touched)">
+                            <div class="error" *ngIf="this.formGroup.controls['acreage'].hasError('required')">
+                                {{'saveHotel.validate.acreage.required' | translate}}
                             </div>
                         </div>
                     </nz-form-item>
@@ -78,7 +78,7 @@
                         <nz-form-control>
                             <nz-form-control>
                                 <nz-input-group [nzSuffix]="inputNameClear">
-                                    <input nz-input formControlName="phone" id="phone" />
+                                    <input [disabled]="action == 'DETAIL'" nz-input formControlName="phone" id="phone" />
                                     <ng-template #inputNameClear>
                                         <span
                                             nz-icon
@@ -95,6 +95,11 @@
                                 {{'saveHotel.validate.phone.required' | translate}}
                             </div>
                         </div>
+                        <div *ngIf="this.formGroup.controls['phone'].invalid && (this.formGroup.controls['phone'].dirty || this.formGroup.controls['phone'].touched)">
+                          <div class="error" *ngIf="this.formGroup.controls['phone'].hasError('pattern')">
+                              {{'saveHotel.validate.phone.pattern' | translate}}
+                          </div>
+                      </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -103,7 +108,7 @@
                         <nz-form-control>
                             <nz-form-control>
                                 <nz-input-group [nzSuffix]="inputNameClear">
-                                    <input nz-input formControlName="totalRoom" id="totalRoom" />
+                                    <input [disabled]="action == 'DETAIL'" nz-input formControlName="totalRoom" id="totalRoom" />
                                     <ng-template #inputNameClear>
                                         <span
                                             nz-icon
@@ -127,7 +132,7 @@
                         <nz-form-label nzFor="email">{{'saveHotel.email' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="email" id="email" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="email" id="email" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -142,6 +147,9 @@
                             <div class="error" *ngIf="this.formGroup.controls['email'].hasError('required')">
                                 {{'saveHotel.validate.email.required' | translate}}
                             </div>
+                            <div class="error" *ngIf="this.formGroup.controls['email'].hasError('pattern')">
+                              {{'saveHotel.validate.email.pattern' | translate}}
+                          </div>
                             <div class="error" *ngIf="this.formGroup.controls['email'].hasError('maxLength')">
                                 {{'saveHotel.validate.email.maxLength' | translate}}
                             </div>
@@ -153,7 +161,7 @@
                         <nz-form-label nzFor="description">{{'saveHotel.description' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="description" id="description" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="description" id="description" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -176,7 +184,7 @@
                         <nz-form-label nzFor="address">{{'saveHotel.address' | translate}}</nz-form-label>
                         <nz-form-control>
                             <nz-input-group [nzSuffix]="inputNameClear">
-                                <input nz-input formControlName="address" id="address" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="address" id="address" />
                                 <ng-template #inputNameClear>
                                     <span
                                         nz-icon
@@ -200,7 +208,7 @@
                         <nz-form-control>
                             <div class="file-list" (click)="hiddenFileInput.click()">
                                 <div class="name">{{fileListName.join(", ")}}</div>
-                                <input #hiddenFileInput style="display: none;" type="file" class="custom-file-input" multiple id="uploadFile" (change)="onFileSelect($event)">
+                                <input [disabled]="action == 'DETAIL'" #hiddenFileInput style="display: none;" type="file" class="custom-file-input" multiple id="uploadFile" (change)="onFileSelect($event)">
                                 <img src="../../../../assets/icon/upload-file.svg" alt="upload-file">
                             </div>
                             <!-- <nz-upload
@@ -209,7 +217,7 @@
                                 (nzChange)="handleChange($event)"
                                 nzMultiple="true"
                             >
-                                <input nz-input formControlName="uploadFile" id="uploadFile" />
+                                <input [disabled]="action == 'DETAIL'" nz-input formControlName="uploadFile" id="uploadFile" />
                             </nz-upload> -->
                         </nz-form-control>
                         <!-- <div *ngIf="this.formGroup.controls['uploadFile'].invalid && (this.formGroup.controls['uploadFile'].dirty || this.formGroup.controls['uploadFile'].touched)">
@@ -224,19 +232,45 @@
                 </div>
                 <div class="col col-sm-12">
                     <div class="d-flex justify-content-center align-items-center">
-                        <button style="background-color: #9A9A9A; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
+                        <button style="background-color: #9A9A9A !important; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
                             {{'saveHotel.btnCancel'| translate}}
                         </button>
-                        <button *ngIf="!roomId" nz-button nzType="primary" (click)="handleAddHotel()">
+                        <button *ngIf="!hotelId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddHotel()">
                             {{'saveHotel.btnAdd'| translate}}
                         </button>
-                        <button *ngIf="roomId" nz-button nzType="primary" (click)="handleAddHotel()">
+                        <button  *ngIf="hotelId  && action == 'PROCESS'" nz-button nzType="primary" (click)="handleAddHotel()">
                             {{'saveHotel.btnSave'| translate}}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col col-md-4">
+            <div class="frame-default" *ngIf="fileList.length == 0">
+            </div>
+            <p class="mt-1 text-center" *ngIf="fileList.length == 0">{{"saveHotel.image" | translate}}</p>
+            <div class="d-flex  align-items-center">
+              <svg style="cursor: pointer;" (click)="pre()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+                height="14" viewBox="0 0 12 14" fill="none">
+                <path d="M11.4258 12L4.3271 7L11.4258 2L10.006 0L0.0678864 7L10.006 14L11.4258 12Z" fill="black" />
+              </svg>
+
+              <nz-carousel [nzEnableSwipe]="true" [nzEffect]="'fade'">
+                <div nz-carousel-content *ngFor="let image of imageInput;let indexOfelement=index;">
+                  <div>
+                    <img src={{image}} alt="">
+                    <p style="font-size: 16px;">{{fileList[indexOfelement].name}}</p>
+                  </div>
+                </div>
+              </nz-carousel>
+
+              <svg style="cursor: pointer;" (click)="next()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+                height="14" viewBox="0 0 12 14" fill="none">
+                <path d="M0.148438 12L7.24712 7L0.148438 2L1.56817 0L11.5063 7L1.56817 14L0.148438 12Z"
+                  fill="black" />
+              </svg>
+            </div>
+        </div>
     </div>
-    
+
 </form>

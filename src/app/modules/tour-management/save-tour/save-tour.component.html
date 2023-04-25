@@ -1,1 +1,378 @@
-<!-- <quill-editor></quill-editor> -->
+<app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
+<form action="" [nzLayout]="'vertical'" [formGroup]="formGroup" class="form" nz-form>
+    <div class="title-search">{{'saveTour.title' | translate}}</div>
+    <div class="content row">
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="name">{{'saveTour.name' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-input-group [nzSuffix]="inputNameClear">
+                        <input nz-input formControlName="name" id="name" />
+                        <ng-template #inputNameClear>
+                            <span
+                                nz-icon
+                                class="ant-input-clear-icon"
+                                nzTheme="fill"
+                                nzType="close-circle"
+                                *ngIf="formGroup.controls['name'].value"
+                                (click)="formGroup.controls['name'].setValue(null)"
+                            ></span>
+                        </ng-template>
+                    </nz-input-group>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['name'].invalid && (this.formGroup.controls['name'].dirty || this.formGroup.controls['name'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['name'].hasError('required')">
+                        {{'saveTour.validate.name.required' | translate}}
+                    </div>
+                    <div class="error" *ngIf="this.formGroup.controls['name'].hasError('maxLength')">
+                        {{'saveTour.validate.name.maxLength' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="numberOfPeople">{{'saveTour.numberOfPeople' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-input-group [nzSuffix]="inputNumberOfPeopleClear">
+                        <input nz-input formControlName="numberOfPeople" id="numberOfPeople" />
+                        <ng-template #inputNumberOfPeopleClear>
+                            <span
+                                nz-icon
+                                class="ant-input-clear-icon"
+                                nzTheme="fill"
+                                nzType="close-circle"
+                                *ngIf="formGroup.controls['numberOfPeople'].value"
+                                (click)="formGroup.controls['numberOfPeople'].setValue(null)"
+                            ></span>
+                        </ng-template>
+                    </nz-input-group>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['numberOfPeople'].invalid && (this.formGroup.controls['numberOfPeople'].dirty || this.formGroup.controls['numberOfPeople'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['numberOfPeople'].hasError('required')">
+                        {{'saveTour.validate.numberOfPeople.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="typeOfTour">{{'saveTour.typeOfTour' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-select
+                        [nzPlaceHolder]="'saveTour.placeHolder' | translate"
+                        formControlName="typeOfTour"
+                        nzAllowClear
+                    >
+                        <nz-option *ngFor="let item of listOfTypeOfTour" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['typeOfTour'].invalid && (this.formGroup.controls['typeOfTour'].dirty || this.formGroup.controls['typeOfTour'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['typeOfTour'].hasError('required')">
+                        {{'saveTour.validate.typeOfTour.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="lengthOfStay">{{'saveTour.lengthOfStay' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-select
+                        [nzPlaceHolder]="'saveTour.placeHolder' | translate"
+                        formControlName="lengthOfStay"
+                        nzAllowClear
+                    >
+                        <nz-option *ngFor="let item of listOfLengthOfStay" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['lengthOfStay'].invalid && (this.formGroup.controls['lengthOfStay'].dirty || this.formGroup.controls['lengthOfStay'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['lengthOfStay'].hasError('required')">
+                        {{'saveTour.validate.lengthOfStay.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="leavingFrom">{{'saveTour.leavingFrom' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-select
+                        [nzPlaceHolder]="'saveTour.placeHolder' | translate"
+                        formControlName="leavingFrom"
+                        nzAllowClear
+                    >
+                        <nz-option *ngFor="let item of listOfSite" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['leavingFrom'].invalid && (this.formGroup.controls['leavingFrom'].dirty || this.formGroup.controls['leavingFrom'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['leavingFrom'].hasError('required')">
+                        {{'saveTour.validate.leavingFrom.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="leavingTo">{{'saveTour.leavingTo' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-select
+                        [nzPlaceHolder]="'saveTour.placeHolder' | translate"
+                        formControlName="leavingTo"
+                        nzAllowClear
+                    >
+                        <nz-option *ngFor="let item of listOfSite" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['leavingTo'].invalid && (this.formGroup.controls['leavingTo'].dirty || this.formGroup.controls['leavingTo'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['leavingTo'].hasError('required')">
+                        {{'saveTour.validate.leavingTo.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="suitable">{{'saveTour.suitable' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-select
+                        [nzPlaceHolder]="'saveTour.placeHolder' | translate"
+                        formControlName="suitable"
+                        nzAllowClear
+                    >
+                        <nz-option *ngFor="let item of listOfSuitable" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['suitable'].invalid && (this.formGroup.controls['suitable'].dirty || this.formGroup.controls['suitable'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['suitable'].hasError('required')">
+                        {{'saveTour.validate.suitable.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="priceAdult">{{'saveTour.priceAdult' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-input-group [nzSuffix]="inputPriceAdultClear">
+                        <input nz-input formControlName="priceAdult" id="priceAdult" />
+                        <ng-template #inputPriceAdultClear>
+                            <span
+                                nz-icon
+                                class="ant-input-clear-icon"
+                                nzTheme="fill"
+                                nzType="close-circle"
+                                *ngIf="formGroup.controls['priceAdult'].value"
+                                (click)="formGroup.controls['priceAdult'].setValue(null)"
+                            ></span>
+                        </ng-template>
+                    </nz-input-group>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['priceAdult'].invalid && (this.formGroup.controls['priceAdult'].dirty || this.formGroup.controls['priceAdult'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['priceAdult'].hasError('required')">
+                        {{'saveTour.validate.priceAdult.required' | translate}}
+                    </div>
+                    <div class="error" *ngIf="this.formGroup.controls['priceAdult'].hasError('maxLength')">
+                        {{'saveTour.validate.priceAdult.maxLength' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="priceChildren">{{'saveTour.priceChildren' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-input-group [nzSuffix]="inputPriceChildrenClear">
+                        <input nz-input formControlName="priceChildren" id="priceChildren" />
+                        <ng-template #inputPriceChildrenClear>
+                            <span
+                                nz-icon
+                                class="ant-input-clear-icon"
+                                nzTheme="fill"
+                                nzType="close-circle"
+                                *ngIf="formGroup.controls['priceChildren'].value"
+                                (click)="formGroup.controls['priceChildren'].setValue(null)"
+                            ></span>
+                        </ng-template>
+                    </nz-input-group>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['priceChildren'].invalid && (this.formGroup.controls['priceChildren'].dirty || this.formGroup.controls['priceChildren'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['priceChildren'].hasError('required')">
+                        {{'saveTour.validate.priceChildren.required' | translate}}
+                    </div>
+                    <div class="error" *ngIf="this.formGroup.controls['priceChildren'].hasError('maxLength')">
+                        {{'saveTour.validate.priceChildren.maxLength' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="startDate">{{'saveTour.startDate' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-date-picker
+                        nzShowTime
+                        nzFormat="HH:mm:ss dd/MM/yyyy"
+                        ngModel
+                        [nzShowTime]="true"
+                        [nzAllowClear]="true"
+                        [nzDisabled]="false"
+                        [nzInputReadOnly]="true"
+                        name="startDate"
+                        formControlName="startDate"
+                    ></nz-date-picker>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['startDate'].invalid && (this.formGroup.controls['startDate'].dirty || this.formGroup.controls['startDate'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['startDate'].hasError('required')">
+                        {{'saveTour.validate.startDate.required' | translate}}
+                    </div>
+                    <div class="error" *ngIf="this.formGroup.controls['startDate'].hasError('maxLength')">
+                        {{'saveTour.validate.startDate.maxLength' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+          <nz-form-item>
+              <nz-form-label nzFor="endDate">{{'saveTour.endDate' | translate}}</nz-form-label>
+              <nz-form-control>
+                  <nz-date-picker
+                      nzShowTime
+                      nzFormat="HH:mm:ss dd/MM/yyyy"
+                      ngModel
+                      [nzShowTime]="true"
+                      [nzAllowClear]="true"
+                      [nzDisabled]="false"
+                      [nzInputReadOnly]="true"
+                      name="endDate"
+                      formControlName="endDate"
+                  ></nz-date-picker>
+              </nz-form-control>
+              <div *ngIf="this.formGroup.controls['endDate'].invalid && (this.formGroup.controls['endDate'].dirty || this.formGroup.controls['endDate'].touched)">
+                  <div class="error" *ngIf="this.formGroup.controls['endDate'].hasError('required')">
+                      {{'saveTour.validate.endDate.required' | translate}}
+                  </div>
+              </div>
+          </nz-form-item>
+      </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="expirationDate">{{'saveTour.expirationDate' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <nz-date-picker
+                        nzShowTime
+                        nzFormat="HH:mm:ss dd/MM/yyyy"
+                        ngModel
+                        [nzShowTime]="true"
+                        [nzAllowClear]="true"
+                        [nzDisabled]="false"
+                        [nzInputReadOnly]="true"
+                        name="expirationDate"
+                        formControlName="expirationDate"
+                    ></nz-date-picker>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['expirationDate'].invalid && (this.formGroup.controls['expirationDate'].dirty || this.formGroup.controls['expirationDate'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['expirationDate'].hasError('required')">
+                        {{'saveTour.validate.expirationDate.required' | translate}}
+                    </div>
+                    <div class="error" *ngIf="this.formGroup.controls['expirationDate'].hasError('maxLength')">
+                        {{'saveTour.validate.expirationDate.maxLength' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="description">{{'saveTour.description' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <ngx-editor-menu [editor]="descriptionEditor" [toolbar]="toolbar"> </ngx-editor-menu>
+                    <ngx-editor formControlName="description" [editor]="descriptionEditor" [disabled]="false"></ngx-editor>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['description'].invalid && (this.formGroup.controls['description'].dirty || this.formGroup.controls['description'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['description'].hasError('required')">
+                        {{'saveTour.validate.description.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="inclusion">{{'saveTour.inclusion' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <ngx-editor-menu [editor]="inclusionEditor" [toolbar]="toolbar"> </ngx-editor-menu>
+                    <ngx-editor formControlName="inclusion" [editor]="inclusionEditor" [disabled]="false"></ngx-editor>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['inclusion'].invalid && (this.formGroup.controls['inclusion'].dirty || this.formGroup.controls['inclusion'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['inclusion'].hasError('required')">
+                        {{'saveTour.validate.inclusion.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-4">
+            <nz-form-item>
+                <nz-form-label nzFor="termsConditions">{{'saveTour.termsConditions' | translate}}</nz-form-label>
+                <nz-form-control>
+                    <ngx-editor-menu [editor]="termsConditionsEditor" [toolbar]="toolbar"> </ngx-editor-menu>
+                    <ngx-editor formControlName="termsConditions" [editor]="termsConditionsEditor" [disabled]="false"></ngx-editor>
+                </nz-form-control>
+                <div *ngIf="this.formGroup.controls['termsConditions'].invalid && (this.formGroup.controls['termsConditions'].dirty || this.formGroup.controls['termsConditions'].touched)">
+                    <div class="error" *ngIf="this.formGroup.controls['termsConditions'].hasError('required')">
+                        {{'saveTour.validate.termsConditions.required' | translate}}
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div class="col col-sm-8">
+          <nz-form-item>
+              <nz-form-label nzFor="uploadFile">{{'saveTour.image'| translate}}</nz-form-label>
+              <nz-form-control>
+                  <div class="file-list" (click)="hiddenFileInput.click()">
+                      <div class="name">{{fileListName.join(", ")}}</div>
+                      <input #hiddenFileInput style="display: none;" type="file" class="custom-file-input" multiple id="uploadFile" (change)="onFileSelect($event)">
+                      <img src="../../../../assets/icon/upload-file.svg" alt="upload-file">
+                  </div>
+              </nz-form-control>
+          </nz-form-item>
+      </div>
+        <div class="col col-md-4">
+          <div class="frame-default" *ngIf="fileList.length == 0">
+          </div>
+          <p class="mt-1 text-center" *ngIf="fileList.length == 0">{{"saveTour.image" | translate}}</p>
+          <div class="d-flex  align-items-center">
+            <svg style="cursor: pointer;" (click)="pre()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+              height="14" viewBox="0 0 12 14" fill="none">
+              <path d="M11.4258 12L4.3271 7L11.4258 2L10.006 0L0.0678864 7L10.006 14L11.4258 12Z" fill="black" />
+            </svg>
+
+            <nz-carousel [nzEnableSwipe]="true" [nzEffect]="'fade'">
+              <div nz-carousel-content *ngFor="let image of imageInput;let indexOfelement=index;">
+                <div>
+                  <img src={{image}} alt="">
+                  <p style="font-size: 16px;">{{fileList[indexOfelement].name}}</p>
+                </div>
+              </div>
+            </nz-carousel>
+
+            <svg style="cursor: pointer;" (click)="next()" *ngIf="fileList.length > 1" xmlns="http://www.w3.org/2000/svg" width="12"
+              height="14" viewBox="0 0 12 14" fill="none">
+              <path d="M0.148438 12L7.24712 7L0.148438 2L1.56817 0L11.5063 7L1.56817 14L0.148438 12Z"
+                fill="black" />
+            </svg>
+          </div>
+        </div>
+        <div class="col col-sm-12">
+            <div class="d-flex justify-content-center align-items-center">
+                <button style="background-color: #9A9A9A !important; margin-right: 8px;" nz-button nzType="primary" (click)="onCancel()">
+                    {{'saveTour.btnCancel'| translate}}
+                </button>
+                <button *ngIf="!tourId && action != 'DETAIL'" nz-button nzType="primary" (click)="handleAddTour()">
+                    {{'saveTour.btnAdd'| translate}}
+                </button>
+                <button *ngIf="tourId  && action == 'PROCESS'" nz-button nzType="primary" (click)="handleAddTour()">
+                    {{'saveTour.btnSave'| translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

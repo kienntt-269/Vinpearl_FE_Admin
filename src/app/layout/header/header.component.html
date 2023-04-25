@@ -1,9 +1,41 @@
-<div id="header__default" class="header" [ngClass]="isExpand ? 'toggle': ''">
-  <div class="header__left d-flex">
+<div id="header-default" class="header" [ngClass]="isExpand ? 'toggle': ''">
+  <div class="header-left d-flex">
     <img *ngIf="isExpand" (click)="toggleSidebar()" src="../../../assets/icon/hamberger_menu.svg" alt="">
     <img *ngIf="!isExpand" (click)="toggleSidebar()" src="../../../assets/icon/hamberger_menu_.svg" alt="">
   </div>
-  <div class="header__right">
-    <!-- <app-option-info-admin></app-option-info-admin> -->
+  <div class="header-right">
+    <app-option-info-admin></app-option-info-admin>
+    <div class="position-relative">
+      <button nz-tooltip='{{"header.bell" | translate}}'  nzTooltipPlacement="bottom" *ngIf="lstBooking.length > 0" id="btn-show-warning" class="btn-custom2" (click)="showWarning()" style="width: max-content;">
+        <img id="animation" [class]="isRingBell ? 'bell':''" src="./assets/icons/icon/CMS/noti.svg" alt="" />
+        <div *ngIf="countNotRead > 0" class="noti-number">{{countNotRead}}</div>
+      </button>
+
+      <button nz-tooltip='{{"header.bell" | translate}}'  nzTooltipPlacement="bottom" *ngIf="lstBooking.length === 0" class="btn-custom2">
+        <img src="../../../assets/icon/noti.svg" alt="" />
+      </button>
+
+      <!-- <div
+        infinite-scroll
+        [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollUpDistance]="scrollUpDistance"
+        [infiniteScrollThrottle]="throttle"
+        (scrolled)="onScrollDown($event)"
+        (scrolledUp)="onUp($event)"
+        [hidden]="!isShowBooking"
+        [infiniteScrollContainer]="'#warning-content'"
+        [fromRoot]="true"
+        id="warning-content"
+        class="warning-content position-absolute"
+      >
+        <div class="title-warning">{{"header.title" | translate}}</div>
+        <div *ngFor="let data of lstBooking; index as index">
+
+        </div>
+      </div> -->
+    </div>
+    <button style="width: auto; display: block; cursor: default;" class="btn-custom2">
+      <div id="txt"></div>
+    </button>
   </div>
 </div>

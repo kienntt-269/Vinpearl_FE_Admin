@@ -1,20 +1,23 @@
+<app-loader></app-loader>
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
 <form class="form-search" [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
-    <div class="title-search">Tiêu chí tìm kiếm</div>
+    <div class="title-search">{{'listService.titleSearch'| translate}}</div>
     <div class="content">
         <div class="row">
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="roomName">Tên nội thất</nz-form-label>
+                <nz-form-label nzFor="name">{{'listService.name'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="roomName" id="roomName" />
-                            <ng-template #inputNameClear>
+                        <nz-input-group [nzSuffix]="inputNameService">
+                            <input nz-input formControlName="name" id="name" />
+                            <ng-template #inputNameService>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="this.formGroup.controls['name'].value"
+                                    (click)="this.formGroup.controls['name'].setValue('')"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -23,16 +26,18 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="roomType">Loại phòng</nz-form-label>
+                    <nz-form-label nzFor="description">{{'listService.description'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="roomType" id="roomType" />
-                            <ng-template #inputNameClear>
+                        <nz-input-group [nzSuffix]="inputDescription">
+                            <input nz-input formControlName="description" id="description" />
+                            <ng-template #inputDescription>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="this.formGroup.controls['description'].value"
+                                    (click)="this.formGroup.controls['description'].setValue('')"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -41,16 +46,18 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="status">Trạng thái</nz-form-label>
+                    <nz-form-label nzFor="price">{{'listService.price'| translate}}</nz-form-label>
                     <nz-form-control>
-                        <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="status" id="status" />
-                            <ng-template #inputNameClear>
+                        <nz-input-group [nzSuffix]="inputprice">
+                            <input nz-input formControlName="price" id="price" />
+                            <ng-template #inputprice>
                                 <span
                                     nz-icon
                                     class="ant-input-clear-icon"
                                     nzTheme="fill"
                                     nzType="close-circle"
+                                    *ngIf="this.formGroup.controls['price'].value"
+                                    (click)="this.formGroup.controls['price'].setValue('')"
                                 ></span>
                             </ng-template>
                         </nz-input-group>
@@ -60,58 +67,49 @@
         </div>
     </div>
     <div class="group__btns d-flex justify-content-center">
-        <button nz-button nzType="primary" [nzSize]="size">Tìm kiếm</button>
+        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">{{'listService.btnSearch'| translate}}</button>
     </div>
 </form>
 <div class="table">
-    <div class="d-flex table__header justify-content-between">
-        <div class="title-search">Danh sách phòng ({{listOfData.length}})</div>
-        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
-            <img src="../../../../assets/icon/plus_icon.svg" alt="">
-            Thêm mới loại phòng
+    <div class="d-flex table__header justify-content-between mb-8">
+        <div class="title-search">{{'listService.titleTable'| translate}} ({{listOfData.length}})</div>
+        <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addService()">
+            <span class="d-flex mr-8">
+                <img src="../../../../assets/icon/plus_icon.svg" alt="">
+            </span>
+            {{'listService.add'| translate}}
         </button>
     </div>
     <div class="table__content">
         <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
-                    <th [nzSortFn]="true">STT</th>
-                    <th [nzSortFn]="true">Tên phòng</th>
-                    <th [nzSortFn]="true">Toà nhà</th>
-                    <th [nzSortFn]="true">Giá phòng</th>
-                    <th [nzSortFn]="true">Diện tích (m2)</th>
-                    <th [nzSortFn]="true">Loại phòng</th>
-                    <th [nzSortFn]="true">View phòng</th>
-                    <th [nzSortFn]="true">Trạng thái phòng</th>
-                    <th>Thao tác</th>
+                    <th>{{'listService.stt'| translate}}</th>
+                    <th nzColumnKey="name" [nzSortFn]="true">{{'listService.name'| translate}}</th>
+                    <th nzColumnKey="description" [nzSortFn]="true">{{'listService.description'| translate}}</th>
+                    <th nzColumnKey="price" [nzSortFn]="true">{{'listService.price'| translate}}</th>
+                    <th>{{'listService.action'| translate}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of basicTable.data">
-                    <td>{{ data?.id }}</td>
-                    <td>
-                        {{ data?.numberRoom?.toString().length == 1 ? "00" + data?.numberRoom : null}}
-                        {{ data?.numberRoom?.toString().length == 2 ? "0" + data?.numberRoom : null}}
-                    </td>
-                    <td>{{ data?.building?.name }}</td>
-                    <td>{{ data?.price }}</td>
-                    <td>{{ data?.area }} m2</td>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                    <td>{{ pageSize * pageIndex + i + 1 }}</td>
                     <td>{{ data?.name }}</td>
-                    <td>{{ data?.name }}</td>
-                    <td>{{ data?.status }}</td>
+                    <td>{{ data?.descriptions.join(', ') }}</td>
+                    <td>{{ data?.price | format }} VNĐ</td>
                     <td>
-                        <div class="btn-actions">
+                        <div class="d-flex align-items-center justify-content-center btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button 
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateRoom(data)">
-                                      <a>Chỉnh sửa</a>
+                                    <li nz-menu-item (click)="updateService(data)">
+                                      <a>{{'listService.edit'| translate}}</a>
                                     </li>
                                     <li nz-menu-item>
-                                      <a>Xóa</a>
+                                      <a>{{'listService.delete'| translate}}</a>
                                     </li>
                                   </ul>
                             </nz-dropdown-menu>

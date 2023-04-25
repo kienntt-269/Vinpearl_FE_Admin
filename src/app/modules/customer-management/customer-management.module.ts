@@ -19,11 +19,13 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-import { CustomerManagementComponent } from './customer-management/customer-management.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { CustomerManagementRoutingModule } from './customer-management-routing.module';
+import { CustomerManagementComponent } from './customer-management/customer-management.component';
+
 @NgModule({
   declarations: [
-    CustomerManagementComponent
+    CustomerManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { CustomerManagementRoutingModule } from './customer-management-routing.m
     NzInputModule,
     NzTabsModule,
     NzModalModule,
+    NzPaginationModule,
     NzMessageModule,
     ReactiveFormsModule,
     FormsModule,

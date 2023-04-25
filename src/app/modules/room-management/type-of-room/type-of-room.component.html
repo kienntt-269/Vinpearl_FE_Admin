@@ -1,14 +1,14 @@
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
 <form class="form-search" [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
-    <div class="title-search">Tiêu chí tìm kiếm</div>
+    <div class="title-search">{{'listTypeOfRoom.titleSearch' | translate}}</div>
     <div class="content">
         <div class="row">
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="roomName">Tên phòng</nz-form-label>
+                    <nz-form-label nzFor="name">{{'listTypeOfRoom.name' | translate}}</nz-form-label>
                     <nz-form-control>
                         <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="roomName" id="roomName" />
+                            <input nz-input formControlName="name" id="name" />
                             <ng-template #inputNameClear>
                                 <span
                                     nz-icon
@@ -23,10 +23,10 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="roomType">Loại phòng</nz-form-label>
+                    <nz-form-label nzFor="numberPerson">{{'listTypeOfRoom.numberPerson' | translate}}</nz-form-label>
                     <nz-form-control>
                         <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="roomType" id="roomType" />
+                            <input nz-input formControlName="numberPerson" id="numberPerson" />
                             <ng-template #inputNameClear>
                                 <span
                                     nz-icon
@@ -41,10 +41,10 @@
             </div>
             <div class="col col-sm-4">
                 <nz-form-item>
-                    <nz-form-label nzFor="status">Trạng thái</nz-form-label>
+                    <nz-form-label nzFor="hotelName">{{'listTypeOfRoom.hotelName' | translate}}</nz-form-label>
                     <nz-form-control>
                         <nz-input-group [nzSuffix]="inputNameClear">
-                            <input nz-input formControlName="status" id="status" />
+                            <input nz-input formControlName="hotelName" id="hotelName" />
                             <ng-template #inputNameClear>
                                 <span
                                     nz-icon
@@ -55,58 +55,89 @@
                             </ng-template>
                         </nz-input-group>
                     </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col col-sm-8">
+              <nz-form-item>
+                <nz-form-label nzFor="">{{'listTypeOfRoom.rangeTime'| translate}}</nz-form-label>
+                <nz-form-control>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <nz-date-picker
+                      nzAllowClear="false"
+                      formControlName="startTime"
+                      [nzFormat]="'HH:mm:ss - dd/MM/yyyy'"
+                    ></nz-date-picker>
+                    <div> ~ </div>
+                    <nz-date-picker
+                      nzAllowClear="false"
+                      formControlName="endTime"
+                      [nzFormat]="'HH:mm:ss - dd/MM/yyyy'"
+                    ></nz-date-picker>
+                  </div>
+                </nz-form-control>
                 </nz-form-item>
             </div>
         </div>
     </div>
     <div class="group__btns d-flex justify-content-center">
-        <button nz-button nzType="primary" [nzSize]="size">Tìm kiếm</button>
+        <button (click)="search()" nz-button nzType="primary" [nzSize]="size">{{'listTypeOfRoom.btnSearch' | translate}}</button>
     </div>
 </form>
 <div class="table">
     <div class="d-flex table__header justify-content-between">
-        <div class="title-search">Danh sách phòng ({{listOfData.length}})</div>
+        <div class="title-search">{{'listTypeOfRoom.titleTable' | translate}} ({{totalItem}})</div>
         <button nz-button nzType="primary" class="d-flex align-items-center justify-content-center" (click)="addRoom()">
             <img src="../../../../assets/icon/plus_icon.svg" alt="">
-            Thêm mới loại phòng
+            {{'listTypeOfRoom.addRoomType' | translate}}
         </button>
     </div>
     <div class="table__content">
-        <nz-table nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
+        <nz-table [nzHideOnSinglePage]="true" nzBordered nzSize="middle" #basicTable [nzData]="listOfData">
             <thead (nzSortOrderChange)="sortChange($event)">
                 <tr>
-                    <th [nzSortFn]="true">STT</th>
-                    <th [nzSortFn]="true">Tên phòng</th>
-                    <th [nzSortFn]="true">Giá phòng</th>
-                    <th [nzSortFn]="true">Diện tích (m2)</th>
-                    <th [nzSortFn]="true">Số trẻ em</th>
-                    <th [nzSortFn]="true">Số người lớn</th>
-                    <th [nzSortFn]="true">Số lượng phòng</th>
-                    <th>Thao tác</th>
+                    <th [nzSortFn]="true">{{'listTypeOfRoom.stt' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listTypeOfRoom.name' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listTypeOfRoom.acreage' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listTypeOfRoom.numberChildren' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listTypeOfRoom.numberAdult' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listTypeOfRoom.numberOfRooms' | translate}}</th>
+                    <th [width]="400" [nzSortFn]="true">{{'listTypeOfRoom.service' | translate}}</th>
+                    <th [nzSortFn]="true">{{'listTypeOfRoom.description' | translate}}</th>
+                    <th>{{'listTypeOfRoom.action' | translate}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let data of basicTable.data; let i = index">
                     <td>{{ pageSize * pageIndex + i + 1 }}</td>
                     <td>{{ data?.name }}</td>
-                    <td>{{ data?.price }}</td>
-                    <td>{{ data?.area }} m2</td>
+                    <td>{{ data?.acreage }} m2</td>
                     <td>{{ data?.numberChildren }}</td>
-                    <td>{{ data?.numberParent }}</td>
+                    <td>{{ data?.numberAdult }}</td>
                     <td>{{ data?.numberOfRooms }}</td>
                     <td>
+                      <div *ngFor="let service of data.service; let idx = index">
+                        <div>
+                          {{ service.name }}
+                        </div>
+                        <div>
+                          {{ service.price }}
+                        </div>
+                      </div>
+                    </td>
+                    <td [width]="350">{{ data?.description }}</td>
+                    <td>
                         <div class="btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>
                             <nz-dropdown-menu #menu="nzDropdownMenu">
                                 <ul nz-menu>
-                                    <li nz-menu-item (click)="updateRoom(data)">
-                                      <a>Chỉnh sửa</a>
+                                    <li nz-menu-item (click)="updateTypeOfRoom(data, 1)">
+                                      <a>{{'listTypeOfRoom.edit' | translate}}</a>
                                     </li>
-                                    <li nz-menu-item>
-                                      <a>Xóa</a>
+                                    <li nz-menu-item (click)="updateTypeOfRoom(data, 2)">
+                                      <a>{{'listTypeOfRoom.detail' | translate}}</a>
                                     </li>
                                   </ul>
                             </nz-dropdown-menu>
@@ -116,7 +147,19 @@
             </tbody>
         </nz-table>
     </div>
-    <div class="table__footer">
-
+    <div class="table-footer d-flex justify-content-between align-items-center">
+        <div *ngIf="totalItem > 0">Hiển thị 1 - {{pageSize}} trong {{totalItem}} bản ghi</div>
+        <div *ngIf="totalItem > 5">
+            <nz-pagination
+                [nzPageIndex]="pageIndex"
+                [nzTotal]="totalItem"
+                nzShowSizeChanger
+                [nzPageSize]="pageSize"
+                [nzPageSizeOptions]="[5, 10, 20, 50, 100]"
+                (nzPageSizeChange)="changeItemPerPage($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+            ></nz-pagination>
+            <div style="width: 300px;"></div>
+        </div>
     </div>
 </div>
