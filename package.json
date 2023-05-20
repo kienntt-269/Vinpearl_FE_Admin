@@ -2,7 +2,7 @@
   "name": "vinpearl",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
+    "ng": "ng serve --ssl true --ssl-cert src/assets/localhost.crt --ssl-key src/assets/localhost.key --port 4401",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
