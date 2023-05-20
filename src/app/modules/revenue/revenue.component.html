@@ -83,6 +83,7 @@
                     <tr>
                         <th>STT</th>
                         <th [nzSortFn]="true">Mã Code</th>
+                        <th [nzSortFn]="true">Thời gian chuyển khoản</th>
                         <th [nzSortFn]="true">Tên khách hàng</th>
                         <th [nzSortFn]="true">Email</th>
                         <th [nzSortFn]="true">Số điện thoại</th>
@@ -97,9 +98,10 @@
                     <tr *ngFor="let data of basicTable.data; let i = index">
                         <td>{{ pageSize * pageIndex + i + 1 }}</td>
                         <td>{{ data?.code }}</td>
+                        <td>{{ data?.paymentDate | date: "HH:mm:ss - dd/MM/yyyy" }}</td>
                         <td>{{ data?.customer?.fullName }}</td>
                         <td>{{ data?.customer?.email }}</td>
-                        <td>{{ data?.customer?.phone }} m2</td>
+                        <td>{{ data?.customer?.phone }}</td>
                         <td>{{ data?.paymentAmount | format }} VNĐ</td>
                         <td>{{ data?.room?.name }}</td>
                         <td>{{ data?.room?.roomTypes.name }}</td>

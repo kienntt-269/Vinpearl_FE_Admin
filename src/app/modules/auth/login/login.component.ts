@@ -7,6 +7,7 @@ import constants from 'src/app/core/constants/constants';
 import { AuthService } from 'src/app/core/auth-guard/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { config } from 'src/app/core/constants/tost.config';
+import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,9 @@ import { config } from 'src/app/core/constants/tost.config';
 export class LoginComponent implements OnInit {
 
   currentTab: number = 1;
+  passwordVisible = false;
+  confirmPasswordVisible = false;
+  passwordVisibleLogin = false;
 
   formLogin: FormGroup = new FormGroup({
     email: new FormControl(''),
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private location: Location,
     private toast: ToastrService,
-  ) { 
+  ) {
     if (localStorage.getItem('lang')) {
       translate.use(localStorage.getItem('lang')!);
     } else {
@@ -49,36 +53,18 @@ export class LoginComponent implements OnInit {
   buildForm() {
     this.formLogin = new FormGroup({
       email: new FormControl('', {
-        validators: [Validators.required]
+        validators: [
+          Validators.required,
+          Validators.maxLength(100),
+          Validators.pattern(REGEX_PATTERN.EMAIL),
+        ]
       }),
       password: new FormControl('', {
         validators: [
           Validators.required,
-          Validators.pattern(''),
         ],
       }),
     });
-
-    this.formRegister = new FormGroup({
-      email: new FormControl('', {
-        validators: [Validators.required]
-      }),
-      fullName: new FormControl('', {
-        validators: [Validators.required]
-      }),
-      password: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.pattern(''),
-        ],
-      }),
-      confirmPassword: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.pattern(''),
-        ],
-      }),
-    })
   }
 
   clickTab(tab: number) {

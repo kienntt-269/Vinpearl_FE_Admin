@@ -92,15 +92,18 @@
                 <tr *ngFor="let data of basicTable.data; let i = index">
                     <td>{{ pageSize * (pageIndex - 1) + i + 1 }}</td>
                     <td>{{ data?.fullName }}</td>
-                    <td>{{ data?.birthDate | date: "HH:mm:ss - dd/MM/yyyy" }}</td>
                     <td>
+                      {{ data?.birthDate ? (data?.birthDate | date: "HH:mm:ss - dd/MM/yyyy") : "-" }}
+                    </td>
+                    <td>
+                        <p *ngIf="!data?.sex">-</p>
                         <p *ngIf="data?.sex === 1">Nam</p>
                         <p *ngIf="data?.sex === 2">Nữ</p>
                         <p *ngIf="data?.sex === 0">Không xác định</p>
                     </td>
-                    <td>{{ data?.phone }}</td>
+                    <td>{{ data?.phone ? data?.phone : "-" }}</td>
                     <!-- <td>{{ data?.cccd }}</td> -->
-                    <td>{{ data?.email }}</td>
+                    <td>{{ data?.email ? data?.email : "-" }}</td>
                     <td>
                         <div class="btn-actions">
                             <button class="three-dots" nzTrigger="click" nz-button

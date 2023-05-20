@@ -10,7 +10,7 @@ import { LangChangeEvent, TranslateLoader, TranslateModule, TranslateService } f
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared.module';
-
+import { NzIconModule } from 'ng-zorro-antd/icon';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -24,6 +24,7 @@ import { SharedModule } from 'src/app/shared.module';
     NzButtonModule,
     CommonModule,
     SharedModule,
+    NzIconModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

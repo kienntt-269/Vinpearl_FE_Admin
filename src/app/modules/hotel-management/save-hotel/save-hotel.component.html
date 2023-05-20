@@ -95,6 +95,11 @@
                                 {{'saveHotel.validate.phone.required' | translate}}
                             </div>
                         </div>
+                        <div *ngIf="this.formGroup.controls['phone'].invalid && (this.formGroup.controls['phone'].dirty || this.formGroup.controls['phone'].touched)">
+                          <div class="error" *ngIf="this.formGroup.controls['phone'].hasError('pattern')">
+                              {{'saveHotel.validate.phone.pattern' | translate}}
+                          </div>
+                      </div>
                     </nz-form-item>
                 </div>
                 <div class="col col-sm-6">
@@ -142,6 +147,9 @@
                             <div class="error" *ngIf="this.formGroup.controls['email'].hasError('required')">
                                 {{'saveHotel.validate.email.required' | translate}}
                             </div>
+                            <div class="error" *ngIf="this.formGroup.controls['email'].hasError('pattern')">
+                              {{'saveHotel.validate.email.pattern' | translate}}
+                          </div>
                             <div class="error" *ngIf="this.formGroup.controls['email'].hasError('maxLength')">
                                 {{'saveHotel.validate.email.maxLength' | translate}}
                             </div>

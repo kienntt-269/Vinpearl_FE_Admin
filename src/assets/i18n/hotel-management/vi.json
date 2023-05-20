@@ -45,6 +45,7 @@
       "acreage.required": "Vui lòng nhập Diện tích",
       "site.required": "Vui lòng chọn Khu vực",
       "phone.required": "Vui lòng nhập Số điện thoại",
+      "phone.pattern": "Số điện thoại đã nhập chưa đúng định dạng",
       "totalRoom.required": "Vui lòng nhập Số phòng",
       "email.required": "Vui lòng nhập Email",
       "email.pattern": "Email đã nhập chưa đúng định dạng",
@@ -56,5 +57,4 @@
     }
   }
 }
-  
-  
+

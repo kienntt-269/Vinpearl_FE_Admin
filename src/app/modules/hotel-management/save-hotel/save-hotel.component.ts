@@ -108,6 +108,7 @@ export class SaveHotelComponent implements OnInit {
     phone: new FormControl('', {
       validators: [
         Validators.required,
+        Validators.pattern(REGEX_PATTERN.PHONE),
       ],
     }),
     totalRoom: new FormControl('', {
