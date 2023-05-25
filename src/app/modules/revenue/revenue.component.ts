@@ -92,14 +92,14 @@ export class RevenueComponent implements OnInit {
         datasets: [
           {
             label: 'Khách hàng đặt tour',
-            data:  listOfStatistics.length > 0 ? listOfStatistics.map((item: any) => item.data) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            data:  listOfStatistics.length > 0 ? listOfStatistics.map((item: any) => item.dataTour) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             fill: false,
             borderColor: 'rgb(159,141,241)',
             tension: 0.1
           },
           {
             label: 'Khách hàng đặt phòng',
-            data: listOfStatistics.length > 0 ? listOfStatistics.map((item: any) => item.data) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            data: listOfStatistics.length > 0 ? listOfStatistics.map((item: any) => item.dataRoom) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             fill: false,
             borderColor: 'rgb(231,154,59)',
             tension: 0.1
