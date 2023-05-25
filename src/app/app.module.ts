@@ -24,7 +24,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxEditorModule } from 'ngx-editor';
 import { OptionInfoAdminModule } from './modules/option-info-admin/option-info-admin.component.module';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { SharedModule } from './shared.module';
+import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(vi);
 

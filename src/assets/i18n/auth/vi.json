@@ -19,14 +19,9 @@
     "policy": "Chính sách bảo mật",
     "hasAccount": "Đã có tài khoản?"
   },
-  "header": {
-    "bell": "Đặt phòng"
-  },
   "optionInfoAdmin": {
     "menu": {
-      "introduce": "Giới thiệu",
       "changePassword": "Đổi mật khẩu",
-      "accountSettings": "Cài đặt",
       "vi": "Tiếng Việt",
       "en": "Tiếng Anh",
       "logout": "Đăng xuất"
@@ -52,5 +47,11 @@
     "error": {
       "404": "Tên đăng nhập/ Mật khẩu không đúng"
     }
+  },
+  "500": {
+    "name": "500",
+    "message": "Không tìm thấy trang",
+    "description": "Trang bạn đang tìm kiếm có thể đã bị xóa, thay đổi tên hoặc tạm thời không khả dụng.",
+    "link": "Quay lại trang chủ"
   }
 }

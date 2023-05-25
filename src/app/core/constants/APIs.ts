@@ -10,8 +10,8 @@ export default {
   API_DASHBOARD_GET_BOOKING_STATISTICS: environment.BASE_PATH_DOMAIN + '/dashboard/statistics',
 
   //account
-  AUTH_LOGIN: environment.BASE_PATH_DOMAIN + '/user/login',
-  AUTH_REGISTER: environment.BASE_PATH_DOMAIN + '/user/register',
+  AUTH_LOGIN: environment.BASE_PATH_DOMAIN + '/public/user/login',
+  AUTH_REGISTER: environment.BASE_PATH_DOMAIN + '/public/user/register',
   API_GET_LIST_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/search',
   API_GET_LIST_CUSTOMER: environment.BASE_PATH_DOMAIN + '/customer/search',
   API_GET_DETAIL_ACCOUNT: environment.BASE_PATH_DOMAIN + '/user/detail',

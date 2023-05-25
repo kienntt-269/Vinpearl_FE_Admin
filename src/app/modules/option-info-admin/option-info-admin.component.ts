@@ -15,8 +15,6 @@ import { AuthService } from 'src/app/core/auth-guard/auth.service';
 import { REGEX_PATTERN } from 'src/app/shared/constains/pattern.constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastrService} from 'ngx-toastr';
-// import {OPTIONS_EN, OPTIONS_EN_2_LAYER} from 'src/app/data/account/option-en';
-// import {OPTIONS_VI, OPTIONS_VI_2_LAYER} from 'src/app/data/account/option-vi';
 import {DomSanitizer} from "@angular/platform-browser";
 // import {DatePipe, Location} from "@angular/common";
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
@@ -33,9 +31,6 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
   @ViewChild('infOption') infOption: any;
   @ViewChild('menu') menu!: ElementRef;
-  @ViewChild("closePopup2") closePopup2!: ElementRef;
-  @ViewChild("closePopup") closePopup!: ElementRef;
-  @ViewChild('closePopupChangePassword') closePopupChangePassword!: ElementRef;
   @Input() nameUser = '';
   @Input() hiddenAll: any = false;
   @Input() forgotPass: any = false;
@@ -91,13 +86,9 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
     private el: ElementRef,
     // private location: Location,
   ) {
-    this.languageCurrent = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'vi'
-    // this.languageStore.dispatch(createLanguage(this.languageCurrent))
-    // this.sharingService.currentLanguage(this.languageCurrent);
-    this.setLabel();
-    this.lang = localStorage.getItem('lang')!
-    this.translate.use(this.lang)
-    // this.translate.use(this.lang);
+    this.languageCurrent = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'vi';
+    this.lang = localStorage.getItem('lang')!;
+    this.translate.use(this.lang);
   }
 
   title = '';
@@ -109,34 +100,13 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
   remember = false;
 
 
-  dataOptions: any[] = []
+  dataOptions: any[] = [];
 
   ngOnInit() {
-    this.email = atob(String(localStorage.getItem(constants.EMAIL)));
-    this.phone = atob(String(localStorage.getItem(constants.PHONE)));
-    if (this.forgotPass === true) {
-      this.userName = this.userNameForgot;
-    } else {
-      this.nameUser = localStorage.getItem(constants.PERSON_NAME)!
-      this.getNotification();
-    }
-    // this.email = localStorage.getItem(constants.USERNAME);
+
   }
 
   isMenuOpen = false;
-
-  setLabel() {
-    // this.sharingService.getCurrentLanguage().subscribe(mes => {
-    //   if (mes == '') {
-    //     this.lang = 'vi'
-    //   } else {
-    //     this.lang = mes;
-    //   }
-    //   this.translate.use(this.lang);
-    //   this.dataOptions = (this.lang == 'vi') ? OPTIONS_VI : OPTIONS_EN
-    //   this.dataOption2Layers = (this.lang == 'vi') ? OPTIONS_VI_2_LAYER : OPTIONS_EN_2_LAYER
-    // });
-  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -148,28 +118,6 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
   }
 
   hideOption(modalName: any) {
-    // this.isMenuOpen = false;
-    // this.translate.instant('label.introduction');
-    // // truong hop open modal doi pass khi da dang nhap thanh cong => focus truong mat khau hien tai
-    // if (modalName === 'changePassword' && this.forgotPass === false) {
-    //   setTimeout(() => {
-    //     const control = this.el.nativeElement.querySelector('[formControlName="oldPassword"]');
-    //     control.focus();
-    //   }, 1000);
-    // }
-
-    // if (modalName === 'introduce') {
-    //   setTimeout(() => {
-    //     focusElement('.btn-cancel-introduce');
-    //   }, 500)
-    // }
-
-    // if (modalName === 'accountSettings') {
-    //   this.getNotification();
-    //   setTimeout(() => {
-    //     focusElement('.btn-cancel-setting');
-    //   }, 500)
-    // }
     if (modalName === 'logout') {
       this.showLogout = true;
       setTimeout(() => {
@@ -179,17 +127,10 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
   }
 
   changeLanguage(chooseLanguage: string) {
-    // this.isMenuOpen = false;
-    // this.translate.instant('label.introduction')
-    // if (chooseLanguage == 'vi') {
-    //   this.serverService.changeLangKey(true);
-    // } else this.serverService.changeLangKey(false);
-    // localStorage.setItem('lang', chooseLanguage);
-    // this.languageCurrent = chooseLanguage;
-    // this.sharingService.currentLanguage(this.languageCurrent);
-    // this.languageService.changeLocale(chooseLanguage)
-    // this.languageStore.dispatch(createLanguage(this.languageCurrent))
-    // window.location.reload();
+    localStorage.setItem('lang', chooseLanguage);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   formGroupPassword: FormGroup = new FormGroup({
@@ -215,12 +156,6 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
       validators: [Validators.required],
     },),
   })
-
-  formGroupVerify: FormGroup = new FormGroup({
-    otpCode: new FormControl('', {
-      validators: [Validators.required]
-    })
-  });
 
   // validate old password
   validateOldPass: string = '';
@@ -371,12 +306,6 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    //thuc hien doi pass trong truong hop gui link ve email
-    if (this.forgotPass === true) {
-      this.forgotPassword();
-      // this.verifyOTP();
-      return
-    }
     const body = {
       passwordNew: this.formGroupPassword.get('newPassword')?.value,
       email: this.email
@@ -393,68 +322,6 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
     // });
   }
 
-
-  forgotPassword() {
-    //truong hop link da qua 5p sau khi bam quen mat khau
-    // if (this.linkExpired === true) {
-    //   this.toast.error(this.translate.instant('forgotPassword.expired'), this.translate.instant('error'), config);
-    //   return;
-    // }
-    // let newPassword = this.formGroupPassword.get('newPassword')?.value;
-    // let body = {
-    //   userName: this.userNameForgot,
-    //   passwordNew: newPassword,
-    //   activateKey: this.activateKey
-    // };
-
-    // this.authService.changePassword(body).subscribe(res => {
-    //   if (res.code == 200) {
-    //     if(res.messageCode == 408 || res.messageCode == 500 || res.messageCode == 0){
-    //       // @ts-ignore
-    //       document.getElementById('closeChangePass').click();
-
-    //       this.formGroupVerify.get('otpCode')?.setValue('');
-
-    //       setTimeout(() => {
-    //         // @ts-ignore
-    //         document.getElementById("openModalVerifyOtp").click();
-    //       }, 700);
-
-    //       //focus otp code
-    //       setTimeout(() => {
-    //         this.el.nativeElement.querySelector('[formControlName="otpCode"]').focus();
-    //       }, 1000);
-
-    //       this.objectId = res.data.objectId;
-
-    //       if (res.message.includes('Send SMS Succes')) {
-    //         this.timer(2);
-    //         this.type2FA = 'SMS';
-    //         this.phone = res.data.phoneNumber;
-    //       } else if (res.message.includes('Send Mail Succes')) {
-    //         this.timer(2);
-    //         this.type2FA = 'Email';
-    //         this.email = res.data.email;
-    //       }
-    //     } else {
-    //       this.toast.success(this.translate.instant('toast.password.200'), this.translate.instant('success'), config);
-    //       // @ts-ignore
-    //       document.getElementById('closeChangePass').click();
-    //       this.formGroupPassword.reset();
-    //       //thuc hien logout trong truong hop quen mau khau-> redirect ve login
-    //       handle.logout();
-    //     }
-    //   } else if (res.code == 400 && res.messageCode == 532) {
-    //     this.toast.error(this.translate.instant('forgotPassword.code.400'), this.translate.instant('error'), config);
-    //     setTimeout(() => {
-    //       this.isLinkExpire();
-    //     }, 1000)
-    //   } else if (res.code == 400 && (res.messageCode == 515 || res.messageCode == 409)) {
-    //     this.toast.error(this.translate.instant(`forgotPassword.change.failed`), this.translate.instant('error'), config);
-    //   }
-    // });
-  }
-
   changePassword() {
     let password = this.formGroupPassword.get('oldPassword')?.value;
     let newPassword = this.formGroupPassword.get('newPassword')?.value;
@@ -464,13 +331,6 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
       passwordOld: password,
       passwordNew: newPassword,
     };
-
-    //xac thuc 2 buoc can confirm otp -> close modal otp hoac modal doi mat khau
-    if (this.passwordExpire === false && this.forgotPass === false) {
-      if (this.is2FA === 'off') {
-        this.closePopup2.nativeElement.click();
-      }
-    }
   }
 
   /**
@@ -516,117 +376,6 @@ export class OptionInfoAdminComponent implements OnInit, AfterViewChecked {
   btnCancelAccSetting() {
     // this.getNotification();
     this.isGoogleAuth = false;
-  }
-
-  cancelOtp() {
-    this.display = '';
-    clearInterval(this.timeInterval);
-    setTimeout(() => {
-      // @ts-ignore
-      document.getElementById("openModalChangePassword").click();
-    }, 500);
-    this.toast.error(this.translate.instant('toast.verify.otp'), this.translate.instant('error'), config)
-  }
-
-  showModalChangePassword() {
-    setTimeout(() => {
-      // @ts-ignore
-      document.getElementById("openChangePassword").click();
-    }, 500)
-  }
-
-  count: number = 0;
-
-  removeTimeUpdate() {
-    if (this.count == 1) {
-      setTimeout(() => {
-        // @ts-ignore
-        document.getElementById("timeUpdatePassword")?.remove();
-      }, 500)
-    }
-    this.count++;
-  }
-
-  // Function handle vietnamese input is not allowed
-  removeAccents(str: any, controlName: string) {
-    return this.formGroupPassword.get(controlName)?.setValue(this.formGroupPassword.get(controlName)?.value.normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/đ/g, 'd').replace(/Đ/g, 'D'));
-  }
-
-  onBlur(event: any) {
-    //function validate khong hoat dong -> thuc hien set lai value de thuc hien validate
-    if (this.formGroupPassword.value.password === null || this.formGroupPassword.value.password === '') {
-      this.formGroupPassword.patchValue({
-        password: ''
-      })
-    }
-  }
-
-  handleEmail(): string {
-    if (this.email) {
-      let data = (this.email as string).split('@');
-      let endString = data[1] ? data[1] : 'gmail.com';
-      if (data[0].length <= 4) {
-        return 'xxx@' + endString;
-      }
-      return data[0].slice(0, data[0].length - 4) + 'xxx@' + endString;
-    }
-    return '';
-  }
-
-  handlePhone(): string {
-    if (this.phone) {
-      let phone = this.phone as string;
-      return phone.slice(0, phone.length - 3) + 'xxx'
-    }
-    return '';
-  }
-
-  // coutdown time
-  display: any;
-  isSend_Again: boolean = false;
-
-  timer(minute: number) {
-    this.isSend_Again = false
-    // let minute = 1;
-    let seconds: number = minute * 60;
-    let textSec: any = '0';
-    let statSec: number = 60;
-
-    const prefix = minute < 10 ? '0' : '';
-
-    this.timeInterval = setInterval(() => {
-      seconds--;
-      if (statSec != 0) statSec--;
-      else statSec = 59;
-
-      if (statSec < 10) {
-        textSec = '0' + statSec;
-      } else textSec = statSec;
-
-      this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
-
-      if (seconds == 0) {
-        this.isSend_Again = true;
-        clearInterval(this.timeInterval);
-      }
-    }, 1000);
-  }
-
-  // warning = '';
-  checkWarning: boolean = false;
-
-  ngAfterViewInit(): void {
-
-  }
-  isLinkExpire(){
-    setTimeout(() => {
-      // @ts-ignore
-      document.getElementById('closeChangePass').click();
-      this.toast.error(this.translate.instant('forgotPassword.expired'), this.translate.instant('error'), config);
-      this.route.navigate(["/auth/forgot-password"]);
-    }, 700);
   }
 
   showLogout: boolean = false;

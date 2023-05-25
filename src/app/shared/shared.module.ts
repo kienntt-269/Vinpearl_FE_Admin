@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BreadcrumbComponent } from './shared/component/breadcrumb/breadcrumb.component'
+import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component'
 import {
   LangChangeEvent,
   TranslateLoader,
@@ -11,11 +11,11 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { LoaderComponent } from './shared/component/loader/loader.component';
-import { PagingComponent } from './shared/component/paging/paging.component';
+import { LoaderComponent } from './component/loader/loader.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { FormatPrice } from './shared/pipe/number.pipe';
-import { HasPermissionDirective } from './core/directive/has-permission.directive';
+import { FormatPrice } from './pipe/number.pipe';
+import { HasPermissionDirective } from '../core/directive/has-permission.directive';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 export function sharedCreateTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -27,9 +27,9 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
   declarations: [
     BreadcrumbComponent,
     LoaderComponent,
-    PagingComponent,
     FormatPrice,
     HasPermissionDirective,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +46,6 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
   exports: [
     BreadcrumbComponent,
     LoaderComponent,
-    PagingComponent,
     FormatPrice,
     HasPermissionDirective,
   ],

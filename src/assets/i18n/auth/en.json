@@ -18,5 +18,40 @@
     "service": "Terms of Service",
     "policy": "Privacy Policy",
     "hasAccount": "Already have account?"
+  },
+  "optionInfoAdmin": {
+    "menu": {
+      "changePassword": "Change Password",
+      "vi": "Vietnamese",
+      "en": "English",
+      "logout": "Logout"
+    },
+    "btnConfirm": "Confirm",
+    "textLogout": "Are you sure you want to Logout from the system?",
+    "labelLogout": "Logout",
+    "labelNewPassword": "New Password",
+    "labelOldPassword": "Current Password",
+    "labelPasswordRenew": "Re-enter new password",
+    "btnExit": "Exit",
+    "error": "Error",
+    "btn": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "error": "Error",
+  "success": "Success",
+  "toast": {
+    "login_success": "Login successful",
+    "login_fail": "Login failed",
+    "error": {
+      "404": "Invalid Username/Password"
+    }
+  },
+  "500": {
+    "name": "500",
+    "message": "Page not found",
+    "description": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "link": "Go back to homepage"
   }
 }

@@ -3,7 +3,7 @@ import { LangChangeEvent, TranslateLoader, TranslateModule, TranslateService } f
 import { HttpClient } from "@angular/common/http";
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from 'src/app/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { BookingManagementPageComponent } from './booking-management-page/booking-management-page.component';
 import { RoomManagementRoutingModule } from './room-management-routing.module';
 import { NzTableModule } from 'ng-zorro-antd/table';

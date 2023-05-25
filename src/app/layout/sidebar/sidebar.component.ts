@@ -34,8 +34,10 @@ export class SidebarComponent implements OnInit {
       codes = PERMISSION.ROLE_CUSTOMER_CARE;
     } else if (localStorage.getItem(constants.ROLE_ID) == '3') {
       codes = PERMISSION.ROLE_ADMIN;
+    } else if (localStorage.getItem(constants.ROLE_ID) == '4') {
+      codes = PERMISSION.ROLE_MANAGEMENT_1;
     }
-    
+
     child.forEach((item: any) => {
       if (codes.indexOf(item.code) > -1 || item.code == "ALL") {
         if (item.children.length) {

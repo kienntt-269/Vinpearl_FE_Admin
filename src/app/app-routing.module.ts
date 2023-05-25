@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService as AuthGuard} from './core/auth-guard/auth-guard.service';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
+import { PageNotFoundComponent } from './shared/component/page-not-found/page-not-found.component';
 const routes: Routes = [
   {
     path: '',
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'report',
         loadChildren: () => import('./modules/report/report.module').then(m => m.ReportModule)
+      },
+      {
+        path: '500',
+        component: PageNotFoundComponent,
       },
     ]
   },
