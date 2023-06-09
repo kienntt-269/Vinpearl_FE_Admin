@@ -1,4 +1,3 @@
-<app-loader></app-loader>
 <app-breadcrumb [listBreadCrumb]="breadcrumb"></app-breadcrumb>
 <form class="form-search" [nzLayout]="'vertical'" nz-form [formGroup]="formGroup">
     <div class="title-search">{{'listService.titleSearch'| translate}}</div>
@@ -99,7 +98,7 @@
                     <td>{{ data?.price | format }} VNĐ</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center btn-actions">
-                            <button class="three-dots" nzTrigger="click" nz-button 
+                            <button class="three-dots" nzTrigger="click" nz-button
                                 nz-dropdown [nzDropdownMenu]="menu">
                                     <img src="../../../assets/icon/three-dots-vertical.svg" alt="three dots">
                             </button>

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { vi_VN } from 'ng-zorro-antd/i18n';
+import { vi_VN, en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { OptionInfoAdminModule } from './modules/option-info-admin/option-info-admin.component.module';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { SharedModule } from './shared/shared.module';
+import en from '@angular/common/locales/en';
 
 registerLocaleData(vi);
 

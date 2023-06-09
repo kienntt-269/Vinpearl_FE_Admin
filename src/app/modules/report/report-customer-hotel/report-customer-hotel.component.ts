@@ -33,11 +33,11 @@ export class ReportCustomerHotelComponent implements OnInit {
   ngOnInit(): void {
     this.breadcrumb = [
       {
-        name: "Quản lý khách hàng",
+        name: "Báo cáo",
         // route: "/pages/room-booking"
       },
       {
-        name: "Danh sách khách hàng",
+        name: "Báo cáo khách sạn",
         // route: "/pages/room-booking"
       }
     ]

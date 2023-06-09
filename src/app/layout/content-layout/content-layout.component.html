@@ -1,5 +1,7 @@
 <div id="app">
   <app-sidebar [status]="status"></app-sidebar>
+  <div class="backgroup-loading" *ngIf="(loading$ | async)"></div>
+  <app-loading [isFull]="false" *ngIf="(loading$ | async)"></app-loading>
   <div [ngClass]="status ? 'content':'toggle'">
     <app-header (status)="childToParent($event)"></app-header>
     <div class="content__body">

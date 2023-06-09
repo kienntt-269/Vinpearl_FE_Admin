@@ -34,7 +34,7 @@ export class RevenueComponent implements OnInit {
   ngOnInit(): void {
     this.breadcrumb = [
       {
-        name: "Doanh thu",
+        name: localStorage.getItem('lang') == "vi" ? "Doanh thu" : "Revenue",
         route: "/pages/revenue"
       }
     ];

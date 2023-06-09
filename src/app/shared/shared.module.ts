@@ -11,11 +11,11 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { LoaderComponent } from './component/loader/loader.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { FormatPrice } from './pipe/number.pipe';
 import { HasPermissionDirective } from '../core/directive/has-permission.directive';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { LoadingComponent } from './component/loading/loading.component';
 
 export function sharedCreateTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -26,10 +26,10 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     BreadcrumbComponent,
-    LoaderComponent,
     FormatPrice,
     HasPermissionDirective,
     PageNotFoundComponent,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -45,9 +45,9 @@ export function sharedCreateTranslateLoader(http: HttpClient) {
   ],
   exports: [
     BreadcrumbComponent,
-    LoaderComponent,
     FormatPrice,
     HasPermissionDirective,
+    LoadingComponent,
   ],
   providers: [TranslateStore],
 })

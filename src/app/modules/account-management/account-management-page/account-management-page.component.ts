@@ -57,11 +57,11 @@ export class AccountManagementPageComponent implements OnInit {
   ngOnInit(): void {
     this.breadcrumb = [
       {
-        name: "Quản lý đặt phòng",
+        name: "Quản lý tài khoản",
         // route: "/pages/room-booking"
       },
       {
-        name: "Danh sách phòng",
+        name: "Danh sách tài khoản",
         // route: "/pages/room-booking"
       }
     ]

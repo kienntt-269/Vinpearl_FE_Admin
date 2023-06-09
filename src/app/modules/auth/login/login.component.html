@@ -41,7 +41,7 @@
                 <nz-form-item>
                   <nz-form-control>
                     <nz-input-group [nzSuffix]="passwordTemplateLogin">
-                      <input formControlName="password" nz-input placeholder="{{'login.password' | translate}}" />
+                      <input [type]="passwordVisibleLogin?'text':'password'" formControlName="password" nz-input placeholder="{{'login.password' | translate}}" />
                       <ng-template #passwordTemplateLogin>
                         <span
                           nz-icon

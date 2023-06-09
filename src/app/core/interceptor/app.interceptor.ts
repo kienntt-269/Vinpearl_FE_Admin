@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, finalize, Observable, tap } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import constants from '../constants/constants';
 import handle from '../functions/handle';
 import { ToastrService } from 'ngx-toastr';
+import { LoadingService } from '../service/loading.service';
 
 @Injectable({ providedIn: 'root' })
 export class AppInterceptor implements HttpInterceptor{
@@ -16,6 +17,7 @@ export class AppInterceptor implements HttpInterceptor{
         public authService: AuthService,
         public router: Router,
         private toast: ToastrService,
+        private loader: LoadingService,
     ) { }
 
     // public isAuthenticated(): boolean {
@@ -31,6 +33,7 @@ export class AppInterceptor implements HttpInterceptor{
             localStorage.getItem(constants.TOKEN) &&
             localStorage.getItem(constants.TOKEN) != 'undefined'
         ) {
+            this.loader.show();
             return next.handle(request).pipe(
                 tap((request: HttpEvent<any>) => {
                     if (request instanceof HttpResponse) {
@@ -48,7 +51,7 @@ export class AppInterceptor implements HttpInterceptor{
                     }
                 }),
                 finalize(() => {
-                    // this.loader.hide();
+                    this.loader.hide();
                 }),
                 catchError((err, caught) => {
                     console.log(caught);
@@ -86,15 +89,17 @@ export class AppInterceptor implements HttpInterceptor{
                 })
             );
         } else {
+            this.loader.show();
             request = request.clone({
                 setHeaders: {
                   'Content-Type': 'application/json',
                   'Accept': 'application/json',
                 },
               });
+             this.router.navigate(['auth/login']);
             return next.handle(request).pipe(
                 finalize(() => {
-                //   this.loader.hide();
+                  this.loader.hide();
                 })
               );
         }

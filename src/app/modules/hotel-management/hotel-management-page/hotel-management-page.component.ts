@@ -32,11 +32,11 @@ export class HotelManagementPageComponent implements OnInit {
   ngOnInit(): void {
     this.breadcrumb = [
       {
-        name: "Quản lý đặt phòng",
+        name: localStorage.getItem('lang') == "vi" ?  "Quản lý khách sạn" : "Hotel manager",
         // route: "/pages/room-booking"
       },
       {
-        name: "Danh sách phòng",
+        name: localStorage.getItem('lang') == "vi" ? "Danh sách khách sạn" : "Hotel list",
         // route: "/pages/room-booking"
       }
     ]
